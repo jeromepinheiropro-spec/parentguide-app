@@ -384,7 +384,7 @@ async function api(u,m='GET',b=null){const o={method:m,headers:{'Content-Type':'
 
 // ============= NAV =============
 document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>go(b.dataset.p)));
-function go(p){document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.nb').forEach(n=>n.classList.toggle('on',n.dataset.p===p));const nav=document.getElementById('navbar'),fab=document.getElementById('fab');document.body.classList.toggle('auth-mode',p==='auth');nav.style.display=['auth','guide-detail','child-detail','quiz','quizres','suggestions'].includes(p)?'none':'flex';fab.style.display=p==='agenda'?'flex':'none';if(p==='home')loadHome();if(p==='agenda')loadAgenda();if(p==='milestones')loadMs();if(p==='growth')loadGr();if(p==='guide')loadGuide();if(p==='profile')loadProf();if(p==='suggestions')loadMySuggestions();window.scrollTo(0,0)}
+function go(p){document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.nb').forEach(n=>n.classList.toggle('on',n.dataset.p===p));const nav=document.getElementById('navbar'),fab=document.getElementById('fab');document.body.classList.toggle('auth-mode',p==='auth');nav.style.display=['auth','guide-detail','child-detail','quiz','quizres','suggestions'].includes(p)?'none':'flex';fab.style.display=p==='agenda'?'flex':'none';if(p==='home')loadHome();if(p==='agenda')loadAgenda();if(p==='milestones')loadMs();if(p==='growth')loadGr();if(p==='guide')loadGuide();if(p==='profile')loadProf();if(p==='suggestions')loadMySuggestions();if(!['auth','guide-detail','child-detail','quiz','quizres'].includes(p)){try{localStorage.setItem('pg_lastpage',p)}catch(e){}}window.scrollTo(0,0)}
 
 // ============= UTILS =============
 function calcAge(bd){const b=new Date(bd),n=new Date();let m=(n.getFullYear()-b.getFullYear())*12+n.getMonth()-b.getMonth();if(n.getDate()<b.getDate())m--;if(m<1)return'Nouveau-ne';if(m<12)return m+' mois';const y=Math.floor(m/12),r=m%12;return r>0?y+' an'+(y>1?'s':'')+' et '+r+' mois':y+' an'+(y>1?'s':'')}
@@ -413,7 +413,7 @@ window.selCh=function(cid,id){S.sel=id;if(cid.includes('ms'))loadMs();if(cid.inc
 
 // ============= HOME =============
 async function loadHome(){
-  await loadDynamicContent();
+  await refreshContentIfStale();
   if(!S.cp){S.parents=await api('/api/parents');if(!S.parents.length)return;S.cp=S.parents[0];}
   const greetEl=document.getElementById('greeting');
   const pAvatar=S.cp.avatar||'parent';
@@ -699,7 +699,7 @@ function renderChart(){const svg=document.getElementById('chsvg');if(S.gr.length
 
 // ============= GUIDE =============
 async function loadGuide(){
-  await loadDynamicContent();
+  await refreshContentIfStale();
   try{
   document.getElementById('devref').innerHTML=Object.entries(DEV).map(([k,d])=>{try{const stepCount=d.ages?Object.values(d.ages).flat().length:0;return '<div class="rd"><div class="rdh" onclick="toggleRD(this)"><div class="rdi" style="background:'+(d.bg||'#f0f0f0')+'"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,18)+'</span></div><span class="rdt">'+(d.t||k)+'</span><span class="badge" style="background:'+(d.bg||'#f0f0f0')+';color:'+(d.c||'#666')+'">'+stepCount+' etapes</span><span class="rda">'+I.chevR+'</span></div><div class="rdb" data-domain="'+k+'"></div></div>'}catch(e){console.warn('[loadGuide] domain err',k,e);return ''}}).join('');
   document.getElementById('glist').innerHTML=Object.entries(GUIDE).map(([k,g])=>{try{return '<div class="gc" onclick="showGD(\''+k+'\')"><div class="gci" style="background:'+(g.bg||'#f0f0f0')+'"><span style="color:'+(g.c||'#666')+'">'+ico(g.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+(g.t||k)+'</div><div class="gcd">'+(g.tips?g.tips.length:0)+' conseils bienveillants</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>'}catch(e){console.warn('[loadGuide] guide err',k,e);return ''}}).join('')}catch(e){console.error('[loadGuide]',e)}}
@@ -1195,7 +1195,17 @@ window.openNotifCenter=function(){
 
 // ============= DYNAMIC CONTENT LOADING =============
 // Override hardcoded constants with DB content when available
+let _contentLastFetch = 0;
+const CONTENT_TTL = 15000; // 15 seconds cache
+
+async function refreshContentIfStale() {
+  if (Date.now() - _contentLastFetch > CONTENT_TTL) {
+    await loadDynamicContent();
+  }
+}
+
 async function loadDynamicContent(){
+  _contentLastFetch = Date.now();
   try{
     // Load quotes
     const qr=await fetch('/api/content/quotes');
@@ -1470,6 +1480,7 @@ window.doLogin = async function() {
 window.doLogout = function() {
   localStorage.removeItem('pg_auth');
   localStorage.removeItem('pg_onboarded');
+  localStorage.removeItem('pg_lastpage');
   authToken = null;
   S.cp = null;
   S.parents = [];
@@ -1528,7 +1539,9 @@ async function startApp(isNewUser) {
     await loadHome();
     showOnboarding();
   } else {
-    go('profile');
+    const lastPage = localStorage.getItem('pg_lastpage');
+    const validPages = ['home','agenda','milestones','growth','guide','profile','suggestions'];
+    go(validPages.includes(lastPage) ? lastPage : 'profile');
   }
 }
 

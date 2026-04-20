@@ -317,6 +317,10 @@ body.auth-mode .nav{display:none!important}
 </style>
 </head>
 <body class="auth-mode">
+<script>
+// Inline auth check: if logged in, hide auth page and show loading state to prevent flash
+(function(){try{var a=localStorage.getItem('pg_auth');if(a){var d=JSON.parse(a);if(d&&d.token&&d.parent){document.body.classList.remove('auth-mode');document.body.style.background='var(--bg)';document.addEventListener('DOMContentLoaded',function(){var ap=document.getElementById('p-auth');if(ap)ap.classList.remove('active')})}}}catch(e){}})();
+</script>
 <div class="app">
 <!-- Auth / Landing page -->
 <div class="page active" id="p-auth">
