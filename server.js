@@ -881,14 +881,16 @@ app.post('/api/admin/dev-steps', (req, res) => {
 
 app.put('/api/admin/dev-steps/:id', (req, res) => {
   try {
-    const { label, activities, sortOrder } = req.body;
+    const { label, activities, sortOrder, ageGroup, domainKey } = req.body;
     const step = db.prepare('SELECT * FROM content_dev_steps WHERE id = ?').get(req.params.id);
     if (!step) return res.status(404).json({ error: 'Step not found' });
     const activitiesStr = activities !== undefined ? (typeof activities === 'string' ? activities : JSON.stringify(activities)) : step.activities;
-    db.prepare('UPDATE content_dev_steps SET label = ?, activities = ?, sortOrder = ? WHERE id = ?').run(
+    db.prepare('UPDATE content_dev_steps SET label = ?, activities = ?, sortOrder = ?, ageGroup = ?, domainKey = ? WHERE id = ?').run(
       label !== undefined ? label : step.label,
       activitiesStr,
       sortOrder !== undefined ? sortOrder : step.sortOrder,
+      ageGroup !== undefined ? ageGroup : step.ageGroup,
+      domainKey !== undefined ? domainKey : step.domainKey,
       req.params.id
     );
     res.json({ success: true });
