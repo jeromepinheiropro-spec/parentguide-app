@@ -274,6 +274,28 @@ ensureColumn('vaccines', 'extras', 'TEXT');
 ensureColumn('parents', 'passwordHash', 'TEXT');
 
 // ============================================================
+// INDEXES (idempotent)
+// ============================================================
+db.exec(`
+  CREATE INDEX IF NOT EXISTS idx_children_parentId ON children(parentId);
+  CREATE INDEX IF NOT EXISTS idx_milestones_childId ON milestones(childId);
+  CREATE INDEX IF NOT EXISTS idx_growth_childId ON growth_records(childId);
+  CREATE INDEX IF NOT EXISTS idx_sleep_childId ON sleep_records(childId);
+  CREATE INDEX IF NOT EXISTS idx_vaccines_childId ON vaccines(childId);
+  CREATE INDEX IF NOT EXISTS idx_agenda_childId ON agenda_events(childId);
+  CREATE INDEX IF NOT EXISTS idx_agenda_date ON agenda_events(date);
+  CREATE INDEX IF NOT EXISTS idx_parents_email ON parents(email);
+  CREATE INDEX IF NOT EXISTS idx_guide_tips_cat ON content_guide_tips(categoryKey);
+  CREATE INDEX IF NOT EXISTS idx_daily_tips_age ON content_daily_tips(ageGroup);
+  CREATE INDEX IF NOT EXISTS idx_dev_steps_domain ON content_dev_steps(domainKey);
+  CREATE INDEX IF NOT EXISTS idx_user_profiles_email ON user_profiles(email);
+  CREATE INDEX IF NOT EXISTS idx_suggestions_status ON suggestions(status);
+  CREATE INDEX IF NOT EXISTS idx_comments_status ON comments(status);
+  CREATE INDEX IF NOT EXISTS idx_reports_status ON reports(status);
+  CREATE INDEX IF NOT EXISTS idx_parents_created ON parents(createdAt);
+`);
+
+// ============================================================
 // AUTH HELPERS
 // ============================================================
 function hashPassword(password) {
@@ -345,8 +367,10 @@ app.post('/api/auth/login', (req, res) => {
 
 // -- Parents --
 app.get('/api/parents', (req, res) => {
-  const parents = db.prepare('SELECT * FROM parents ORDER BY createdAt DESC').all();
-  res.json(parents);
+  try {
+    const parents = db.prepare('SELECT id, firstName, lastName, email, avatar, createdAt FROM parents ORDER BY createdAt DESC').all();
+    res.json(parents);
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 app.post('/api/parents', (req, res) => {
@@ -362,31 +386,39 @@ app.post('/api/parents', (req, res) => {
 });
 
 app.get('/api/parents/:id', (req, res) => {
-  const parent = db.prepare('SELECT * FROM parents WHERE id = ?').get(req.params.id);
-  if (!parent) return res.status(404).json({ error: 'Parent not found' });
-  const children = db.prepare('SELECT * FROM children WHERE parentId = ? ORDER BY birthDate DESC').all(req.params.id);
-  res.json({ ...parent, children });
+  try {
+    const parent = db.prepare('SELECT id, firstName, lastName, email, avatar, createdAt FROM parents WHERE id = ?').get(req.params.id);
+    if (!parent) return res.status(404).json({ error: 'Parent not found' });
+    const children = db.prepare('SELECT * FROM children WHERE parentId = ? ORDER BY birthDate DESC').all(req.params.id);
+    res.json({ ...parent, children });
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 app.put('/api/parents/:id', (req, res) => {
-  const { firstName, lastName, email, avatar } = req.body;
-  if (avatar !== undefined) {
-    db.prepare('UPDATE parents SET firstName = ?, lastName = ?, email = ?, avatar = ? WHERE id = ?').run(firstName, lastName, email, avatar, req.params.id);
-  } else {
-    db.prepare('UPDATE parents SET firstName = ?, lastName = ?, email = ? WHERE id = ?').run(firstName, lastName, email, req.params.id);
-  }
-  res.json({ success: true });
+  try {
+    const { firstName, lastName, email, avatar } = req.body;
+    if (avatar !== undefined) {
+      db.prepare('UPDATE parents SET firstName = ?, lastName = ?, email = ?, avatar = ? WHERE id = ?').run(firstName, lastName, email, avatar, req.params.id);
+    } else {
+      db.prepare('UPDATE parents SET firstName = ?, lastName = ?, email = ? WHERE id = ?').run(firstName, lastName, email, req.params.id);
+    }
+    res.json({ success: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 app.delete('/api/parents/:id', (req, res) => {
-  db.prepare('DELETE FROM parents WHERE id = ?').run(req.params.id);
-  res.json({ success: true });
+  try {
+    db.prepare('DELETE FROM parents WHERE id = ?').run(req.params.id);
+    res.json({ success: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 // -- Children --
 app.get('/api/parents/:parentId/children', (req, res) => {
-  const children = db.prepare('SELECT * FROM children WHERE parentId = ? ORDER BY birthDate DESC').all(req.params.parentId);
-  res.json(children);
+  try {
+    const children = db.prepare('SELECT * FROM children WHERE parentId = ? ORDER BY birthDate DESC').all(req.params.parentId);
+    res.json(children);
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 app.post('/api/parents/:parentId/children', (req, res) => {
@@ -576,7 +608,7 @@ app.delete('/api/questionnaires/:id', (req, res) => {
 // -- Unified home data (parent + children + growth + reminders in one call) --
 app.get('/api/home/:parentId', (req, res) => {
   try {
-    const parent = db.prepare('SELECT * FROM parents WHERE id = ?').get(req.params.parentId);
+    const parent = db.prepare('SELECT id, firstName, lastName, email, avatar, createdAt FROM parents WHERE id = ?').get(req.params.parentId);
     if (!parent) return res.status(404).json({ error: 'Parent not found' });
     const children = db.prepare('SELECT * FROM children WHERE parentId = ? ORDER BY birthDate DESC').all(req.params.parentId);
     const today = new Date().toISOString().slice(0,10);
@@ -1562,6 +1594,25 @@ app.get('/{*path}', (req, res) => {
 // START SERVER
 // ============================================================
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n  🍼 ParentGuide running at http://localhost:${PORT}\n`);
 });
+
+// Global error handler (catch unhandled route errors)
+app.use((err, req, res, next) => {
+  console.error('[error]', err.message);
+  res.status(500).json({ error: 'Internal server error' });
+});
+
+// Graceful shutdown
+function shutdown() {
+  console.log('\n[shutdown] Closing server...');
+  server.close(() => {
+    db.close();
+    console.log('[shutdown] Database closed. Bye.');
+    process.exit(0);
+  });
+  setTimeout(() => { db.close(); process.exit(1); }, 5000);
+}
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);

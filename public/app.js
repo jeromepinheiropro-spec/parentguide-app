@@ -511,15 +511,15 @@ function expandRec(list){
   list.forEach(e=>{
     out.push(e);
     const ex=exParse(e);
-    if(!ex.récurrence)return;
+    if(!ex.recurrence)return;
     let d=new Date(e.date+'T00:00:00');
     let count=0;
-    const max=ex.récurrence==='weekly'?26:(ex.récurrence==='biweekly'?13:(ex.récurrence==='monthly'?6:3));
+    const max=ex.recurrence==='weekly'?26:(ex.recurrence==='biweekly'?13:(ex.recurrence==='monthly'?6:3));
     while(count<max){
-      if(ex.récurrence==='weekly')d.setDate(d.getDate()+7);
-      else if(ex.récurrence==='biweekly')d.setDate(d.getDate()+14);
-      else if(ex.récurrence==='monthly')d.setMonth(d.getMonth()+1);
-      else if(ex.récurrence==='yearly')d.setFullYear(d.getFullYear()+1);
+      if(ex.recurrence==='weekly')d.setDate(d.getDate()+7);
+      else if(ex.recurrence==='biweekly')d.setDate(d.getDate()+14);
+      else if(ex.recurrence==='monthly')d.setMonth(d.getMonth()+1);
+      else if(ex.recurrence==='yearly')d.setFullYear(d.getFullYear()+1);
       else break;
       if(d>horizon)break;
       out.push(Object.assign({},e,{date:d.toISOString().slice(0,10),_virt:true,_parentId:e.id,id:e.id+'__r'+count,_ex:ex}));
@@ -551,7 +551,7 @@ function renderAgContent(){
   if(S.agTab==='upcoming'){
     const today=new Date().toISOString().slice(0,10);
     const exp=expandRec(S.ag);
-    const upc=exp.filter(e=>e.date>=today&&!e.complèted).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
+    const upc=exp.filter(e=>e.date>=today&&!e.completed).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
     const vacUp=S.vc.filter(v=>v.status!=='done').slice(0,5);
     let h='';
     if(!upc.length&&!vacUp.length){h='<div style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Rien de prevu</p><button class="btn bp mt" onclick="openAddAg()">+ Nouvel événement</button></div>';}
@@ -588,7 +588,7 @@ function evExtrasHtml(e,full){
   if(ex.practitioner)chips.push('<span>'+ico('user',10)+ex.practitioner+'</span>');
   if(ex.phone)chips.push('<span>'+ico('bell',10)+ex.phone+'</span>');
   if(ex.accompaniedBy)chips.push('<span>'+ico('user',10)+'Avec: '+ex.accompaniedBy+'</span>');
-  if(ex.récurrence){const rl={weekly:'Hebdo',biweekly:'Bi-hebdo',monthly:'Mensuel',yearly:'Annuel'};chips.push('<span style="background:var(--lv);color:var(--lv3)">'+ico('clock',10)+(rl[ex.récurrence]||ex.récurrence)+'</span>')}
+  if(ex.recurrence){const rl={weekly:'Hebdo',biweekly:'Bi-hebdo',monthly:'Mensuel',yearly:'Annuel'};chips.push('<span style="background:var(--lv);color:var(--lv3)">'+ico('clock',10)+(rl[ex.recurrence]||ex.recurrence)+'</span>')}
   if(ex.reminderMinutes){const rml={15:'15 min',60:'1h',180:'3h',1440:'Veille',2880:'2 jours',10080:'1 semaine'};chips.push('<span>'+ico('bell',10)+'Rappel: '+(rml[ex.reminderMinutes]||(ex.reminderMinutes+' min'))+'</span>')}
   if(ex.dose)chips.push('<span>'+ico('droplet',10)+'Dose: '+ex.dose+'</span>');
   if(ex.frequency)chips.push('<span>'+ico('clock',10)+ex.frequency+'</span>');
@@ -608,12 +608,12 @@ function evExtrasHtml(e,full){
 }
 function evCard(e){
   const d=new Date(e.date+'T00:00:00'),cat=CAT[e.category]||CAT.note;
-  const done=e.complèted?' done':'';
+  const done=e.completed?' done':'';
   const ex=exParse(e);
-  const recBadge=ex.récurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
+  const recBadge=ex.recurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
   const chkDisabled=e._virt?'':'';
-  const chkClick=e._virt?'':'onclick="event.stopPropagation();toggleAg(\''+e.id+'\','+(!e.complèted)+')"';
-  return '<div class="ev'+done+'"><div class="evd"><div class="evday">'+d.getDate()+'</div><div class="evmo">'+MONTHS_SHORT[d.getMonth()]+'</div></div><div class="evb"><div class="evt">'+e.title+recBadge+'</div>'+(e.content?'<div class="evx">'+e.content+'</div>':'')+'<div class="evmeta"><span class="catp cat-'+e.category+'">'+ico(cat.i,10)+' '+cat.l+'</span>'+(e.time?'<span style="font-size:10px;color:var(--tx3);font-weight:600">'+e.time+'</span>':'')+'</div>'+evExtrasHtml(e,true)+'</div><div class="ev-chk'+(e.complèted?' done':'')+'" '+chkClick+'>'+(e.complèted?ico('check',12):'')+'</div></div>';
+  const chkClick=e._virt?'':'onclick="event.stopPropagation();toggleAg(\''+e.id+'\','+(!e.completed)+')"';
+  return '<div class="ev'+done+'"><div class="evd"><div class="evday">'+d.getDate()+'</div><div class="evmo">'+MONTHS_SHORT[d.getMonth()]+'</div></div><div class="evb"><div class="evt">'+e.title+recBadge+'</div>'+(e.content?'<div class="evx">'+e.content+'</div>':'')+'<div class="evmeta"><span class="catp cat-'+e.category+'">'+ico(cat.i,10)+' '+cat.l+'</span>'+(e.time?'<span style="font-size:10px;color:var(--tx3);font-weight:600">'+e.time+'</span>':'')+'</div>'+evExtrasHtml(e,true)+'</div><div class="ev-chk'+(e.completed?' done':'')+'" '+chkClick+'>'+(e.completed?ico('check',12):'')+'</div></div>';
 }
 function vcCard(v){
   const cls=v.status==='done'?'done':(daysUntil(v.recommendedDate)<0?'overdue':'upcoming');
@@ -675,7 +675,7 @@ window.selDay=function(d){
       h+=dayEvs.map(e=>{
         const cat=CAT[e.category]||CAT.note;
         const ex=exParse(e);
-        const recBadge=ex.récurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
+        const recBadge=ex.recurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
         return '<div class="ev" style="margin:0 0 8px;border-left-color:'+cat.c+'"><div class="evb"><div class="evt">'+e.title+recBadge+'</div>'+(e.content?'<div class="evx">'+e.content+'</div>':'')+'<div class="evmeta"><span class="catp cat-'+e.category+'">'+ico(cat.i,10)+' '+cat.l+'</span>'+(e.time?'<span style="font-size:10px;color:var(--tx3);font-weight:600">'+e.time+'</span>':'')+'</div>'+evExtrasHtml(e,true)+'</div></div>';
       }).join('');
       h+='</div>';
@@ -685,7 +685,7 @@ window.selDay=function(d){
   openMdl(h);
 }
 
-window.toggleAg=async function(id,complèted){await api('/api/agenda/'+id,'PUT',{complèted});S.ag=await api('/api/children/'+S.sel+'/agenda');renderAgContent()}
+window.toggleAg=async function(id,completed){await api('/api/agenda/'+id,'PUT',{completed});S.ag=await api('/api/children/'+S.sel+'/agenda');renderAgContent()}
 window.openVcDetail=function(id){const v=S.vc.find(x=>x.id===id);if(!v)return;const isDone=v.status==='done';openMdl('<h3>'+v.name+'</h3><div class="fg"><div style="font-size:11px;color:var(--tx2);line-height:1.6">Age recommande : <strong>'+(v.recommendedAge||'--')+'</strong><br>Date recommandée : <strong>'+(v.recommendedDate?fmt(v.recommendedDate):'--')+'</strong>'+(v.givenDate?'<br>Fait le : <strong>'+fmt(v.givenDate)+'</strong>':'')+'</div></div>'+(!isDone?'<div class="fg"><label class="fl">Date d\'administration</label><input class="fi" id="vc-gd" type="date" value="'+(new Date().toISOString().slice(0,10))+'"></div><div class="fg"><button class="btn bp bw" onclick="markVcDone(\''+id+'\')">Marquer comme fait</button></div>':'<div class="fg"><button class="btn bs bw" onclick="resetVc(\''+id+'\')">Marquer comme non fait</button></div>')+'<div class="fg"><button class="btn bs bw" style="color:var(--rs3)" onclick="delVc(\''+id+'\')">Supprimer</button></div>')}
 window.markVcDone=async function(id){const gd=document.getElementById('vc-gd').value;await api('/api/vaccines/'+id,'PUT',{givenDate:gd,status:'done',reminderDate:null});closeMdl();loadAgenda();loadHome()}
 window.resetVc=async function(id){await api('/api/vaccines/'+id,'PUT',{givenDate:null,status:'upcoming'});closeMdl();loadAgenda();loadHome()}
@@ -1069,7 +1069,7 @@ window.submitMs=async function(){const t=document.getElementById('nm-t').value,l
 window.openAddSleep=function(){if(!S.sel)return;const showNap=S.childAge<36;openMdl('<h3>Ajouter une nuit</h3><div class="fg"><label class="fl">Date</label><input class="fi" id="ns-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Heures de nuit</label><input class="fi" id="ns-n" type="number" step="0.5" placeholder="10"></div>'+(showNap?'<div class="fg"><label class="fl">Heures de sieste</label><input class="fi" id="ns-np" type="number" step="0.5" placeholder="2"></div>':'')+'<div class="fg"><label class="fl">Qualite</label><select class="fsl" id="ns-q"><option value="great">Excellente</option><option value="good">Bonne</option><option value="fair">Moyenne</option><option value="poor">Difficile</option></select></div><div class="fg"><button class="btn bp bw" onclick="submitSl()">Enregistrer</button></div>')}
 window.submitSl=async function(){const d=document.getElementById('ns-d').value,n=parseFloat(document.getElementById('ns-n').value)||null,npEl=document.getElementById('ns-np'),np=npEl?parseFloat(npEl.value)||null:null,q=document.getElementById('ns-q').value;await api('/api/children/'+S.sel+'/sleep','POST',{date:d,nightHours:n,napHours:np,quality:q});closeMdl();loadGr()}
 
-window.openAddGrowth=function(){if(!S.sel)return;const showHead=S.childAge<=12;openMdl('<h3>Nouvelle mesure</h3><div class="fg"><label class="fl">Date</label><input class="fi" id="ng-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Poids (kg)</label><input class="fi" id="ng-w" type="number" step="0.1" placeholder="8.5"></div><div class="fg"><label class="fl">Taille (cm)</label><input class="fi" id="ng-h" type="number" step="0.5" placeholder="72"></div>'+(showHead?'<div class="fg"><label class="fl">Perimêtre cranien (cm)</label><input class="fi" id="ng-hc" type="number" step="0.5" placeholder="45"></div>':'')+'<div class="fg"><button class="btn bp bw" onclick="submitGr()">Enregistrer</button></div>')}
+window.openAddGrowth=function(){if(!S.sel)return;const showHead=S.childAge<=12;openMdl('<h3>Nouvelle mesure</h3><div class="fg"><label class="fl">Date</label><input class="fi" id="ng-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Poids (kg)</label><input class="fi" id="ng-w" type="number" step="0.1" placeholder="8.5"></div><div class="fg"><label class="fl">Taille (cm)</label><input class="fi" id="ng-h" type="number" step="0.5" placeholder="72"></div>'+(showHead?'<div class="fg"><label class="fl">Périmètre cranien (cm)</label><input class="fi" id="ng-hc" type="number" step="0.5" placeholder="45"></div>':'')+'<div class="fg"><button class="btn bp bw" onclick="submitGr()">Enregistrer</button></div>')}
 window.submitGr=async function(){const d=document.getElementById('ng-d').value,w=parseFloat(document.getElementById('ng-w').value)||null,h=parseFloat(document.getElementById('ng-h').value)||null,hcEl=document.getElementById('ng-hc'),hc=hcEl?parseFloat(hcEl.value)||null:null;await api('/api/children/'+S.sel+'/growth','POST',{date:d,weightKg:w,heightCm:h,headCircCm:hc});closeMdl();loadGr()}
 
 function renderAdaptFields(cat){
@@ -1094,12 +1094,12 @@ window.openAddAg=function(defaultCat,defaultDate){
   const accDl='<datalist id="na-accsug">'+ACCOMP_SUG.map(s=>'<option value="'+s+'"></option>').join('')+'</datalist>';
   let h='<h3>Nouvel événement</h3>';
   h+='<div class="fg"><label class="fl">Type</label>'+selHtml+'</div>';
-  h+='<div class="fg"><label class="fl">Titre</label><input class="fi" id="na-t" list="na-tsug" placeholder="'+(PH_MAP[dc]||'Titre')+'" autocomplète="off">'+dlHtml+'</div>';
+  h+='<div class="fg"><label class="fl">Titre</label><input class="fi" id="na-t" list="na-tsug" placeholder="'+(PH_MAP[dc]||'Titre')+'" autocomplete="off">'+dlHtml+'</div>';
   h+='<div id="na-adapt">'+renderAdaptFields(dc)+'</div>';
   h+='<div class="fg" style="display:flex;gap:8px"><div style="flex:1"><label class="fl">Date</label><input class="fi" id="na-d" type="date" value="'+dd+'"></div><div style="flex:1"><label class="fl">Heure</label><input class="fi" id="na-h" type="time"></div></div>';
-  h+='<details class="nadet"><summary class="nadet-s">Plus d\'options (lieu, rappel, récurrence...)</summary>';
+  h+='<details class="nadet"><summary class="nadet-s">Plus d\'options (lieu, rappel, recurrence...)</summary>';
   h+='<div class="fg"><label class="fl">Lieu (optionnel)</label><input class="fi" id="na-loc" placeholder="Ex: Cabinet Dr Martin, 12 rue..."></div>';
-  h+='<div class="fg"><label class="fl">Qui accompagne</label><input class="fi" id="na-acc" list="na-accsug" placeholder="Ex: Maman, Nounou..." autocomplète="off">'+accDl+'</div>';
+  h+='<div class="fg"><label class="fl">Qui accompagne</label><input class="fi" id="na-acc" list="na-accsug" placeholder="Ex: Maman, Nounou..." autocomplete="off">'+accDl+'</div>';
   h+='<div class="fg"><label class="fl">Rappel avant</label><select class="fsl" id="na-rem">'+REM_OPTS.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('')+'</select></div>';
   h+='<div class="fg"><label class="fl">Recurrence</label><select class="fsl" id="na-rec">'+REC_OPTS.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('')+'</select></div>';
   h+='<div class="fg"><label class="fl">Checklist a apporter</label><textarea class="fta" id="na-chk" placeholder="Un element par ligne - ex:&#10;Doudou&#10;Carnet de santé&#10;Biberon"></textarea></div>';
@@ -1117,7 +1117,7 @@ function buildExtras(){
   const loc=gvn('na-loc');if(loc)ex.location=loc;
   const acc=gvn('na-acc');if(acc)ex.accompaniedBy=acc;
   const rem=gvn('na-rem');if(rem)ex.reminderMinutes=parseInt(rem);
-  const rec=gvn('na-rec');if(rec)ex.récurrence=rec;
+  const rec=gvn('na-rec');if(rec)ex.recurrence=rec;
   const chk=gvn('na-chk');if(chk)ex.checklist=chk.split('\n').map(s=>s.trim()).filter(Boolean);
   if(c==='appointment'){const p=gvn('na-pract');if(p)ex.practitioner=p;const ph=gvn('na-phone');if(ph)ex.phone=ph}
   if(c==='vaccine'){const a=gvn('na-vca');if(a)ex.ageLabel=a;const b=gvn('na-boost');if(b)ex.boosterDate=b}
