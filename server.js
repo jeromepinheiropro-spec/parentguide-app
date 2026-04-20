@@ -236,6 +236,20 @@ db.exec(`
     word TEXT UNIQUE NOT NULL,
     createdAt TEXT DEFAULT (datetime('now'))
   );
+
+  CREATE TABLE IF NOT EXISTS promo_codes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    code TEXT UNIQUE NOT NULL,
+    description TEXT DEFAULT '',
+    discountType TEXT DEFAULT 'percent',
+    discountValue REAL DEFAULT 0,
+    maxUses INTEGER DEFAULT 0,
+    currentUses INTEGER DEFAULT 0,
+    validFrom TEXT DEFAULT (datetime('now')),
+    validUntil TEXT,
+    active INTEGER DEFAULT 1,
+    createdAt TEXT DEFAULT (datetime('now'))
+  );
 `);
 
 // ============================================================
@@ -881,6 +895,68 @@ app.delete('/api/admin/dev-steps/:id', (req, res) => {
   }
 });
 
+// ============================================================
+// ADMIN API - PROMO CODES
+// ============================================================
+app.get('/api/admin/promo-codes', (req, res) => {
+  try {
+    const codes = db.prepare('SELECT * FROM promo_codes ORDER BY createdAt DESC').all();
+    res.json(codes);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/api/admin/promo-codes', (req, res) => {
+  try {
+    const { code, description, discountType, discountValue, maxUses, validFrom, validUntil } = req.body;
+    if (!code) return res.status(400).json({ error: 'Le code est requis' });
+    const result = db.prepare(
+      'INSERT INTO promo_codes (code, description, discountType, discountValue, maxUses, validFrom, validUntil) VALUES (?, ?, ?, ?, ?, ?, ?)'
+    ).run(code.toUpperCase().trim(), description || '', discountType || 'percent', discountValue || 0, maxUses || 0, validFrom || new Date().toISOString(), validUntil || null);
+    res.json({ success: true, id: result.lastInsertRowid });
+  } catch (e) {
+    if (e.message.includes('UNIQUE')) return res.status(400).json({ error: 'Ce code existe déjà' });
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.put('/api/admin/promo-codes/:id', (req, res) => {
+  try {
+    const { code, description, discountType, discountValue, maxUses, validFrom, validUntil, active } = req.body;
+    const existing = db.prepare('SELECT * FROM promo_codes WHERE id = ?').get(req.params.id);
+    if (!existing) return res.status(404).json({ error: 'Code non trouvé' });
+    db.prepare(
+      'UPDATE promo_codes SET code=?, description=?, discountType=?, discountValue=?, maxUses=?, validFrom=?, validUntil=?, active=? WHERE id=?'
+    ).run(
+      (code || existing.code).toUpperCase().trim(),
+      description !== undefined ? description : existing.description,
+      discountType || existing.discountType,
+      discountValue !== undefined ? discountValue : existing.discountValue,
+      maxUses !== undefined ? maxUses : existing.maxUses,
+      validFrom || existing.validFrom,
+      validUntil !== undefined ? validUntil : existing.validUntil,
+      active !== undefined ? active : existing.active,
+      req.params.id
+    );
+    res.json({ success: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.delete('/api/admin/promo-codes/:id', (req, res) => {
+  try {
+    db.prepare('DELETE FROM promo_codes WHERE id = ?').run(req.params.id);
+    res.json({ success: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.post('/api/admin/promo-codes/:id/toggle', (req, res) => {
+  try {
+    const code = db.prepare('SELECT * FROM promo_codes WHERE id = ?').get(req.params.id);
+    if (!code) return res.status(404).json({ error: 'Code non trouvé' });
+    db.prepare('UPDATE promo_codes SET active = ? WHERE id = ?').run(code.active ? 0 : 1, req.params.id);
+    res.json({ success: true, active: !code.active });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 // -- Public content endpoints --
 app.get('/api/content/quotes', (req, res) => {
   try {
@@ -962,6 +1038,57 @@ app.get('/api/admin/stats', (req, res) => {
     // Children age distribution
     const childAges = db.prepare("SELECT birthDate FROM children").all();
 
+    // Registration evolution (last 30 days, grouped by day)
+    const registrationEvolution = db.prepare(`
+      SELECT date(createdAt) as day, COUNT(*) as count
+      FROM parents
+      WHERE createdAt >= datetime('now', '-30 days')
+      GROUP BY date(createdAt)
+      ORDER BY day ASC
+    `).all();
+
+    // Registration evolution by week (last 12 weeks)
+    const weeklyRegistrations = db.prepare(`
+      SELECT strftime('%Y-W%W', createdAt) as week,
+             MIN(date(createdAt)) as weekStart,
+             COUNT(*) as count
+      FROM parents
+      WHERE createdAt >= datetime('now', '-84 days')
+      GROUP BY strftime('%Y-W%W', createdAt)
+      ORDER BY week ASC
+    `).all();
+
+    // Monthly registrations (last 6 months)
+    const monthlyRegistrations = db.prepare(`
+      SELECT strftime('%Y-%m', createdAt) as month, COUNT(*) as count
+      FROM parents
+      WHERE createdAt >= datetime('now', '-180 days')
+      GROUP BY strftime('%Y-%m', createdAt)
+      ORDER BY month ASC
+    `).all();
+
+    // Promo codes stats
+    const promoCodes = db.prepare('SELECT COUNT(*) as count FROM promo_codes').get();
+    const activePromoCodes = db.prepare("SELECT COUNT(*) as count FROM promo_codes WHERE active = 1").get();
+
+    // Conversion / engagement metrics
+    const parentsWithChildren = db.prepare("SELECT COUNT(DISTINCT parentId) as count FROM children").get();
+    const activeParents7d = db.prepare(`
+      SELECT COUNT(DISTINCT parentId) as count FROM (
+        SELECT c.parentId FROM children c WHERE c.id IN (
+          SELECT childId FROM agenda_events WHERE createdAt >= datetime('now', '-7 days')
+        )
+        UNION
+        SELECT c.parentId FROM children c WHERE c.id IN (
+          SELECT childId FROM milestones WHERE createdAt >= datetime('now', '-7 days')
+        )
+        UNION
+        SELECT c.parentId FROM children c WHERE c.id IN (
+          SELECT childId FROM growth_records WHERE createdAt >= datetime('now', '-7 days')
+        )
+      )
+    `).get();
+
     res.json({
       quotes: quotes.count,
       guideCategories: categories.count,
@@ -995,6 +1122,13 @@ app.get('/api/admin/stats', (req, res) => {
       agendaEvents: agendaEvents.count,
       vaccines: vaccines.count,
       childAges: childAges.map(c => c.birthDate),
+      registrationEvolution,
+      weeklyRegistrations,
+      monthlyRegistrations,
+      promoCodes: promoCodes.count,
+      activePromoCodes: activePromoCodes.count,
+      parentsWithChildren: parentsWithChildren.count,
+      activeParents7d: activeParents7d.count,
       lastUpdate: new Date().toISOString()
     });
   } catch (e) {

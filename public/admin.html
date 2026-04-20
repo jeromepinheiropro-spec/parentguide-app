@@ -702,6 +702,10 @@
                     <div class="nav-icon">🛡️</div>
                     <span>Modération</span>
                 </div>
+                <div class="nav-item" data-section="promo-codes">
+                    <div class="nav-icon">🎟️</div>
+                    <span>Codes promo</span>
+                </div>
                 <div class="nav-item" data-section="suggestions">
                     <div class="nav-icon">💬</div>
                     <span>Boîte à idées</span>
@@ -716,7 +720,7 @@
                 <div class="header">
                     <h2>Tableau de bord</h2>
                     <div class="header-actions">
-                        <span id="autoRefreshIndicator" style="font-size:12px;color:#999;margin-right:12px;">Actualisation auto toutes les 30s</span>
+                        <span id="autoRefreshIndicator" style="font-size:12px;color:#999;margin-right:12px;">⟳ Auto 30s</span>
                         <button class="btn btn-primary" id="seedBtn">
                             <span>🔄</span>
                             <span>Initialiser le contenu</span>
@@ -724,48 +728,69 @@
                     </div>
                 </div>
                 <div class="content">
-                    <!-- User Analytics Section -->
-                    <h3 style="margin-bottom:12px;color:#7C5CFC;">👥 Utilisateurs & Engagement</h3>
-                    <div class="stats-grid" id="userStatsGrid">
-                        <div class="stat-card" style="border-left:4px solid #7C5CFC;">
-                            <div class="stat-label">Parents inscrits</div>
-                            <div class="stat-value" id="statParents">0</div>
+
+                    <!-- KPI Cards Row -->
+                    <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="stat-card" style="border-left:4px solid #7C5CFC;position:relative;">
+                            <div class="stat-label">Total inscrits</div>
+                            <div class="stat-value" id="statParents" style="font-size:28px;">0</div>
+                            <div id="parentsTrend" style="font-size:11px;margin-top:4px;color:#4CAF7D;"></div>
                         </div>
                         <div class="stat-card" style="border-left:4px solid #4CAF7D;">
                             <div class="stat-label">Nouveaux (7j)</div>
-                            <div class="stat-value" id="statRecentParents" style="color:#4CAF7D;">0</div>
+                            <div class="stat-value" id="statRecentParents" style="font-size:28px;color:#4CAF7D;">0</div>
                         </div>
                         <div class="stat-card" style="border-left:4px solid #E8956A;">
-                            <div class="stat-label">Enfants</div>
-                            <div class="stat-value" id="statChildren">0</div>
+                            <div class="stat-label">Taux de complétion</div>
+                            <div class="stat-value" id="statCompletionRate" style="font-size:28px;color:#E8956A;">0%</div>
+                            <div style="font-size:11px;margin-top:4px;color:#999;">Parents avec enfant ajouté</div>
                         </div>
                         <div class="stat-card" style="border-left:4px solid #4A90D9;">
-                            <div class="stat-label">Événements agenda</div>
-                            <div class="stat-value" id="statAgenda">0</div>
-                        </div>
-                        <div class="stat-card" style="border-left:4px solid #8B6DB5;">
-                            <div class="stat-label">Étapes notées</div>
-                            <div class="stat-value" id="statMilestones">0</div>
-                        </div>
-                        <div class="stat-card" style="border-left:4px solid #85C1E9;">
-                            <div class="stat-label">Mesures croissance</div>
-                            <div class="stat-value" id="statGrowth">0</div>
-                        </div>
-                        <div class="stat-card" style="border-left:4px solid #B8A9C9;">
-                            <div class="stat-label">Entrées sommeil</div>
-                            <div class="stat-value" id="statSleep">0</div>
-                        </div>
-                        <div class="stat-card" style="border-left:4px solid #D46B6B;">
-                            <div class="stat-label">Vaccins</div>
-                            <div class="stat-value" id="statVaccines">0</div>
+                            <div class="stat-label">Actifs (7j)</div>
+                            <div class="stat-value" id="statActive7d" style="font-size:28px;color:#4A90D9;">0</div>
+                            <div style="font-size:11px;margin-top:4px;color:#999;">Parents avec activité récente</div>
                         </div>
                     </div>
 
-                    <!-- Age Distribution Chart -->
+                    <!-- Registration Evolution Chart -->
                     <div style="margin:24px 0;background:white;border-radius:12px;padding:20px;border:1px solid #e0e0e0;">
-                        <h3 style="margin-bottom:16px;font-size:15px;">📊 Répartition par âge des enfants</h3>
-                        <div id="ageDistribution" style="display:flex;align-items:flex-end;gap:12px;height:120px;padding:0 20px;">
-                            <p style="color:#999;font-size:13px;">Aucune donnée</p>
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                            <h3 style="font-size:15px;margin:0;">📈 Évolution des inscriptions</h3>
+                            <div style="display:flex;gap:8px;">
+                                <button class="btn btn-secondary btn-small" id="chartDaily" onclick="setChartView('daily')" style="font-size:11px;">30 jours</button>
+                                <button class="btn btn-secondary btn-small" id="chartWeekly" onclick="setChartView('weekly')" style="font-size:11px;">12 semaines</button>
+                                <button class="btn btn-secondary btn-small" id="chartMonthly" onclick="setChartView('monthly')" style="font-size:11px;">6 mois</button>
+                            </div>
+                        </div>
+                        <div style="position:relative;height:200px;">
+                            <canvas id="registrationChart" style="width:100%;height:200px;"></canvas>
+                            <div id="registrationChartFallback" style="display:flex;align-items:flex-end;gap:2px;height:180px;padding:0 4px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Second row: Age distribution + Promo codes summary -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0;">
+                        <div style="background:white;border-radius:12px;padding:20px;border:1px solid #e0e0e0;">
+                            <h3 style="margin-bottom:16px;font-size:15px;">👶 Répartition par âge</h3>
+                            <div id="ageDistribution" style="display:flex;align-items:flex-end;gap:12px;height:120px;padding:0 10px;">
+                                <p style="color:#999;font-size:13px;">Aucune donnée</p>
+                            </div>
+                        </div>
+                        <div style="background:white;border-radius:12px;padding:20px;border:1px solid #e0e0e0;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                                <h3 style="font-size:15px;margin:0;">🎟️ Codes promo</h3>
+                                <button class="btn btn-primary btn-small" onclick="switchSection('promo-codes')">Gérer</button>
+                            </div>
+                            <div class="stats-grid" style="grid-template-columns:1fr 1fr;gap:12px;">
+                                <div class="stat-card" style="padding:12px;">
+                                    <div class="stat-label" style="font-size:11px;">Codes actifs</div>
+                                    <div class="stat-value" id="statActivePromos" style="font-size:22px;color:#4CAF7D;">0</div>
+                                </div>
+                                <div class="stat-card" style="padding:12px;">
+                                    <div class="stat-label" style="font-size:11px;">Total codes</div>
+                                    <div class="stat-value" id="statTotalPromos" style="font-size:22px;">0</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -775,93 +800,38 @@
                         <div id="recentRegistrations" style="font-size:13px;color:#666;">Aucune inscription</div>
                     </div>
 
-                    <!-- Content Stats Section -->
-                    <h3 style="margin:24px 0 12px;color:#E8956A;">📚 Contenu</h3>
-                    <div class="stats-grid" id="statsGrid">
-                        <div class="stat-card">
-                            <div class="stat-label">Citations</div>
-                            <div class="stat-value" id="statQuotes">0</div>
+                    <!-- Content summary row -->
+                    <h3 style="margin:24px 0 12px;color:#999;font-size:13px;text-transform:uppercase;letter-spacing:1px;">Contenu publié</h3>
+                    <div class="stats-grid" style="grid-template-columns:repeat(6,1fr);" id="statsGrid">
+                        <div class="stat-card" style="padding:12px;">
+                            <div class="stat-label" style="font-size:11px;">Citations</div>
+                            <div class="stat-value" id="statQuotes" style="font-size:18px;">0</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Catégories</div>
-                            <div class="stat-value" id="statCategories">0</div>
+                        <div class="stat-card" style="padding:12px;">
+                            <div class="stat-label" style="font-size:11px;">Catégories</div>
+                            <div class="stat-value" id="statCategories" style="font-size:18px;">0</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Conseils</div>
-                            <div class="stat-value" id="statTips">0</div>
+                        <div class="stat-card" style="padding:12px;">
+                            <div class="stat-label" style="font-size:11px;">Conseils</div>
+                            <div class="stat-value" id="statTips" style="font-size:18px;">0</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Domaines</div>
-                            <div class="stat-value" id="statDomains">0</div>
+                        <div class="stat-card" style="padding:12px;">
+                            <div class="stat-label" style="font-size:11px;">Domaines</div>
+                            <div class="stat-value" id="statDomains" style="font-size:18px;">0</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Repères</div>
-                            <div class="stat-value" id="statSteps">0</div>
+                        <div class="stat-card" style="padding:12px;">
+                            <div class="stat-label" style="font-size:11px;">Repères</div>
+                            <div class="stat-value" id="statSteps" style="font-size:18px;">0</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Conseils du jour</div>
-                            <div class="stat-value" id="statDailyTips">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Profils clients</div>
-                            <div class="stat-value" id="statDashUsers">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Suggestions</div>
-                            <div class="stat-value" id="statDashSuggestions">0</div>
+                        <div class="stat-card" style="padding:12px;">
+                            <div class="stat-label" style="font-size:11px;">Conseils/jour</div>
+                            <div class="stat-value" id="statDailyTips" style="font-size:18px;">0</div>
                         </div>
                     </div>
 
-                    <!-- Community Stats -->
-                    <h3 style="margin:24px 0 12px;color:#4CAF7D;">💬 Communauté & Modération</h3>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-label">Commentaires</div>
-                            <div class="stat-value" id="statDashComments">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Signalés</div>
-                            <div class="stat-value" id="statDashFlagged" style="color:#D46B6B;">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Signalements</div>
-                            <div class="stat-value" id="statDashReports">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">En attente</div>
-                            <div class="stat-value" id="statDashPendingReports" style="color:#E8956A;">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Utilisateurs bannis</div>
-                            <div class="stat-value" id="statDashBanned" style="color:#D46B6B;">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Suggestions en attente</div>
-                            <div class="stat-value" id="statDashPendingSuggestions" style="color:#E8956A;">0</div>
-                        </div>
-                    </div>
-
-                    <div class="quick-actions">
-                        <h3>Raccourcis</h3>
-                        <div class="quick-actions-grid">
-                            <button class="quick-action-btn" onclick="switchSection('quotes')">
-                                ➕ Ajouter une citation
-                            </button>
-                            <button class="quick-action-btn" onclick="switchSection('guide')">
-                                ➕ Ajouter un conseil
-                            </button>
-                            <button class="quick-action-btn" onclick="switchSection('milestones')">
-                                ➕ Ajouter un repère
-                            </button>
-                            <button class="quick-action-btn" onclick="switchSection('daily-tips')">
-                                ➕ Ajouter un conseil du jour
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="quick-actions">
-                        <h3>Dernière mise à jour</h3>
-                        <p id="lastUpdate" class="text-muted">Jamais</p>
+                    <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:center;color:#999;font-size:12px;">
+                        <span>Dernière actualisation : <span id="lastUpdate">Jamais</span></span>
+                        <span>Prochaine dans 30s</span>
                     </div>
                 </div>
             </section>
@@ -1131,6 +1101,79 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Promo codes section -->
+            <section id="promo-codes" class="section">
+                <div class="header">
+                    <h2>Codes promo</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openPromoModal()">
+                            <span>➕</span>
+                            <span>Nouveau code</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="list-section" style="height: auto;">
+                        <div class="list-header">
+                            <h3>Tous les codes</h3>
+                        </div>
+                        <div class="list-content" id="promoCodesList">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">🎟️</div>
+                                <div class="empty-state-text">Aucun code promo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Promo Code Modal -->
+            <div id="promoModal" class="modal-overlay">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h3 id="promoModalTitle">Nouveau code promo</h3>
+                        <button class="modal-close" onclick="closePromoModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Code</label>
+                            <input type="text" id="promoCode" placeholder="Ex: BIENVENUE20" style="text-transform:uppercase;">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" id="promoDescription" placeholder="Description du code">
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div class="form-group">
+                                <label>Type de réduction</label>
+                                <select id="promoDiscountType">
+                                    <option value="percent">Pourcentage (%)</option>
+                                    <option value="fixed">Montant fixe (€)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Valeur</label>
+                                <input type="number" id="promoDiscountValue" placeholder="20" min="0">
+                            </div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div class="form-group">
+                                <label>Utilisations max (0 = illimité)</label>
+                                <input type="number" id="promoMaxUses" placeholder="0" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Date d'expiration (optionnel)</label>
+                                <input type="date" id="promoValidUntil">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="closePromoModal()">Annuler</button>
+                        <button class="btn btn-primary" onclick="savePromoCode()">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Suggestions section -->
             <section id="suggestions" class="section">
@@ -1509,6 +1552,7 @@
             editingUserId: null,
             editingSuggestionId: null,
             editingReportId: null,
+            editingPromoId: null,
             currentModerationTab: 'comments',
             quotes: [],
             categories: [],
@@ -1520,7 +1564,8 @@
             suggestions: [],
             comments: [],
             reports: [],
-            bannedWords: []
+            bannedWords: [],
+            promoCodes: []
         };
 
         // Initialize
@@ -1534,6 +1579,7 @@
                     // Also refresh the current section data
                     if (state.currentSection === 'users') loadUsers();
                     else if (state.currentSection === 'moderation') { loadComments(); loadReports(); }
+                    else if (state.currentSection === 'promo-codes') loadPromoCodes();
                     else if (state.currentSection === 'suggestions') loadSuggestions();
                 }
             }, 30000);
@@ -1595,19 +1641,52 @@
                 loadComments();
                 loadReports();
                 loadBannedWords();
+            } else if (section === 'promo-codes') {
+                loadPromoCodes();
             } else if (section === 'suggestions') {
                 loadSuggestions();
             }
         }
 
         // Load all data
+        // Chart state
+        let currentChartView = 'daily';
+        let chartData = { daily: [], weekly: [], monthly: [] };
+
+        function setChartView(view) {
+            currentChartView = view;
+            document.querySelectorAll('#chartDaily,#chartWeekly,#chartMonthly').forEach(b => {
+                b.style.background = b.id === 'chart' + view.charAt(0).toUpperCase() + view.slice(1) ? '#7C5CFC' : '';
+                b.style.color = b.id === 'chart' + view.charAt(0).toUpperCase() + view.slice(1) ? 'white' : '';
+            });
+            renderRegistrationChart();
+        }
+
         async function loadData() {
             try {
                 const response = await fetch('/api/admin/stats?_=' + Date.now(), {cache: 'no-store'});
                 const stats = await response.json();
 
                 const el = (id) => document.getElementById(id);
-                const set = (id, val) => { const e = el(id); if (e) e.textContent = val || 0; };
+                const set = (id, val) => { const e = el(id); if (e) e.textContent = val !== undefined ? val : 0; };
+
+                // KPI cards
+                set('statParents', stats.parents);
+                set('statRecentParents', stats.recentParents);
+                set('statActive7d', stats.activeParents7d);
+
+                // Completion rate
+                const completionRate = stats.parents > 0 ? Math.round((stats.parentsWithChildren / stats.parents) * 100) : 0;
+                set('statCompletionRate', completionRate + '%');
+
+                // Trend indicator
+                const trendEl = el('parentsTrend');
+                if (trendEl && stats.recentParents > 0) {
+                    trendEl.innerHTML = '↑ +' + stats.recentParents + ' cette semaine';
+                    trendEl.style.color = '#4CAF7D';
+                } else if (trendEl) {
+                    trendEl.innerHTML = '';
+                }
 
                 // Content stats
                 set('statQuotes', stats.quotes);
@@ -1617,27 +1696,11 @@
                 set('statSteps', stats.devSteps || stats.steps);
                 set('statDailyTips', stats.dailyTips);
 
-                // User engagement stats
-                set('statParents', stats.parents);
-                set('statRecentParents', stats.recentParents);
-                set('statChildren', stats.children);
-                set('statAgenda', stats.agendaEvents);
-                set('statMilestones', stats.milestones);
-                set('statGrowth', stats.growthEntries);
-                set('statSleep', stats.sleepEntries);
-                set('statVaccines', stats.vaccines);
+                // Promo codes
+                set('statActivePromos', stats.activePromoCodes);
+                set('statTotalPromos', stats.promoCodes);
 
-                // Community stats
-                set('statDashUsers', stats.users);
-                set('statDashSuggestions', stats.suggestions);
-                set('statDashComments', stats.comments);
-                set('statDashFlagged', stats.flaggedComments);
-                set('statDashReports', stats.reports);
-                set('statDashPendingReports', stats.pendingReports);
-                set('statDashBanned', stats.bannedUsers);
-                set('statDashPendingSuggestions', stats.pendingSuggestions);
-
-                // Section-level stats
+                // Section-level stats (for other sections)
                 set('statUsers', stats.users);
                 set('statBannedUsers', stats.bannedUsers);
                 set('statSuggestions', stats.suggestions);
@@ -1646,17 +1709,23 @@
                 set('statFlaggedComments', stats.flaggedComments);
                 set('statReports', stats.reports);
                 set('statPendingReports', stats.pendingReports);
+                set('statDashUsers', stats.users);
+                set('statDashSuggestions', stats.suggestions);
 
-                // Age distribution chart
+                // Store chart data
+                chartData.daily = stats.registrationEvolution || [];
+                chartData.weekly = stats.weeklyRegistrations || [];
+                chartData.monthly = stats.monthlyRegistrations || [];
+
+                // Render charts
+                renderRegistrationChart();
                 renderAgeDistribution(stats.childAges || []);
-
-                // Recent registrations
                 renderRecentRegistrations(stats.recentParentsList || []);
 
                 const lastUpdate = new Date(stats.lastUpdate || Date.now()).toLocaleString('fr-FR');
-                document.getElementById('lastUpdate').textContent = lastUpdate;
+                set('lastUpdate', lastUpdate);
 
-                // Pulse the refresh indicator
+                // Pulse indicator
                 const indicator = el('autoRefreshIndicator');
                 if (indicator) {
                     indicator.style.color = '#4CAF7D';
@@ -1665,6 +1734,57 @@
             } catch (error) {
                 console.error('Error loading stats:', error);
             }
+        }
+
+        function renderRegistrationChart() {
+            const container = document.getElementById('registrationChartFallback');
+            if (!container) return;
+
+            let data, labels;
+            const MONTHS_FR = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+
+            if (currentChartView === 'daily') {
+                // Fill all 30 days
+                const days = [];
+                for (let i = 29; i >= 0; i--) {
+                    const d = new Date(); d.setDate(d.getDate() - i);
+                    const key = d.toISOString().split('T')[0];
+                    const found = chartData.daily.find(r => r.day === key);
+                    days.push({ label: d.getDate() + '/' + (d.getMonth()+1), count: found ? found.count : 0 });
+                }
+                data = days.map(d => d.count);
+                labels = days.map(d => d.label);
+            } else if (currentChartView === 'weekly') {
+                data = chartData.weekly.map(w => w.count);
+                labels = chartData.weekly.map(w => {
+                    if (w.weekStart) { const d = new Date(w.weekStart); return d.getDate() + ' ' + MONTHS_FR[d.getMonth()]; }
+                    return w.week;
+                });
+            } else {
+                data = chartData.monthly.map(m => m.count);
+                labels = chartData.monthly.map(m => {
+                    const parts = m.month.split('-');
+                    return MONTHS_FR[parseInt(parts[1])-1] + ' ' + parts[0].slice(2);
+                });
+            }
+
+            if (!data.length || data.every(v => v === 0)) {
+                container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#999;font-size:13px;">Aucune inscription sur cette période</div>';
+                return;
+            }
+
+            const max = Math.max(...data, 1);
+            const barWidth = currentChartView === 'daily' ? 'calc((100% - ' + (data.length * 2) + 'px) / ' + data.length + ')' : 'calc((100% - ' + (data.length * 8) + 'px) / ' + data.length + ')';
+
+            container.innerHTML = data.map((count, i) => {
+                const h = Math.max((count / max) * 160, count > 0 ? 8 : 2);
+                const showLabel = currentChartView === 'daily' ? (i % 5 === 0 || i === data.length - 1) : true;
+                return '<div style="flex:1;min-width:0;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;">' +
+                    (count > 0 ? '<span style="font-size:10px;font-weight:700;color:#7C5CFC;margin-bottom:2px;">' + count + '</span>' : '') +
+                    '<div style="width:80%;max-width:32px;height:' + h + 'px;background:' + (count > 0 ? 'linear-gradient(180deg,#7C5CFC,#9B7FFF)' : '#f0f0f0') + ';border-radius:4px 4px 0 0;"></div>' +
+                    (showLabel ? '<span style="font-size:9px;color:#999;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;">' + labels[i] + '</span>' : '') +
+                    '</div>';
+            }).join('');
         }
 
         function renderAgeDistribution(birthDates) {
@@ -1687,11 +1807,11 @@
             });
             const max = Math.max(...Object.values(buckets), 1);
             container.innerHTML = Object.entries(buckets).map(([label, count]) => {
-                const h = Math.max((count / max) * 90, count > 0 ? 20 : 4);
+                const h = Math.max((count / max) * 80, count > 0 ? 16 : 4);
                 return '<div style="flex:1;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;">' +
-                    '<span style="font-size:13px;font-weight:700;color:' + (colors[label] || '#666') + ';">' + count + '</span>' +
-                    '<div style="width:100%;max-width:48px;height:' + h + 'px;background:' + (colors[label] || '#ccc') + ';border-radius:6px 6px 0 0;margin:4px auto 0;"></div>' +
-                    '<span style="font-size:11px;color:#999;margin-top:6px;">' + label + '</span></div>';
+                    '<span style="font-size:12px;font-weight:700;color:' + (colors[label] || '#666') + ';">' + count + '</span>' +
+                    '<div style="width:90%;max-width:40px;height:' + h + 'px;background:' + (colors[label] || '#ccc') + ';border-radius:4px 4px 0 0;margin:3px auto 0;"></div>' +
+                    '<span style="font-size:10px;color:#999;margin-top:4px;">' + label + '</span></div>';
             }).join('');
         }
 
@@ -2263,8 +2383,8 @@
             };
 
             let stepsHtml = '';
-            Object.keys(ageGroups).forEach(ag => {
-                if (groupedSteps[ag].length > 0) {
+            ageGroups.forEach(ag => {
+                if (groupedSteps[ag] && groupedSteps[ag].length > 0) {
                     stepsHtml += `
                         <div style="margin-bottom: 24px;">
                             <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #7C5CFC;">${ageGroupLabels[ag]}</h4>
@@ -3174,6 +3294,134 @@
                 }
             };
             openConfirmModal('Supprimer la suggestion', 'Êtes-vous sûr de vouloir supprimer cette suggestion?');
+        }
+
+        // ============================================================
+        // PROMO CODES
+        // ============================================================
+        async function loadPromoCodes() {
+            try {
+                const response = await fetch('/api/admin/promo-codes?_=' + Date.now(), {cache: 'no-store'});
+                state.promoCodes = await response.json();
+                renderPromoCodes();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des codes promo', 'error');
+            }
+        }
+
+        function renderPromoCodes() {
+            const container = document.getElementById('promoCodesList');
+            if (!state.promoCodes.length) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎟️</div><div class="empty-state-text">Aucun code promo</div></div>';
+                return;
+            }
+
+            container.innerHTML = state.promoCodes.map(code => {
+                const isExpired = code.validUntil && new Date(code.validUntil) < new Date();
+                const isMaxed = code.maxUses > 0 && code.currentUses >= code.maxUses;
+                const statusColor = !code.active ? '#999' : isExpired ? '#D46B6B' : isMaxed ? '#E8956A' : '#4CAF7D';
+                const statusText = !code.active ? 'Inactif' : isExpired ? 'Expiré' : isMaxed ? 'Épuisé' : 'Actif';
+                const discountText = code.discountType === 'percent' ? code.discountValue + '%' : code.discountValue + '€';
+
+                return '<div class="list-item" style="flex-wrap:wrap;gap:8px;padding:16px;">' +
+                    '<div style="flex:1;min-width:200px;">' +
+                        '<div style="display:flex;align-items:center;gap:8px;">' +
+                            '<span style="font-family:monospace;font-size:16px;font-weight:700;color:#7C5CFC;letter-spacing:1px;">' + escapeHtml(code.code) + '</span>' +
+                            '<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:' + statusColor + '20;color:' + statusColor + ';font-weight:600;">' + statusText + '</span>' +
+                        '</div>' +
+                        '<div style="font-size:12px;color:#666;margin-top:4px;">' + escapeHtml(code.description || 'Aucune description') + '</div>' +
+                    '</div>' +
+                    '<div style="display:flex;align-items:center;gap:16px;">' +
+                        '<div style="text-align:center;"><div style="font-size:18px;font-weight:700;color:#E8956A;">-' + discountText + '</div><div style="font-size:10px;color:#999;">Réduction</div></div>' +
+                        '<div style="text-align:center;"><div style="font-size:18px;font-weight:700;">' + code.currentUses + (code.maxUses > 0 ? '/' + code.maxUses : '') + '</div><div style="font-size:10px;color:#999;">Utilisations</div></div>' +
+                        (code.validUntil ? '<div style="text-align:center;"><div style="font-size:12px;color:#666;">' + new Date(code.validUntil).toLocaleDateString('fr-FR') + '</div><div style="font-size:10px;color:#999;">Expiration</div></div>' : '') +
+                    '</div>' +
+                    '<div class="list-item-actions" style="display:flex;gap:6px;">' +
+                        '<button class="btn btn-secondary btn-small" onclick="togglePromoCode(' + code.id + ')" title="' + (code.active ? 'Désactiver' : 'Activer') + '">' + (code.active ? '⏸️' : '▶️') + '</button>' +
+                        '<button class="btn btn-secondary btn-small" onclick="editPromoCode(' + code.id + ')">✏️</button>' +
+                        '<button class="btn btn-danger btn-small" onclick="deletePromoCode(' + code.id + ')">🗑️</button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function openPromoModal() {
+            state.editingPromoId = null;
+            document.getElementById('promoModalTitle').textContent = 'Nouveau code promo';
+            document.getElementById('promoCode').value = '';
+            document.getElementById('promoDescription').value = '';
+            document.getElementById('promoDiscountType').value = 'percent';
+            document.getElementById('promoDiscountValue').value = '';
+            document.getElementById('promoMaxUses').value = '0';
+            document.getElementById('promoValidUntil').value = '';
+            document.getElementById('promoModal').classList.add('active');
+        }
+
+        function closePromoModal() {
+            document.getElementById('promoModal').classList.remove('active');
+        }
+
+        function editPromoCode(id) {
+            const code = state.promoCodes.find(c => c.id === id);
+            if (!code) return;
+            state.editingPromoId = id;
+            document.getElementById('promoModalTitle').textContent = 'Modifier le code';
+            document.getElementById('promoCode').value = code.code;
+            document.getElementById('promoDescription').value = code.description || '';
+            document.getElementById('promoDiscountType').value = code.discountType || 'percent';
+            document.getElementById('promoDiscountValue').value = code.discountValue || '';
+            document.getElementById('promoMaxUses').value = code.maxUses || 0;
+            document.getElementById('promoValidUntil').value = code.validUntil ? code.validUntil.split('T')[0] : '';
+            document.getElementById('promoModal').classList.add('active');
+        }
+
+        async function savePromoCode() {
+            const data = {
+                code: document.getElementById('promoCode').value,
+                description: document.getElementById('promoDescription').value,
+                discountType: document.getElementById('promoDiscountType').value,
+                discountValue: parseFloat(document.getElementById('promoDiscountValue').value) || 0,
+                maxUses: parseInt(document.getElementById('promoMaxUses').value) || 0,
+                validUntil: document.getElementById('promoValidUntil').value || null
+            };
+            if (!data.code) { showNotification('Le code est requis', 'error'); return; }
+            try {
+                const url = state.editingPromoId ? '/api/admin/promo-codes/' + state.editingPromoId : '/api/admin/promo-codes';
+                const method = state.editingPromoId ? 'PUT' : 'POST';
+                const response = await fetch(url, { method, headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+                const result = await response.json();
+                if (!response.ok) { showNotification(result.error || 'Erreur', 'error'); return; }
+                closePromoModal();
+                loadPromoCodes();
+                loadData();
+                showNotification('Code promo enregistré', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function togglePromoCode(id) {
+            try {
+                await fetch('/api/admin/promo-codes/' + id + '/toggle', { method: 'POST' });
+                loadPromoCodes();
+                loadData();
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        async function deletePromoCode(id) {
+            state.deleteCallback = async () => {
+                try {
+                    await fetch('/api/admin/promo-codes/' + id, {method: 'DELETE'});
+                    loadPromoCodes();
+                    loadData();
+                    showNotification('Code promo supprimé', 'success');
+                } catch (error) {
+                    showNotification('Erreur', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le code', 'Êtes-vous sûr de vouloir supprimer ce code promo?');
         }
 
         // Close modals on outside click
