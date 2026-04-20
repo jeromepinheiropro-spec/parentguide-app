@@ -3,6 +3,7 @@ const Database = require('better-sqlite3');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const crypto = require('crypto');
 
 const app = express();
 app.use(cors());
@@ -29,6 +30,7 @@ db.exec(`
     firstName TEXT NOT NULL,
     lastName TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
+    passwordHash TEXT,
     avatar TEXT DEFAULT 'parent',
     createdAt TEXT DEFAULT (datetime('now'))
   );
@@ -248,113 +250,77 @@ function ensureColumn(table, col, decl) {
 }
 ensureColumn('agenda_events', 'extras', 'TEXT');
 ensureColumn('vaccines', 'extras', 'TEXT');
+ensureColumn('parents', 'passwordHash', 'TEXT');
 
 // ============================================================
-// SEED DATA
+// AUTH HELPERS
 // ============================================================
-const parentCount = db.prepare('SELECT COUNT(*) as count FROM parents').get();
-if (parentCount.count === 0) {
-  const parentId = uuidv4();
-  const childId = uuidv4();
-
-  db.prepare('INSERT INTO parents (id, firstName, lastName, email) VALUES (?, ?, ?, ?)').run(parentId, 'Pinoo', 'P.', 'pinoo@example.com');
-  db.prepare('INSERT INTO children (id, parentId, firstName, birthDate, gender, photoUrl) VALUES (?, ?, ?, ?, ?, ?)').run(childId, parentId, 'Lucas', '2025-07-03', 'boy', 'lion');
-
-  // Milestones
-  const milestones = [
-    { type: 'motor', label: 'Tient sa tête', ageInMonths: 3, date: '2025-10-03' },
-    { type: 'motor', label: 'Se retourne', ageInMonths: 5, date: '2025-12-03' },
-    { type: 'motor', label: 'Position assise', ageInMonths: 7, date: '2026-02-03' },
-    { type: 'motor', label: 'Quatre pattes', ageInMonths: 8, date: '2026-03-03' },
-    { type: 'language', label: 'Premiers babillages', ageInMonths: 4, date: '2025-11-03' },
-    { type: 'language', label: 'Réagit à son prénom', ageInMonths: 6, date: '2026-01-03' },
-    { type: 'social', label: 'Premier sourire', ageInMonths: 2, date: '2025-09-03' },
-    { type: 'social', label: 'Rire aux éclats', ageInMonths: 4, date: '2025-11-03' },
-    { type: 'autonomy', label: 'Tient son biberon', ageInMonths: 6, date: '2026-01-03' },
-  ];
-  for (const m of milestones) {
-    db.prepare('INSERT INTO milestones (id, childId, type, label, ageInMonths, date) VALUES (?, ?, ?, ?, ?, ?)').run(uuidv4(), childId, m.type, m.label, m.ageInMonths, m.date);
-  }
-
-  // Growth records
-  const growth = [
-    { date: '2025-07-03', weightKg: 3.4, heightCm: 50, headCircCm: 35 },
-    { date: '2025-08-03', weightKg: 4.2, heightCm: 53, headCircCm: 37 },
-    { date: '2025-09-03', weightKg: 5.1, heightCm: 56, headCircCm: 39 },
-    { date: '2025-10-03', weightKg: 5.8, heightCm: 59, headCircCm: 40.5 },
-    { date: '2025-11-03', weightKg: 6.4, heightCm: 62, headCircCm: 41.5 },
-    { date: '2025-12-03', weightKg: 7.0, heightCm: 64, headCircCm: 42.5 },
-    { date: '2026-01-03', weightKg: 7.5, heightCm: 67, headCircCm: 43.5 },
-    { date: '2026-02-03', weightKg: 8.0, heightCm: 69, headCircCm: 44.5 },
-    { date: '2026-03-03', weightKg: 8.4, heightCm: 71, headCircCm: 45 },
-    { date: '2026-04-03', weightKg: 8.7, heightCm: 72.5, headCircCm: 45.5 },
-  ];
-  for (const g of growth) {
-    db.prepare('INSERT INTO growth_records (id, childId, date, weightKg, heightCm, headCircCm) VALUES (?, ?, ?, ?, ?, ?)').run(uuidv4(), childId, g.date, g.weightKg, g.heightCm, g.headCircCm);
-  }
-
-  // Sleep records
-  const sleeps = [
-    { date: '2026-04-08', nightHours: 10, napHours: 3, quality: 'great' },
-    { date: '2026-04-09', nightHours: 9, napHours: 2.5, quality: 'good' },
-    { date: '2026-04-10', nightHours: 8, napHours: 3, quality: 'fair' },
-    { date: '2026-04-11', nightHours: 10.5, napHours: 2, quality: 'great' },
-    { date: '2026-04-12', nightHours: 9.5, napHours: 2.5, quality: 'good' },
-    { date: '2026-04-13', nightHours: 10, napHours: 3, quality: 'great' },
-    { date: '2026-04-14', nightHours: 9, napHours: 2, quality: 'good' },
-  ];
-  for (const s of sleeps) {
-    db.prepare('INSERT INTO sleep_records (id, childId, date, nightHours, napHours, quality) VALUES (?, ?, ?, ?, ?, ?)').run(uuidv4(), childId, s.date, s.nightHours, s.napHours, s.quality);
-  }
-
-  // French vaccine calendar seeded for Lucas (born 2025-07-03)
-  // Birth + 2m, 4m, 5m done; 11m, 12m, 16-18m upcoming
-  const birth = new Date('2025-07-03');
-  const addMonths = (d, m) => { const x = new Date(d); x.setMonth(x.getMonth() + m); return x.toISOString().slice(0,10); };
-  const vaccines = [
-    { name: 'Hexavalent (DTP-Hib-HepB-Polio) - 1ère dose', ageMonths: 2, ageLabel: '2 mois', done: true },
-    { name: 'Pneumocoque (Prevenar) - 1ère dose', ageMonths: 2, ageLabel: '2 mois', done: true },
-    { name: 'Hexavalent (DTP-Hib-HepB-Polio) - 2ème dose', ageMonths: 4, ageLabel: '4 mois', done: true },
-    { name: 'Pneumocoque (Prevenar) - 2ème dose', ageMonths: 4, ageLabel: '4 mois', done: true },
-    { name: 'Méningocoque B - 1ère dose', ageMonths: 3, ageLabel: '3 mois', done: true },
-    { name: 'Méningocoque B - 2ème dose', ageMonths: 5, ageLabel: '5 mois', done: true },
-    { name: 'Méningocoque C - 1ère dose', ageMonths: 5, ageLabel: '5 mois', done: true },
-    { name: 'Hexavalent (DTP-Hib-HepB-Polio) - 3ème dose (rappel)', ageMonths: 11, ageLabel: '11 mois', done: false },
-    { name: 'Pneumocoque (Prevenar) - rappel', ageMonths: 11, ageLabel: '11 mois', done: false },
-    { name: 'Méningocoque B - rappel', ageMonths: 12, ageLabel: '12 mois', done: false },
-    { name: 'Méningocoque C - rappel', ageMonths: 12, ageLabel: '12 mois', done: false },
-    { name: 'ROR (Rougeole-Oreillons-Rubéole) - 1ère dose', ageMonths: 12, ageLabel: '12 mois', done: false },
-    { name: 'ROR (Rougeole-Oreillons-Rubéole) - 2ème dose', ageMonths: 17, ageLabel: '16-18 mois', done: false },
-    { name: 'DTP-Polio - rappel', ageMonths: 72, ageLabel: '6 ans', done: false },
-  ];
-  for (const v of vaccines) {
-    const recDate = addMonths(birth, v.ageMonths);
-    const given = v.done ? recDate : null;
-    const reminder = v.done ? null : recDate;
-    const status = v.done ? 'done' : 'upcoming';
-    db.prepare('INSERT INTO vaccines (id, childId, name, recommendedAge, recommendedDate, givenDate, reminderDate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)').run(uuidv4(), childId, v.name, v.ageLabel, recDate, given, reminder, status);
-  }
-
-  // Agenda events seeded
-  const events = [
-    { date: '2026-04-20', time: '10:30', category: 'appointment', title: 'Rendez-vous pédiatre - visite des 9 mois', content: 'Apporter le carnet de santé' },
-    { date: '2026-04-18', time: '16:00', category: 'activity', title: 'Éveil aquatique à la piscine', content: 'Avec maman' },
-    { date: '2026-04-17', time: null, category: 'note', title: 'A adoré les bananes écrasées', content: 'Premier aliment qu\'il mange seul avec les doigts sans grimacer' },
-    { date: '2026-04-16', time: null, category: 'note', title: 'A dit "papa" clairement', content: 'Premier vrai mot en regardant Jérôme !' },
-    { date: '2026-04-14', time: null, category: 'note', title: 'Premiere nuit complète', content: '20h-6h30 sans se réveiller' },
-    { date: '2026-04-25', time: '14:00', category: 'activity', title: 'Après-midi avec les grands-parents', content: null },
-    { date: '2026-05-02', time: '09:00', category: 'milestone', title: 'Préparer l\'introduction des protéines', content: 'Viandes et poissons mixés' },
-  ];
-  for (const e of events) {
-    db.prepare('INSERT INTO agenda_events (id, childId, date, time, category, title, content) VALUES (?, ?, ?, ?, ?, ?, ?)').run(uuidv4(), childId, e.date, e.time, e.category, e.title, e.content);
-  }
-
-  console.log('Demo data seeded successfully (with vaccines & agenda)');
+function hashPassword(password) {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(password, salt, 64).toString('hex');
+  return salt + ':' + hash;
 }
+
+function verifyPassword(password, storedHash) {
+  if (!storedHash) return false;
+  const [salt, hash] = storedHash.split(':');
+  if (!salt || !hash) return false;
+  const testHash = crypto.scryptSync(password, salt, 64).toString('hex');
+  return hash === testHash;
+}
+
+function generateToken(parentId) {
+  return parentId + '.' + crypto.randomBytes(32).toString('hex');
+}
+
+// No demo data seeded — users create accounts via the app
+console.log('Database ready (no demo data)');
 
 // ============================================================
 // API ROUTES
 // ============================================================
+
+// -- Auth --
+app.post('/api/auth/register', (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+  if (!firstName || !lastName || !email || !password) {
+    return res.status(400).json({ error: 'Tous les champs sont obligatoires' });
+  }
+  if (password.length < 6) {
+    return res.status(400).json({ error: 'Mot de passe : 6 caractères minimum' });
+  }
+  // Check if email already exists
+  const existing = db.prepare('SELECT id FROM parents WHERE email = ?').get(email);
+  if (existing) {
+    return res.status(409).json({ error: 'Un compte existe déjà avec cet email' });
+  }
+  try {
+    const id = uuidv4();
+    const passwordHash = hashPassword(password);
+    db.prepare('INSERT INTO parents (id, firstName, lastName, email, passwordHash) VALUES (?, ?, ?, ?, ?)').run(id, firstName, lastName, email, passwordHash);
+    const token = generateToken(id);
+    const parent = { id, firstName, lastName, email };
+    res.json({ token, parent });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email et mot de passe requis' });
+  }
+  const parent = db.prepare('SELECT * FROM parents WHERE email = ?').get(email);
+  if (!parent) {
+    return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+  }
+  if (!verifyPassword(password, parent.passwordHash)) {
+    return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+  }
+  const token = generateToken(parent.id);
+  res.json({ token, parent: { id: parent.id, firstName: parent.firstName, lastName: parent.lastName, email: parent.email } });
+});
 
 // -- Parents --
 app.get('/api/parents', (req, res) => {
@@ -363,10 +329,11 @@ app.get('/api/parents', (req, res) => {
 });
 
 app.post('/api/parents', (req, res) => {
-  const { firstName, lastName, email } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   const id = uuidv4();
   try {
-    db.prepare('INSERT INTO parents (id, firstName, lastName, email) VALUES (?, ?, ?, ?)').run(id, firstName, lastName, email);
+    const pwHash = password ? hashPassword(password) : null;
+    db.prepare('INSERT INTO parents (id, firstName, lastName, email, passwordHash) VALUES (?, ?, ?, ?, ?)').run(id, firstName, lastName, email, pwHash);
     res.json({ id, firstName, lastName, email });
   } catch (e) {
     res.status(400).json({ error: e.message });

@@ -399,7 +399,7 @@ window.selCh=function(cid,id){S.sel=id;if(cid.includes('ms'))loadMs();if(cid.inc
 
 // ============= HOME =============
 async function loadHome(){
-  S.parents=await api('/api/parents');if(!S.parents.length)return;S.cp=S.parents[0];
+  if(!S.cp){S.parents=await api('/api/parents');if(!S.parents.length)return;S.cp=S.parents[0];}
   document.getElementById('greeting').textContent='Bonjour '+S.cp.firstName+' !';
   const p=await api('/api/parents/'+S.cp.id);const c=document.getElementById('hc');
   if(!p.children.length){c.innerHTML='<div class="crd" style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Ajoutez votre premier enfant</p><button class="btn bp mt" onclick="openAddChild()">Ajouter un enfant</button></div>';document.getElementById('hi').innerHTML='';document.getElementById('st').innerHTML='';document.getElementById('ht').innerHTML='';document.getElementById('hremind').innerHTML='';return}
@@ -507,7 +507,7 @@ function expandRec(list){
   return out;
 }
 async function loadAgenda(){
-  if(!S.cp){S.parents=await api('/api/parents');if(S.parents.length)S.cp=S.parents[0];else return}
+  if(!S.cp)return;
   const p=await api('/api/parents/'+S.cp.id);
   childSel('agsel',p.children,async id=>{
     S.sel=id;
@@ -694,13 +694,9 @@ window.showAge=function(dom,age,btn){btn.parentElement.querySelectorAll('.agetab
 
 function showAgeContent(dom,age){const d=DEV[dom];if(!d)return;const steps=d.ages[age]||[];const el=document.getElementById('age-'+dom);if(!el)return;el.innerHTML=steps.map(s=>'<div class="mcard"><div class="mca">'+age+'</div><div class="mcl">'+s.l+'</div><div class="acts"><div class="acts-t">Activites & Jeux</div>'+s.acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>').join('')||'<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repere pour cette tranche</p>'}
 
-window.showGD=async function(key){const g=GUIDE[key];if(!g)return;document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
-  // Load comments for this guide category
-  let comments=[];try{const cr=await fetch('/api/comments?targetType=guide&targetId='+key);if(cr.ok)comments=await cr.json()}catch(e){}
+window.showGD=function(key){const g=GUIDE[key];if(!g)return;document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
   document.getElementById('gdc').innerHTML=g.tips.map((t,i)=>{
-    const tipComments=comments.filter(c=>c.targetId===key+'-'+i||c.targetId===key);
-    const commentsHtml=tipComments.length?tipComments.map(c=>'<div class="comment-item"><div><div class="ci-name">'+(c.userName||'Parent')+'</div><div class="ci-text">'+escHtml(c.text)+'</div><div class="ci-date">'+new Date(c.createdAt).toLocaleDateString('fr-FR')+'</div></div></div>').join(''):'';
-    return '<div class="tip" style="border-left-color:'+g.c+'"><div class="tph"><span class="tpt">'+t.t+'</span><span class="badge" style="background:'+g.bg+';color:'+g.c+'">'+t.a+'</span></div><div class="tpx">'+t.x+'</div><div class="comment-section"><div class="comment-form"><input type="text" id="cmt-'+key+'-'+i+'" placeholder="Votre commentaire..."><button onclick="postComment(\'guide\',\''+key+'-'+i+'\',\'cmt-'+key+'-'+i+'\')">Envoyer</button></div>'+commentsHtml+'</div></div>'
+    return '<div class="tip" style="border-left-color:'+g.c+'"><div class="tph"><span class="tpt">'+t.t+'</span><span class="badge" style="background:'+g.bg+';color:'+g.c+'">'+t.a+'</span></div><div class="tpx">'+t.x+'</div></div>'
   }).join('');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
 
@@ -1277,32 +1273,7 @@ function renderMySuggestions(container, mine) {
     ).join('');
 }
 
-// ============= COMMENTS =============
-async function postComment(targetType, targetId, inputId) {
-  const input = document.getElementById(inputId);
-  if (!input) return;
-  const text = input.value.trim();
-  if (!text) return;
-
-  try {
-    const res = await fetch('/api/comments', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({userId: currentUserProfileId, targetType, targetId, text})
-    });
-    const data = await res.json();
-    if (data.error) {
-      showToast(data.error);
-      return;
-    }
-    input.value = '';
-    showToast('Commentaire envoyé');
-    // Refresh the guide detail page
-    const guideKey = targetId.split('-')[0];
-    if (GUIDE[guideKey]) window.showGD(guideKey);
-  } catch (e) { showToast('Erreur'); }
-}
-window.postComment = postComment;
+// (Comments removed from guides/repères - managed via admin only)
 
 
 // ============= TOAST =============
@@ -1326,11 +1297,157 @@ function escHtml(text) {
   return String(text || '').replace(/[&<>"']/g, m => map[m]);
 }
 
-// ============= INIT =============
-(async()=>{
+// ============= AUTH =============
+let authToken = null;
+
+function checkAuth() {
+  const saved = localStorage.getItem('pg_auth');
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      if (data.token && data.parent) {
+        authToken = data.token;
+        S.cp = data.parent;
+        return true;
+      }
+    } catch(e) {}
+  }
+  return false;
+}
+
+function showAuthPage() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('p-auth').classList.add('active');
+  document.getElementById('navbar').style.display = 'none';
+  document.getElementById('fab').style.display = 'none';
+}
+
+function showLoginForm() {
+  document.getElementById('auth-signup').style.display = 'none';
+  document.getElementById('auth-login').style.display = 'block';
+}
+function showSignupForm() {
+  document.getElementById('auth-login').style.display = 'none';
+  document.getElementById('auth-signup').style.display = 'block';
+}
+window.showLoginForm = showLoginForm;
+window.showSignupForm = showSignupForm;
+
+window.doSignup = async function() {
+  const fn = document.getElementById('su-fn').value.trim();
+  const ln = document.getElementById('su-ln').value.trim();
+  const email = document.getElementById('su-email').value.trim();
+  const pw = document.getElementById('su-pw').value;
+  const pw2 = document.getElementById('su-pw2').value;
+  if (!fn || !ln || !email || !pw) { showToast('Tous les champs sont obligatoires'); return; }
+  if (pw.length < 6) { showToast('Mot de passe : 6 caractères minimum'); return; }
+  if (pw !== pw2) { showToast('Les mots de passe ne correspondent pas'); return; }
+  try {
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ firstName: fn, lastName: ln, email, password: pw })
+    });
+    const data = await res.json();
+    if (!res.ok || data.error) { showToast(data.error || 'Erreur lors de l\'inscription'); return; }
+    authToken = data.token;
+    S.cp = data.parent;
+    S.parents = [data.parent];
+    localStorage.setItem('pg_auth', JSON.stringify({ token: data.token, parent: data.parent }));
+    await startApp(true);
+  } catch(e) { showToast('Erreur de connexion au serveur'); }
+}
+
+window.doLogin = async function() {
+  const email = document.getElementById('li-email').value.trim();
+  const pw = document.getElementById('li-pw').value;
+  if (!email || !pw) { showToast('Email et mot de passe requis'); return; }
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, password: pw })
+    });
+    const data = await res.json();
+    if (!res.ok || data.error) { showToast(data.error || 'Identifiants incorrects'); return; }
+    authToken = data.token;
+    S.cp = data.parent;
+    S.parents = [data.parent];
+    localStorage.setItem('pg_auth', JSON.stringify({ token: data.token, parent: data.parent }));
+    await startApp(false);
+  } catch(e) { showToast('Erreur de connexion au serveur'); }
+}
+
+window.doLogout = function() {
+  localStorage.removeItem('pg_auth');
+  localStorage.removeItem('pg_onboarded');
+  authToken = null;
+  S.cp = null;
+  S.parents = [];
+  showAuthPage();
+}
+
+// ============= ONBOARDING =============
+function showOnboarding() {
+  const steps = [
+    { ico: 'home', title: 'Tableau de bord', desc: 'Votre page d\'accueil personnalisée avec les alertes, conseils du jour et outils adaptés à l\'âge de votre enfant.' },
+    { ico: 'cal', title: 'Agenda', desc: 'Planifiez et suivez tous les rendez-vous médicaux, vaccins, activités et notes importantes.' },
+    { ico: 'book', title: 'Carnet de bord', desc: 'Notez toutes les grandes premières de votre enfant : premiers pas, premiers mots, sourires...' },
+    { ico: 'chart', title: 'Suivi & Courbes', desc: 'Suivez la croissance (poids, taille) et le sommeil de votre enfant avec des graphiques visuels.' },
+    { ico: 'compass', title: 'Repères & Guide', desc: 'Accédez aux repères de développement par âge et au guide du quotidien (sommeil, alimentation, santé...).' },
+    { ico: 'user', title: 'Mon profil', desc: 'Gérez vos enfants, consultez le calendrier famille, le bilan personnalisé et la boîte à idées.' }
+  ];
+  let current = 0;
+  const overlay = document.createElement('div');
+  overlay.id = 'onboarding-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  function renderStep() {
+    const s = steps[current];
+    const isLast = current === steps.length - 1;
+    overlay.innerHTML = '<div style="background:white;border-radius:20px;max-width:380px;width:100%;padding:30px 24px;text-align:center;animation:fadeIn .3s ease">' +
+      '<div style="width:60px;height:60px;border-radius:50%;background:var(--pk);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">' + ico(s.ico, 28) + '</div>' +
+      '<h3 style="font-size:18px;font-weight:800;margin-bottom:8px;color:var(--tx)">' + s.title + '</h3>' +
+      '<p style="font-size:13px;color:var(--tx2);line-height:1.6;margin-bottom:20px">' + s.desc + '</p>' +
+      '<div style="display:flex;justify-content:center;gap:6px;margin-bottom:16px">' + steps.map((_, i) => '<div style="width:8px;height:8px;border-radius:50%;background:' + (i === current ? 'var(--pk3)' : 'var(--bd)') + '"></div>').join('') + '</div>' +
+      '<div style="display:flex;gap:10px;justify-content:center">' +
+        (current > 0 ? '<button onclick="window._obPrev()" style="padding:10px 20px;border-radius:12px;border:1px solid var(--bd);background:white;font-size:13px;font-weight:600;cursor:pointer">Précédent</button>' : '') +
+        '<button onclick="window._obNext()" style="padding:10px 24px;border-radius:12px;border:none;background:var(--pk3);color:white;font-size:13px;font-weight:700;cursor:pointer">' + (isLast ? 'C\'est parti !' : 'Suivant') + '</button>' +
+      '</div>' +
+      '<button onclick="window._obSkip()" style="margin-top:12px;background:none;border:none;color:var(--tx3);font-size:11px;cursor:pointer">Passer le tutoriel</button>' +
+    '</div>';
+  }
+  window._obNext = function() { if (current < steps.length - 1) { current++; renderStep(); } else { finishOnboarding(); } };
+  window._obPrev = function() { if (current > 0) { current--; renderStep(); } };
+  window._obSkip = function() { finishOnboarding(); };
+  function finishOnboarding() {
+    overlay.remove();
+    localStorage.setItem('pg_onboarded', '1');
+    delete window._obNext; delete window._obPrev; delete window._obSkip;
+  }
+  renderStep();
+  document.body.appendChild(overlay);
+}
+
+// ============= APP START =============
+async function startApp(isNewUser) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('p-home').classList.add('active');
+  document.getElementById('navbar').style.display = '';
   await loadDynamicContent();
   await loadHome();
   await syncUserProfile();
+  if (isNewUser || !localStorage.getItem('pg_onboarded')) {
+    showOnboarding();
+  }
+}
+
+// ============= INIT =============
+(async()=>{
+  if (checkAuth()) {
+    await startApp(false);
+  } else {
+    showAuthPage();
+  }
 })();
 // Re-check reminders every 2 minutes so reminderMinutes windows trigger on time
 setInterval(()=>{if(document.visibilityState==='visible'&&document.getElementById('p-home').classList.contains('active')){loadHome()}},120000);
