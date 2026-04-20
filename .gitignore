@@ -1,0 +1,8 @@
+node_modules/
+parentguide.db
+parentguide.db-wal
+parentguide.db-shm
+*.log
+.env
+.DS_Store
+PROMPT-REPRISE.md

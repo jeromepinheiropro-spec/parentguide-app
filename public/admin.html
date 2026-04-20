@@ -1,0 +1,3021 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParentGuide Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 24px 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sidebar-header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #7C5CFC;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-item:hover {
+            background: #f9f9f9;
+            color: #7C5CFC;
+        }
+
+        .nav-item.active {
+            background: #f0ebff;
+            border-left-color: #7C5CFC;
+            color: #7C5CFC;
+        }
+
+        .nav-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 240px;
+            flex: 1;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .content {
+            padding: 32px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #7C5CFC;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6a48d6;
+            box-shadow: 0 2px 8px rgba(124, 92, 252, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #f9f9f9;
+            border-color: #ccc;
+        }
+
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ff5252;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #7C5CFC;
+            margin: 12px 0;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quick-actions {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 32px;
+        }
+
+        .quick-actions h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .quick-action-btn {
+            padding: 12px 16px;
+            background: #f0ebff;
+            border: 1px solid #e0d5ff;
+            border-radius: 6px;
+            color: #7C5CFC;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .quick-action-btn:hover {
+            background: #7C5CFC;
+            color: white;
+            border-color: #7C5CFC;
+        }
+
+        /* List views */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+            height: calc(100vh - 200px);
+        }
+
+        .list-section {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .list-header {
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .list-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .list-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .list-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .list-item:hover {
+            background: #f9f9f9;
+        }
+
+        .list-item.active {
+            background: #f0ebff;
+            border-left: 3px solid #7C5CFC;
+        }
+
+        .list-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .list-item-title {
+            font-weight: 500;
+            font-size: 13px;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .list-item-subtitle {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .list-item-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .empty-state {
+            padding: 32px 16px;
+            text-align: center;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .detail-panel {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .detail-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #7C5CFC;
+            box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-hint {
+            font-size: 11px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 24px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 24px;
+            background: white;
+            padding: 0 24px;
+        }
+
+        .tab {
+            padding: 12px 0;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: #7C5CFC;
+        }
+
+        .tab.active {
+            color: #7C5CFC;
+            border-bottom-color: #7C5CFC;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Toggle */
+        .toggle {
+            display: inline-flex;
+            width: 44px;
+            height: 24px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s;
+            border: none;
+            padding: 0;
+        }
+
+        .toggle.active {
+            background: #7C5CFC;
+        }
+
+        .toggle-thumb {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: left 0.2s;
+        }
+
+        .toggle.active .toggle-thumb {
+            left: 22px;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            max-width: 400px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success {
+            border-left: 3px solid #51cf66;
+        }
+
+        .notification.error {
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .notification-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f0f0f0;
+            border-top-color: #7C5CFC;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Utility */
+        .hidden {
+            display: none;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .gap-8 {
+            gap: 8px;
+        }
+
+        .mt-8 {
+            margin-top: 8px;
+        }
+
+        .mt-16 {
+            margin-top: 16px;
+        }
+
+        .text-muted {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .color-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+            }
+
+            .content {
+                padding: 16px;
+            }
+
+            .modal {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>ParentGuide Admin</h1>
+                <p>Gestion de contenu</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item active" data-section="dashboard">
+                    <div class="nav-icon">📊</div>
+                    <span>Tableau de bord</span>
+                </div>
+                <div class="nav-item" data-section="quotes">
+                    <div class="nav-icon">✨</div>
+                    <span>Citations</span>
+                </div>
+                <div class="nav-item" data-section="guide">
+                    <div class="nav-icon">📚</div>
+                    <span>Guide</span>
+                </div>
+                <div class="nav-item" data-section="milestones">
+                    <div class="nav-icon">🎯</div>
+                    <span>Repères</span>
+                </div>
+                <div class="nav-item" data-section="daily-tips">
+                    <div class="nav-icon">💡</div>
+                    <span>Conseils du jour</span>
+                </div>
+                <div style="border-top:1px solid #e0e0e0;margin:12px 0;"></div>
+                <div class="nav-item" data-section="users">
+                    <div class="nav-icon">👥</div>
+                    <span>Profils clients</span>
+                </div>
+                <div class="nav-item" data-section="moderation">
+                    <div class="nav-icon">🛡️</div>
+                    <span>Modération</span>
+                </div>
+                <div class="nav-item" data-section="suggestions">
+                    <div class="nav-icon">💬</div>
+                    <span>Boîte à idées</span>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="main">
+            <!-- Dashboard section -->
+            <section id="dashboard" class="section active">
+                <div class="header">
+                    <h2>Tableau de bord</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" id="seedBtn">
+                            <span>🔄</span>
+                            <span>Initialiser le contenu</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="stats-grid" id="statsGrid">
+                        <div class="stat-card">
+                            <div class="stat-label">Citations</div>
+                            <div class="stat-value" id="statQuotes">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Catégories</div>
+                            <div class="stat-value" id="statCategories">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Conseils</div>
+                            <div class="stat-value" id="statTips">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Domaines</div>
+                            <div class="stat-value" id="statDomains">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Repères</div>
+                            <div class="stat-value" id="statSteps">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Conseils du jour</div>
+                            <div class="stat-value" id="statDailyTips">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Clients</div>
+                            <div class="stat-value" id="statDashUsers">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Suggestions</div>
+                            <div class="stat-value" id="statDashSuggestions">0</div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h3>Raccourcis</h3>
+                        <div class="quick-actions-grid">
+                            <button class="quick-action-btn" onclick="switchSection('quotes')">
+                                ➕ Ajouter une citation
+                            </button>
+                            <button class="quick-action-btn" onclick="switchSection('guide')">
+                                ➕ Ajouter un conseil
+                            </button>
+                            <button class="quick-action-btn" onclick="switchSection('milestones')">
+                                ➕ Ajouter un repère
+                            </button>
+                            <button class="quick-action-btn" onclick="switchSection('daily-tips')">
+                                ➕ Ajouter un conseil du jour
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h3>Dernière mise à jour</h3>
+                        <p id="lastUpdate" class="text-muted">Jamais</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quotes section -->
+            <section id="quotes" class="section">
+                <div class="header">
+                    <h2>Citations</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openQuoteModal()">
+                            <span>➕</span>
+                            <span>Nouvelle citation</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="list-section">
+                        <div class="list-header">
+                            <h3>Citations</h3>
+                        </div>
+                        <div class="list-content" id="quotesList">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">📭</div>
+                                <div class="empty-state-text">Aucune citation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Guide section -->
+            <section id="guide" class="section">
+                <div class="header">
+                    <h2>Guide</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openCategoryModal()">
+                            <span>➕</span>
+                            <span>Nouvelle catégorie</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="two-column">
+                        <div class="list-section">
+                            <div class="list-header">
+                                <h3>Catégories</h3>
+                            </div>
+                            <div class="list-content" id="categoriesList">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-text">Aucune catégorie</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="guideDetailPanel">
+                            <div class="detail-panel">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">👇</div>
+                                    <div class="empty-state-text">Sélectionnez une catégorie</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Milestones section -->
+            <section id="milestones" class="section">
+                <div class="header">
+                    <h2>Repères développementaux</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openDomainModal()">
+                            <span>➕</span>
+                            <span>Nouveau domaine</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="two-column">
+                        <div class="list-section">
+                            <div class="list-header">
+                                <h3>Domaines</h3>
+                            </div>
+                            <div class="list-content" id="domainsList">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-text">Aucun domaine</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="milestonesDetailPanel">
+                            <div class="detail-panel">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">👇</div>
+                                    <div class="empty-state-text">Sélectionnez un domaine</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily tips section -->
+            <section id="daily-tips" class="section">
+                <div class="header">
+                    <h2>Conseils du jour</h2>
+                </div>
+                <div class="content">
+                    <div class="tabs" id="ageGroupTabs">
+                        <div class="tab active" data-tab="0-6m">0-6 mois</div>
+                        <div class="tab" data-tab="6-12m">6-12 mois</div>
+                        <div class="tab" data-tab="12-24m">12-24 mois</div>
+                        <div class="tab" data-tab="2-3a">2-3 ans</div>
+                        <div class="tab" data-tab="3-6a">3-6 ans</div>
+                    </div>
+
+                    <div class="tab-content active" id="tab-0-6m">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3>Conseils pour 0-6 mois</h3>
+                            <button class="btn btn-primary btn-small" onclick="openDailyTipModal('0-6m')">
+                                ➕ Ajouter
+                            </button>
+                        </div>
+                        <div class="list-section" style="height: auto;">
+                            <div class="list-content" id="dailyTips-0-6m">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-text">Aucun conseil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-6-12m">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3>Conseils pour 6-12 mois</h3>
+                            <button class="btn btn-primary btn-small" onclick="openDailyTipModal('6-12m')">
+                                ➕ Ajouter
+                            </button>
+                        </div>
+                        <div class="list-section" style="height: auto;">
+                            <div class="list-content" id="dailyTips-6-12m">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-text">Aucun conseil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-12-24m">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3>Conseils pour 12-24 mois</h3>
+                            <button class="btn btn-primary btn-small" onclick="openDailyTipModal('12-24m')">
+                                ➕ Ajouter
+                            </button>
+                        </div>
+                        <div class="list-section" style="height: auto;">
+                            <div class="list-content" id="dailyTips-12-24m">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-text">Aucun conseil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-2-3a">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3>Conseils pour 2-3 ans</h3>
+                            <button class="btn btn-primary btn-small" onclick="openDailyTipModal('2-3a')">
+                                ➕ Ajouter
+                            </button>
+                        </div>
+                        <div class="list-section" style="height: auto;">
+                            <div class="list-content" id="dailyTips-2-3a">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-text">Aucun conseil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-3-6a">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3>Conseils pour 3-6 ans</h3>
+                            <button class="btn btn-primary btn-small" onclick="openDailyTipModal('3-6a')">
+                                ➕ Ajouter
+                            </button>
+                        </div>
+                        <div class="list-section" style="height: auto;">
+                            <div class="list-content" id="dailyTips-3-6a">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-text">Aucun conseil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users section -->
+            <section id="users" class="section">
+                <div class="header">
+                    <h2>Profils clients</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openUserModal()">➕ Nouveau client</button>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="stats-grid" style="margin-bottom:20px;">
+                        <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="statUsers">0</div></div>
+                        <div class="stat-card" style="border-left:3px solid #e74c3c;"><div class="stat-label">Bannis</div><div class="stat-value" id="statBannedUsers">0</div></div>
+                    </div>
+                    <div style="margin-bottom:16px;display:flex;gap:8px;">
+                        <input type="text" class="form-input" id="userSearchInput" placeholder="Rechercher par nom ou email..." style="flex:1;" oninput="filterUsers()">
+                        <select class="form-select" id="userStatusFilter" style="width:150px;" onchange="filterUsers()">
+                            <option value="">Tous</option>
+                            <option value="active">Actifs</option>
+                            <option value="banned">Bannis</option>
+                            <option value="suspended">Suspendus</option>
+                        </select>
+                    </div>
+                    <div class="list-section" style="height:auto;">
+                        <div class="list-content" id="usersList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Moderation section -->
+            <section id="moderation" class="section">
+                <div class="header">
+                    <h2>Modération</h2>
+                </div>
+                <div class="content">
+                    <div class="stats-grid" style="margin-bottom:20px;">
+                        <div class="stat-card"><div class="stat-label">Commentaires</div><div class="stat-value" id="statComments">0</div></div>
+                        <div class="stat-card" style="border-left:3px solid #e67e22;"><div class="stat-label">Signalés</div><div class="stat-value" id="statFlaggedComments">0</div></div>
+                        <div class="stat-card"><div class="stat-label">Signalements</div><div class="stat-value" id="statReports">0</div></div>
+                        <div class="stat-card" style="border-left:3px solid #e74c3c;"><div class="stat-label">En attente</div><div class="stat-value" id="statPendingReports">0</div></div>
+                    </div>
+                    <div class="tabs" id="moderationTabs">
+                        <div class="tab active" onclick="switchModerationTab('comments')">Commentaires</div>
+                        <div class="tab" onclick="switchModerationTab('reports')">Signalements</div>
+                        <div class="tab" onclick="switchModerationTab('banned-words')">Mots interdits</div>
+                    </div>
+                    <div id="moderationContent">
+                        <div id="commentsPanel" class="list-section" style="height:auto;">
+                            <div class="list-content" id="commentsList"></div>
+                        </div>
+                        <div id="reportsPanel" style="display:none;" class="list-section" style="height:auto;">
+                            <div class="list-content" id="reportsList"></div>
+                        </div>
+                        <div id="bannedWordsPanel" style="display:none;">
+                            <div style="display:flex;gap:8px;margin-bottom:16px;">
+                                <input type="text" class="form-input" id="newBannedWord" placeholder="Ajouter un mot interdit..." style="flex:1;">
+                                <button class="btn btn-primary" onclick="addBannedWord()">Ajouter</button>
+                            </div>
+                            <div class="list-section" style="height:auto;">
+                                <div class="list-content" id="bannedWordsList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suggestions section -->
+            <section id="suggestions" class="section">
+                <div class="header">
+                    <h2>Boîte à idées</h2>
+                </div>
+                <div class="content">
+                    <div class="stats-grid" style="margin-bottom:20px;">
+                        <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="statSuggestions">0</div></div>
+                        <div class="stat-card" style="border-left:3px solid #e67e22;"><div class="stat-label">En attente</div><div class="stat-value" id="statPendingSuggestions">0</div></div>
+                    </div>
+                    <div style="margin-bottom:16px;">
+                        <select class="form-select" id="suggestionStatusFilter" style="width:200px;" onchange="filterSuggestions()">
+                            <option value="">Toutes</option>
+                            <option value="pending">En attente</option>
+                            <option value="approved">Approuvées</option>
+                            <option value="rejected">Rejetées</option>
+                            <option value="archived">Archivées</option>
+                        </select>
+                    </div>
+                    <div class="list-section" style="height:auto;">
+                        <div class="list-content" id="suggestionsList"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modals -->
+
+    <!-- User Modal -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal" style="max-width:550px;">
+            <div class="modal-header">
+                <span id="userModalTitle">Nouveau client</span>
+            </div>
+            <form id="userForm" onsubmit="saveUser(event)">
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label class="form-label">Prénom</label>
+                        <input type="text" class="form-input" id="userFirstName" required>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="form-input" id="userLastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Téléphone</label>
+                    <input type="tel" class="form-input" id="userPhone">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Photo URL</label>
+                    <input type="text" class="form-input" id="userPhoto" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Bio</label>
+                    <textarea class="form-textarea" id="userBio" placeholder="Courte bio..."></textarea>
+                </div>
+                <div style="display:flex;gap:12px;">
+                    <div class="form-group" style="flex:1;">
+                        <label class="form-label">Nombre d'enfants</label>
+                        <input type="number" class="form-input" id="userChildrenCount" min="0" value="0">
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label class="form-label">Statut</label>
+                        <select class="form-select" id="userStatus">
+                            <option value="active">Actif</option>
+                            <option value="suspended">Suspendu</option>
+                            <option value="banned">Banni</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" id="banReasonGroup" style="display:none;">
+                    <label class="form-label">Raison du ban</label>
+                    <textarea class="form-textarea" id="userBanReason" placeholder="Raison..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Suggestion Admin Note Modal -->
+    <div class="modal-overlay" id="suggestionNoteModal">
+        <div class="modal" style="max-width:450px;">
+            <div class="modal-header">
+                <span>Note administrative</span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Note</label>
+                <textarea class="form-textarea" id="suggestionAdminNote" placeholder="Votre note..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('suggestionNoteModal')">Annuler</button>
+                <button type="button" class="btn btn-primary" onclick="saveSuggestionNote()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Admin Note Modal -->
+    <div class="modal-overlay" id="reportNoteModal">
+        <div class="modal" style="max-width:450px;">
+            <div class="modal-header">
+                <span>Traiter le signalement</span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Statut</label>
+                <select class="form-select" id="reportStatusSelect">
+                    <option value="pending">En attente</option>
+                    <option value="reviewed">Examiné</option>
+                    <option value="dismissed">Rejeté</option>
+                    <option value="action_taken">Action prise</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Note admin</label>
+                <textarea class="form-textarea" id="reportAdminNote" placeholder="Votre note..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('reportNoteModal')">Annuler</button>
+                <button type="button" class="btn btn-primary" onclick="saveReportNote()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Modal -->
+    <div class="modal-overlay" id="quoteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="quoteModalTitle">Nouvelle citation</span>
+            </div>
+            <form id="quoteForm" onsubmit="saveQuote(event)">
+                <div class="form-group">
+                    <label class="form-label">Citation</label>
+                    <textarea class="form-textarea" id="quoteText" required placeholder="Entrez la citation..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Auteur</label>
+                    <input type="text" class="form-input" id="quoteAuthor" placeholder="Auteur (optionnel)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="quoteActive" checked style="margin-right: 8px;">
+                        Actif
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('quoteModal')">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal-overlay" id="categoryModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="categoryModalTitle">Nouvelle catégorie</span>
+            </div>
+            <form id="categoryForm" onsubmit="saveCategory(event)">
+                <div class="form-group">
+                    <label class="form-label">Clé (identifiant)</label>
+                    <input type="text" class="form-input" id="categoryKey" required placeholder="sommeil, alimentation...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Titre</label>
+                    <input type="text" class="form-input" id="categoryTitle" required placeholder="Sommeil, Alimentation...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Icône</label>
+                    <input type="text" class="form-input" id="categoryIcon" placeholder="😴">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Couleur</label>
+                    <input type="color" class="form-input" id="categoryColor" value="#7C5CFC">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Couleur de fond</label>
+                    <input type="color" class="form-input" id="categoryBgColor" value="#f0ebff">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('categoryModal')">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tip Modal -->
+    <div class="modal-overlay" id="tipModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="tipModalTitle">Nouveau conseil</span>
+            </div>
+            <form id="tipForm" onsubmit="saveTip(event)">
+                <div class="form-group">
+                    <label class="form-label">Titre</label>
+                    <input type="text" class="form-input" id="tipTitle" required placeholder="Titre du conseil...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tranche d'âge</label>
+                    <input type="text" class="form-input" id="tipAgeRange" placeholder="Ex: 0-6 mois">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contenu</label>
+                    <textarea class="form-textarea" id="tipText" required placeholder="Contenu du conseil..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('tipModal')">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Domain Modal -->
+    <div class="modal-overlay" id="domainModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="domainModalTitle">Nouveau domaine</span>
+            </div>
+            <form id="domainForm" onsubmit="saveDomain(event)">
+                <div class="form-group">
+                    <label class="form-label">Clé (identifiant)</label>
+                    <input type="text" class="form-input" id="domainKey" required placeholder="motricite, langage...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Titre</label>
+                    <input type="text" class="form-input" id="domainTitle" required placeholder="Motricité, Langage...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Icône (emoji)</label>
+                    <input type="text" class="form-input" id="domainIcon" required placeholder="🏃 💬 🧠...">
+                </div>
+                <div class="form-group" style="display:flex;gap:12px;">
+                    <div style="flex:1;">
+                        <label class="form-label">Couleur</label>
+                        <input type="color" class="form-input" id="domainColor" value="#7C5CFC">
+                    </div>
+                    <div style="flex:1;">
+                        <label class="form-label">Couleur fond</label>
+                        <input type="color" class="form-input" id="domainBgColor" value="#f0ebff">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('domainModal')">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Step Modal -->
+    <div class="modal-overlay" id="stepModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="stepModalTitle">Nouveau repère</span>
+            </div>
+            <form id="stepForm" onsubmit="saveStep(event)">
+                <div class="form-group">
+                    <label class="form-label">Tranche d'âge</label>
+                    <select class="form-select" id="stepAgeGroup" required>
+                        <option value="">Sélectionnez une tranche...</option>
+                        <option value="0-6m">0-6 mois</option>
+                        <option value="6-12m">6-12 mois</option>
+                        <option value="1-2a">1-2 ans</option>
+                        <option value="2-3a">2-3 ans</option>
+                        <option value="3-6a">3-6 ans</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Label</label>
+                    <input type="text" class="form-input" id="stepLabel" required placeholder="Description du repère...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Activités (une par ligne)</label>
+                    <textarea class="form-textarea" id="stepActivities" placeholder="Activité 1&#10;Activité 2&#10;Activité 3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('stepModal')">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Daily Tip Modal -->
+    <div class="modal-overlay" id="dailyTipModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="dailyTipModalTitle">Nouveau conseil du jour</span>
+            </div>
+            <form id="dailyTipForm" onsubmit="saveDailyTip(event)">
+                <div class="form-group">
+                    <label class="form-label">Titre</label>
+                    <input type="text" class="form-input" id="dailyTipTitle" required placeholder="Titre du conseil...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contenu</label>
+                    <textarea class="form-textarea" id="dailyTipText" required placeholder="Contenu du conseil..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('dailyTipModal')">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header" id="confirmTitle">
+                Confirmer la suppression
+            </div>
+            <p id="confirmMessage" style="margin-bottom: 20px; color: #666; font-size: 14px;">
+                Êtes-vous sûr de vouloir supprimer cet élément? Cette action ne peut pas être annulée.
+            </p>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('confirmModal')">
+                    Annuler
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmBtn" onclick="executeDelete()">
+                    Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        const state = {
+            currentSection: 'dashboard',
+            selectedCategory: null,
+            selectedDomain: null,
+            currentDailyTipAgeGroup: null,
+            deleteCallback: null,
+            editingQuoteId: null,
+            editingCategoryId: null,
+            editingTipId: null,
+            editingDomainId: null,
+            editingStepId: null,
+            editingDailyTipId: null,
+            editingUserId: null,
+            editingSuggestionId: null,
+            editingReportId: null,
+            currentModerationTab: 'comments',
+            quotes: [],
+            categories: [],
+            tips: [],
+            domains: [],
+            steps: [],
+            dailyTips: [],
+            users: [],
+            suggestions: [],
+            comments: [],
+            reports: [],
+            bannedWords: []
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            loadData();
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const section = item.dataset.section;
+                    switchSection(section);
+                });
+            });
+
+            // Age group tabs
+            document.querySelectorAll('#ageGroupTabs .tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('#ageGroupTabs .tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    const tabId = `tab-${tab.dataset.tab}`;
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Seed button
+            document.getElementById('seedBtn').addEventListener('click', seedDatabase);
+        }
+
+        // Switch section
+        function switchSection(section) {
+            // Update sidebar
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.section === section) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Update content
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+
+            state.currentSection = section;
+
+            // Load section-specific data
+            if (section === 'quotes') {
+                loadQuotes();
+            } else if (section === 'guide') {
+                loadCategories();
+            } else if (section === 'milestones') {
+                loadDomains();
+            } else if (section === 'daily-tips') {
+                loadDailyTips();
+            } else if (section === 'users') {
+                loadUsers();
+            } else if (section === 'moderation') {
+                loadComments();
+                loadReports();
+                loadBannedWords();
+            } else if (section === 'suggestions') {
+                loadSuggestions();
+            }
+        }
+
+        // Load all data
+        async function loadData() {
+            try {
+                const response = await fetch('/api/admin/stats?_=' + Date.now(), {cache: 'no-store'});
+                const stats = await response.json();
+
+                document.getElementById('statQuotes').textContent = stats.quotes || 0;
+                document.getElementById('statCategories').textContent = stats.guideCategories || stats.categories || 0;
+                document.getElementById('statTips').textContent = stats.guideTips || stats.tips || 0;
+                document.getElementById('statDomains').textContent = stats.devDomains || stats.domains || 0;
+                document.getElementById('statSteps').textContent = stats.devSteps || stats.steps || 0;
+                document.getElementById('statDailyTips').textContent = stats.dailyTips || 0;
+
+                // New section stats
+                const el = (id) => document.getElementById(id);
+                if (el('statUsers')) el('statUsers').textContent = stats.users || 0;
+                if (el('statBannedUsers')) el('statBannedUsers').textContent = stats.bannedUsers || 0;
+                if (el('statSuggestions')) el('statSuggestions').textContent = stats.suggestions || 0;
+                if (el('statPendingSuggestions')) el('statPendingSuggestions').textContent = stats.pendingSuggestions || 0;
+                if (el('statComments')) el('statComments').textContent = stats.comments || 0;
+                if (el('statFlaggedComments')) el('statFlaggedComments').textContent = stats.flaggedComments || 0;
+                if (el('statReports')) el('statReports').textContent = stats.reports || 0;
+                if (el('statPendingReports')) el('statPendingReports').textContent = stats.pendingReports || 0;
+                if (el('statDashUsers')) el('statDashUsers').textContent = stats.users || 0;
+                if (el('statDashSuggestions')) el('statDashSuggestions').textContent = stats.suggestions || 0;
+
+                const lastUpdate = new Date(stats.lastUpdate || Date.now()).toLocaleString('fr-FR');
+                document.getElementById('lastUpdate').textContent = lastUpdate;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // Quotes
+        async function loadQuotes() {
+            try {
+                const response = await fetch('/api/admin/quotes');
+                state.quotes = await response.json();
+                renderQuotes();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des citations', 'error');
+            }
+        }
+
+        function renderQuotes() {
+            const container = document.getElementById('quotesList');
+
+            if (state.quotes.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-text">Aucune citation</div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Update count in header
+            document.querySelector('#quotes h3').textContent = `Citations (${state.quotes.length})`;
+
+            container.innerHTML = state.quotes.map(quote => `
+                <div class="list-item" style="flex-wrap: wrap;">
+                    <div class="list-item-content">
+                        <div class="list-item-title">${escapeHtml(quote.text.substring(0, 50))}...</div>
+                        <div class="list-item-subtitle">${escapeHtml(quote.author || 'Auteur inconnu')}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button class="toggle ${quote.active ? 'active' : ''}" onclick="toggleQuote('${quote.id}')" style="margin: 0;">
+                            <div class="toggle-thumb"></div>
+                        </button>
+                    </div>
+                    <div class="list-item-actions" style="width: 100%; justify-content: flex-end; margin-top: 8px;">
+                        <button class="btn btn-secondary btn-small" onclick="editQuote('${quote.id}')">Modifier</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteQuote('${quote.id}')">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openQuoteModal() {
+            state.editingQuoteId = null;
+            document.getElementById('quoteModalTitle').textContent = 'Nouvelle citation';
+            document.getElementById('quoteForm').reset();
+            document.getElementById('quoteActive').checked = true;
+            openModal('quoteModal');
+        }
+
+        function editQuote(id) {
+            id = Number(id);
+            const quote = state.quotes.find(q => q.id === id);
+            if (!quote) return;
+
+            state.editingQuoteId = id;
+            document.getElementById('quoteModalTitle').textContent = 'Modifier la citation';
+            document.getElementById('quoteText').value = quote.text;
+            document.getElementById('quoteAuthor').value = quote.author || '';
+            document.getElementById('quoteActive').checked = quote.active !== false;
+            openModal('quoteModal');
+        }
+
+        async function saveQuote(e) {
+            e.preventDefault();
+
+            const data = {
+                text: document.getElementById('quoteText').value,
+                author: document.getElementById('quoteAuthor').value,
+                active: document.getElementById('quoteActive').checked
+            };
+
+            try {
+                if (state.editingQuoteId) {
+                    await fetch(`/api/admin/quotes/${state.editingQuoteId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/admin/quotes', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                closeModal('quoteModal');
+                loadQuotes();
+                loadData();
+                showNotification('Citation enregistrée avec succès', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function deleteQuote(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/quotes/${id}`, { method: 'DELETE' });
+                    loadQuotes();
+                    loadData();
+                    showNotification('Citation supprimée avec succès', 'success');
+                } catch (error) {
+                    showNotification('Erreur lors de la suppression', 'error');
+                }
+            };
+            openConfirmModal('Supprimer la citation', 'Êtes-vous sûr de vouloir supprimer cette citation?');
+        }
+
+        async function toggleQuote(id) {
+            id = Number(id);
+            try {
+                await fetch(`/api/admin/quotes/${id}/toggle`, { method: 'PUT' });
+                loadQuotes();
+            } catch (error) {
+                showNotification('Erreur lors de la mise à jour', 'error');
+            }
+        }
+
+        // Categories and Tips
+        async function loadCategories() {
+            try {
+                const response = await fetch('/api/admin/guide-categories');
+                state.categories = await response.json();
+                renderCategories();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des catégories', 'error');
+            }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesList');
+
+            if (state.categories.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-text">Aucune catégorie</div>
+                    </div>
+                `;
+                document.getElementById('guideDetailPanel').innerHTML = `
+                    <div class="detail-panel">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">👇</div>
+                            <div class="empty-state-text">Sélectionnez une catégorie</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.categories.map(cat => `
+                <div class="list-item" onclick="selectCategory('${cat.id}')" ${state.selectedCategory === cat.id ? 'style="background: #f0ebff; border-left: 3px solid #7C5CFC;"' : ''}>
+                    <div class="list-item-content">
+                        <div class="list-item-title">${cat.icon} ${escapeHtml(cat.title)}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); editCategory('${cat.id}')">✏️</button>
+                        <button class="btn btn-danger btn-small" onclick="event.stopPropagation(); deleteCategory('${cat.id}')">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectCategory(id) {
+            id = Number(id);
+            state.selectedCategory = id;
+            renderCategories();
+            loadTips();
+        }
+
+        function openCategoryModal() {
+            state.editingCategoryId = null;
+            document.getElementById('categoryModalTitle').textContent = 'Nouvelle catégorie';
+            document.getElementById('categoryForm').reset();
+            document.getElementById('categoryColor').value = '#7C5CFC';
+            document.getElementById('categoryBgColor').value = '#f0ebff';
+            openModal('categoryModal');
+        }
+
+        function editCategory(id) {
+            id = Number(id);
+            const category = state.categories.find(c => c.id === id);
+            if (!category) return;
+
+            state.editingCategoryId = id;
+            document.getElementById('categoryModalTitle').textContent = 'Modifier la catégorie';
+            document.getElementById('categoryKey').value = category.key;
+            document.getElementById('categoryTitle').value = category.title;
+            document.getElementById('categoryIcon').value = category.icon;
+            document.getElementById('categoryColor').value = category.color;
+            document.getElementById('categoryBgColor').value = category.bgColor;
+            openModal('categoryModal');
+        }
+
+        async function saveCategory(e) {
+            e.preventDefault();
+
+            const data = {
+                key: document.getElementById('categoryKey').value,
+                title: document.getElementById('categoryTitle').value,
+                icon: document.getElementById('categoryIcon').value,
+                color: document.getElementById('categoryColor').value,
+                bgColor: document.getElementById('categoryBgColor').value
+            };
+
+            try {
+                if (state.editingCategoryId) {
+                    await fetch(`/api/admin/guide-categories/${state.editingCategoryId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/admin/guide-categories', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                closeModal('categoryModal');
+                loadCategories();
+                loadData();
+                showNotification('Catégorie enregistrée avec succès', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function deleteCategory(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/guide-categories/${id}`, { method: 'DELETE' });
+                    loadCategories();
+                    loadData();
+                    showNotification('Catégorie supprimée avec succès', 'success');
+                } catch (error) {
+                    showNotification('Erreur lors de la suppression', 'error');
+                }
+            };
+            openConfirmModal('Supprimer la catégorie', 'Êtes-vous sûr de vouloir supprimer cette catégorie et tous ses conseils?');
+        }
+
+        // Tips
+        async function loadTips() {
+            if (!state.selectedCategory) return;
+            const category = state.categories.find(c => c.id === state.selectedCategory);
+            if (!category) return;
+
+            try {
+                const response = await fetch(`/api/admin/guide-tips?categoryKey=${encodeURIComponent(category.key)}`);
+                state.tips = await response.json();
+                renderTips();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des conseils', 'error');
+            }
+        }
+
+        function renderTips() {
+            const category = state.categories.find(c => c.id === state.selectedCategory);
+            if (!category) return;
+
+            const container = document.getElementById('guideDetailPanel');
+
+            if (state.tips.length === 0) {
+                container.innerHTML = `
+                    <div class="detail-panel">
+                        <div class="detail-header">
+                            <h3>${category.icon} ${escapeHtml(category.title)}</h3>
+                            <button class="btn btn-primary btn-small" onclick="openTipModal()">➕ Ajouter</button>
+                        </div>
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📭</div>
+                            <div class="empty-state-text">Aucun conseil</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const tipsHtml = state.tips.map(tip => `
+                <div class="list-item" style="flex-wrap: wrap;">
+                    <div class="list-item-content">
+                        <div class="list-item-title">${escapeHtml(tip.title)}</div>
+                        <div class="list-item-subtitle">${escapeHtml(tip.ageRange || '')}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-small" onclick="editTip('${tip.id}')">Modifier</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteTip('${tip.id}')">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="detail-panel">
+                    <div class="detail-header">
+                        <h3>${category.icon} ${escapeHtml(category.title)}</h3>
+                        <button class="btn btn-primary btn-small" onclick="openTipModal()">➕ Ajouter</button>
+                    </div>
+                    <div class="list-section" style="height: auto; border: none; background: transparent;">
+                        <div class="list-content">
+                            ${tipsHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openTipModal() {
+            if (!state.selectedCategory) {
+                showNotification('Veuillez sélectionner une catégorie', 'error');
+                return;
+            }
+            state.editingTipId = null;
+            document.getElementById('tipModalTitle').textContent = 'Nouveau conseil';
+            document.getElementById('tipForm').reset();
+            openModal('tipModal');
+        }
+
+        function editTip(id) {
+            id = Number(id);
+            const tip = state.tips.find(t => t.id === id);
+            if (!tip) return;
+
+            state.editingTipId = id;
+            document.getElementById('tipModalTitle').textContent = 'Modifier le conseil';
+            document.getElementById('tipTitle').value = tip.title;
+            document.getElementById('tipAgeRange').value = tip.ageRange;
+            document.getElementById('tipText').value = tip.text;
+            openModal('tipModal');
+        }
+
+        async function saveTip(e) {
+            e.preventDefault();
+
+            const category = state.categories.find(c => c.id === state.selectedCategory);
+            const data = {
+                categoryKey: category ? category.key : '',
+                title: document.getElementById('tipTitle').value,
+                ageRange: document.getElementById('tipAgeRange').value,
+                text: document.getElementById('tipText').value
+            };
+
+            try {
+                if (state.editingTipId) {
+                    await fetch(`/api/admin/guide-tips/${state.editingTipId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/admin/guide-tips', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                closeModal('tipModal');
+                loadTips();
+                loadData();
+                showNotification('Conseil enregistré avec succès', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function deleteTip(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/guide-tips/${id}`, { method: 'DELETE' });
+                    loadTips();
+                    loadData();
+                    showNotification('Conseil supprimé avec succès', 'success');
+                } catch (error) {
+                    showNotification('Erreur lors de la suppression', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le conseil', 'Êtes-vous sûr de vouloir supprimer ce conseil?');
+        }
+
+        // Domains
+        async function loadDomains() {
+            try {
+                const response = await fetch('/api/admin/dev-domains');
+                state.domains = await response.json();
+                renderDomains();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des domaines', 'error');
+            }
+        }
+
+        function renderDomains() {
+            const container = document.getElementById('domainsList');
+
+            if (state.domains.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-text">Aucun domaine</div>
+                    </div>
+                `;
+                document.getElementById('milestonesDetailPanel').innerHTML = `
+                    <div class="detail-panel">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">👇</div>
+                            <div class="empty-state-text">Sélectionnez un domaine</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.domains.map(domain => `
+                <div class="list-item" onclick="selectDomain('${domain.id}')" ${state.selectedDomain === domain.id ? 'style="background: #f0ebff; border-left: 3px solid #7C5CFC;"' : ''}>
+                    <div class="list-item-content">
+                        <div class="list-item-title">${escapeHtml(domain.title)}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); editDomain('${domain.id}')">✏️</button>
+                        <button class="btn btn-danger btn-small" onclick="event.stopPropagation(); deleteDomain('${domain.id}')">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectDomain(id) {
+            id = Number(id);
+            state.selectedDomain = id;
+            renderDomains();
+            loadSteps();
+        }
+
+        function openDomainModal() {
+            state.editingDomainId = null;
+            document.getElementById('domainModalTitle').textContent = 'Nouveau domaine';
+            document.getElementById('domainForm').reset();
+            openModal('domainModal');
+        }
+
+        function editDomain(id) {
+            id = Number(id);
+            const domain = state.domains.find(d => d.id === id);
+            if (!domain) return;
+
+            state.editingDomainId = id;
+            document.getElementById('domainModalTitle').textContent = 'Modifier le domaine';
+            document.getElementById('domainKey').value = domain.key;
+            document.getElementById('domainTitle').value = domain.title;
+            document.getElementById('domainIcon').value = domain.icon || '';
+            document.getElementById('domainColor').value = domain.color || '#7C5CFC';
+            document.getElementById('domainBgColor').value = domain.bgColor || '#f0ebff';
+            openModal('domainModal');
+        }
+
+        async function saveDomain(e) {
+            e.preventDefault();
+
+            const data = {
+                key: document.getElementById('domainKey').value,
+                title: document.getElementById('domainTitle').value,
+                icon: document.getElementById('domainIcon').value,
+                color: document.getElementById('domainColor').value,
+                bgColor: document.getElementById('domainBgColor').value
+            };
+
+            try {
+                if (state.editingDomainId) {
+                    await fetch(`/api/admin/dev-domains/${state.editingDomainId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/admin/dev-domains', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                closeModal('domainModal');
+                loadDomains();
+                loadData();
+                showNotification('Domaine enregistré avec succès', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function deleteDomain(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/dev-domains/${id}`, { method: 'DELETE' });
+                    loadDomains();
+                    loadData();
+                    showNotification('Domaine supprimé avec succès', 'success');
+                } catch (error) {
+                    showNotification('Erreur lors de la suppression', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le domaine', 'Êtes-vous sûr de vouloir supprimer ce domaine et tous ses repères?');
+        }
+
+        // Steps
+        async function loadSteps() {
+            if (!state.selectedDomain) return;
+            const domain = state.domains.find(d => d.id === state.selectedDomain);
+            if (!domain) return;
+
+            try {
+                const response = await fetch(`/api/admin/dev-steps?domainKey=${encodeURIComponent(domain.key)}`);
+                state.steps = await response.json();
+                renderSteps();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des repères', 'error');
+            }
+        }
+
+        function renderSteps() {
+            const domain = state.domains.find(d => d.id === state.selectedDomain);
+            if (!domain) return;
+
+            const container = document.getElementById('milestonesDetailPanel');
+
+            // Group steps by age group
+            const ageGroups = ['0-6m', '6-12m', '1-2a', '2-3a', '3-6a'];
+            const groupedSteps = {};
+            ageGroups.forEach(ag => { groupedSteps[ag] = []; });
+
+            state.steps.forEach(step => {
+                if (groupedSteps[step.ageGroup]) {
+                    groupedSteps[step.ageGroup].push(step);
+                }
+            });
+
+            const ageGroupLabels = {
+                '0-6m': '0-6 mois',
+                '6-12m': '6-12 mois',
+                '1-2a': '1-2 ans',
+                '2-3a': '2-3 ans',
+                '3-6a': '3-6 ans'
+            };
+
+            let stepsHtml = '';
+            Object.keys(ageGroups).forEach(ag => {
+                if (groupedSteps[ag].length > 0) {
+                    stepsHtml += `
+                        <div style="margin-bottom: 24px;">
+                            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #7C5CFC;">${ageGroupLabels[ag]}</h4>
+                    `;
+                    groupedSteps[ag].forEach(step => {
+                        stepsHtml += `
+                            <div class="list-item" style="flex-wrap: wrap;">
+                                <div class="list-item-content">
+                                    <div class="list-item-title">${escapeHtml(step.label)}</div>
+                                </div>
+                                <div class="list-item-actions">
+                                    <button class="btn btn-secondary btn-small" onclick="editStep('${step.id}')">Modifier</button>
+                                    <button class="btn btn-danger btn-small" onclick="deleteStep('${step.id}')">Supprimer</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    stepsHtml += '</div>';
+                }
+            });
+
+            if (stepsHtml === '') {
+                container.innerHTML = `
+                    <div class="detail-panel">
+                        <div class="detail-header">
+                            <h3>${escapeHtml(domain.title)}</h3>
+                            <button class="btn btn-primary btn-small" onclick="openStepModal()">➕ Ajouter</button>
+                        </div>
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📭</div>
+                            <div class="empty-state-text">Aucun repère</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="detail-panel">
+                        <div class="detail-header">
+                            <h3>${escapeHtml(domain.title)}</h3>
+                            <button class="btn btn-primary btn-small" onclick="openStepModal()">➕ Ajouter</button>
+                        </div>
+                        <div class="list-section" style="height: auto; border: none; background: transparent;">
+                            <div class="list-content">
+                                ${stepsHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function openStepModal() {
+            if (!state.selectedDomain) {
+                showNotification('Veuillez sélectionner un domaine', 'error');
+                return;
+            }
+            state.editingStepId = null;
+            document.getElementById('stepModalTitle').textContent = 'Nouveau repère';
+            document.getElementById('stepForm').reset();
+            openModal('stepModal');
+        }
+
+        function editStep(id) {
+            id = Number(id);
+            const step = state.steps.find(s => s.id === id);
+            if (!step) return;
+
+            state.editingStepId = id;
+            document.getElementById('stepModalTitle').textContent = 'Modifier le repère';
+            document.getElementById('stepAgeGroup').value = step.ageGroup;
+            document.getElementById('stepLabel').value = step.label;
+            document.getElementById('stepActivities').value = (step.activities || []).join('\n');
+            openModal('stepModal');
+        }
+
+        async function saveStep(e) {
+            e.preventDefault();
+
+            const domain = state.domains.find(d => d.id === state.selectedDomain);
+            const data = {
+                domainKey: domain ? domain.key : '',
+                ageGroup: document.getElementById('stepAgeGroup').value,
+                label: document.getElementById('stepLabel').value,
+                activities: document.getElementById('stepActivities').value.split('\n').filter(a => a.trim())
+            };
+
+            try {
+                if (state.editingStepId) {
+                    await fetch(`/api/admin/dev-steps/${state.editingStepId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/admin/dev-steps', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                closeModal('stepModal');
+                loadSteps();
+                loadData();
+                showNotification('Repère enregistré avec succès', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function deleteStep(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/dev-steps/${id}`, { method: 'DELETE' });
+                    loadSteps();
+                    loadData();
+                    showNotification('Repère supprimé avec succès', 'success');
+                } catch (error) {
+                    showNotification('Erreur lors de la suppression', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le repère', 'Êtes-vous sûr de vouloir supprimer ce repère?');
+        }
+
+        // Daily Tips
+        async function loadDailyTips() {
+            try {
+                const response = await fetch('/api/admin/daily-tips');
+                state.dailyTips = await response.json();
+                renderDailyTips();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des conseils du jour', 'error');
+            }
+        }
+
+        function renderDailyTips() {
+            const ageGroups = ['0-6m', '6-12m', '12-24m', '2-3a', '3-6a'];
+
+            ageGroups.forEach(ag => {
+                const tips = state.dailyTips.filter(t => t.ageGroup === ag);
+                const container = document.getElementById(`dailyTips-${ag}`);
+
+                if (tips.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📭</div>
+                            <div class="empty-state-text">Aucun conseil</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = tips.map(tip => `
+                    <div class="list-item" style="flex-wrap: wrap;">
+                        <div class="list-item-content">
+                            <div class="list-item-title">${escapeHtml(tip.title)}</div>
+                        </div>
+                        <div class="list-item-actions">
+                            <button class="btn btn-secondary btn-small" onclick="editDailyTip('${tip.id}', '${ag}')">Modifier</button>
+                            <button class="btn btn-danger btn-small" onclick="deleteDailyTip('${tip.id}')">Supprimer</button>
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function openDailyTipModal(ageGroup) {
+            state.currentDailyTipAgeGroup = ageGroup;
+            state.editingDailyTipId = null;
+            document.getElementById('dailyTipModalTitle').textContent = 'Nouveau conseil du jour';
+            document.getElementById('dailyTipForm').reset();
+            openModal('dailyTipModal');
+        }
+
+        function editDailyTip(id, ageGroup) {
+            id = Number(id);
+            const tip = state.dailyTips.find(t => t.id === id);
+            if (!tip) return;
+
+            state.currentDailyTipAgeGroup = ageGroup;
+            state.editingDailyTipId = id;
+            document.getElementById('dailyTipModalTitle').textContent = 'Modifier le conseil du jour';
+            document.getElementById('dailyTipTitle').value = tip.title;
+            document.getElementById('dailyTipText').value = tip.text;
+            openModal('dailyTipModal');
+        }
+
+        async function saveDailyTip(e) {
+            e.preventDefault();
+
+            const data = {
+                ageGroup: state.currentDailyTipAgeGroup,
+                title: document.getElementById('dailyTipTitle').value,
+                text: document.getElementById('dailyTipText').value
+            };
+
+            try {
+                if (state.editingDailyTipId) {
+                    await fetch(`/api/admin/daily-tips/${state.editingDailyTipId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/admin/daily-tips', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                closeModal('dailyTipModal');
+                loadDailyTips();
+                loadData();
+                showNotification('Conseil enregistré avec succès', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function deleteDailyTip(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/daily-tips/${id}`, { method: 'DELETE' });
+                    loadDailyTips();
+                    loadData();
+                    showNotification('Conseil supprimé avec succès', 'success');
+                } catch (error) {
+                    showNotification('Erreur lors de la suppression', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le conseil du jour', 'Êtes-vous sûr de vouloir supprimer ce conseil?');
+        }
+
+        // Seed database by extracting data from the main app.js
+        async function seedDatabase() {
+            const btn = document.getElementById('seedBtn');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span><span>Extraction du contenu...</span>';
+
+            try {
+                // Fetch app.js source text
+                const src = await fetch('/app.js').then(r => r.text());
+
+                // Extract JS objects using sandboxed eval
+                const sandbox = {};
+                // Extract PARENT_QUOTES
+                const qMatch = src.match(/const PARENT_QUOTES\s*=\s*\[([\s\S]*?)\];/);
+                if (qMatch) { try { sandbox.quotes = eval('[' + qMatch[1] + ']'); } catch(e) { console.warn('quotes parse err', e); } }
+
+                // Extract GUIDE
+                const gMatch = src.match(/const GUIDE\s*=\s*\{([\s\S]*?)\n\};/);
+                if (gMatch) { try { sandbox.guide = eval('({' + gMatch[1] + '})'); } catch(e) { console.warn('guide parse err', e); } }
+
+                // Extract DAILY_TIPS
+                const dtMatch = src.match(/const DAILY_TIPS\s*=\s*\{([\s\S]*?)\n\};/);
+                if (dtMatch) { try { sandbox.dailyTips = eval('({' + dtMatch[1] + '})'); } catch(e) { console.warn('dailyTips parse err', e); } }
+
+                // Extract DEV
+                const devMatch = src.match(/const DEV\s*=\s*\{([\s\S]*?)\n\};/);
+                if (devMatch) { try { sandbox.dev = eval('({' + devMatch[1] + '})'); } catch(e) { console.warn('dev parse err', e); } }
+
+                // Build seed payload
+                const payload = { quotes: [], guideCategories: [], guideTips: [], dailyTips: [], devDomains: [], devSteps: [] };
+
+                // Quotes
+                if (sandbox.quotes) {
+                    payload.quotes = sandbox.quotes.map((q, i) => ({ text: q.q, author: q.a || '', active: true, sortOrder: i }));
+                }
+
+                // Guide categories + tips
+                if (sandbox.guide) {
+                    let catIdx = 0;
+                    Object.entries(sandbox.guide).forEach(([key, cat]) => {
+                        payload.guideCategories.push({ key, title: cat.t, icon: cat.ico, color: cat.c, bgColor: cat.bg, sortOrder: catIdx++ });
+                        if (cat.tips) {
+                            cat.tips.forEach((tip, ti) => {
+                                payload.guideTips.push({ categoryKey: key, title: tip.t, ageRange: tip.a, text: tip.x, sortOrder: ti });
+                            });
+                        }
+                    });
+                }
+
+                // Daily tips
+                if (sandbox.dailyTips) {
+                    Object.entries(sandbox.dailyTips).forEach(([ag, tips]) => {
+                        tips.forEach((t, i) => {
+                            payload.dailyTips.push({ ageGroup: ag, title: t.t, text: t.x, sortOrder: i });
+                        });
+                    });
+                }
+
+                // Dev domains + steps
+                if (sandbox.dev) {
+                    let domIdx = 0;
+                    Object.entries(sandbox.dev).forEach(([key, dom]) => {
+                        payload.devDomains.push({ key, title: dom.t, icon: dom.ico, color: dom.c, bgColor: dom.bg, sortOrder: domIdx++ });
+                        if (dom.ages) {
+                            Object.entries(dom.ages).forEach(([ag, steps]) => {
+                                steps.forEach((s, si) => {
+                                    payload.devSteps.push({ domainKey: key, ageGroup: ag, label: s.l, activities: s.acts, sortOrder: si });
+                                });
+                            });
+                        }
+                    });
+                }
+
+                btn.innerHTML = '<span class="loading"></span><span>Enregistrement...</span>';
+
+                const response = await fetch('/api/admin/seed', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    showNotification('Contenu initialise : ' + (payload.quotes.length) + ' citations, ' + (payload.guideCategories.length) + ' categories, ' + (payload.guideTips.length) + ' conseils', 'success');
+                    loadData();
+                } else {
+                    showNotification(result.error || 'Erreur', 'error');
+                }
+            } catch (error) {
+                console.error('Seed error:', error);
+                showNotification('Erreur : ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        }
+
+        // Modal helpers
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function openConfirmModal(title, message) {
+            document.getElementById('confirmTitle').textContent = title;
+            document.getElementById('confirmMessage').textContent = message;
+            openModal('confirmModal');
+        }
+
+        function executeDelete() {
+            closeModal('confirmModal');
+            if (state.deleteCallback) {
+                state.deleteCallback();
+                state.deleteCallback = null;
+            }
+        }
+
+        // Notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-icon">${type === 'success' ? '✓' : '✕'}</div>
+                <div>${escapeHtml(message)}</div>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Utility
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // ============================================================
+        // USERS MANAGEMENT
+        // ============================================================
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/admin/users?_=' + Date.now(), {cache: 'no-store'});
+                state.users = await response.json();
+                renderUsers();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des utilisateurs', 'error');
+            }
+        }
+
+        function filterUsers() {
+            renderUsers();
+        }
+
+        function renderUsers() {
+            const container = document.getElementById('usersList');
+            const search = (document.getElementById('userSearchInput').value || '').toLowerCase();
+            const statusFilter = document.getElementById('userStatusFilter').value;
+
+            let filtered = state.users;
+            if (search) {
+                filtered = filtered.filter(u =>
+                    (u.firstName + ' ' + u.lastName).toLowerCase().includes(search) ||
+                    (u.email || '').toLowerCase().includes(search)
+                );
+            }
+            if (statusFilter) {
+                filtered = filtered.filter(u => u.status === statusFilter);
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">👥</div><div class="empty-state-text">Aucun utilisateur</div></div>';
+                return;
+            }
+
+            const statusBadge = (s) => {
+                const colors = {active: '#27ae60', suspended: '#e67e22', banned: '#e74c3c'};
+                const labels = {active: 'Actif', suspended: 'Suspendu', banned: 'Banni'};
+                return `<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;color:white;background:${colors[s] || '#999'};">${labels[s] || s}</span>`;
+            };
+
+            container.innerHTML = filtered.map(user => `
+                <div class="list-item">
+                    <div class="list-item-content" style="flex:1;">
+                        <div class="list-item-title">
+                            ${user.photo ? `<img src="${escapeHtml(user.photo)}" style="width:28px;height:28px;border-radius:50%;margin-right:8px;vertical-align:middle;" onerror="this.style.display='none'">` : ''}
+                            ${escapeHtml(user.firstName)} ${escapeHtml(user.lastName)}
+                            ${statusBadge(user.status)}
+                        </div>
+                        <div class="list-item-subtitle">
+                            ${escapeHtml(user.email || '')} · ${user.childrenCount || 0} enfant(s) · Inscrit le ${new Date(user.createdAt).toLocaleDateString('fr-FR')}
+                            ${user.lastLogin ? ' · Dernière connexion: ' + new Date(user.lastLogin).toLocaleDateString('fr-FR') : ''}
+                        </div>
+                        ${user.bio ? `<div style="font-size:12px;color:#888;margin-top:4px;">${escapeHtml(user.bio)}</div>` : ''}
+                        ${user.banReason ? `<div style="font-size:12px;color:#e74c3c;margin-top:4px;">Raison: ${escapeHtml(user.banReason)}</div>` : ''}
+                    </div>
+                    <div class="list-item-actions">
+                        ${user.status === 'active' ? `<button class="btn btn-secondary btn-small" onclick="changeUserStatus(${user.id}, 'suspended')" title="Suspendre">⏸️</button>` : ''}
+                        ${user.status === 'active' ? `<button class="btn btn-danger btn-small" onclick="banUser(${user.id})" title="Bannir">🚫</button>` : ''}
+                        ${user.status !== 'active' ? `<button class="btn btn-secondary btn-small" onclick="changeUserStatus(${user.id}, 'active')" title="Réactiver" style="background:#27ae60;color:white;">✅</button>` : ''}
+                        <button class="btn btn-secondary btn-small" onclick="editUser(${user.id})">✏️</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteUser(${user.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openUserModal() {
+            state.editingUserId = null;
+            document.getElementById('userModalTitle').textContent = 'Nouveau client';
+            document.getElementById('userForm').reset();
+            document.getElementById('userChildrenCount').value = '0';
+            document.getElementById('userStatus').value = 'active';
+            document.getElementById('banReasonGroup').style.display = 'none';
+            openModal('userModal');
+        }
+
+        function editUser(id) {
+            id = Number(id);
+            const user = state.users.find(u => u.id === id);
+            if (!user) return;
+
+            state.editingUserId = id;
+            document.getElementById('userModalTitle').textContent = 'Modifier le client';
+            document.getElementById('userFirstName').value = user.firstName;
+            document.getElementById('userLastName').value = user.lastName;
+            document.getElementById('userEmail').value = user.email;
+            document.getElementById('userPhone').value = user.phone || '';
+            document.getElementById('userPhoto').value = user.photo || '';
+            document.getElementById('userBio').value = user.bio || '';
+            document.getElementById('userChildrenCount').value = user.childrenCount || 0;
+            document.getElementById('userStatus').value = user.status || 'active';
+            document.getElementById('userBanReason').value = user.banReason || '';
+            document.getElementById('banReasonGroup').style.display = user.status === 'banned' ? 'block' : 'none';
+            openModal('userModal');
+        }
+
+        async function saveUser(e) {
+            e.preventDefault();
+            const data = {
+                firstName: document.getElementById('userFirstName').value,
+                lastName: document.getElementById('userLastName').value,
+                email: document.getElementById('userEmail').value,
+                phone: document.getElementById('userPhone').value,
+                photo: document.getElementById('userPhoto').value,
+                bio: document.getElementById('userBio').value,
+                childrenCount: parseInt(document.getElementById('userChildrenCount').value) || 0,
+                status: document.getElementById('userStatus').value,
+                banReason: document.getElementById('userBanReason').value
+            };
+
+            try {
+                if (state.editingUserId) {
+                    await fetch(`/api/admin/users/${state.editingUserId}`, {
+                        method: 'PUT',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    await fetch('/api/admin/users', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(data)
+                    });
+                }
+                closeModal('userModal');
+                loadUsers();
+                loadData();
+                showNotification('Client enregistré avec succès', 'success');
+            } catch (error) {
+                showNotification('Erreur lors de l\'enregistrement', 'error');
+            }
+        }
+
+        async function changeUserStatus(id, status) {
+            try {
+                await fetch(`/api/admin/users/${id}/status`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({status})
+                });
+                loadUsers();
+                loadData();
+                showNotification('Statut mis à jour', 'success');
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        function banUser(id) {
+            const reason = prompt('Raison du bannissement:');
+            if (reason === null) return;
+            fetch(`/api/admin/users/${id}/status`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({status: 'banned', banReason: reason})
+            }).then(() => {
+                loadUsers();
+                loadData();
+                showNotification('Utilisateur banni', 'success');
+            }).catch(() => showNotification('Erreur', 'error'));
+        }
+
+        async function deleteUser(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/users/${id}`, {method: 'DELETE'});
+                    loadUsers();
+                    loadData();
+                    showNotification('Client supprimé', 'success');
+                } catch (error) {
+                    showNotification('Erreur', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le client', 'Êtes-vous sûr de vouloir supprimer ce client? Cette action est irréversible.');
+        }
+
+        // Show/hide ban reason field based on status
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'userStatus') {
+                document.getElementById('banReasonGroup').style.display = e.target.value === 'banned' ? 'block' : 'none';
+            }
+        });
+
+        // ============================================================
+        // MODERATION
+        // ============================================================
+        function switchModerationTab(tab) {
+            state.currentModerationTab = tab;
+            document.querySelectorAll('#moderationTabs .tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('commentsPanel').style.display = tab === 'comments' ? 'block' : 'none';
+            document.getElementById('reportsPanel').style.display = tab === 'reports' ? 'block' : 'none';
+            document.getElementById('bannedWordsPanel').style.display = tab === 'banned-words' ? 'block' : 'none';
+        }
+
+        // Comments
+        async function loadComments() {
+            try {
+                const response = await fetch('/api/admin/comments?_=' + Date.now(), {cache: 'no-store'});
+                state.comments = await response.json();
+                renderComments();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des commentaires', 'error');
+            }
+        }
+
+        function renderComments() {
+            const container = document.getElementById('commentsList');
+            if (state.comments.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">💬</div><div class="empty-state-text">Aucun commentaire</div></div>';
+                return;
+            }
+
+            const statusBadge = (s) => {
+                const colors = {visible: '#27ae60', hidden: '#999', flagged: '#e74c3c'};
+                const labels = {visible: 'Visible', hidden: 'Masqué', flagged: 'Signalé'};
+                return `<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;color:white;background:${colors[s] || '#999'};">${labels[s] || s}</span>`;
+            };
+
+            container.innerHTML = state.comments.map(c => `
+                <div class="list-item" ${c.status === 'flagged' ? 'style="border-left:3px solid #e74c3c;"' : ''}>
+                    <div class="list-item-content" style="flex:1;">
+                        <div class="list-item-title">${statusBadge(c.status)} ${escapeHtml(c.userName || 'Anonyme')}</div>
+                        <div style="margin:4px 0;font-size:13px;">${escapeHtml(c.text)}</div>
+                        <div class="list-item-subtitle">${c.targetType}#${c.targetId} · ${new Date(c.createdAt).toLocaleDateString('fr-FR')}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        ${c.status !== 'visible' ? `<button class="btn btn-secondary btn-small" onclick="setCommentStatus(${c.id}, 'visible')" title="Rendre visible">👁️</button>` : ''}
+                        ${c.status !== 'hidden' ? `<button class="btn btn-secondary btn-small" onclick="setCommentStatus(${c.id}, 'hidden')" title="Masquer">🙈</button>` : ''}
+                        <button class="btn btn-danger btn-small" onclick="deleteComment(${c.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function setCommentStatus(id, status) {
+            try {
+                await fetch(`/api/admin/comments/${id}/status`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({status})
+                });
+                loadComments();
+                loadData();
+                showNotification('Statut mis à jour', 'success');
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        async function deleteComment(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/comments/${id}`, {method: 'DELETE'});
+                    loadComments();
+                    loadData();
+                    showNotification('Commentaire supprimé', 'success');
+                } catch (error) {
+                    showNotification('Erreur', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le commentaire', 'Êtes-vous sûr de vouloir supprimer ce commentaire?');
+        }
+
+        // Reports
+        async function loadReports() {
+            try {
+                const response = await fetch('/api/admin/reports?_=' + Date.now(), {cache: 'no-store'});
+                state.reports = await response.json();
+                renderReports();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des signalements', 'error');
+            }
+        }
+
+        function renderReports() {
+            const container = document.getElementById('reportsList');
+            if (state.reports.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🛡️</div><div class="empty-state-text">Aucun signalement</div></div>';
+                return;
+            }
+
+            const statusBadge = (s) => {
+                const colors = {pending: '#e67e22', reviewed: '#3498db', dismissed: '#999', action_taken: '#27ae60'};
+                const labels = {pending: 'En attente', reviewed: 'Examiné', dismissed: 'Rejeté', action_taken: 'Action prise'};
+                return `<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;color:white;background:${colors[s] || '#999'};">${labels[s] || s}</span>`;
+            };
+
+            container.innerHTML = state.reports.map(r => `
+                <div class="list-item" ${r.status === 'pending' ? 'style="border-left:3px solid #e67e22;"' : ''}>
+                    <div class="list-item-content" style="flex:1;">
+                        <div class="list-item-title">${statusBadge(r.status)} Signalement de <strong>${escapeHtml(r.reporterName || 'Inconnu')}</strong> contre <strong>${escapeHtml(r.reportedName || 'Inconnu')}</strong></div>
+                        <div style="margin:4px 0;font-size:13px;"><strong>Raison:</strong> ${escapeHtml(r.reason)}</div>
+                        ${r.details ? `<div style="font-size:12px;color:#666;">${escapeHtml(r.details)}</div>` : ''}
+                        ${r.adminNote ? `<div style="font-size:12px;color:#7C5CFC;margin-top:4px;">Note admin: ${escapeHtml(r.adminNote)}</div>` : ''}
+                        <div class="list-item-subtitle">${new Date(r.createdAt).toLocaleDateString('fr-FR')}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button class="btn btn-secondary btn-small" onclick="openReportNote(${r.id})">📝 Traiter</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteReport(${r.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openReportNote(id) {
+            id = Number(id);
+            const report = state.reports.find(r => r.id === id);
+            if (!report) return;
+            state.editingReportId = id;
+            document.getElementById('reportStatusSelect').value = report.status || 'pending';
+            document.getElementById('reportAdminNote').value = report.adminNote || '';
+            openModal('reportNoteModal');
+        }
+
+        async function saveReportNote() {
+            if (!state.editingReportId) return;
+            try {
+                await fetch(`/api/admin/reports/${state.editingReportId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        status: document.getElementById('reportStatusSelect').value,
+                        adminNote: document.getElementById('reportAdminNote').value
+                    })
+                });
+                closeModal('reportNoteModal');
+                loadReports();
+                loadData();
+                showNotification('Signalement mis à jour', 'success');
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        async function deleteReport(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/reports/${id}`, {method: 'DELETE'});
+                    loadReports();
+                    loadData();
+                    showNotification('Signalement supprimé', 'success');
+                } catch (error) {
+                    showNotification('Erreur', 'error');
+                }
+            };
+            openConfirmModal('Supprimer le signalement', 'Êtes-vous sûr de vouloir supprimer ce signalement?');
+        }
+
+        // Banned Words
+        async function loadBannedWords() {
+            try {
+                const response = await fetch('/api/admin/banned-words?_=' + Date.now(), {cache: 'no-store'});
+                state.bannedWords = await response.json();
+                renderBannedWords();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des mots interdits', 'error');
+            }
+        }
+
+        function renderBannedWords() {
+            const container = document.getElementById('bannedWordsList');
+            if (state.bannedWords.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔤</div><div class="empty-state-text">Aucun mot interdit</div></div>';
+                return;
+            }
+            container.innerHTML = state.bannedWords.map(w => `
+                <div class="list-item">
+                    <div class="list-item-content"><div class="list-item-title" style="font-family:monospace;">${escapeHtml(w.word)}</div></div>
+                    <div class="list-item-actions">
+                        <button class="btn btn-danger btn-small" onclick="deleteBannedWord(${w.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function addBannedWord() {
+            const input = document.getElementById('newBannedWord');
+            const word = input.value.trim();
+            if (!word) return;
+            try {
+                await fetch('/api/admin/banned-words', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({word})
+                });
+                input.value = '';
+                loadBannedWords();
+                showNotification('Mot ajouté', 'success');
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        async function deleteBannedWord(id) {
+            id = Number(id);
+            try {
+                await fetch(`/api/admin/banned-words/${id}`, {method: 'DELETE'});
+                loadBannedWords();
+                showNotification('Mot supprimé', 'success');
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        // ============================================================
+        // SUGGESTIONS (Boîte à idées)
+        // ============================================================
+        async function loadSuggestions() {
+            try {
+                const response = await fetch('/api/admin/suggestions?_=' + Date.now(), {cache: 'no-store'});
+                state.suggestions = await response.json();
+                renderSuggestions();
+            } catch (error) {
+                showNotification('Erreur lors du chargement des suggestions', 'error');
+            }
+        }
+
+        function filterSuggestions() {
+            renderSuggestions();
+        }
+
+        function renderSuggestions() {
+            const container = document.getElementById('suggestionsList');
+            const statusFilter = document.getElementById('suggestionStatusFilter').value;
+
+            let filtered = state.suggestions;
+            if (statusFilter) {
+                filtered = filtered.filter(s => s.status === statusFilter);
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">💬</div><div class="empty-state-text">Aucune suggestion</div></div>';
+                return;
+            }
+
+            const statusBadge = (s) => {
+                const colors = {pending: '#e67e22', approved: '#27ae60', rejected: '#e74c3c', archived: '#999'};
+                const labels = {pending: 'En attente', approved: 'Approuvée', rejected: 'Rejetée', archived: 'Archivée'};
+                return `<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600;color:white;background:${colors[s] || '#999'};">${labels[s] || s}</span>`;
+            };
+
+            container.innerHTML = filtered.map(s => `
+                <div class="list-item" ${s.status === 'pending' ? 'style="border-left:3px solid #e67e22;"' : ''}>
+                    <div class="list-item-content" style="flex:1;">
+                        <div class="list-item-title">${statusBadge(s.status)} ${escapeHtml(s.userName || 'Anonyme')}</div>
+                        <div style="margin:8px 0;font-size:14px;line-height:1.5;">${escapeHtml(s.text)}</div>
+                        ${s.adminNote ? `<div style="font-size:12px;color:#7C5CFC;margin-top:4px;padding:4px 8px;background:#f0ebff;border-radius:4px;">Note: ${escapeHtml(s.adminNote)}</div>` : ''}
+                        <div class="list-item-subtitle">${new Date(s.createdAt).toLocaleDateString('fr-FR')}</div>
+                    </div>
+                    <div class="list-item-actions" style="flex-direction:column;gap:4px;">
+                        ${s.status !== 'approved' ? `<button class="btn btn-secondary btn-small" onclick="setSuggestionStatus(${s.id}, 'approved')" style="background:#27ae60;color:white;">✅ Approuver</button>` : ''}
+                        ${s.status !== 'rejected' ? `<button class="btn btn-danger btn-small" onclick="setSuggestionStatus(${s.id}, 'rejected')">❌ Rejeter</button>` : ''}
+                        <button class="btn btn-secondary btn-small" onclick="openSuggestionNote(${s.id})">📝 Note</button>
+                        ${s.status !== 'archived' ? `<button class="btn btn-secondary btn-small" onclick="setSuggestionStatus(${s.id}, 'archived')">📦 Archiver</button>` : ''}
+                        <button class="btn btn-danger btn-small" onclick="deleteSuggestion(${s.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function setSuggestionStatus(id, status) {
+            try {
+                await fetch(`/api/admin/suggestions/${id}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({status})
+                });
+                loadSuggestions();
+                loadData();
+                showNotification('Statut mis à jour', 'success');
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        function openSuggestionNote(id) {
+            id = Number(id);
+            const suggestion = state.suggestions.find(s => s.id === id);
+            if (!suggestion) return;
+            state.editingSuggestionId = id;
+            document.getElementById('suggestionAdminNote').value = suggestion.adminNote || '';
+            openModal('suggestionNoteModal');
+        }
+
+        async function saveSuggestionNote() {
+            if (!state.editingSuggestionId) return;
+            const suggestion = state.suggestions.find(s => s.id === state.editingSuggestionId);
+            try {
+                await fetch(`/api/admin/suggestions/${state.editingSuggestionId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        status: suggestion ? suggestion.status : 'pending',
+                        adminNote: document.getElementById('suggestionAdminNote').value
+                    })
+                });
+                closeModal('suggestionNoteModal');
+                loadSuggestions();
+                showNotification('Note enregistrée', 'success');
+            } catch (error) {
+                showNotification('Erreur', 'error');
+            }
+        }
+
+        async function deleteSuggestion(id) {
+            id = Number(id);
+            state.deleteCallback = async () => {
+                try {
+                    await fetch(`/api/admin/suggestions/${id}`, {method: 'DELETE'});
+                    loadSuggestions();
+                    loadData();
+                    showNotification('Suggestion supprimée', 'success');
+                } catch (error) {
+                    showNotification('Erreur', 'error');
+                }
+            };
+            openConfirmModal('Supprimer la suggestion', 'Êtes-vous sûr de vouloir supprimer cette suggestion?');
+        }
+
+        // Close modals on outside click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
