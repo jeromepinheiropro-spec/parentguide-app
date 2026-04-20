@@ -384,7 +384,7 @@ async function api(u,m='GET',b=null){const o={method:m,headers:{'Content-Type':'
 
 // ============= NAV =============
 document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>go(b.dataset.p)));
-function go(p){document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.nb').forEach(n=>n.classList.toggle('on',n.dataset.p===p));const nav=document.getElementById('navbar'),fab=document.getElementById('fab');nav.style.display=['guide-detail','child-detail','quiz','quizres','suggestions'].includes(p)?'none':'flex';fab.style.display=p==='agenda'?'flex':'none';if(p==='home')loadHome();if(p==='agenda')loadAgenda();if(p==='milestones')loadMs();if(p==='growth')loadGr();if(p==='guide')loadGuide();if(p==='profile')loadProf();if(p==='suggestions')loadMySuggestions();window.scrollTo(0,0)}
+function go(p){document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.nb').forEach(n=>n.classList.toggle('on',n.dataset.p===p));const nav=document.getElementById('navbar'),fab=document.getElementById('fab');document.body.classList.toggle('auth-mode',p==='auth');nav.style.display=['auth','guide-detail','child-detail','quiz','quizres','suggestions'].includes(p)?'none':'flex';fab.style.display=p==='agenda'?'flex':'none';if(p==='home')loadHome();if(p==='agenda')loadAgenda();if(p==='milestones')loadMs();if(p==='growth')loadGr();if(p==='guide')loadGuide();if(p==='profile')loadProf();if(p==='suggestions')loadMySuggestions();window.scrollTo(0,0)}
 
 // ============= UTILS =============
 function calcAge(bd){const b=new Date(bd),n=new Date();let m=(n.getFullYear()-b.getFullYear())*12+n.getMonth()-b.getMonth();if(n.getDate()<b.getDate())m--;if(m<1)return'Nouveau-ne';if(m<12)return m+' mois';const y=Math.floor(m/12),r=m%12;return r>0?y+' an'+(y>1?'s':'')+' et '+r+' mois':y+' an'+(y>1?'s':'')}
@@ -1393,6 +1393,7 @@ function checkAuth() {
 function showAuthPage() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('p-auth').classList.add('active');
+  document.body.classList.add('auth-mode');
   document.getElementById('navbar').style.display = 'none';
   document.getElementById('fab').style.display = 'none';
 }
