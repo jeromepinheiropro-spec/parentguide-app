@@ -46,7 +46,7 @@ const AVS=[
 {id:'butterfly',svg:'<svg viewBox="0 0 40 40"><ellipse cx="11" cy="15" rx="8" ry="9" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1"/><ellipse cx="29" cy="15" rx="8" ry="9" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/><ellipse cx="11" cy="27" rx="6" ry="7" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/><ellipse cx="29" cy="27" rx="6" ry="7" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1"/><line x1="20" y1="8" x2="20" y2="36" stroke="#8D6E63" stroke-width="2"/></svg>'},
 {id:'starav',svg:'<svg viewBox="0 0 40 40"><polygon points="20,4 24,14 35,14 26,21 29,32 20,25 11,32 14,21 5,14 16,14" fill="#FFF9C4" stroke="#FFD54F" stroke-width="1.5"/><circle cx="16" cy="17" r="1.2" fill="#5D4E37"/><circle cx="24" cy="17" r="1.2" fill="#5D4E37"/><path d="M17 21a4 4 0 006 0" stroke="#FFB74D" stroke-width="1" fill="none"/></svg>'},
 ];
-function avSvg(id){const a=AVS.find(x=>x.id===id)||PAVS.find(x=>x.id===id);return a?a.svg:AVS[0].svg}
+function avSvg(id){const a=AVS.find(x=>x.id===id)||PAVS.find(x=>x.id===id);const s=a?a.svg:AVS[0].svg;return s.replace('<svg ','<svg width="100%" height="100%" ')}
 
 // ============= PARENT AVATARS =============
 const PAVS=[
@@ -494,6 +494,11 @@ async function loadHome(){
   document.getElementById('stTip').style.display='flex';
   document.getElementById('stTip').innerHTML=ico('lightbulb',16)+' Conseil du jour pour '+ch.firstName+' ('+ageLabel+')';
   document.getElementById('tipDay').innerHTML='<div class="tipcard"><div class="tci">'+ico('sparkle',18)+'</div><div style="flex:1"><div class="tct">'+tip.t+'</div><div class="tcx">'+tip.x+'</div></div></div>';
+
+  // Citation inspirante du jour
+  const quoteIdx=(dayOfYear+3)%PARENT_QUOTES.length;
+  const quote=PARENT_QUOTES[quoteIdx];
+  document.getElementById('homeQuote').innerHTML='<div class="quotecard" style="margin:0"><div class="qi-ico">'+ico('heart',18)+'</div><div style="flex:1"><p class="qt">\u00AB '+quote.q+' \u00BB</p>'+(quote.a?'<p class="qa">\u2014 '+quote.a+'</p>':'')+'</div></div>';
 
 }
 
