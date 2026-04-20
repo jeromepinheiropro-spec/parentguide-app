@@ -562,7 +562,7 @@
             }
         }
 
-        .notification.success {
+        .notification.succèss {
             border-left: 3px solid #51cf66;
         }
 
@@ -809,7 +809,7 @@
                         </div>
                         <div class="stat-card" style="padding:12px;">
                             <div class="stat-label" style="font-size:11px;">Catégories</div>
-                            <div class="stat-value" id="statCategories" style="font-size:18px;">0</div>
+                            <div class="stat-value" id="statCatégories" style="font-size:18px;">0</div>
                         </div>
                         <div class="stat-card" style="padding:12px;">
                             <div class="stat-label" style="font-size:11px;">Conseils</div>
@@ -879,7 +879,7 @@
                             <div class="list-header">
                                 <h3>Catégories</h3>
                             </div>
-                            <div class="list-content" id="categoriesList">
+                            <div class="list-content" id="catégoriesList">
                                 <div class="empty-state">
                                     <div class="empty-state-icon">📭</div>
                                     <div class="empty-state-text">Aucune catégorie</div>
@@ -1051,7 +1051,7 @@
                         <div class="stat-card" style="border-left:3px solid #e74c3c;"><div class="stat-label">Bannis</div><div class="stat-value" id="statBannedUsers">0</div></div>
                     </div>
                     <div style="margin-bottom:16px;display:flex;gap:8px;">
-                        <input type="text" class="form-input" id="userSearchInput" placeholder="Rechercher par nom ou email..." style="flex:1;" oninput="filterUsers()">
+                        <input type="text" class="form-input" id="userSearchInput" placeholder="Rechercher par nom où email..." style="flex:1;" oninput="filterUsers()">
                         <select class="form-select" id="userStatusFilter" style="width:150px;" onchange="filterUsers()">
                             <option value="">Tous</option>
                             <option value="active">Actifs</option>
@@ -1418,7 +1418,7 @@
             <form id="domainForm" onsubmit="saveDomain(event)">
                 <div class="form-group">
                     <label class="form-label">Clé (identifiant)</label>
-                    <input type="text" class="form-input" id="domainKey" required placeholder="motricite, langage...">
+                    <input type="text" class="form-input" id="domainKey" required placeholder="motricité, langage...">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Titre</label>
@@ -1555,7 +1555,7 @@
             editingPromoId: null,
             currentModerationTab: 'comments',
             quotes: [],
-            categories: [],
+            catégories: [],
             tips: [],
             domains: [],
             steps: [],
@@ -1630,7 +1630,7 @@
             if (section === 'quotes') {
                 loadQuotes();
             } else if (section === 'guide') {
-                loadCategories();
+                loadCatégories();
             } else if (section === 'milestones') {
                 loadDomains();
             } else if (section === 'daily-tips') {
@@ -1690,7 +1690,7 @@
 
                 // Content stats
                 set('statQuotes', stats.quotes);
-                set('statCategories', stats.guideCategories || stats.categories);
+                set('statCatégories', stats.guideCatégories || stats.catégories);
                 set('statTips', stats.guideTips || stats.tips);
                 set('statDomains', stats.devDomains || stats.domains);
                 set('statSteps', stats.devSteps || stats.steps);
@@ -1922,7 +1922,7 @@
                 closeModal('quoteModal');
                 loadQuotes();
                 loadData();
-                showNotification('Citation enregistrée avec succès', 'success');
+                showNotification('Citation enregistrée avec succès', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -1935,7 +1935,7 @@
                     await fetch(`/api/admin/quotes/${id}`, { method: 'DELETE' });
                     loadQuotes();
                     loadData();
-                    showNotification('Citation supprimée avec succès', 'success');
+                    showNotification('Citation supprimée avec succès', 'succèss');
                 } catch (error) {
                     showNotification('Erreur lors de la suppression', 'error');
                 }
@@ -1953,21 +1953,21 @@
             }
         }
 
-        // Categories and Tips
-        async function loadCategories() {
+        // Catégories and Tips
+        async function loadCatégories() {
             try {
-                const response = await fetch('/api/admin/guide-categories');
-                state.categories = await response.json();
-                renderCategories();
+                const response = await fetch('/api/admin/guide-catégories');
+                state.catégories = await response.json();
+                renderCatégories();
             } catch (error) {
                 showNotification('Erreur lors du chargement des catégories', 'error');
             }
         }
 
-        function renderCategories() {
-            const container = document.getElementById('categoriesList');
+        function renderCatégories() {
+            const container = document.getElementById('catégoriesList');
 
-            if (state.categories.length === 0) {
+            if (state.catégories.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">📭</div>
@@ -1985,7 +1985,7 @@
                 return;
             }
 
-            container.innerHTML = state.categories.map(cat => `
+            container.innerHTML = state.catégories.map(cat => `
                 <div class="list-item" onclick="selectCategory('${cat.id}')" ${state.selectedCategory === cat.id ? 'style="background: #f0ebff; border-left: 3px solid #7C5CFC;"' : ''}>
                     <div class="list-item-content">
                         <div class="list-item-title">${cat.icon} ${escapeHtml(cat.title)}</div>
@@ -2001,7 +2001,7 @@
         function selectCategory(id) {
             id = Number(id);
             state.selectedCategory = id;
-            renderCategories();
+            renderCatégories();
             loadTips();
         }
 
@@ -2016,7 +2016,7 @@
 
         function editCategory(id) {
             id = Number(id);
-            const category = state.categories.find(c => c.id === id);
+            const category = state.catégories.find(c => c.id === id);
             if (!category) return;
 
             state.editingCategoryId = id;
@@ -2042,13 +2042,13 @@
 
             try {
                 if (state.editingCategoryId) {
-                    await fetch(`/api/admin/guide-categories/${state.editingCategoryId}`, {
+                    await fetch(`/api/admin/guide-catégories/${state.editingCategoryId}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
                     });
                 } else {
-                    await fetch('/api/admin/guide-categories', {
+                    await fetch('/api/admin/guide-catégories', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
@@ -2056,9 +2056,9 @@
                 }
 
                 closeModal('categoryModal');
-                loadCategories();
+                loadCatégories();
                 loadData();
-                showNotification('Catégorie enregistrée avec succès', 'success');
+                showNotification('Catégorie enregistrée avec succès', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -2068,10 +2068,10 @@
             id = Number(id);
             state.deleteCallback = async () => {
                 try {
-                    await fetch(`/api/admin/guide-categories/${id}`, { method: 'DELETE' });
-                    loadCategories();
+                    await fetch(`/api/admin/guide-catégories/${id}`, { method: 'DELETE' });
+                    loadCatégories();
                     loadData();
-                    showNotification('Catégorie supprimée avec succès', 'success');
+                    showNotification('Catégorie supprimée avec succès', 'succèss');
                 } catch (error) {
                     showNotification('Erreur lors de la suppression', 'error');
                 }
@@ -2082,7 +2082,7 @@
         // Tips
         async function loadTips() {
             if (!state.selectedCategory) return;
-            const category = state.categories.find(c => c.id === state.selectedCategory);
+            const category = state.catégories.find(c => c.id === state.selectedCategory);
             if (!category) return;
 
             try {
@@ -2095,7 +2095,7 @@
         }
 
         function renderTips() {
-            const category = state.categories.find(c => c.id === state.selectedCategory);
+            const category = state.catégories.find(c => c.id === state.selectedCategory);
             if (!category) return;
 
             const container = document.getElementById('guideDetailPanel');
@@ -2171,7 +2171,7 @@
         async function saveTip(e) {
             e.preventDefault();
 
-            const category = state.categories.find(c => c.id === state.selectedCategory);
+            const category = state.catégories.find(c => c.id === state.selectedCategory);
             const data = {
                 categoryKey: category ? category.key : '',
                 title: document.getElementById('tipTitle').value,
@@ -2197,7 +2197,7 @@
                 closeModal('tipModal');
                 loadTips();
                 loadData();
-                showNotification('Conseil enregistré avec succès', 'success');
+                showNotification('Conseil enregistré avec succès', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -2210,7 +2210,7 @@
                     await fetch(`/api/admin/guide-tips/${id}`, { method: 'DELETE' });
                     loadTips();
                     loadData();
-                    showNotification('Conseil supprimé avec succès', 'success');
+                    showNotification('Conseil supprimé avec succès', 'succèss');
                 } catch (error) {
                     showNotification('Erreur lors de la suppression', 'error');
                 }
@@ -2321,7 +2321,7 @@
                 closeModal('domainModal');
                 loadDomains();
                 loadData();
-                showNotification('Domaine enregistré avec succès', 'success');
+                showNotification('Domaine enregistré avec succès', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -2334,7 +2334,7 @@
                     await fetch(`/api/admin/dev-domains/${id}`, { method: 'DELETE' });
                     loadDomains();
                     loadData();
-                    showNotification('Domaine supprimé avec succès', 'success');
+                    showNotification('Domaine supprimé avec succès', 'succèss');
                 } catch (error) {
                     showNotification('Erreur lors de la suppression', 'error');
                 }
@@ -2363,7 +2363,7 @@
 
             const container = document.getElementById('milestonesDetailPanel');
 
-            // Group steps by age group
+            // Group steps by âge group
             const ageGroups = ['0-6m', '6-12m', '1-2a', '2-3a', '3-6a'];
             const groupedSteps = {};
             ageGroups.forEach(ag => { groupedSteps[ag] = []; });
@@ -2490,7 +2490,7 @@
                 closeModal('stepModal');
                 loadSteps();
                 loadData();
-                showNotification('Repère enregistré avec succès', 'success');
+                showNotification('Repère enregistré avec succès', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -2503,7 +2503,7 @@
                     await fetch(`/api/admin/dev-steps/${id}`, { method: 'DELETE' });
                     loadSteps();
                     loadData();
-                    showNotification('Repère supprimé avec succès', 'success');
+                    showNotification('Repère supprimé avec succès', 'succèss');
                 } catch (error) {
                     showNotification('Erreur lors de la suppression', 'error');
                 }
@@ -2601,7 +2601,7 @@
                 closeModal('dailyTipModal');
                 loadDailyTips();
                 loadData();
-                showNotification('Conseil enregistré avec succès', 'success');
+                showNotification('Conseil enregistré avec succès', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -2614,7 +2614,7 @@
                     await fetch(`/api/admin/daily-tips/${id}`, { method: 'DELETE' });
                     loadDailyTips();
                     loadData();
-                    showNotification('Conseil supprimé avec succès', 'success');
+                    showNotification('Conseil supprimé avec succès', 'succèss');
                 } catch (error) {
                     showNotification('Erreur lors de la suppression', 'error');
                 }
@@ -2652,18 +2652,18 @@
                 if (devMatch) { try { sandbox.dev = eval('({' + devMatch[1] + '})'); } catch(e) { console.warn('dev parse err', e); } }
 
                 // Build seed payload
-                const payload = { quotes: [], guideCategories: [], guideTips: [], dailyTips: [], devDomains: [], devSteps: [] };
+                const payload = { quotes: [], guideCatégories: [], guideTips: [], dailyTips: [], devDomains: [], devSteps: [] };
 
                 // Quotes
                 if (sandbox.quotes) {
                     payload.quotes = sandbox.quotes.map((q, i) => ({ text: q.q, author: q.a || '', active: true, sortOrder: i }));
                 }
 
-                // Guide categories + tips
+                // Guide catégories + tips
                 if (sandbox.guide) {
                     let catIdx = 0;
                     Object.entries(sandbox.guide).forEach(([key, cat]) => {
-                        payload.guideCategories.push({ key, title: cat.t, icon: cat.ico, color: cat.c, bgColor: cat.bg, sortOrder: catIdx++ });
+                        payload.guideCatégories.push({ key, title: cat.t, icon: cat.ico, color: cat.c, bgColor: cat.bg, sortOrder: catIdx++ });
                         if (cat.tips) {
                             cat.tips.forEach((tip, ti) => {
                                 payload.guideTips.push({ categoryKey: key, title: tip.t, ageRange: tip.a, text: tip.x, sortOrder: ti });
@@ -2706,7 +2706,7 @@
 
                 const result = await response.json();
                 if (response.ok) {
-                    showNotification('Contenu initialise : ' + (payload.quotes.length) + ' citations, ' + (payload.guideCategories.length) + ' categories, ' + (payload.guideTips.length) + ' conseils', 'success');
+                    showNotification('Contenu initialise : ' + (payload.quotes.length) + ' citations, ' + (payload.guideCatégories.length) + ' catégories, ' + (payload.guideTips.length) + ' conseils', 'succèss');
                     loadData();
                 } else {
                     showNotification(result.error || 'Erreur', 'error');
@@ -2744,11 +2744,11 @@
         }
 
         // Notification
-        function showNotification(message, type = 'success') {
+        function showNotification(message, type = 'succèss') {
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.innerHTML = `
-                <div class="notification-icon">${type === 'success' ? '✓' : '✕'}</div>
+                <div class="notification-icon">${type === 'succèss' ? '✓' : '✕'}</div>
                 <div>${escapeHtml(message)}</div>
             `;
             document.body.appendChild(notification);
@@ -2901,7 +2901,7 @@
                 closeModal('userModal');
                 loadUsers();
                 loadData();
-                showNotification('Client enregistré avec succès', 'success');
+                showNotification('Client enregistré avec succès', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -2916,7 +2916,7 @@
                 });
                 loadUsers();
                 loadData();
-                showNotification('Statut mis à jour', 'success');
+                showNotification('Statut mis à jour', 'succèss');
             } catch (error) {
                 showNotification('Erreur', 'error');
             }
@@ -2932,7 +2932,7 @@
             }).then(() => {
                 loadUsers();
                 loadData();
-                showNotification('Utilisateur banni', 'success');
+                showNotification('Utilisateur banni', 'succèss');
             }).catch(() => showNotification('Erreur', 'error'));
         }
 
@@ -2943,7 +2943,7 @@
                     await fetch(`/api/admin/users/${id}`, {method: 'DELETE'});
                     loadUsers();
                     loadData();
-                    showNotification('Client supprimé', 'success');
+                    showNotification('Client supprimé', 'succèss');
                 } catch (error) {
                     showNotification('Erreur', 'error');
                 }
@@ -3019,7 +3019,7 @@
                 });
                 loadComments();
                 loadData();
-                showNotification('Statut mis à jour', 'success');
+                showNotification('Statut mis à jour', 'succèss');
             } catch (error) {
                 showNotification('Erreur', 'error');
             }
@@ -3032,7 +3032,7 @@
                     await fetch(`/api/admin/comments/${id}`, {method: 'DELETE'});
                     loadComments();
                     loadData();
-                    showNotification('Commentaire supprimé', 'success');
+                    showNotification('Commentaire supprimé', 'succèss');
                 } catch (error) {
                     showNotification('Erreur', 'error');
                 }
@@ -3105,7 +3105,7 @@
                 closeModal('reportNoteModal');
                 loadReports();
                 loadData();
-                showNotification('Signalement mis à jour', 'success');
+                showNotification('Signalement mis à jour', 'succèss');
             } catch (error) {
                 showNotification('Erreur', 'error');
             }
@@ -3118,7 +3118,7 @@
                     await fetch(`/api/admin/reports/${id}`, {method: 'DELETE'});
                     loadReports();
                     loadData();
-                    showNotification('Signalement supprimé', 'success');
+                    showNotification('Signalement supprimé', 'succèss');
                 } catch (error) {
                     showNotification('Erreur', 'error');
                 }
@@ -3165,7 +3165,7 @@
                 });
                 input.value = '';
                 loadBannedWords();
-                showNotification('Mot ajouté', 'success');
+                showNotification('Mot ajouté', 'succèss');
             } catch (error) {
                 showNotification('Erreur', 'error');
             }
@@ -3176,7 +3176,7 @@
             try {
                 await fetch(`/api/admin/banned-words/${id}`, {method: 'DELETE'});
                 loadBannedWords();
-                showNotification('Mot supprimé', 'success');
+                showNotification('Mot supprimé', 'succèss');
             } catch (error) {
                 showNotification('Erreur', 'error');
             }
@@ -3247,7 +3247,7 @@
                 });
                 loadSuggestions();
                 loadData();
-                showNotification('Statut mis à jour', 'success');
+                showNotification('Statut mis à jour', 'succèss');
             } catch (error) {
                 showNotification('Erreur', 'error');
             }
@@ -3276,7 +3276,7 @@
                 });
                 closeModal('suggestionNoteModal');
                 loadSuggestions();
-                showNotification('Note enregistrée', 'success');
+                showNotification('Note enregistrée', 'succèss');
             } catch (error) {
                 showNotification('Erreur', 'error');
             }
@@ -3289,7 +3289,7 @@
                     await fetch(`/api/admin/suggestions/${id}`, {method: 'DELETE'});
                     loadSuggestions();
                     loadData();
-                    showNotification('Suggestion supprimée', 'success');
+                    showNotification('Suggestion supprimée', 'succèss');
                 } catch (error) {
                     showNotification('Erreur', 'error');
                 }
@@ -3395,7 +3395,7 @@
                 closePromoModal();
                 loadPromoCodes();
                 loadData();
-                showNotification('Code promo enregistré', 'success');
+                showNotification('Code promo enregistré', 'succèss');
             } catch (error) {
                 showNotification('Erreur lors de l\'enregistrement', 'error');
             }
@@ -3417,7 +3417,7 @@
                     await fetch('/api/admin/promo-codes/' + id, {method: 'DELETE'});
                     loadPromoCodes();
                     loadData();
-                    showNotification('Code promo supprimé', 'success');
+                    showNotification('Code promo supprimé', 'succèss');
                 } catch (error) {
                     showNotification('Erreur', 'error');
                 }

@@ -64,170 +64,170 @@ const PAVS=[
 
 // ============= DEV REF DATA =============
 const DEV={
-motor_gross:{t:"Motricite globale",ico:"run",bg:"var(--sk)",c:"var(--sk3)",ages:{"0-6m":[{l:"Tient sa tete, souleve le buste sur le ventre",acts:["Tummy time : 2-3 min sur le ventre apres chaque change","Portage vertical pour renforcer les muscles du cou","Jeu du miroir : allonge sur le ventre face a un miroir"]},{l:"Se retourne du ventre sur le dos",acts:["Attirez-le sur le cote avec un jouet musical","Roulade douce guidee avec vos mains","Surface legerement inclinee avec un coussin"]}],"6-12m":[{l:"S'assoit seul, rampe, quatre pattes",acts:["Parcours de coussins au sol pour ramper","Tunnel avec une grande boite en carton","Jouets places hors de portee pour motiver"]},{l:"Se met debout en s'accrochant",acts:["Table basse stable pour se hisser","Dansez debout en le tenant par les mains","Jouets poses sur le canape pour l'attirer"]}],"1-2a":[{l:"Premiers pas, commence a courir",acts:["Promenade pieds nus dans l'herbe","Jeu de la balle a rouler puis lancer","Mini parcours d'obstacles dans le salon"]},{l:"Monte les escaliers a quatre pattes",acts:["Accompagnez-le dans les escaliers (supervise)","Montagne de matelas pour grimper","Escalade douce sur les coussins"]}],"2-3a":[{l:"Court, saute a pieds joints, pedale",acts:["Course dans le jardin avec obstacles","Sauter dans les flaques avec des bottes","Premier tricycle ou draisienne au parc"]},{l:"Monte les marches en alternant",acts:["Marelle simplifiee","Parcours au parc avec pentes","Danse rythmee avec sauts"]}],"3-6a":[{l:"Velo, corde a sauter, equilibre",acts:["Velo avec puis sans stabilisateurs","Parcours d'agilite au parc","Jeu de la statue"]},{l:"Nage, sports collectifs",acts:["Cours de natation des 4 ans","Football ou basket en famille","Jeux de ballon entre copains"]}]}},
-motor_fine:{t:"Motricite fine",ico:"hand",bg:"var(--lv)",c:"var(--lv3)",ages:{"0-6m":[{l:"Ouvre les mains, attrape un objet",acts:["Hochets legers de differentes textures","Chaussette coloree sur la main","Mobile a portee de main"]}],"6-12m":[{l:"Pince pouce-index, tape deux objets",acts:["Petits morceaux de nourriture (finger food)","Boites a ouvrir et fermer","Transvasement de gros haricots entre bols"]}],"1-2a":[{l:"Empile des cubes, gribouille, cuillere",acts:["Tour de cubes : la plus haute !","Premiers crayons gras sur grande feuille","Jeux d'eau : verser et transvaser"]}],"2-3a":[{l:"Dessine un cercle, decoupe, boutonne",acts:["Pate a modeler : boudins et boules","Collage de gommettes","Jeux de lacage avec cartes perforees"]}],"3-6a":[{l:"Bonhomme, prenom, decoupage precis",acts:["Perles a enfiler pour colliers","Origami simple (avion, bateau)","Cuisine : decorer des biscuits"]}]}},
+motor_gross:{t:"Motricité globale",ico:"run",bg:"var(--sk)",c:"var(--sk3)",ages:{"0-6m":[{l:"Tient sa tête, souleve le buste sur le ventre",acts:["Tummy time : 2-3 min sur le ventre après chaque change","Portage vertical pour renforcer les muscles du cou","Jeu du miroir : allonge sur le ventre face a un miroir"]},{l:"Se retourne du ventre sur le dos",acts:["Attirez-le sur le côté avec un jouet musical","Roulade douce guidee avec vos mains","Surface légèrement inclinee avec un coussin"]}],"6-12m":[{l:"S'assoit seul, rampe, quatre pattes",acts:["Parcours de coussins au sol pour ramper","Tunnel avec une grande boite en carton","Jouets places hors de portee pour motiver"]},{l:"Se met debout en s'accrochant",acts:["Table basse stable pour se hisser","Dansez debout en le tenant par les mains","Jouets poses sur le canape pour l'attirer"]}],"1-2a":[{l:"Premiers pas, commence a courir",acts:["Promenade pieds nus dans l'herbe","Jeu de la balle a rouler puis lancer","Mini parcours d'obstacles dans le salon"]},{l:"Monte les escaliers a quatre pattes",acts:["Accompagnez-le dans les escaliers (supervise)","Montagne de matelas pour grimper","Escalade douce sur les coussins"]}],"2-3a":[{l:"Court, saute a pieds joints, pedale",acts:["Course dans le jardin avec obstacles","Sauter dans les flaques avec des bottes","Premier tricycle où draisienne au parc"]},{l:"Monte les marches en alternant",acts:["Marelle simplifiee","Parcours au parc avec pentes","Danse rythmee avec sauts"]}],"3-6a":[{l:"Velo, corde a sauter, équilibre",acts:["Velo avec puis sans stabilisateurs","Parcours d'agilite au parc","Jeu de la statue"]},{l:"Nage, sports collectifs",acts:["Cours de natation des 4 ans","Football où basket en famille","Jeux de ballon entre copains"]}]}},
+motor_fine:{t:"Motricité fine",ico:"hand",bg:"var(--lv)",c:"var(--lv3)",ages:{"0-6m":[{l:"Ouvre les mains, attrape un objet",acts:["Hochets légers de differentes textures","Chaussette coloree sur la main","Mobile a portee de main"]}],"6-12m":[{l:"Pince pouce-index, tape deux objets",acts:["Petits morceaux de nourriture (finger food)","Boites a ouvrir et fermer","Transvasement de gros haricots entre bols"]}],"1-2a":[{l:"Empile des cubes, gribouille, cuillere",acts:["Tour de cubes : la plus haute !","Premiers crayons gras sur grande feuille","Jeux d'eau : verser et transvaser"]}],"2-3a":[{l:"Dessine un cercle, decoupe, boutonne",acts:["Pate a modèler : boudins et boules","Collage de gommettes","Jeux de lacage avec cartes perforees"]}],"3-6a":[{l:"Bonhomme, prenom, découpage precis",acts:["Perles a enfiler pour colliers","Origami simple (avion, bateau)","Cuisine : decorer des biscuits"]}]}},
 language:{t:"Langage",ico:"speech",bg:"var(--pk)",c:"var(--pk3)",ages:{"0-6m":[{l:"Gazouillis, rires, reagit aux voix",acts:["Parlez de tout ce que vous faites","Chantez berceuses et comptines","Imitez ses sons : dialogue de babillage"]}],"6-12m":[{l:"Babillage, premiers mots, pointe",acts:["Nommez tout ce que vous montrez","Lecture interactive avec images","Coucou-cache avec des mots"]}],"1-2a":[{l:"50 a 200 mots, associe 2 mots",acts:["Livres a volets et textures","Jeu 'Ou est le...?'","Chansons a gestes (Ainsi font font font)"]}],"2-3a":[{l:"Phrases de 3-4 mots, questions",acts:["Racontez votre journee au diner","Devinettes simples","Inventer une histoire a partir d'images"]}],"3-6a":[{l:"Phrases complexes, recits",acts:["Histoires inventees avant le coucher","Jeux de rimes et sons","Theatre de marionnettes"]}]}},
-cognitive:{t:"Cognitif",ico:"brain",bg:"var(--mt)",c:"var(--mt3)",ages:{"0-6m":[{l:"Suit des yeux, explore avec la bouche",acts:["Mobile contraste noir/blanc (0-2 mois)","Jeu du miroir","Hochets sonores pour cause et effet"]}],"6-12m":[{l:"Permanence de l'objet, cause et effet",acts:["Coucou-cache sous une couverture","Boite a formes simples","Cacher un jouet sous un tissu"]}],"1-2a":[{l:"Jeu symbolique, tri par formes",acts:["Dinette et telephone jouet","Puzzles 2-4 pieces en bois","Tri de couleurs avec objets du quotidien"]}],"2-3a":[{l:"Compte jusqu'a 5, couleurs",acts:["Compter les marches en montant","Chasse aux couleurs dans la maison","Puzzles de 6-10 pieces"]}],"3-6a":[{l:"Raisonnement logique, planification",acts:["Jeux de societe (loto, memory)","Circuits de billes","Experiences simples (volcan, fleurs colorees)"]}]}},
-social:{t:"Socio-emotionnel",ico:"smile",bg:"var(--rs)",c:"var(--rs3)",ages:{"0-6m":[{l:"Sourire social, attachement",acts:["Peau-a-peau quotidien","Massage bebe","Repondre aux pleurs = confiance"]}],"6-12m":[{l:"Angoisse de separation, joie",acts:["Coucou pour la separation","Rencontres avec d'autres bebes","Toujours dire au revoir"]}],"1-2a":[{l:"Empathie naissante, crises",acts:["Nommez les emotions","Livres sur les emotions","Coin calme avec coussins et doudou"]}],"2-3a":[{l:"Jeu cooperatif, premiers amis",acts:["Jeux de role : docteur, marchand","Inviter un ami a la maison","Tour de role avec un jeu"]}],"3-6a":[{l:"Negociation, empathie, regles",acts:["Jeux pour apprendre a perdre","Fort en coussins ensemble","Discussions sur les emotions"]}]}},
-autonomy:{t:"Autonomie",ico:"star",bg:"var(--sd)",c:"var(--sd3)",ages:{"0-6m":[{l:"Tient son biberon, coopere habillage",acts:["Laissez tenir le biberon","Decrivez chaque geste d'habillage","Routine previsible"]}],"6-12m":[{l:"Mange avec les doigts, gobelet",acts:["Finger food adapte","Gobelet a bec puis ouvert","Brosse a dents a mordiller"]}],"1-2a":[{l:"Cuillere, aide au deshabillage",acts:["Manger seul (le bazar fait partie de l'apprentissage)","Chaussures a scratch","Ranger dans la boite ensemble"]}],"2-3a":[{l:"Proprete, s'habille avec aide",acts:["Pot accessible, valoriser succes","Choisir ses vetements (2 options)","Se laver les mains seul"]}],"3-6a":[{l:"S'habille seul, range, cuisine",acts:["Tableau routines matin/soir","Preparer son sac d'ecole","Cuisiner un gouter simple"]}]}}
+cognitive:{t:"Cognitif",ico:"brain",bg:"var(--mt)",c:"var(--mt3)",ages:{"0-6m":[{l:"Suit des yeux, explore avec la bouche",acts:["Mobile contraste noir/blanc (0-2 mois)","Jeu du miroir","Hochets sonores pour cause et effet"]}],"6-12m":[{l:"Permanence de l'objet, cause et effet",acts:["Coucou-cache sous une couverture","Boite a formes simples","Cacher un jouet sous un tissu"]}],"1-2a":[{l:"Jeu symbolique, tri par formes",acts:["Dinette et telephone jouet","Puzzles 2-4 pieces en bois","Tri de couleurs avec objets du quotidien"]}],"2-3a":[{l:"Compte jusqu'a 5, couleurs",acts:["Compter les marches en montant","Chasse aux couleurs dans la maison","Puzzles de 6-10 pieces"]}],"3-6a":[{l:"Raisonnement logique, planification",acts:["Jeux de société (loto, memory)","Circuits de billes","Experiences simples (volcan, fleurs colorees)"]}]}},
+social:{t:"Socio-émotionnel",ico:"smile",bg:"var(--rs)",c:"var(--rs3)",ages:{"0-6m":[{l:"Sourire social, attachement",acts:["Peau-a-peau quotidien","Massage bébé","Répondre aux pleurs = confiance"]}],"6-12m":[{l:"Angoisse de separation, joie",acts:["Coucou pour la separation","Rencontrès avec d'autrès bébés","Toujours dire au revoir"]}],"1-2a":[{l:"Empathie naissanté, crises",acts:["Nommez les émotions","Livres sur les émotions","Coin calme avec coussins et doudou"]}],"2-3a":[{l:"Jeu cooperatif, premiers amis",acts:["Jeux de rôle : docteur, marchand","Inviter un ami a la maison","Tour de rôle avec un jeu"]}],"3-6a":[{l:"Negociation, empathie, regles",acts:["Jeux pour apprendre a perdre","Fort en coussins ensemble","Discussions sur les émotions"]}]}},
+autonomy:{t:"Autonomie",ico:"star",bg:"var(--sd)",c:"var(--sd3)",ages:{"0-6m":[{l:"Tient son biberon, coopere habillage",acts:["Laissez tenir le biberon","Decrivez chaque geste d'habillage","Routine prévisible"]}],"6-12m":[{l:"Mange avec les doigts, gobelet",acts:["Finger food adapte","Gobelet a bec puis ouvert","Brosse a dents a mordiller"]}],"1-2a":[{l:"Cuillere, aide au deshabillage",acts:["Manger seul (le bazar fait partie de l'apprentissage)","Chaussures a scratch","Ranger dans la boite ensemble"]}],"2-3a":[{l:"Propreté, s'habille avec aide",acts:["Pot accessible, valoriser succès","Choisir ses vetements (2 options)","Se laver les mains seul"]}],"3-6a":[{l:"S'habille seul, range, cuisine",acts:["Tableau routines matin/soir","Préparer son sac d'école","Cuisiner un goûter simple"]}]}}
 };
 
 // ============= GUIDE DATA =============
 const GUIDE={
 sleep:{t:'Sommeil',ico:'moon',c:'var(--lv3)',bg:'var(--lv)',tips:[
-{t:'Le rituel du coucher',a:'Tous ages',x:'Un rituel regulier aide votre enfant a se sentir en securite. Bain, pyjama, histoire, calin... Gardez le meme ordre chaque soir pour signaler au cerveau qu\'il est temps de dormir.'},
-{t:"L'environnement ideal",a:'Tous ages',x:'Chambre 18-20 degres, obscurite ou veilleuse douce rouge (pas bleue). Evitez les ecrans 1h avant le coucher. La melatonine se bloque avec la lumiere bleue.'},
-{t:"L'objet transitionnel",a:'6m-3 ans',x:'Le doudou aide a se rassurer lors des micro-reveils. Gardez-le contre vous quelques nuits pour votre odeur avant de lui donner.'},
-{t:'Le grand lit',a:'18m-3 ans',x:'Attendez qu\'il soit pret (souvent vers 2,5-3 ans). Rendez la transition positive, barriere de securite au debut, rituel inchange.'},
+{t:'Le rituel du coucher',a:'Tous ages',x:'Un rituel régulier aide votre enfant a se sentir en sécurité. Bain, pyjama, histoire, calin... Gardez le même ordre chaque soir pour signaler au cerveau qu\'il est temps de dormir.'},
+{t:"L'environnement ideal",a:'Tous ages',x:'Chambre 18-20 degrés, obscurite où veilleuse douce rouge (pas bleue). Évitez les écrans 1h avant le coucher. La melatonine se bloque avec la lumiere bleue.'},
+{t:"L'objet transitionnel",a:'6m-3 ans',x:'Le doudou aide a se rassurer lors des micro-réveils. Gardez-le contre vous quelques nuits pour votre odeur avant de lui donner.'},
+{t:'Le grand lit',a:'18m-3 ans',x:'Attendez qu\'il soit prêt (souvent vers 2,5-3 ans). Rendez la transition positive, barriere de sécurité au debut, rituel inchange.'},
 {t:'La sieste',a:'2-5 ans',x:'Si votre enfant ne dort plus, proposez un temps calme : livres, puzzle dans sa chambre. La sieste disparait souvent entre 3 et 5 ans.'},
-{t:'Reveils nocturnes',a:'6m-3 ans',x:'Attendez 2-3 minutes avant d\'intervenir : souvent ils se rendorment seuls. Un calin rapide suffit. Evitez de rallumer la lumiere.'},
-{t:'Les regressions du sommeil',a:'4-18 mois',x:'Vers 4 mois, 8-10 mois, 12 mois, 18 mois : poussees developpementales. C\'est temporaire (1-2 semaines). Gardez le cadre.'},
-{t:'Terreurs nocturnes vs cauchemars',a:'2-6 ans',x:'Terreurs : cri dans le sommeil profond, ne pas reveiller. Cauchemars : il se reveille, rassurez-le doucement.'},
-{t:'Co-dodo securise',a:'0-12 mois',x:'Si co-dodo : matelas ferme, pas d\'oreiller ni couette pres du bebe, gigoteuse. Il est vivement deconseille de s\'endormir sur un canape avec bebe. Tabac / alcool : exclu.'},
-{t:'Fenetres d\'eveil',a:'0-12 mois',x:'0-3m : 45-90 min. 3-6m : 1h30-2h. 6-12m : 2-3h. Coucher avant fatigue extreme = endormissement plus facile.'},
-{t:'Le pouce ou la tetine ?',a:'0-3 ans',x:'Tetine : plus facile a retirer vers 2-3 ans, protection syndrome de mort subite du nourrisson. Pouce : toujours disponible mais plus dur a arreter. Les deux sont courants et tout a fait acceptables.'},
-{t:'Quand consulter ?',a:'Tous ages',x:'Ronflements persistants, pauses respiratoires, sommeil agite chronique, apnees : parlez-en au pediatre (ORL / adenoides).'}]},
+{t:'Réveils nocturnes',a:'6m-3 ans',x:'Attendez 2-3 minutes avant d\'intervenir : souvent ils se rendorment seuls. Un calin rapide suffit. Évitez de rallumer la lumiere.'},
+{t:'Les regressions du sommeil',a:'4-18 mois',x:'Vers 4 mois, 8-10 mois, 12 mois, 18 mois : poussees développementales. C\'est temporaire (1-2 semaines). Gardez le cadre.'},
+{t:'Terreurs nocturnes vs cauchemars',a:'2-6 ans',x:'Terreurs : cri dans le sommeil profond, ne pas réveiller. Cauchemars : il se réveille, rassurez-le doucement.'},
+{t:'Co-dodo securise',a:'0-12 mois',x:'Si co-dodo : matelas ferme, pas d\'oreiller ni couette près du bébé, gigoteuse. Il est vivement déconseillé de s\'endormir sur un canape avec bébé. Tabac / alcool : exclu.'},
+{t:'Fenetrès d\'eveil',a:'0-12 mois',x:'0-3m : 45-90 min. 3-6m : 1h30-2h. 6-12m : 2-3h. Coucher avant fatigue extreme = endormissement plus facile.'},
+{t:'Le pouce où la tetine ?',a:'0-3 ans',x:'Tetine : plus facile a retirer vers 2-3 ans, protection syndrome de mort subite du nourrisson. Pouce : toujours disponible mais plus dur a arrêter. Les deux sont courants et tout a fait acceptables.'},
+{t:'Quand consulter ?',a:'Tous ages',x:'Ronflements persistants, pauses respiratoires, sommeil agite chronique, apnees : parlez-en au pédiatre (ORL / adenoides).'}]},
 food:{t:'Alimentation',ico:'utensils',c:'var(--mt3)',bg:'var(--mt)',tips:[
-{t:'La diversification',a:'4-6 mois',x:'Entre 4 et 6 mois selon pediatre. Un nouvel aliment a la fois pendant 3 jours pour detecter une reaction. Le lait reste l\'aliment principal jusqu\'a 1 an.'},
+{t:'La diversification',a:'4-6 mois',x:'Entre 4 et 6 mois selon pédiatre. Un nouvel aliment a la fois pendant 3 jours pour detecter une reaction. Le lait reste l\'aliment principal jusqu\'a 1 an.'},
 {t:'Du lait aux morceaux',a:'6-12 mois',x:'Purees lisses (6m) puis textures ecrasees (8m) puis petits morceaux fondants (10-12m). Ne sautez pas la texture grumeleuse.'},
-{t:'DME - diversification menee',a:'6-12 mois',x:'Bebe mange seul a la main. Morceaux de la taille du poing (banane, avocat, courgette vapeur). On vous conseille de toujours rester present avec lui pendant qu\'il mange. Formation aux gestes d\'urgence recommandee.'},
-{t:'Les allergenes prioritaires',a:'4-12 mois',x:'Introduisez tot : arachide (purée diluée), oeuf bien cuit, gluten, poisson. Plus tot = moins de risque d\'allergie (etude LEAP).'},
-{t:'La neophobie alimentaire',a:'2-6 ans',x:'Pic vers 2-3 ans. Pas de pression. Il faut 10 a 15 presentations avant acceptation. Proposez sans obliger. Variez la presentation.'},
-{t:'Les repas en famille',a:'Tous ages',x:'Mangez ensemble. Ecrans eteints. Votre enfant copie. L\'appetit varie d\'un jour a l\'autre, c\'est tout a fait habituel. Il est preferable de ne pas insister pour finir l\'assiette.'},
-{t:'Le biberon - bonne posture',a:'0-12 mois',x:'Semi-assis, tete surelevée (pas a plat). Faites des pauses. Rot apres. Il est important de ne pas ajouter de cereales dans le biberon (risque d\'etouffement).'},
+{t:'DME - diversification menee',a:'6-12 mois',x:'Bébé mange seul a la main. Morceaux de la taille du poing (banane, avocat, courgette vapeur). On vous conseille de toujours rester present avec lui pendant qu\'il mange. Formation aux gestes d\'urgence recommandée.'},
+{t:'Les allergenes prioritaires',a:'4-12 mois',x:'Introduisez tôt : arachide (purée diluée), oeuf bien cuit, gluten, poisson. Plus tôt = moins de risque d\'allergie (etude LEAP).'},
+{t:'La néophobie alimentaire',a:'2-6 ans',x:'Pic vers 2-3 ans. Pas de pression. Il faut 10 a 15 presentations avant acceptation. Proposez sans obliger. Variez la presentation.'},
+{t:'Les repas en famille',a:'Tous ages',x:'Mangez ensemble. Écrans eteints. Votre enfant copie. L\'appétit varie d\'un jour a l\'autre, c\'est tout a fait habituel. Il est préférable de ne pas insister pour finir l\'assiette.'},
+{t:'Le biberon - bonne posture',a:'0-12 mois',x:'Semi-assis, tête surelevée (pas a plat). Faites des pauses. Rot après. Il est important de ne pas ajouter de céréales dans le biberon (risque d\'étouffement).'},
 {t:'Sucres et sel',a:'0-2 ans',x:'Pas de sel ajoute avant 1 an (reins immatures). Pas de miel avant 1 an (botulisme). Sucre : limitez le plus possible avant 2 ans.'},
-{t:'L\'eau',a:'Tous ages',x:'Proposez a chaque repas des 6 mois. Pas de jus de fruit avant 1 an, limites apres. Un gobelet ouvert des 12 mois aide la proprete.'},
-{t:'Les aliments a risque d\'etouffement',a:'0-4 ans',x:'Evitez : cacahuetes entieres, raisins entiers (coupez en 4), saucisses rondelles, bonbons durs, pop-corn. Plutot en longueur qu\'en rondelles.'},
+{t:'L\'eau',a:'Tous ages',x:'Proposez a chaque repas des 6 mois. Pas de jus de fruit avant 1 an, limites après. Un gobelet ouvert des 12 mois aide la propreté.'},
+{t:'Les aliments a risque d\'étouffement',a:'0-4 ans',x:'Évitez : cacahuetes entieres, raisins entiers (coupez en 4), saucisses rondelles, bonbons durs, pop-corn. Plutôt en longueur qu\'en rondelles.'},
 {t:'Petits mangeurs',a:'1-5 ans',x:'Portion enfant = 1 cuillere a soupe par annee d\'age et par groupe alimentaire. C\'est moins que vous pensez. Fiez-vous a sa faim, pas aux quantites.'},
-{t:'Gerer la grignote',a:'1-6 ans',x:'3 repas + 1 ou 2 collations structurees. Pas de grignotage toute la journee. Entre deux : eau seulement. Appetit creuse pour le repas.'}]},
+{t:'Gerer la grignote',a:'1-6 ans',x:'3 repas + 1 où 2 collations structurees. Pas de grignotage toute la journee. Entre deux : eau seulement. Appetit creuse pour le repas.'}]},
 behavior:{t:'Comportement',ico:'heart',c:'var(--rs3)',bg:'var(--rs)',tips:[
-{t:'Tempetes emotionnelles',a:'18m-4 ans',x:'Le cerveau de votre enfant est encore immature : il ne peut pas encore reguler seul ses emotions. Restez calme, a sa hauteur, nommez l\'emotion ("tu es en colere"). Calinez quand il est pret. Ne raisonnez pas pendant la crise.'},
-{t:'Le "non" magique',a:'18m-3 ans',x:'Le "non" affirme son moi, etape saine. Proposez 2 choix ("tu veux la pomme ou la banane ?"). Moins de "non", plus de "quand tu auras fini, on...".'},
-{t:'Partager',a:'2-5 ans',x:'Avant 3 ans, "c\'est a moi" est une etape classique du developpement. Enseignez le tour de role avec un sablier. Il est preferable de ne pas forcer a preter le doudou.'},
+{t:'Tempetes émotionnelles',a:'18m-4 ans',x:'Le cerveau de votre enfant est encore immature : il ne peut pas encore réguler seul ses émotions. Restez calme, a sa hauteur, nommez l\'émotion ("tu es en colere"). Calinez quand il est prêt. Ne raisonnez pas pendant la crise.'},
+{t:'Le "non" magique',a:'18m-3 ans',x:'Le "non" affirme son moi, étape saine. Proposez 2 choix ("tu veux la pomme où la banane ?"). Moins de "non", plus de "quand tu auras fini, on...".'},
+{t:'Partager',a:'2-5 ans',x:'Avant 3 ans, "c\'est a moi" est une étape classique du développement. Enseignez le tour de rôle avec un sablier. Il est préférable de ne pas forcer a preter le doudou.'},
 {t:'La separation',a:'8m-3 ans',x:'Pic d\'angoisse de separation entre 8 et 18 mois. Dites toujours au revoir franchement (ne partez pas en cachette). Un objet transitionnel (doudou, petit foulard avec l\'odeur de la maison) fait le lien entre la maison et le lieu de garde et apaise la transition. Rassurez sur le retour.'},
-{t:'Les ecrans',a:'Regle 4-6-9-12',x:'Pas d\'ecran avant 3 ans. Pas de console avant 6 ans. Pas d\'internet seul avant 9 ans. Pas de reseaux sociaux avant 12 ans (recommandations Serge Tisseron).'},
-{t:'L\'autonomie qui grandit',a:'2-6 ans',x:'Laissez faire seul meme si c\'est plus lent. Chaque victoire = confiance. Acceptez que ce soit moins bien fait.'},
+{t:'Les écrans',a:'Regle 4-6-9-12',x:'Pas d\'écran avant 3 ans. Pas de console avant 6 ans. Pas d\'internet seul avant 9 ans. Pas de réseaux sociaux avant 12 ans (recommandations Serge Tisseron).'},
+{t:'L\'autonomie qui grandit',a:'2-6 ans',x:'Laissez faire seul même si c\'est plus lent. Chaque victoire = confiance. Acceptez que ce soit moins bien fait.'},
 {t:'Dire non sans crier',a:'Tous ages',x:'Descendez a sa hauteur. Regard dans les yeux. Ton ferme mais calme. Explication courte. "Je ne te laisse pas frapper, c\'est dangereux."'},
-{t:'Les limites qui rassurent',a:'Tous ages',x:'Les limites claires et coherentes rassurent. Un enfant teste pour verifier que le cadre tient. Tenir = amour.'},
+{t:'Les limites qui rassurent',a:'Tous ages',x:'Les limites claires et coherentes rassurent. Un enfant teste pour vérifier que le cadre tient. Tenir = amour.'},
 {t:'Morsures et coups',a:'1-3 ans',x:'Souvent par manque de mots. "Tu as envie de mordre, je ne te laisse pas. Tu peux mordre ce jouet." Proposez une alternative.'},
-{t:'Frere et soeurs',a:'Tous ages',x:'Les conflits entre freres et soeurs sont frequents et formateurs. Intervenez uniquement en cas de danger. Ne prenez pas parti. "Trouvez une solution tous les deux."'},
-{t:'La punition vs la consequence',a:'2-6 ans',x:'La punition arbitraire risque de blesser l\'estime de soi. La consequence logique ("tu renverses l\'eau, tu aides a essuyer") enseigne. Preferez toujours la seconde.'},
-{t:'La discipline positive',a:'Tous ages',x:'Ferme et bienveillant a la fois. Centré sur la solution, pas la punition. "Que peux-tu faire maintenant ?" plutot que "regarde ce que tu as fait".'}]},
+{t:'Frere et soeurs',a:'Tous ages',x:'Les conflits entre freres et soeurs sont fréquents et formateurs. Intervenez uniquement en cas de danger. Ne prenez pas parti. "Trouvez une solution tous les deux."'},
+{t:'La punition vs la consequence',a:'2-6 ans',x:'La punition arbitraire risque de blesser l\'estime de soi. La consequence logique ("tu renverses l\'eau, tu aides a essuyer") enseigne. Préférez toujours la seconde.'},
+{t:'La discipline positive',a:'Tous ages',x:'Ferme et bienveillant a la fois. Centré sur la solution, pas la punition. "Que peux-tu faire maintenant ?" plutôt que "regarde ce que tu as fait".'}]},
 hygiene:{t:'Soins & Hygiene',ico:'droplet',c:'var(--sk3)',bg:'var(--sk)',tips:[
-{t:'Le bain',a:'Tous ages',x:'Jouets, bulles, chansons. Temperature ideale : 37 degres. Il est essentiel de rester toujours present, meme pour 30 secondes. Un doigt pret a tenir.'},
+{t:'Le bain',a:'Tous ages',x:'Jouets, bulles, chansons. Temperature ideale : 37 degrés. Il est essentiel de rester toujours present, même pour 30 secondes. Un doigt prêt a tenir.'},
 {t:'Lavage des cheveux',a:'1-4 ans',x:'Visiere de bain, eau douce vers l\'arriere. Shampooing crete de coq ! Laissez-le tenir le pommeau. Acceptez 2-3 fois par semaine.'},
-{t:'La proprete diurne',a:'2-4 ans',x:'Signes : il reste sec plus de 2h, imite aux toilettes, demande a etre change. Pot ou reducteur, son choix. Zero pression.'},
-{t:'La proprete nocturne',a:'3-6 ans',x:'Souvent 6 mois a 2 ans apres la proprete diurne. Maturite du cerveau et du systeme hormonal (antidiuretique). Zero pression, zero honte. Alese + culotte.'},
-{t:'Brossage des dents',a:'1-6 ans',x:'Des la premiere dent. Matin et soir, 2 minutes. Dentifrice fluore adapte a l\'age (500 ppm avant 3 ans). Jusqu\'a 8 ans les parents finissent le brossage.'},
-{t:'Le mouchage',a:'2-5 ans',x:'Apprenez avec un jeu : souffler la bougie, faire la pluie. Un nez bouche gene le sommeil et l\'appetit. Serum phy au besoin.'},
-{t:'Coupe des ongles',a:'Tous ages',x:'Pendant le sommeil pour les bebes. Pour les petits : pendant un dessin anime. Coupez droit. En veillant a ne pas couper dans la peau.'},
-{t:'La sieste du bain',a:'0-12 mois',x:'Pas de bain apres un repas. Pas trop long pour un bebe (5-10 min). Serviette chaude a portee. Huile nourrissante si peau seche.'},
-{t:'Les poux',a:'3-6 ans',x:'Tres frequent a l\'ecole. Inspection 1 fois / semaine. Traitement immediat. Lavage du linge 60 degres. Pas de honte.'},
-{t:'La creme solaire',a:'6 mois+',x:'Pas d\'exposition directe avant 1 an. Chapeau, vetements, ombre. Indice 50+ mineral, renouveler toutes les 2h. Evitez 11h-16h.'},
-{t:'Le change',a:'0-2 ans',x:'Liniment oleocalcaire pour change fille (sens avant-arriere). Erytheme fessier : air libre + ceralia ou oxyde de zinc. Couche changee toutes les 3-4h.'}]},
-emotions:{t:'Emotions',ico:'heart',c:'var(--pk3)',bg:'var(--pk)',tips:[
-{t:'Nommer les emotions',a:'Tous ages',x:'Aidez a mettre des mots sur ce qu\'il ressent. "Je vois que tu es triste, tu voulais le jouet." Les livres emotionnels sont precieux.'},
+{t:'La propreté diurne',a:'2-4 ans',x:'Signes : il reste sec plus de 2h, imite aux toilettes, demande a être change. Pot où réducteur, son choix. Zero pression.'},
+{t:'La propreté nocturne',a:'3-6 ans',x:'Souvent 6 mois a 2 ans après la propreté diurne. Maturité du cerveau et du système hormonal (antidiuretique). Zero pression, zero honte. Alese + culotte.'},
+{t:'Brossage des dents',a:'1-6 ans',x:'Des la première dent. Matin et soir, 2 minutes. Dentifrice fluore adapte a l\'age (500 ppm avant 3 ans). Jusqu\'a 8 ans les parents finissent le brossage.'},
+{t:'Le mouchage',a:'2-5 ans',x:'Apprenez avec un jeu : souffler la bougie, faire la pluie. Un nez bouche gêne le sommeil et l\'appétit. Serum phy au besoin.'},
+{t:'Coupe des ongles',a:'Tous ages',x:'Pendant le sommeil pour les bébés. Pour les petits : pendant un dessin anime. Coupez droit. En veillant a ne pas couper dans la peau.'},
+{t:'La sieste du bain',a:'0-12 mois',x:'Pas de bain après un repas. Pas trop long pour un bébé (5-10 min). Serviette chaude a portee. Huile nourrissanté si peau seche.'},
+{t:'Les poux',a:'3-6 ans',x:'Tres frequent a l\'école. Inspection 1 fois / semaine. Traitement immediat. Lavage du linge 60 degrés. Pas de honte.'},
+{t:'La creme solaire',a:'6 mois+',x:'Pas d\'exposition directe avant 1 an. Chapeau, vetements, ombre. Indice 50+ mineral, renouveler toutes les 2h. Évitez 11h-16h.'},
+{t:'Le change',a:'0-2 ans',x:'Liniment oleocalcaire pour change fille (sens avant-arriere). Erytheme fessier : air libre + ceralia où oxyde de zinc. Couche changee toutes les 3-4h.'}]},
+émotions:{t:'Emotions',ico:'heart',c:'var(--pk3)',bg:'var(--pk)',tips:[
+{t:'Nommer les émotions',a:'Tous ages',x:'Aidez a mettre des mots sur ce qu\'il ressent. "Je vois que tu es triste, tu voulais le jouet." Les livres émotionnels sont précieux.'},
 {t:'Le coin calme',a:'2-6 ans',x:'Espace douillet avec coussins, doudous, livres. Pas une punition mais un refuge. "Veux-tu aller au coin calme ?" est bien plus invitant que de l\'envoyer dans sa chambre.'},
-{t:'Confiance en soi',a:'Tous ages',x:'Encouragez les efforts ("tu as travaille dur") plutot que les resultats ("tu es intelligent"). Evite la pression de performance.'},
-{t:'Les peurs',a:'2-6 ans',x:'Il est preferable de ne pas minimiser ("ce n\'est rien"). Validez ("je comprends que tu as peur") puis accompagnez (veilleuse, spray anti-monstres, calins).'},
-{t:'Colere vs caprice',a:'Tous ages',x:'Ce qu\'on appelle "caprice" est en realite l\'expression d\'un besoin que l\'enfant ne peut pas encore formuler. Son cerveau est immature et ne lui permet pas de reguler seul ses emotions. Accueillir sa colere avec calme est le plus beau cadeau que vous pouvez lui faire.'},
-{t:'Cerveau en construction',a:'0-6 ans',x:'Le cerveau de votre enfant se construit jusqu\'a l\'age adulte. L\'immaturite cerebrale explique pourquoi il ne "fait pas expres" : il apprend a gerer ses emotions quand il est accompagne avec bienveillance. Chaque moment de patience est un investissement dans son developpement.'},
-{t:'Le refuge parental',a:'Tous ages',x:'Etre la base de securite : toujours accueillir les emotions avant de poser les limites. "Je t\'aime meme quand tu es en colere."'},
-{t:'Le deuil et la perte',a:'Tous ages',x:'Parlez vrai. Pas "il est parti" mais "il est mort". Repondez aux questions simplement. Rituels aident. Enfants peuvent passer par des phases.'},
-{t:'L\'anxiete',a:'2-6 ans',x:'Rituels rassurants, routines, explications simples. Respiration "ballon dans le ventre". Si persistante + impact : parlez-en au pediatre.'},
-{t:'La jalousie',a:'2-6 ans',x:'Emotion saine. Accueillez sans juger. Evitez les comparaisons. "Chacun est different, tu as aussi tes forces." Temps individuel avec chaque enfant.'},
-{t:'Les mots doux',a:'Tous ages',x:'Dites "je t\'aime" souvent. Cela ne gate pas, ca construit. Un enfant ne peut pas entendre trop d\'amour.'},
-{t:'La gratitude',a:'3-6 ans',x:'Rituel du soir : "3 choses que tu as aime aujourd\'hui". Developpe l\'optimisme et la conscience positive. Modele vous-meme.'}]},
-activities:{t:'Activites & Jeux',ico:'palette',c:'var(--lv3)',bg:'var(--lv)',tips:[
+{t:'Confiance en soi',a:'Tous ages',x:'Encouragez les efforts ("tu as travaille dur") plutôt que les résultats ("tu es intelligent"). Evite la pression de performance.'},
+{t:'Les peurs',a:'2-6 ans',x:'Il est préférable de ne pas minimiser ("ce n\'est rien"). Validez ("je comprends que tu as peur") puis accompagnez (veilleuse, spray anti-monstres, calins).'},
+{t:'Colere vs caprice',a:'Tous ages',x:'Ce qu\'on appelle "caprice" est en realite l\'expression d\'un besoin que l\'enfant ne peut pas encore formuler. Son cerveau est immature et ne lui permet pas de réguler seul ses émotions. Accueillir sa colere avec calme est le plus beau cadeau que vous pouvez lui faire.'},
+{t:'Cerveau en construction',a:'0-6 ans',x:'Le cerveau de votre enfant se construit jusqu\'a l\'age adulte. L\'immaturité cérébrale explique pourquoi il ne "fait pas expres" : il apprend a gerer ses émotions quand il est accompagne avec bienveillance. Chaque moment de patience est un investissement dans son développement.'},
+{t:'Le refuge parental',a:'Tous ages',x:'Être la base de sécurité : toujours accueillir les émotions avant de poser les limites. "Je t\'aime même quand tu es en colere."'},
+{t:'Le deuil et la perte',a:'Tous ages',x:'Parlez vrai. Pas "il est parti" mais "il est mort". Répondez aux questions simplement. Rituels aident. Enfants peuvent passer par des phases.'},
+{t:'L\'anxiété',a:'2-6 ans',x:'Rituels rassurants, routines, explications simples. Respiration "ballon dans le ventre". Si persistante + impact : parlez-en au pédiatre.'},
+{t:'La jalousie',a:'2-6 ans',x:'Emotion saine. Accueillez sans juger. Évitez les comparaisons. "Chacun est different, tu as aussi tes forces." Temps individuel avec chaque enfant.'},
+{t:'Les mots doux',a:'Tous ages',x:'Dites "je t\'aime" souvent. Cela ne gate pas, ça construit. Un enfant ne peut pas entendre trop d\'amour.'},
+{t:'La gratitude',a:'3-6 ans',x:'Rituel du soir : "3 choses que tu as aime aujourd\'hui". Developpe l\'optimisme et la conscience positive. Modele vous-même.'}]},
+activities:{t:'Activités & Jeux',ico:'palette',c:'var(--lv3)',bg:'var(--lv)',tips:[
 {t:'Eveil sensoriel',a:'0-18 mois',x:'Bacs sensoriels (riz, pates, lentilles sous surveillance), tapis d\'eveil, musique variee, textures variees. Le cerveau se construit par les sens.'},
-{t:'Jeu libre',a:'Tous ages',x:'Cartons, bols, cuilleres en bois, foulards. L\'imagination se developpe davantage qu\'avec des jouets a pile. Moins, mais mieux.'},
-{t:'Cuisiner ensemble',a:'2-6 ans',x:'Laver legumes, touiller, decorer un gateau. Motricite fine, vocabulaire, fierte. Accepter le bazar = part du jeu.'},
-{t:'Sorties nature',a:'Tous ages',x:'Feuilles, insectes, flaques. La nature stimule tout : sensoriel, moteur, cognitif. Minimum 1h/jour dehors meme par mauvais temps.'},
-{t:'Les livres',a:'Tous ages',x:'Regarder des livres ensemble des 6 mois est l\'une des plus belles habitudes : cela developpe le langage, l\'imagination et le lien parent-enfant. Laissez choisir et relisez en boucle, c\'est rassurant.'},
-{t:'Sorties au restaurant',a:'2-6 ans',x:'Preparez un petit sac a surprises : quelques livres, des crayons de couleur, un petit jeu discret (cartes, figurines). Cela permet de profiter du repas en famille sans recourir aux ecrans. Changer d\'environnement est aussi une aventure pour votre enfant.'},
-{t:'Boite a ennui',a:'2-6 ans',x:'Contre les ecrans : pate a modeler, coloriage, puzzle, deguisements, gommettes, blocs de bois, tampons. L\'ennui creatif est un moteur.'},
-{t:'Activites Montessori',a:'1-3 ans',x:'Transvasement (eau, graines), boites a formes, cadres d\'habillage, puzzles encastrables. Concentration, autonomie, motricite fine.'},
+{t:'Jeu libre',a:'Tous ages',x:'Cartons, bols, cuilleres en bois, foulards. L\'imagination se développe davantage qu\'avec des jouets a pile. Moins, mais mieux.'},
+{t:'Cuisiner ensemble',a:'2-6 ans',x:'Laver legumes, touiller, decorer un gateau. Motricité fine, vocabulaire, fierte. Accepter le bazar = part du jeu.'},
+{t:'Sorties nature',a:'Tous ages',x:'Feuilles, insectes, flaques. La nature stimule tout : sensoriel, moteur, cognitif. Minimum 1h/jour dehors même par mauvais temps.'},
+{t:'Les livres',a:'Tous ages',x:'Regarder des livres ensemble des 6 mois est l\'une des plus belles habitudes : cela développe le langage, l\'imagination et le lien parent-enfant. Laissez choisir et relisez en boucle, c\'est rassurant.'},
+{t:'Sorties au restaurant',a:'2-6 ans',x:'Préparez un petit sac a surprises : quelques livres, des crayons de couleur, un petit jeu discret (cartes, figurines). Cela permet de profiter du repas en famille sans recourir aux écrans. Changer d\'environnement est aussi une aventure pour votre enfant.'},
+{t:'Boite a ennui',a:'2-6 ans',x:'Contre les écrans : pate a modèler, coloriage, puzzle, déguisements, gommettes, blocs de bois, tampons. L\'ennui creatif est un moteur.'},
+{t:'Activités Montessori',a:'1-3 ans',x:'Transvasement (eau, graines), boites a formes, cadres d\'habillage, puzzles encastrables. Concentration, autonomie, motricité fine.'},
 {t:'Musique et comptines',a:'0-6 ans',x:'Chantez sans complexe ! Les comptines gestes (ainsi font font font) enrichissent langage et coordination. Instruments simples des 18 mois.'},
-{t:'Dessin et peinture',a:'18m-6 ans',x:'Grandes feuilles. Crayons gras puis feutres puis crayons. Peinture aux doigts des 2 ans. Ne corrigez pas. "Raconte-moi ce que tu as dessine."'},
-{t:'Jeux de construction',a:'12m-6 ans',x:'Briques emboitables, planchettes en bois, blocs de construction. Spatialite, logique, creativite. Jeu individuel puis collectif vers 4-5 ans.'},
-{t:'Jeux symboliques',a:'18m-6 ans',x:'Dinette, poupees, docteur, deguisements. L\'enfant digere les experiences en les rejouant. C\'est un formidable moteur pour l\'imagination et la comprehension du monde.'},
-{t:'Jeux de societe',a:'3-6 ans',x:'Loto, memory, jeux de parcours simples, jeux cooperatifs. Enseignent tour de role, perdre / gagner, regles. Commencez court (10 min).'},
-{t:'Le parcours motricite',a:'12m-6 ans',x:'Coussins, tunnels, chaises : parcours a ramper, grimper, sauter. Au parc : toboggan, balancoire, escalade. La motricite libre = autonomie.'},
-{t:'Mindfulness enfant',a:'3-6 ans',x:'Des exercices de relaxation ludiques adaptes aux enfants (respiration du ballon, yoga-animal, relaxation guidee). 3 a 5 minutes par jour suffisent. Cela developpe le calme, la concentration et la regulation emotionnelle.'}]},
+{t:'Dessin et peinture',a:'18m-6 ans',x:'Grandes feuilles. Crayons gras puis feutrès puis crayons. Peinture aux doigts des 2 ans. Ne corrigez pas. "Raconte-moi ce que tu as dessine."'},
+{t:'Jeux de construction',a:'12m-6 ans',x:'Briques emboitables, planchettes en bois, blocs de construction. Spatialite, logique, créativité. Jeu individuel puis collectif vers 4-5 ans.'},
+{t:'Jeux symboliques',a:'18m-6 ans',x:'Dinette, poupees, docteur, déguisements. L\'enfant digere les experiences en les rejouant. C\'est un formidable moteur pour l\'imagination et la comprehension du monde.'},
+{t:'Jeux de société',a:'3-6 ans',x:'Loto, memory, jeux de parcours simples, jeux cooperatifs. Enseignent tour de rôle, perdre / gagner, regles. Commencez court (10 min).'},
+{t:'Le parcours motricité',a:'12m-6 ans',x:'Coussins, tunnels, chaises : parcours a ramper, grimper, sauter. Au parc : toboggan, balancoire, escalade. La motricité libre = autonomie.'},
+{t:'Mindfulness enfant',a:'3-6 ans',x:'Des exercices de relaxation ludiques adaptes aux enfants (respiration du ballon, yoga-animal, relaxation guidee). 3 a 5 minutes par jour suffisent. Cela développe le calme, la concentration et la régulation émotionnelle.'}]},
 teeth:{t:'Dents & Bouche',ico:'tooth',c:'var(--sd3)',bg:'var(--sd)',tips:[
-{t:'La premiere dent',a:'4-15 mois',x:'Apparait en general entre 4 et 10 mois, souvent les incisives centrales du bas en premier. Tres variable : jusqu\'a 15 mois sans souci. Certains bebes naissent avec une dent, d\'autres attendent leur 1 an. C\'est tout a fait courant.'},
-{t:'Symptomes de poussee dentaire',a:'3-24 mois',x:'Salivation abondante, joues rouges, envie de mordre, irritabilite, sommeil perturbe, selles plus molles. Important : la fievre superieure a 38°C, la diarrhee et les vomissements NE sont PAS causes par les dents. Si presents, consulter.'},
-{t:'Apaiser les poussees',a:'4-24 mois',x:'Anneau de dentition frais (pas congele, cela brule la gencive), massage doux avec doigt propre, gant humide a mordre, croute de pain si enfant mange deja. A eviter : colliers d\'ambre (risque d\'etranglement prouve, aucune efficacite).'},
-{t:'Antalgiques : quand et comment',a:'Des 3 mois',x:'Si douleur intense qui empeche de dormir ou manger : paracetamol adapte au poids, pas d\'ibuprofene avant 3 mois. Les gels anesthesiants locaux (lidocaine) sont deconseilles chez le tout-petit. Homeopathie : efficacite non prouvee.'},
+{t:'La première dent',a:'4-15 mois',x:'Apparait en général entre 4 et 10 mois, souvent les incisives centrales du bas en premier. Tres variable : jusqu\'a 15 mois sans souci. Certains bébés naissent avec une dent, d\'autrès attendent leur 1 an. C\'est tout a fait courant.'},
+{t:'Symptomes de poussee dentaire',a:'3-24 mois',x:'Salivation abondante, joues rouges, envie de mordre, irritabilite, sommeil perturbe, selles plus molles. Important : la fièvre supérieure a 38°C, la diarrhee et les vomissements NE sont PAS causes par les dents. Si presents, consulter.'},
+{t:'Apaiser les poussees',a:'4-24 mois',x:'Anneau de dentition frais (pas congele, cela brule la gencive), massage doux avec doigt propre, gant humide a mordre, croute de pain si enfant mange déjà. A eviter : colliers d\'ambre (risque d\'etranglement prouve, aucune efficacite).'},
+{t:'Antalgiques : quand et comment',a:'Des 3 mois',x:'Si douleur intense qui empeche de dormir où manger : paracetamol adapte au poids, pas d\'ibuprofène avant 3 mois. Les gels anesthesiants locaux (lidocaine) sont déconseillés chez le tout-petit. Homeopathie : efficacite non prouvee.'},
 {t:'Ordre d\'apparition des dents',a:'6 mois - 3 ans',x:'Incisives centrales bas (6-10m), haut (8-12m), laterales bas et haut (9-13m), 1eres molaires (13-19m), canines (16-23m), 2emes molaires (23-33m). 20 dents de lait au total vers 3 ans. Les molaires sont les plus douloureuses.'},
-{t:'Premier brossage',a:'Des la 1ere dent',x:'Brosse souple pour bebe (tete de 1 cm), 2 fois par jour (matin et soir). Le parent brosse jusqu\'a 6-8 ans : la motricite fine de l\'enfant ne suffit pas avant. Methode : petits mouvements circulaires, toutes les faces.'},
-{t:'Dentifrice fluore : les bonnes doses',a:'Des la 1ere dent',x:'Recommandations UFSBD 2024 : 1000 ppm de fluor des la premiere dent. Quantite : un grain de riz jusqu\'a 3 ans, un petit pois ensuite. Apprendre a cracher a partir de 3 ans. Pas de rincage abondant pour que le fluor agisse.'},
-{t:'Premiere visite chez le dentiste',a:'12-18 mois',x:'Des la premiere dent ou avant 1 an selon l\'UFSBD. Habituer tot = pas de peur plus tard. Programme "M\'T dents" : examens rembourses 100% par l\'Assurance maladie a 3, 6, 9, 12, 15, 18, 21 et 24 ans. Ne pas rater.'},
-{t:'La carie du biberon',a:'0-3 ans',x:'Cause : biberons sucres (lait, jus, sirop) la nuit ou toute la journee. Se voit comme taches brunes sur les incisives du haut. Reserver le biberon de lait aux repas, proposer de l\'eau entre. Il est preferable d\'eviter de laisser bebe s\'endormir avec un biberon de lait ou de liquide sucre au-dela de 6 mois.'},
-{t:'Alimentation et dents',a:'Tous ages',x:'Amis : fromage (calcium, neutralise acidite), eau, pommes crues, noix. A limiter : bonbons collants, jus de fruits (meme "naturels"), compotes a boire, biscuits sucres grignotes. Regle d\'or : le sucre concentre dans un seul moment est moins pire que toute la journee.'},
-{t:'Chute des dents de lait',a:'5-12 ans',x:'Les incisives du bas tombent vers 5-6 ans, toutes les dents de lait vers 12 ans. Si la dent definitive pousse derriere la dent de lait : attendre 2-3 mois, souvent ca se replace. La petite souris (rituel rassurant) transforme un moment inquietant en joie.'},
-{t:'Orthodontie : quand consulter',a:'3-8 ans',x:'Signaux : succion du pouce / tetine apres 4 ans, respiration par la bouche permanente, beance entre dents, machoires decalees, ronflements. 1er bilan orthodontique vers 6-7 ans (remboursement SS jusqu\'a 16 ans, demande d\'entente prealable).'},
-{t:'Traumatisme dentaire : reflexes',a:'Tous ages',x:'Choc sur dent de lait : consulter dans les 24h meme sans mobilite (risque pour la dent definitive dessous). Dent definitive expulsee : URGENCE <1h, la conserver dans du lait ou du serum physiologique (on deconseille l\'eau du robinet), ne pas frotter, direction dentiste/urgences.'}]}
+{t:'Premier brossage',a:'Des la 1ere dent',x:'Brosse souple pour bébé (tête de 1 cm), 2 fois par jour (matin et soir). Le parent brosse jusqu\'a 6-8 ans : la motricité fine de l\'enfant ne suffit pas avant. Methode : petits mouvements circulaires, toutes les faces.'},
+{t:'Dentifrice fluore : les bonnes doses',a:'Des la 1ere dent',x:'Recommandations UFSBD 2024 : 1000 ppm de fluor des la première dent. Quantite : un grain de riz jusqu\'a 3 ans, un petit pois ensuite. Apprendre a cracher a partir de 3 ans. Pas de rincage abondant pour que le fluor agisse.'},
+{t:'Première visite chez le dentiste',a:'12-18 mois',x:'Des la première dent où avant 1 an selon l\'UFSBD. Habituer tôt = pas de peur plus tard. Programme "M\'T dents" : examens remboursés 100% par l\'Assurance maladie a 3, 6, 9, 12, 15, 18, 21 et 24 ans. Ne pas rater.'},
+{t:'La carie du biberon',a:'0-3 ans',x:'Cause : biberons sucres (lait, jus, sirop) la nuit où toute la journee. Se voit comme taches brunes sur les incisives du haut. Reserver le biberon de lait aux repas, proposer de l\'eau entre. Il est préférable d\'eviter de laisser bébé s\'endormir avec un biberon de lait où de liquide sucre au-dela de 6 mois.'},
+{t:'Alimentation et dents',a:'Tous ages',x:'Amis : fromage (calcium, neutralise acidite), eau, pommes crues, noix. A limiter : bonbons collants, jus de fruits (même "naturels"), compotes a boire, biscuits sucres grignotes. Regle d\'or : le sucre concentre dans un seul moment est moins pire que toute la journee.'},
+{t:'Chute des dents de lait',a:'5-12 ans',x:'Les incisives du bas tombent vers 5-6 ans, toutes les dents de lait vers 12 ans. Si la dent definitive pousse derriere la dent de lait : attendre 2-3 mois, souvent ça se replace. La petite souris (rituel rassurant) transforme un moment inquietant en joie.'},
+{t:'Orthodontie : quand consulter',a:'3-8 ans',x:'Signaux : succion du pouce / tetine après 4 ans, respiration par la bouche permanente, beance entre dents, machoires decalees, ronflements. 1er bilan orthodontique vers 6-7 ans (remboursément SS jusqu\'a 16 ans, demande d\'entente préalable).'},
+{t:'Traumatisme dentaire : reflexes',a:'Tous ages',x:'Choc sur dent de lait : consulter dans les 24h même sans mobilite (risque pour la dent definitive dessous). Dent definitive expulsee : URGENCE <1h, la conserver dans du lait où du serum physiologique (on déconseillé l\'eau du robinet), ne pas frotter, direction dentiste/urgences.'}]}
 };
 
 // ============= QUESTIONNAIRE PERSONNALISE =============
 const QDOMS={
 sleep:{t:'Sommeil',ico:'moon',c:'var(--lv3)',bg:'var(--lv)'},
 food:{t:'Alimentation',ico:'utensils',c:'var(--mt3)',bg:'var(--mt)'},
-emotions:{t:'Emotions',ico:'heart',c:'var(--rs3)',bg:'var(--rs)'},
+émotions:{t:'Emotions',ico:'heart',c:'var(--rs3)',bg:'var(--rs)'},
 language:{t:'Langage',ico:'speech',c:'var(--pk3)',bg:'var(--pk)'},
-motor:{t:'Motricite',ico:'run',c:'var(--sk3)',bg:'var(--sk)'},
+motor:{t:'Motricité',ico:'run',c:'var(--sk3)',bg:'var(--sk)'},
 social:{t:'Relations sociales',ico:'smile',c:'var(--rs3)',bg:'var(--rs)'},
-screens:{t:'Ecrans',ico:'tv',c:'var(--sd3)',bg:'var(--sd)'},
+screens:{t:'Écrans',ico:'tv',c:'var(--sd3)',bg:'var(--sd)'},
 bonding:{t:'Lien & jeu',ico:'sparkle',c:'var(--pk3)',bg:'var(--pk)'}
 };
 const QUIZ=[
-{id:'q1',dom:'sleep',q:'Comment se passent les nuits en general ?',opts:[
-{v:'a',l:'Bien, completes la plupart du temps',lvl:'good'},
-{v:'b',l:'Quelques reveils mais il/elle se rendort',lvl:'ok'},
-{v:'c',l:'Reveils frequents, difficulte a rendormir',lvl:'watch'},
-{v:'d',l:'Nuits tres hachees, peu de sommeil profond',lvl:'alert'}]},
+{id:'q1',dom:'sleep',q:'Comment se passent les nuits en général ?',opts:[
+{v:'a',l:'Bien, complètes la plupart du temps',lvl:'good'},
+{v:'b',l:'Quelques réveils mais il/elle se rendort',lvl:'ok'},
+{v:'c',l:'Réveils fréquents, difficulté a rendormir',lvl:'watch'},
+{v:'d',l:'Nuits très hachees, peu de sommeil profond',lvl:'alert'}]},
 {id:'q2',dom:'sleep',q:"L'endormissement le soir est...",opts:[
 {v:'a',l:'Simple, autonome',lvl:'good'},
 {v:'b',l:'Un peu long mais gerable',lvl:'ok'},
 {v:'c',l:'Long et complique tous les soirs',lvl:'watch'},
-{v:'d',l:'Avec cris, pleurs ou crises regulieres',lvl:'alert'}]},
+{v:'d',l:'Avec cris, pleurs où crises régulieres',lvl:'alert'}]},
 {id:'q3',dom:'food',q:'Avec la nourriture, votre enfant...',opts:[
 {v:'a',l:'Mange de tout volontiers',lvl:'good'},
 {v:'b',l:'Mange bien avec quelques refus',lvl:'ok'},
-{v:'c',l:'Se montre selectif (neophobie alimentaire)',lvl:'watch'},
-{v:'d',l:"Tres peu varie, petit appetit qui inquiete",lvl:'alert'}]},
+{v:'c',l:'Se montre sélectif (néophobie alimentaire)',lvl:'watch'},
+{v:'d',l:"Tres peu varie, petit appétit qui inquiete",lvl:'alert'}]},
 {id:'q4',dom:'food',q:'Les repas se passent...',opts:[
 {v:'a',l:'Calmes et conviviaux',lvl:'good'},
 {v:'b',l:'OK mais parfois un peu longs',lvl:'ok'},
-{v:'c',l:'Souvent agites ou conflictuels',lvl:'watch'},
+{v:'c',l:'Souvent agites où conflictuels',lvl:'watch'},
 {v:'d',l:'Chaque repas est un combat',lvl:'alert'}]},
-{id:'q5',dom:'emotions',q:'Face aux frustrations, votre enfant...',opts:[
-{v:'a',l:'Se calme vite, seul ou avec un calin',lvl:'good'},
-{v:'b',l:'Pleure parfois mais recupere bien',lvl:'ok'},
+{id:'q5',dom:'émotions',q:'Face aux frustrations, votre enfant...',opts:[
+{v:'a',l:'Se calme vite, seul où avec un calin',lvl:'good'},
+{v:'b',l:'Pleure parfois mais reçupere bien',lvl:'ok'},
 {v:'c',l:'A des crises intenses plusieurs fois par semaine',lvl:'watch'},
 {v:'d',l:'Crises quotidiennes, longues a apaiser',lvl:'alert'}]},
-{id:'q6',dom:'language',q:'Pour son age, son langage est...',opts:[
+{id:'q6',dom:'language',q:'Pour son âge, son langage est...',opts:[
 {v:'a',l:'Riche, en avance',lvl:'good'},
 {v:'b',l:"Conforme a son age",lvl:'ok'},
 {v:'c',l:'Un peu en retrait, je surveille',lvl:'watch'},
-{v:'d',l:'Me preoccupe, peu de progres',lvl:'alert'}]},
-{id:'q7',dom:'motor',q:'Sur le plan moteur (tenir sa tete, ramper, marcher, courir)...',opts:[
-{v:'a',l:'Dans la moyenne ou en avance',lvl:'good'},
-{v:'b',l:'Progresse a son rythme',lvl:'ok'},
-{v:'c',l:'Un peu en retrait sans etre bloque',lvl:'watch'},
-{v:'d',l:'Retard visible ou difficultes repetees',lvl:'alert'}]},
-{id:'q8',dom:'social',q:'Avec les autres enfants et adultes...',opts:[
+{v:'d',l:'Me preoccupe, peu de progrès',lvl:'alert'}]},
+{id:'q7',dom:'motor',q:'Sur le plan moteur (tenir sa tête, ramper, marcher, courir)...',opts:[
+{v:'a',l:'Dans la moyenne où en avance',lvl:'good'},
+{v:'b',l:'Progrèsse a son rythme',lvl:'ok'},
+{v:'c',l:'Un peu en retrait sans être bloque',lvl:'watch'},
+{v:'d',l:'Retard visible où difficultés repetees',lvl:'alert'}]},
+{id:'q8',dom:'social',q:'Avec les autrès enfants et adultes...',opts:[
 {v:'a',l:"A l'aise, curieux, va vers les autres",lvl:'good'},
 {v:'b',l:"Temps d'adaptation mais s'integre",lvl:'ok'},
-{v:'c',l:'Plutot timide, en retrait',lvl:'watch'},
-{v:'d',l:'Conflits frequents ou evitement marque',lvl:'alert'}]},
-{id:'q9',dom:'screens',q:"Temps d'ecran quotidien (TV, tablette, telephone) ?",opts:[
+{v:'c',l:'Plutôt timide, en retrait',lvl:'watch'},
+{v:'d',l:'Conflits fréquents où évitement marque',lvl:'alert'}]},
+{id:'q9',dom:'screens',q:"Temps d'écran quotidien (TV, tablette, telephone) ?",opts:[
 {v:'a',l:'Aucun',lvl:'good'},
 {v:'b',l:'Moins de 30 minutes',lvl:'ok'},
 {v:'c',l:'30 minutes a 1 heure',lvl:'watch'},
 {v:'d',l:"Plus d'1 heure par jour",lvl:'alert'}]},
-{id:'q10',dom:'bonding',q:'Temps de jeu ou interaction directe parent-enfant par jour (cumule) ?',opts:[
+{id:'q10',dom:'bonding',q:'Temps de jeu où interaction directe parent-enfant par jour (cumule) ?',opts:[
 {v:'a',l:'Plus de 2 heures',lvl:'good'},
 {v:'b',l:'Entre 1 et 2 heures',lvl:'ok'},
 {v:'c',l:'Entre 30 minutes et 1 heure',lvl:'watch'},
@@ -238,52 +238,52 @@ const LVL_LBL={good:'Tout roule',ok:'Ca va bien',watch:'A observer',alert:'Point
 
 const BILAN_LIB={
 sleep:{
-good:{s:"Le sommeil de votre enfant est solide et soutient bien sa croissance. C'est un pilier precieux.",t:["Maintenez les rituels qui fonctionnent : regularite des horaires, meme le week-end.","Protegez les siestes : elles participent directement a la qualite des nuits.","Continuez a creer une ambiance apaisante (lumiere tamisee, voix calme) au coucher."]},
-ok:{s:"Les nuits sont globalement bonnes avec quelques aleas normaux dans le developpement.",t:["Des reveils courts sont normaux : laissez 2 a 3 minutes avant d'intervenir, il peut se rendormir seul.","Un rituel regulier (bain, histoire, cabine-calin) ameliore significativement l'endormissement.","Limitez les ecrans dans l'heure qui precede le coucher : la lumiere bleue retarde la melatonine."]},
-watch:{s:"Le sommeil est difficile en ce moment. C'est souvent lie a une phase passagere (poussees dentaires, pic de croissance, angoisse de separation, grand changement).",t:["Tenez un petit journal de sommeil 7 a 10 jours pour reperer un schema.","Environnement : chambre a 18-19°C, obscurite complete, pas d'ecran 1h avant le dodo.","Ritualisez un coucher court mais tres previsible (3 etapes maxi, toujours dans le meme ordre).","Evitez les habitudes qui conditionnent (endormissement dans les bras systematique, biberon au lit apres 6 mois)."]},
-alert:{s:"Sur la duree, un sommeil tres fragile impacte le comportement, l'appetit et votre equilibre familial. Il est temps d'agir.",t:["Consultez le pediatre : ecarter une cause physique (reflux, apnees du sommeil, infection ORL, allergies).","Envisagez une consultation sommeil de l'enfant si c'est installe depuis plus d'un mois.","Essayez la methode de l'extinction progressive (lever le delai d'intervention) uniquement apres accord medical.","Prenez soin de vous : demandez de l'aide, relayez-vous la nuit. Un parent epuise ne peut pas apaiser."]}
+good:{s:"Le sommeil de votre enfant est solide et soutient bien sa croissance. C'est un pilier précieux.",t:["Maintenez les rituels qui fonctionnent : régularité des horaires, même le week-end.","Protegez les siestes : elles participent directement a la qualite des nuits.","Continuez a créer une ambiance apaisanté (lumiere tamisee, voix calme) au coucher."]},
+ok:{s:"Les nuits sont globalement bonnes avec quelques aleas normaux dans le développement.",t:["Des réveils courts sont normaux : laissez 2 a 3 minutes avant d'intervenir, il peut se rendormir seul.","Un rituel régulier (bain, histoire, cabine-calin) ameliore significativement l'endormissement.","Limitez les écrans dans l'heure qui precede le coucher : la lumiere bleue retarde la melatonine."]},
+watch:{s:"Le sommeil est difficile en ce moment. C'est souvent lie a une phase passagere (poussees dentaires, pic de croissance, angoisse de separation, grand changement).",t:["Tenez un petit journal de sommeil 7 a 10 jours pour repèrer un schema.","Environnement : chambre a 18-19°C, obscurite complète, pas d'écran 1h avant le dodo.","Ritualisez un coucher court mais très prévisible (3 étapes maxi, toujours dans le même ordre).","Évitez les habitudes qui conditionnent (endormissement dans les bras systematique, biberon au lit après 6 mois)."]},
+alert:{s:"Sur la duree, un sommeil très fragile impacte le comportement, l'appétit et votre équilibre familial. Il est temps d'agir.",t:["Consultez le pédiatre : ecarter une cause physique (reflux, apnees du sommeil, infection ORL, allergies).","Envisagez une consultation sommeil de l'enfant si c'est installe depuis plus d'un mois.","Essayez la methode de l'extinction progrèssive (lever le delai d'intervention) uniquement après accord medical.","Prenez soin de vous : demandez de l'aide, relayez-vous la nuit. Un parent épuisé ne peut pas apaiser."]}
 },
 food:{
-good:{s:"Votre enfant a une relation saine et curieuse avec l'alimentation. Bravo pour ce socle.",t:["Continuez a proposer une grande variete sans pression.","Mangez en famille quand c'est possible : l'exemple est le meilleur apprentissage.","Laissez-le participer (touillier, dresser, choisir entre 2 legumes) : ca renforce son autonomie."]},
-ok:{s:"L'alimentation se passe bien avec des refus ponctuels, ce qui est tout a fait courant.",t:["Regle du 'une bouchee pour gouter' plutot que 'finis ton assiette' : respecte les signaux de satiete.","Presentez un aliment refuse jusqu'a 8 a 15 fois avant de conclure : les gouts evoluent.","Evitez de remplacer un plat refuse par un autre (sinon il apprend que refuser = choisir)."]},
-watch:{s:"La neophobie alimentaire (2-6 ans) est un passage courant mais qui s'entretient si on tombe dans les pieges. Pas de panique, mais quelques ajustements vont aider.",t:["Il est preferable de ne pas forcer : la contrainte renforce le refus. La table doit rester un lieu positif.","Reintroduisez les aliments refuses sous des formes differentes (cru, cuit, rape, en soupe, en gratin).","Limitez les grignotages sucres entre les repas : l'appetit revient avec la faim.","Impliquez-le en cuisine : couper, melanger, cueillir... il mangera plus volontiers ce qu'il a prepare."]},
-alert:{s:"Les repas sont devenus un combat qui epuise toute la famille. Ce n'est pas une question de caprice : il y a une difficulte a accompagner.",t:["Consultez le pediatre pour verifier courbe de poids, fer, vitamine D et ecarter une cause medicale (reflux, allergie, trouble de l'oralite).","Un bilan avec une dieteticienne pediatrique ou une orthophoniste (oralite) peut debloquer la situation.","Dediramatisez : supprimez les menaces, recompenses et chantages alimentaires.","Retablir un cadre serein : horaires reguliers, duree du repas limitee (30 min maxi), meme table, sans ecran."]}
+good:{s:"Votre enfant a une relation saine et curieuse avec l'alimentation. Bravo pour ce socle.",t:["Continuez a proposer une grande variété sans pression.","Mangez en famille quand c'est possible : l'exemple est le meilleur apprentissage.","Laissez-le participer (touillier, dresser, choisir entre 2 legumes) : ça renforce son autonomie."]},
+ok:{s:"L'alimentation se passe bien avec des refus ponctuels, ce qui est tout a fait courant.",t:["Regle du 'une bouchee pour goûter' plutôt que 'finis ton assiette' : respecte les signaux de satiété.","Présentez un aliment refuse jusqu'a 8 a 15 fois avant de conclure : les gouts evoluent.","Évitez de remplacer un plat refuse par un autre (sinon il apprend que refuser = choisir)."]},
+watch:{s:"La néophobie alimentaire (2-6 ans) est un passage courant mais qui s'entretient si on tombe dans les pieges. Pas de panique, mais quelques ajustements vont aider.",t:["Il est préférable de ne pas forcer : la contrainte renforce le refus. La table doit rester un lieu positif.","Reintroduisez les aliments refuses sous des formes differentes (cru, cuit, rape, en soupe, en gratin).","Limitez les grignotages sucres entre les repas : l'appétit revient avec la faim.","Impliquez-le en cuisine : couper, melanger, cueillir... il mangera plus volontiers ce qu'il a prepare."]},
+alert:{s:"Les repas sont devenus un combat qui épuisé toute la famille. Ce n'est pas une question de caprice : il y a une difficulté a accompagner.",t:["Consultez le pédiatre pour vérifier courbe de poids, fer, vitamine D et ecarter une cause médicale (reflux, allergie, trouble de l'oralité).","Un bilan avec une diététicienne pédiatrique où une orthophoniste (oralité) peut debloquer la situation.","Dédramatisez : supprimez les menaces, recompenses et chantages alimentaires.","Rétablir un cadre serein : horaires réguliers, duree du repas limitee (30 min maxi), même table, sans écran."]}
 },
-emotions:{
-good:{s:"Votre enfant developpe une belle regulation emotionnelle, soutenue par votre attention et votre securite.",t:["Continuez a nommer les emotions en temps reel : 'je vois que tu es tres fache'.","Validez avant de chercher une solution : l'emotion a besoin d'etre entendue.","Modelisez : verbalisez vos propres emotions pour lui montrer que c'est sain et naturel."]},
-ok:{s:"Les emotions sont globalement bien vecues avec des orages passagers. C'est le rythme sain du developpement.",t:["Avant 3-4 ans, le cerveau est encore immature : les crises expriment une difficulte a gerer les emotions, pas un 'caprice'. C'est une etape attendue du developpement.","Technique du 'coin calme' (non punitif) : un petit espace doux avec coussins et livres pour se reguler.","Apres la tempete, reparez : un calin, quelques mots bienveillants, pas de morale."]},
-watch:{s:"Les crises intenses repetees fatiguent tout le monde. Il y a souvent un besoin non comble en dessous (sommeil, faim, sur-stimulation, changement, manque d'attention individuelle).",t:["Identifiez les declencheurs : moment de la journee, contexte, duree depuis la derniere pause calme.","Anticipez les transitions difficiles : prevenez 5 min avant ('apres le dessin, on s'habille'), utilisez un minuteur visuel.","Offrez 15 min de 'temps special' par jour (juste lui, sans ecran ni distraction) : cela reduit enormement les crises.","Lisez les livres d'emotions (la 'Couleur des emotions', les 'Monstres' de Gilles Rapaport)."]},
-alert:{s:"Des crises quotidiennes tres intenses sur plusieurs mois meritent un regard professionnel. Ce n'est pas de l'education ratee, c'est un signal.",t:["Consultez le pediatre pour orienter vers un psychologue ou un pedopsychiatre si necessaire.","Explorez : cela a-t-il commence apres un evenement (deuil, separation, demenagement, naissance) ?","Verifiez le sommeil en premier : un enfant epuise ne peut pas reguler ses emotions.","Prenez soin de vous : un parent deborde amplifie sans le vouloir les emotions de l'enfant. Le 'bain affectif' parental doit etre ressource."]}
+émotions:{
+good:{s:"Votre enfant développe une belle régulation émotionnelle, soutenue par votre attention et votre sécurité.",t:["Continuez a nommer les émotions en temps reel : 'je vois que tu es très fache'.","Validez avant de chercher une solution : l'émotion a besoin d'être entendue.","Modelisez : verbalisez vos propres émotions pour lui montrer que c'est sain et naturel."]},
+ok:{s:"Les émotions sont globalement bien vecues avec des orages passagers. C'est le rythme sain du développement.",t:["Avant 3-4 ans, le cerveau est encore immature : les crises expriment une difficulté a gerer les émotions, pas un 'caprice'. C'est une étape attendue du développement.","Technique du 'coin calme' (non punitif) : un petit espace doux avec coussins et livres pour se réguler.","Apres la tempete, reparez : un calin, quelques mots bienveillants, pas de morale."]},
+watch:{s:"Les crises intenses repetees fatiguent tout le monde. Il y a souvent un besoin non comble en dessous (sommeil, faim, sur-stimulation, changement, manque d'attention individuelle).",t:["Identifiez les declencheurs : moment de la journee, contexte, duree depuis la dernière pause calme.","Anticipez les transitions difficiles : prevenez 5 min avant ('après le dessin, on s'habille'), utilisez un minuteur visuel.","Offrez 15 min de 'temps spécial' par jour (juste lui, sans écran ni distraction) : cela reduit énormement les crises.","Lisez les livres d'émotions (la 'Couleur des émotions', les 'Monstres' de Gilles Rapaport)."]},
+alert:{s:"Des crises quotidiennes très intenses sur plusieurs mois méritent un regard professionnel. Ce n'est pas de l'éducation ratee, c'est un signal.",t:["Consultez le pédiatre pour orienter vers un psychologue où un pédopsychiatre si nécessaire.","Explorez : cela a-t-il commence après un événement (deuil, separation, déménagement, naissance) ?","Vérifiez le sommeil en premier : un enfant épuisé ne peut pas réguler ses émotions.","Prenez soin de vous : un parent débordé amplifie sans le vouloir les émotions de l'enfant. Le 'bain affectif' parental doit être ressource."]}
 },
 language:{
-good:{s:"Le langage se deploie bien, signe d'un environnement riche en interactions.",t:["Continuez a lire tous les jours, meme 10 minutes : c'est le plus puissant booster de vocabulaire.","Parlez-lui en phrases completes et variees plutot qu'en 'bebe-parlant'.","Posez des questions ouvertes : 'qu'est-ce qui se passe dans l'histoire ?' plutot que 'c'est un chat ?'."]},
-ok:{s:"Le langage suit son rythme habituel. Chaque enfant a sa propre courbe, tres variable entre 18 mois et 3 ans.",t:["Privilegiez le face-a-face et le regard pendant les echanges.","Limitez les ecrans avant 3 ans : ils freinent l'acquisition du langage (pas d'interaction reciproque).","Comptines, chansons, jeux de doigts : excellents pour les sons, le rythme et le vocabulaire."]},
-watch:{s:"Certains reperes sont un peu en retrait. La plupart du temps, ce sont de vraies variations individuelles, mais mieux vaut verifier que de laisser s'installer.",t:["Signes a surveiller : a 18 mois, moins de 10 mots ; a 24 mois, pas d'association de 2 mots ; bave beaucoup, n'imite pas.","Faites tester l'audition en ORL : une otite seromuqueuse chronique peut freiner l'acquisition sans bruit.","Bain de langage : description de ce que vous faites au quotidien ('on met la chaussure droite, puis la gauche').","Limitez strictement les ecrans et les tetines en journee (la tetine gene l'articulation)."]},
-alert:{s:"Vos observations meritent un bilan professionnel. Une prise en charge precoce transforme litteralement le pronostic.",t:["Consultez le pediatre ou le medecin scolaire pour prescription d'un bilan orthophonique (rembourse sans avance a partir de l'ordonnance).","L'orthophonie prise en charge avant 4-5 ans rattrape la plupart des retards sans sequelle.","Parallelement : bilan auditif en ORL obligatoire avant tout bilan langage.","Ne pas attendre 'qu'il se deverrouille seul' : l'attente coute davantage que l'action."]}
+good:{s:"Le langage se déploie bien, signe d'un environnement riche en interactions.",t:["Continuez a lire tous les jours, même 10 minutes : c'est le plus puissant booster de vocabulaire.","Parlez-lui en phrases complètes et variees plutôt qu'en 'bébé-parlant'.","Posez des questions ouvertes : 'qu'est-ce qui se passe dans l'histoire ?' plutôt que 'c'est un chat ?'."]},
+ok:{s:"Le langage suit son rythme habituel. Chaque enfant a sa propre courbe, très variable entre 18 mois et 3 ans.",t:["Privilégiez le face-a-face et le regard pendant les échanges.","Limitez les écrans avant 3 ans : ils freinent l'acquisition du langage (pas d'interaction reciproque).","Comptines, chansons, jeux de doigts : excellents pour les sons, le rythme et le vocabulaire."]},
+watch:{s:"Certains repères sont un peu en retrait. La plupart du temps, ce sont de vraies variations individuelles, mais mieux vaut vérifier que de laisser s'installer.",t:["Signes a surveiller : a 18 mois, moins de 10 mots ; a 24 mois, pas d'association de 2 mots ; bave beaucoup, n'imite pas.","Faites tester l'audition en ORL : une otite seromuqueuse chronique peut freiner l'acquisition sans bruit.","Bain de langage : description de ce que vous faites au quotidien ('on met la chaussure droite, puis la gauche').","Limitez strictement les écrans et les tetines en journee (la tetine gêne l'articulation)."]},
+alert:{s:"Vos observations méritent un bilan professionnel. Une prise en charge précoce transforme littéralement le pronostic.",t:["Consultez le pédiatre où le medecin scolaire pour prescription d'un bilan orthophonique (remboursé sans avance a partir de l'ordonnance).","L'orthophonie prise en charge avant 4-5 ans rattrape la plupart des retards sans séquelle.","Parallelement : bilan auditif en ORL obligatoire avant tout bilan langage.","Ne pas attendre 'qu'il se deverrouille seul' : l'attente coute davantage que l'action."]}
 },
 motor:{
-good:{s:"La motricite se developpe harmonieusement. Un corps bien explore est une base cognitive solide.",t:["Continuez a offrir des occasions de bouger librement : parcs, sols varies, escaliers accompagnes.","Limitez les transats / youpalas / chaises de maintien qui bloquent l'exploration naturelle.","Motricite fine : encouragez les pinces (petits objets, pinces a linge), decoupage, pate a modeler."]},
-ok:{s:"Les acquisitions motrices suivent leur cours naturellement.",t:["Chaque enfant a son calendrier : certains marchent a 10 mois, d'autres a 18, les deux sont normaux.","Laissez-le tomber (en securite) : chuter fait partie de l'apprentissage de l'equilibre.","Variez les environnements : herbe, sable, escalade en foret, piscine. La diversite sensorielle nourrit le cerveau."]},
-watch:{s:"Quelques reperes sont un peu decales. Souvent sans consequence, mais cela merite d'etre evalue.",t:["Verifiez que les reperes cles sont presents : tient sa tete (4 mois), tient assis (9), marche (18 mois maxi), monte les escaliers a 24-30 mois.","Mouvement asymetrique, raideur, trop mou, plagiocephalie : parlez-en au pediatre.","Reduisez le temps en transat/chaise haute : privilegiez le tapis au sol.","Un bilan de kinesitherapie pediatrique ou de psychomotricite peut etre prescrit."]},
-alert:{s:"Un retard moteur significatif justifie un bilan. L'enfant a besoin qu'on regarde ce qui se passe.",t:["Consultation pediatrique avec demande d'avis pediatrie du developpement ou neuropediatrie.","Bilan de psychomotricite et/ou kinesitherapie pediatrique : les prises en charge precoces sont tres efficaces.","Une rencontre avec la PMI (gratuite) peut orienter rapidement vers les bons professionnels.","Gardez confiance : beaucoup de retards se comblent totalement avec un accompagnement adapte."]}
+good:{s:"La motricité se développe harmonieusement. Un corps bien explore est une base cognitive solide.",t:["Continuez a offrir des occasions de bouger librement : parcs, sols varies, escaliers accompagnes.","Limitez les transats / youpalas / chaises de maintien qui bloquent l'exploration naturelle.","Motricité fine : encouragez les pinces (petits objets, pinces a linge), découpage, pate a modèler."]},
+ok:{s:"Les acquisitions motrices suivent leur cours naturellement.",t:["Chaque enfant a son calendrier : certains marchent a 10 mois, d'autrès a 18, les deux sont normaux.","Laissez-le tomber (en sécurité) : chuter fait partie de l'apprentissage de l'équilibre.","Variez les environnements : herbe, sable, escalade en forêt, piscine. La diversité sensorielle nourrit le cerveau."]},
+watch:{s:"Quelques repères sont un peu decales. Souvent sans consequence, mais cela mérite d'être evalue.",t:["Vérifiez que les repères cles sont presents : tient sa tête (4 mois), tient assis (9), marche (18 mois maxi), monte les escaliers a 24-30 mois.","Mouvement asymetrique, raideur, trop mou, plagiocephalie : parlez-en au pédiatre.","Réduisez le temps en transat/chaise haute : privilegiez le tapis au sol.","Un bilan de kinésitherapie pédiatrique où de psychomotricité peut être prescrit."]},
+alert:{s:"Un retard moteur significatif justifie un bilan. L'enfant a besoin qu'on regarde ce qui se passe.",t:["Consultation pédiatrique avec demande d'avis pédiatrie du développement où neuropédiatrie.","Bilan de psychomotricité et/ou kinésitherapie pédiatrique : les prises en charge précoces sont très efficaces.","Une rencontre avec la PMI (gratuite) peut orienter rapidement vers les bons professionnels.","Gardez confiance : beaucoup de retards se comblent totalement avec un accompagnement adapte."]}
 },
 social:{
-good:{s:"Votre enfant construit une belle confiance relationnelle. C'est un atout pour toute la vie.",t:["Continuez a multiplier les contacts varies : parc, famille elargie, amis, creche/ecole.","Laissez-le gerer les petits conflits avant d'intervenir : apprentissage essentiel.","Valorisez l'empathie : 'tu as vu, le copain pleure, que peut-on faire ?'."]},
-ok:{s:"Les relations se construisent a son rythme. La timidite passagere est tres courante.",t:["Respectez son rythme : forcer a 'faire un bisou' ne construit pas la sociabilite, ca l'inhibe.","Preparez les nouvelles situations en amont : 'demain on verra Marie, tu te souviens ?'.","Un 'doudou social' (peluche ou petit objet) aide beaucoup dans les transitions."]},
-watch:{s:"Les difficultes sociales peuvent refleter un temperament introverti (tout a fait courant) ou un besoin d'accompagnement supplementaire.",t:["Differenciez timide (observateur qui s'integre ensuite) et evitement (evite activement). Les deux ne se gerent pas pareil.","Mettez en place des temps de jeu a deux avant le groupe : un copain invite a la maison.","Livres a lire : 'Le petit chaperon rouge' et histoires de gestion de peur/rencontre.","Si l'enfant ne regarde pas dans les yeux, ne pointe pas du doigt, ne partage pas d'interet : parlez-en au pediatre."]},
-alert:{s:"Des difficultes sociales marquees et persistantes peuvent avoir des causes multiples qu'il faut eclairer.",t:["Consultation pediatrique pour bilan developpemental global.","Un bilan psychomoteur ou psychologique peut identifier troubles anxieux, TSA ou autre cause.","L'integration en creche/halte-garderie (meme 2 demi-journees) stimule le developpement social.","Evitez l'isolement social de l'enfant mais aussi de la famille : les reseaux d'entraide parents sont precieux."]}
+good:{s:"Votre enfant construit une belle confiance relationnelle. C'est un atout pour toute la vie.",t:["Continuez a multiplier les contacts varies : parc, famille élargie, amis, creche/école.","Laissez-le gerer les petits conflits avant d'intervenir : apprentissage essentiel.","Valorisez l'empathie : 'tu as vu, le copain pleure, que peut-on faire ?'."]},
+ok:{s:"Les relations se construisent a son rythme. La timidité passagere est très courante.",t:["Respectez son rythme : forcer a 'faire un bisou' ne construit pas la sociabilité, ça l'inhibe.","Préparez les nouvelles situations en amont : 'demain on verra Marie, tu te souviens ?'.","Un 'doudou social' (peluche où petit objet) aide beaucoup dans les transitions."]},
+watch:{s:"Les difficultés sociales peuvent refleter un temperament introverti (tout a fait courant) où un besoin d'accompagnement supplementaire.",t:["Differenciez timide (observateur qui s'integre ensuite) et évitement (evite activement). Les deux ne se gerent pas pareil.","Mettez en place des temps de jeu a deux avant le groupe : un copain invite a la maison.","Livres a lire : 'Le petit chaperon rouge' et histoires de gestion de peur/rencontre.","Si l'enfant ne regarde pas dans les yeux, ne pointe pas du doigt, ne partage pas d'interet : parlez-en au pédiatre."]},
+alert:{s:"Des difficultés sociales marquees et persistantes peuvent avoir des causes multiples qu'il faut éclairer.",t:["Consultation pédiatrique pour bilan développemental global.","Un bilan psychomoteur où psychologique peut identifier troubles anxieux, TSA où autre cause.","L'integration en creche/halte-garderie (même 2 demi-journees) stimule le développement social.","Évitez l'isolement social de l'enfant mais aussi de la famille : les réseaux d'entraide parents sont précieux."]}
 },
 screens:{
-good:{s:"Vous avez fait le choix essentiel : proteger le temps de cerveau disponible de votre enfant. C'est l'un des plus beaux cadeaux educatifs.",t:["Continuez ainsi : l'OMS recommande 0 ecran avant 2 ans, moins d'1h/jour entre 2 et 5 ans, contenu adapte uniquement.","Le 'jeu libre ennuye' developpe la creativite, l'imagination, l'autonomie.","Montrez l'exemple : moins vous utilisez votre telephone devant lui, plus il integre le bon modele."]},
-ok:{s:"La consommation d'ecrans est raisonnable. Quelques reflexes pour la garder sous controle.",t:["Evitez les ecrans dans l'heure qui suit le reveil et l'heure qui precede le coucher.","Priorite aux contenus regardes ensemble (co-visionnage) : transforme un temps passif en echange.","Pas d'ecran pendant les repas : moment de langage, de partage et d'attention.","Regle '3-6-9-12' de Serge Tisseron : pas de tele avant 3 ans, pas de console personnelle avant 6, pas d'Internet seul avant 9, pas de reseaux sociaux avant 12."]},
-watch:{s:"Le temps d'ecran est au-dessus des recommandations. A cet age, chaque heure d'ecran remplace une heure de developpement actif (langage, motricite, relation).",t:["Reduisez progressivement : -15 min par jour par semaine pour ne pas creer de frustration massive.","Remplacez l'ecran par des alternatives concretes : boite a jeux libres, coin lecture, sortie dehors quotidienne.","Supprimez les ecrans 'd'ambiance' (TV allumee en fond) : ils reduisent la qualite du langage parental de 30 a 40%.","Ecrans dans la chambre = a bannir, surtout tablette et telephone."]},
-alert:{s:"Une sur-exposition aux ecrans a cet age peut imiter des symptomes de troubles neuro-developpementaux. La bonne nouvelle : reduire les ecrans transforme rapidement la situation.",t:["Recommandation : sevrage complet pendant 4 a 6 semaines pour observer le vrai niveau de developpement.","Les premiers jours sont difficiles (crises, ennui) mais ca passe vite. Remplissez le vide par votre presence active.","Demandez un avis pediatrique : certaines difficultes attribuees aux ecrans peuvent aussi reveler un trouble reel a diagnostiquer.","Informez-vous : le documentaire 'Surexposition aux ecrans' ou les travaux de Michel Desmurget (Le Crer...e des ecrans) eclairent le sujet."]}
+good:{s:"Vous avez fait le choix essentiel : proteger le temps de cerveau disponible de votre enfant. C'est l'un des plus beaux cadeaux éducatifs.",t:["Continuez ainsi : l'OMS recommande 0 écran avant 2 ans, moins d'1h/jour entre 2 et 5 ans, contenu adapte uniquement.","Le 'jeu libre ennuye' développe la créativité, l'imagination, l'autonomie.","Montrez l'exemple : moins vous utilisez votre telephone devant lui, plus il integre le bon modèle."]},
+ok:{s:"La consommation d'écrans est raisonnable. Quelques reflexes pour la garder sous contrôle.",t:["Évitez les écrans dans l'heure qui suit le réveil et l'heure qui precede le coucher.","Priorite aux contenus regardes ensemble (co-visionnage) : transforme un temps passif en échange.","Pas d'écran pendant les repas : moment de langage, de partage et d'attention.","Regle '3-6-9-12' de Serge Tisseron : pas de tele avant 3 ans, pas de console personnelle avant 6, pas d'Internet seul avant 9, pas de réseaux sociaux avant 12."]},
+watch:{s:"Le temps d'écran est au-dessus des recommandations. A cet âge, chaque heure d'écran remplace une heure de développement actif (langage, motricité, relation).",t:["Réduisez progrèssivement : -15 min par jour par semaine pour ne pas créer de frustration massive.","Remplacez l'écran par des alternatives concretes : boite a jeux libres, coin lecture, sortie dehors quotidienne.","Supprimez les écrans 'd'ambiance' (TV allumee en fond) : ils reduisent la qualite du langage parental de 30 a 40%.","Écrans dans la chambre = a bannir, surtout tablette et telephone."]},
+alert:{s:"Une sur-exposition aux écrans a cet âge peut imiter des symptomes de troubles neuro-développementaux. La bonne nouvelle : réduire les écrans transforme rapidement la situation.",t:["Recommandation : sevrage complet pendant 4 a 6 semaines pour observer le vrai niveau de développement.","Les premiers jours sont difficiles (crises, ennui) mais ça passe vite. Remplissez le vide par votre présence active.","Demandez un avis pédiatrique : certaines difficultés attribuees aux écrans peuvent aussi reveler un trouble reel a diagnostiquer.","Informez-vous : le documentaire 'Surexposition aux écrans' où les travaux de Michel Desmurget (Le Crer...e des écrans) éclairent le sujet."]}
 },
 bonding:{
-good:{s:"Vous offrez a votre enfant ce qu'il y a de plus precieux : une attention individuelle et pleine. C'est la base de son securite affective.",t:["Continuez ces moments privilegies : c'est un investissement sur toute sa vie.","Variez : lecture, cuisine ensemble, balade, jeu au sol, chansons... chaque mode nourrit differemment.","Preservez ces moments des ecrans et du telephone : la qualite de presence compte plus que la duree."]},
-ok:{s:"Vous construisez un lien solide. Quelques pistes pour le nourrir encore plus.",t:["Instaurez un rituel 'temps special' : 15 min par jour uniquement avec lui, c'est lui qui choisit l'activite.","La regle d'or : pendant ce temps, telephone en mode avion et pleine presence.","Le soir, le 'bilan de la journee' (3 choses qui ont fait rire/plaisir, 1 qui a ete difficile) cree une intimite precieuse."]},
-watch:{s:"Le temps de connexion directe est un peu juste. Souvent simplement une question de rythme et d'organisation, pas de negligence.",t:["La quantite ne fait pas tout : 15 min de vraie presence valent mieux que 2h distraites.","Profitez des temps contraints (bain, repas, trajet) pour creer du lien plutot que de les subir.","Les enfants sont plus disponibles le matin et juste apres un temps de jeu libre. Saisissez ces moments.","Si vous rentrez tard : rituel du 'moment calme' en rentrant (5 min blottis) avant les taches."]},
-alert:{s:"Un temps de connexion vraiment tres faible merite attention : pour lui et pour vous. Aucune culpabilite, juste agir.",t:["Commencez par 10 min par jour, tous les jours : c'est peu en temps, enorme en signal de securite pour l'enfant.","Si possible, reamenagez : poser un plus tard, moins de taches le soir, rituel avant dodo systematique.","Parlez-en au pediatre ou en PMI : une forme d'epuisement parental peut aussi etre en cause.","Prenez soin de vous : vous ne pouvez donner que ce que vous avez. Un parent repose est un parent disponible."]}
+good:{s:"Vous offrez a votre enfant ce qu'il y a de plus précieux : une attention individuelle et pleine. C'est la base de son sécurité affective.",t:["Continuez ces moments privilegies : c'est un investissement sur toute sa vie.","Variez : lecture, cuisine ensemble, balade, jeu au sol, chansons... chaque mode nourrit differemment.","Préservez ces moments des écrans et du telephone : la qualite de présence compte plus que la duree."]},
+ok:{s:"Vous construisez un lien solide. Quelques pistes pour le nourrir encore plus.",t:["Instaurez un rituel 'temps spécial' : 15 min par jour uniquement avec lui, c'est lui qui choisit l'activité.","La regle d'or : pendant ce temps, telephone en mode avion et pleine présence.","Le soir, le 'bilan de la journee' (3 choses qui ont fait rire/plaisir, 1 qui a ete difficile) crée une intimité precieuse."]},
+watch:{s:"Le temps de connexion directe est un peu juste. Souvent simplement une question de rythme et d'organisation, pas de negligence.",t:["La quantite ne fait pas tout : 15 min de vraie présence valent mieux que 2h distraites.","Profitez des temps contraints (bain, repas, trajet) pour créer du lien plutôt que de les subir.","Les enfants sont plus disponibles le matin et juste après un temps de jeu libre. Saisissez ces moments.","Si vous rentrez tard : rituel du 'moment calme' en rentrant (5 min blottis) avant les taches."]},
+alert:{s:"Un temps de connexion vraiment très faible mérite attention : pour lui et pour vous. Aucune culpabilite, juste agir.",t:["Commencez par 10 min par jour, tous les jours : c'est peu en temps, énorme en signal de sécurité pour l'enfant.","Si possible, réaménagez : poser un plus tard, moins de taches le soir, rituel avant dodo systematique.","Parlez-en au pédiatre où en PMI : une forme d'épuisément parental peut aussi être en cause.","Prenez soin de vous : vous ne pouvez donner que ce que vous avez. Un parent repose est un parent disponible."]}
 }
 };
 
@@ -306,7 +306,7 @@ function buildBilan(responses){
 }
 
 // ============= DAILY TOOLS =============
-const TOOLS={"0-6m":[{t:"Sommeil du bebe",d:"Cycles courts et frequents",ico:"moon",bg:"var(--lv)",g:"sleep"},{t:"Allaitement & biberon",d:"Nourrir a la demande",ico:"utensils",bg:"var(--mt)",g:"food"},{t:"Pleurs et reconfort",d:"Repondre avec douceur",ico:"heart",bg:"var(--rs)",g:"behavior"},{t:"Eveil sensoriel",d:"Stimuler les 5 sens",ico:"sparkle",bg:"var(--pk)",g:"activities"}],"6-12m":[{t:"Diversification alimentaire",d:"Introduire les solides",ico:"utensils",bg:"var(--mt)",g:"food"},{t:"Quatre pattes et mobilite",d:"Encourager le mouvement",ico:"run",bg:"var(--sk)",g:"activities"},{t:"Angoisse de separation",d:"C'est une etape et c'est positif",ico:"heart",bg:"var(--rs)",g:"emotions"},{t:"Gestes et sons",d:"Premiers mots et signes",ico:"speech",bg:"var(--pk)",g:"activities"}],"12-24m":[{t:"Premiers mots",d:"L'explosion du vocabulaire",ico:"speech",bg:"var(--pk)",g:"activities"},{t:"Marche et exploration",d:"Securiser et laisser faire",ico:"run",bg:"var(--sk)",g:"activities"},{t:"Crises de colere",d:"Nommer les emotions",ico:"heart",bg:"var(--rs)",g:"emotions"},{t:"Autonomie au repas",d:"Manger seul, quel bazar !",ico:"utensils",bg:"var(--mt)",g:"food"}],"2-3a":[{t:"Apprentissage proprete",d:"A son rythme, sans pression",ico:"droplet",bg:"var(--sk)",g:"hygiene"},{t:"Socialisation",d:"Apprendre a partager",ico:"smile",bg:"var(--rs)",g:"behavior"},{t:"Gestion des emotions",d:"Le coin calme et les mots",ico:"heart",bg:"var(--pk)",g:"emotions"},{t:"Jeux creatifs",d:"Pate a modeler, dessin...",ico:"palette",bg:"var(--lv)",g:"activities"}],"3-6a":[{t:"Preparer l'ecole",d:"Confiance et autonomie",ico:"star",bg:"var(--sd)",g:"behavior"},{t:"Amities et regles",d:"Jouer, perdre, gagner",ico:"smile",bg:"var(--rs)",g:"behavior"},{t:"Confiance en soi",d:"Encourager les efforts",ico:"sparkle",bg:"var(--pk)",g:"emotions"},{t:"Alternatives ecrans",d:"Boite a ennui et jeux",ico:"palette",bg:"var(--lv)",g:"behavior"}]};
+const TOOLS={"0-6m":[{t:"Sommeil du bébé",d:"Cycles courts et fréquents",ico:"moon",bg:"var(--lv)",g:"sleep"},{t:"Allaitement & biberon",d:"Nourrir a la demande",ico:"utensils",bg:"var(--mt)",g:"food"},{t:"Pleurs et reconfort",d:"Répondre avec douceur",ico:"heart",bg:"var(--rs)",g:"behavior"},{t:"Eveil sensoriel",d:"Stimuler les 5 sens",ico:"sparkle",bg:"var(--pk)",g:"activities"}],"6-12m":[{t:"Diversification alimentaire",d:"Introduire les solides",ico:"utensils",bg:"var(--mt)",g:"food"},{t:"Quatre pattes et mobilite",d:"Encourager le mouvement",ico:"run",bg:"var(--sk)",g:"activities"},{t:"Angoisse de separation",d:"C'est une étape et c'est positif",ico:"heart",bg:"var(--rs)",g:"émotions"},{t:"Gestes et sons",d:"Premiers mots et signes",ico:"speech",bg:"var(--pk)",g:"activities"}],"12-24m":[{t:"Premiers mots",d:"L'explosion du vocabulaire",ico:"speech",bg:"var(--pk)",g:"activities"},{t:"Marche et exploration",d:"Securiser et laisser faire",ico:"run",bg:"var(--sk)",g:"activities"},{t:"Crises de colere",d:"Nommer les émotions",ico:"heart",bg:"var(--rs)",g:"émotions"},{t:"Autonomie au repas",d:"Manger seul, quel bazar !",ico:"utensils",bg:"var(--mt)",g:"food"}],"2-3a":[{t:"Apprentissage propreté",d:"A son rythme, sans pression",ico:"droplet",bg:"var(--sk)",g:"hygiene"},{t:"Socialisation",d:"Apprendre a partager",ico:"smile",bg:"var(--rs)",g:"behavior"},{t:"Gestion des émotions",d:"Le coin calme et les mots",ico:"heart",bg:"var(--pk)",g:"émotions"},{t:"Jeux creatifs",d:"Pate a modèler, dessin...",ico:"palette",bg:"var(--lv)",g:"activities"}],"3-6a":[{t:"Préparer l'école",d:"Confiance et autonomie",ico:"star",bg:"var(--sd)",g:"behavior"},{t:"Amities et regles",d:"Jouer, perdre, gagner",ico:"smile",bg:"var(--rs)",g:"behavior"},{t:"Confiance en soi",d:"Encourager les efforts",ico:"sparkle",bg:"var(--pk)",g:"émotions"},{t:"Alternatives écrans",d:"Boite a ennui et jeux",ico:"palette",bg:"var(--lv)",g:"behavior"}]};
 function toolsKey(m){if(m<6)return"0-6m";if(m<12)return"6-12m";if(m<24)return"12-24m";if(m<36)return"2-3a";return"3-6a"}
 function devAgeKey(m){if(m<6)return"0-6m";if(m<12)return"6-12m";if(m<24)return"1-2a";if(m<36)return"2-3a";return"3-6a"}
 
@@ -314,67 +314,67 @@ function devAgeKey(m){if(m<6)return"0-6m";if(m<12)return"6-12m";if(m<24)return"1
 const DAILY_TIPS={
 "0-6m":[
 {t:"Parlez-lui de tout ce que vous faites",x:"Commenter vos gestes enrichit son bain de langage : \"Maintenant on met la petite chaussette...\""},
-{t:"5 minutes de tummy time apres chaque change",x:"C'est l'exercice fondamental pour muscler le cou, le dos, et preparer la motricite."},
-{t:"Repondez aux pleurs sans tarder",x:"A cet age, on ne gate pas un bebe. Repondre = construire sa securite interieure."},
-{t:"Limitez les sollicitations en fin de journee",x:"Les bebes accumulent la fatigue. Une ambiance calme des 17h previent les pleurs du soir."}
+{t:"5 minutes de tummy time après chaque change",x:"C'est l'exercice fondamental pour muscler le cou, le dos, et préparer la motricité."},
+{t:"Répondez aux pleurs sans tarder",x:"A cet âge, on ne gate pas un bébé. Répondre = construire sa sécurité intérieure."},
+{t:"Limitez les sollicitations en fin de journee",x:"Les bébés accumulent la fatigue. Une ambiance calme des 17h previent les pleurs du soir."}
 ],
 "6-12m":[
-{t:"Proposez du doigt aujourd'hui",x:"Petits morceaux fondants (banane, avocat, courgette cuite). Il apprend a gerer les textures et la satiete."},
+{t:"Proposez du doigt aujourd'hui",x:"Petits morceaux fondants (banane, avocat, courgette cuite). Il apprend a gerer les textures et la satiété."},
 {t:"Cachez un jouet sous un tissu",x:"Jeu magique qui travaille la permanence de l'objet, base de la confiance et de la separation."},
-{t:"Lisez un livre cartonne 10 minutes",x:"Meme s'il le mange ou tourne les pages au hasard, c'est le debut de l'amour des livres."},
-{t:"Laissez-le se deplacer librement au sol",x:"Plus que le parc, le sol securise est son meilleur terrain de developpement moteur."}
+{t:"Lisez un livre cartonne 10 minutes",x:"Même s'il le mange où tourne les pages au hasard, c'est le debut de l'amour des livres."},
+{t:"Laissez-le se déplacer librement au sol",x:"Plus que le parc, le sol securise est son meilleur terrain de développement moteur."}
 ],
 "12-24m":[
-{t:"Donnez deux choix plutot qu'un ordre",x:"\"Tu veux la banane ou la pomme ?\" reduit les crises en donnant de l'autonomie."},
-{t:"Nommez l'emotion que vous voyez",x:"\"Tu es en colere parce que...\". Il apprend a mettre des mots et a se reguler."},
-{t:"Moment imitation en cuisine",x:"Un petit saladier, une cuillere en bois. Il vous copie et developpe sa motricite fine."},
+{t:"Donnez deux choix plutôt qu'un ordre",x:"\"Tu veux la banane où la pomme ?\" reduit les crises en donnant de l'autonomie."},
+{t:"Nommez l'émotion que vous voyez",x:"\"Tu es en colere parce que...\". Il apprend a mettre des mots et a se réguler."},
+{t:"Moment imitation en cuisine",x:"Un petit saladier, une cuillere en bois. Il vous copie et développe sa motricité fine."},
 {t:"Lecture interactive : montrez et questionnez",x:"\"Ou est le chien ?\" Le pointage declenche les premiers mots."}
 ],
 "2-3a":[
-{t:"Instaurez une routine du soir visuelle",x:"Une suite fixe d'etapes (bain, pyjama, livre, calin) secretse. Les routines calment."},
-{t:"Proposez un coin calme",x:"Coussins, doudou, livres. Un refuge, pas une punition, pour quand ca deborde."},
+{t:"Instaurez une routine du soir visuelle",x:"Une suite fixe d'étapes (bain, pyjama, livre, calin) secretse. Les routines calment."},
+{t:"Proposez un coin calme",x:"Coussins, doudou, livres. Un refuge, pas une punition, pour quand ça débordé."},
 {t:"Dessin libre aujourd'hui",x:"Grandes feuilles, crayons gras. Laissez-le faire, ne corrigez pas. C'est sa pensee qui se pose."},
-{t:"Un livre sur les emotions ce soir",x:"\"La couleur des emotions\" ou \"Quand je suis...\". Aide a mettre des mots sur ce qu'il vit."}
+{t:"Un livre sur les émotions ce soir",x:"\"La couleur des émotions\" où \"Quand je suis...\". Aide a mettre des mots sur ce qu'il vit."}
 ],
 "3-6a":[
-{t:"Donnez-lui une vraie responsabilite",x:"Mettre la table, nourrir le chat, arroser la plante. La fierte d'etre utile = confiance en soi."},
+{t:"Donnez-lui une vraie responsabilite",x:"Mettre la table, nourrir le chat, arroser la plante. La fierte d'être utile = confiance en soi."},
 {t:"Inventez une histoire ensemble",x:"Vous commencez, il continue. Stimule imagination, vocabulaire, narration."},
-{t:"Limitez les ecrans a 30 min maxi",x:"Preferez la nature, les jeux de societe, la cuisine. Les ecrans avant 3 ans : eviter."},
-{t:"Acceptez la lenteur ce matin",x:"Laissez-le mettre ses chaussures seul, meme si c'est long. L'autonomie se construit la."}
+{t:"Limitez les écrans a 30 min maxi",x:"Préférez la nature, les jeux de société, la cuisine. Les écrans avant 3 ans : eviter."},
+{t:"Acceptez la lenteur ce matin",x:"Laissez-le mettre ses chaussures seul, même si c'est long. L'autonomie se construit la."}
 ]
 };
 
 // ============= CITATIONS INSPIRANTES POUR PARENTS =============
 const PARENT_QUOTES=[
-{q:"Vous n'avez pas besoin d'etre parfait. Vous avez juste besoin d'etre present.",a:""},
-{q:"Chaque jour ou vous vous levez pour votre enfant, vous etes deja un parent formidable.",a:""},
+{q:"Vous n'avez pas besoin d'être parfait. Vous avez juste besoin d'être present.",a:""},
+{q:"Chaque jour où vous vous levez pour votre enfant, vous etes déjà un parent formidable.",a:""},
 {q:"Un enfant n'a pas besoin d'un parent parfait. Il a besoin d'un parent heureux.",a:""},
-{q:"Ce que vous faites ne suffit peut-etre pas toujours, mais ce que vous etes suffit toujours.",a:""},
-{q:"Douter de soi-meme, c'est la preuve qu'on prend la parentalite au serieux.",a:""},
+{q:"Ce que vous faites ne suffit peut-être pas toujours, mais ce que vous etes suffit toujours.",a:""},
+{q:"Douter de soi-meme, c'est la preuve qu'on prend la parentalité au serieux.",a:""},
 {q:"Votre enfant ne se souviendra pas de la maison parfaite. Il se souviendra des fous rires.",a:""},
 {q:"Un calin n'a jamais gate un enfant. Il l'a seulement rassure.",a:""},
-{q:"Vous etes le premier modele de votre enfant. Soyez doux avec vous-meme.",a:""},
+{q:"Vous etes le premier modèle de votre enfant. Soyez doux avec vous-même.",a:""},
 {q:"Chaque erreur est une occasion d'apprendre. Vous grandissez avec votre enfant.",a:""},
-{q:"Etre parent, c'est aussi apprendre a se pardonner chaque soir.",a:""},
+{q:"Être parent, c'est aussi apprendre a se pardonner chaque soir.",a:""},
 {q:"Votre enfant ne voit pas vos imperfections. Il voit son monde entier.",a:""},
-{q:"Le plus beau cadeau que vous pouvez offrir a votre enfant, c'est votre presence attentive.",a:""},
+{q:"Le plus beau cadeau que vous pouvez offrir a votre enfant, c'est votre présence attentive.",a:""},
 {q:"Personne ne connait votre enfant mieux que vous. Faites-vous confiance.",a:""},
 {q:"Les petits moments du quotidien sont les grands souvenirs de demain.",a:""},
-{q:"Prendre soin de soi n'est pas de l'egoisme. C'est s'assurer d'avoir de l'amour a donner.",a:""},
-{q:"Un parent fatigue reste un bon parent. Le simple fait d'etre la compte enormement.",a:""},
+{q:"Prendre soin de soi n'est pas de l'égoïsme. C'est s'assurer d'avoir de l'amour a donner.",a:""},
+{q:"Un parent fatigue reste un bon parent. Le simple fait d'être la compte énormement.",a:""},
 {q:"Les enfants ne demandent pas la perfection. Ils demandent la connexion.",a:""},
 {q:"Votre patience d'aujourd'hui construit la confiance de votre enfant pour la vie.",a:""},
 {q:"Il n'y a pas de mode d'emploi. Et c'est normal : chaque famille ecrit sa propre histoire.",a:""},
-{q:"Meme les jours difficiles, vous etes en train de construire quelque chose de beau.",a:""},
-{q:"L'amour que vous donnez ne se perd jamais. Il devient la force interieure de votre enfant.",a:""},
+{q:"Même les jours difficiles, vous etes en train de construire quelque chose de beau.",a:""},
+{q:"L'amour que vous donnez ne se perd jamais. Il devient la force intérieure de votre enfant.",a:""},
 {q:"Vous n'etes pas seul. Tous les parents doutent. Les meilleurs osent en parler.",a:""},
-{q:"Chaque bataille de pyjama, chaque crise au supermarche : ca passera. Et vous en rirez.",a:""},
+{q:"Chaque bataille de pyjama, chaque crise au supermarche : ça passera. Et vous en rirez.",a:""},
 {q:"Votre enfant n'a pas besoin que vous fassiez tout. Il a besoin que vous soyez la.",a:""},
-{q:"Le fait que vous cherchiez a mieux faire prouve deja que vous faites bien.",a:""},
+{q:"Le fait que vous cherchiez a mieux faire prouve déjà que vous faites bien.",a:""},
 {q:"Lacher prise sur le menage pour jouer 10 minutes : c'est la bonne priorite.",a:""},
 {q:"Un parent qui demande de l'aide n'est pas faible. Il est courageux.",a:""},
-{q:"Votre voix est la premiere musique de votre enfant. Parlez-lui, chantez-lui, meme faux.",a:""},
-{q:"Aujourd'hui, autorisez-vous a faire 'juste assez'. C'est deja beaucoup.",a:""},
+{q:"Votre voix est la première musique de votre enfant. Parlez-lui, chantez-lui, même faux.",a:""},
+{q:"Aujourd'hui, autorisez-vous a faire 'juste assez'. C'est déjà beaucoup.",a:""},
 {q:"L'enfance passe vite. Mais chaque moment d'attention laisse une empreinte pour la vie.",a:""}
 ];
 
@@ -387,26 +387,26 @@ document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>go(b.
 function go(p){document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.nb').forEach(n=>n.classList.toggle('on',n.dataset.p===p));const nav=document.getElementById('navbar'),fab=document.getElementById('fab');document.body.classList.toggle('auth-mode',p==='auth');nav.style.display=['auth','guide-detail','child-detail','quiz','quizres','suggestions'].includes(p)?'none':'flex';fab.style.display=p==='agenda'?'flex':'none';if(p==='home')loadHome();if(p==='agenda')loadAgenda();if(p==='milestones')loadMs();if(p==='growth')loadGr();if(p==='guide')loadGuide();if(p==='profile')loadProf();if(p==='suggestions')loadMySuggestions();if(!['auth','guide-detail','child-detail','quiz','quizres'].includes(p)){try{localStorage.setItem('pg_lastpage',p)}catch(e){}}window.scrollTo(0,0)}
 
 // ============= UTILS =============
-function calcAge(bd){const b=new Date(bd),n=new Date();let m=(n.getFullYear()-b.getFullYear())*12+n.getMonth()-b.getMonth();if(n.getDate()<b.getDate())m--;if(m<1)return'Nouveau-ne';if(m<12)return m+' mois';const y=Math.floor(m/12),r=m%12;return r>0?y+' an'+(y>1?'s':'')+' et '+r+' mois':y+' an'+(y>1?'s':'')}
+function calcAge(bd){const b=new Date(bd),n=new Date();let m=(n.getFullYear()-b.getFullYear())*12+n.getMonth()-b.getMonth();if(n.getDate()<b.getDate())m--;if(m<1)return'Nouveau-né';if(m<12)return m+' mois';const y=Math.floor(m/12),r=m%12;return r>0?y+' an'+(y>1?'s':'')+' et '+r+' mois':y+' an'+(y>1?'s':'')}
 function ageM(bd){const b=new Date(bd),n=new Date();return(n.getFullYear()-b.getFullYear())*12+n.getMonth()-b.getMonth()}
 function fmt(d){if(!d)return'';return new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'})}
 function fmtShort(d){if(!d)return'';return new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'short'})}
 function daysUntil(d){if(!d)return null;const t=new Date();t.setHours(0,0,0,0);const td=new Date(d);td.setHours(0,0,0,0);return Math.round((td-t)/86400000)}
 function relDate(d){const n=daysUntil(d);if(n===null)return'';if(n===0)return"Aujourd'hui";if(n===1)return'Demain';if(n===-1)return'Hier';if(n>0&&n<7)return'Dans '+n+' jours';if(n<0&&n>-7)return'Il y a '+(-n)+' jours';return fmtShort(d)}
 const DAYS=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-const MONTHS=['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'];
-const MONTHS_SHORT=['janv.','fevr.','mars','avr.','mai','juin','juil.','aout','sept.','oct.','nov.','dec.'];
+const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const MONTHS_SHORT=['janv.','févr.','mars','avr.','mai','juin','juil.','aout','sept.','oct.','nov.','déc.'];
 const QC={great:'var(--mt3)',good:'var(--sk3)',fair:'var(--pk3)',poor:'var(--rs3)'};
 const MI={motor:'run',language:'speech',social:'smile',cognitive:'brain',autonomy:'star',other:'pin'};
 const MB={motor:'var(--sk)',language:'var(--pk)',social:'var(--rs)',cognitive:'var(--mt)',autonomy:'var(--lv)',other:'var(--sd)'};
-const ML={motor:'Motricite',language:'Langage',social:'Social',cognitive:'Cognitif',autonomy:'Autonomie',other:'Autre'};
-const CAT={appointment:{l:'RDV',i:'clock',c:'var(--sk3)',bg:'var(--sk)'},vaccine:{l:'Vaccin',i:'syringe',c:'var(--rs3)',bg:'var(--rs)'},medication:{l:'Medicament',i:'droplet',c:'var(--rs3)',bg:'var(--rs)'},illness:{l:'Maladie',i:'heart',c:'var(--rs3)',bg:'var(--rs)'},activity:{l:'Activite',i:'palette',c:'var(--mt3)',bg:'var(--mt)'},school:{l:'Scolaire',i:'note',c:'var(--sk3)',bg:'var(--sk)'},sleep:{l:'Sommeil',i:'moon',c:'var(--lv3)',bg:'var(--lv)'},meal:{l:'Repas',i:'utensils',c:'var(--mt3)',bg:'var(--mt)'},note:{l:'Note',i:'note',c:'var(--lv3)',bg:'var(--lv)'},milestone:{l:'Etape',i:'star',c:'var(--pk3)',bg:'var(--pk)'},other:{l:'Autre',i:'pin',c:'var(--sd3)',bg:'var(--sd)'}};
-const TITLE_SUG={appointment:['RDV pediatre','RDV dentiste','RDV ORL','RDV ophtalmo','RDV orthophoniste','RDV kine','RDV osteopathe','Visite medicale','Bilan de sante','Echographie','Analyse de sang'],vaccine:['DTP (Diphterie-Tetanos-Polio)','Coqueluche','ROR (Rougeole-Oreillons-Rubeole)','Meningocoque B','Meningocoque C','Pneumocoque','Hepatite B','Haemophilus influenzae B','HPV (Papillomavirus)','Grippe saisonniere','Rotavirus','Varicelle'],medication:['Doliprane','Paracetamol','Ibuprofene','Antibiotique','Vitamine D','Sirop pour la toux','Serum physiologique','Probiotiques'],illness:['Rhume','Gastro-enterite','Fievre','Otite','Angine','Bronchiolite','Varicelle','Conjonctivite','Roseole','Coup de soleil','Allergie'],activity:['Parc','Piscine','Anniversaire','Sortie famille','Cinema','Bibliotheque','Musee','Pique-nique','Zoo','Plage','Ferme pedagogique','Atelier creatif'],school:['Rentree','Vacances','Reunion parents-prof','Sortie scolaire','Photo de classe','Carnaval','Kermesse','Spectacle','Remise bulletins','Portes ouvertes'],sleep:['Nuit complete','Reveil nocturne','Sieste','Cauchemar','Terreur nocturne','Couchage difficile','Changement de rythme'],meal:['Nouvel aliment','DME','Petit-dejeuner','Dejeuner','Gouter','Diner','Refus alimentaire','Biberon','Allaitement','Diversification'],note:['Souvenir','Premiere fois','Progres','Moment special','Citation amusante','Anecdote'],milestone:['Premiere dent','Premiers pas','Premiers mots','Proprete (jour)','Proprete (nuit)','Rentree ecole','Perte premiere dent','Premiere nuit complete','Premier sourire','Se tient assis','Marche a quatre pattes'],other:['Rappel','Administratif','Achat','Inscription','Reunion ecole']};
-const ACCOMP_SUG=['Maman','Papa','Parent 1','Parent 2','Nounou','Grand-mere','Grand-pere','Tata','Tonton','Assistante maternelle','Creche'];
+const ML={motor:'Motricité',language:'Langage',social:'Social',cognitive:'Cognitif',autonomy:'Autonomie',other:'Autre'};
+const CAT={appointment:{l:'RDV',i:'clock',c:'var(--sk3)',bg:'var(--sk)'},vaccine:{l:'Vaccin',i:'syringe',c:'var(--rs3)',bg:'var(--rs)'},medication:{l:'Médicament',i:'droplet',c:'var(--rs3)',bg:'var(--rs)'},illness:{l:'Maladie',i:'heart',c:'var(--rs3)',bg:'var(--rs)'},activity:{l:'Activité',i:'palette',c:'var(--mt3)',bg:'var(--mt)'},school:{l:'Scolaire',i:'note',c:'var(--sk3)',bg:'var(--sk)'},sleep:{l:'Sommeil',i:'moon',c:'var(--lv3)',bg:'var(--lv)'},meal:{l:'Repas',i:'utensils',c:'var(--mt3)',bg:'var(--mt)'},note:{l:'Note',i:'note',c:'var(--lv3)',bg:'var(--lv)'},milestone:{l:'Étape',i:'star',c:'var(--pk3)',bg:'var(--pk)'},other:{l:'Autre',i:'pin',c:'var(--sd3)',bg:'var(--sd)'}};
+const TITLE_SUG={appointment:['RDV pédiatre','RDV dentiste','RDV ORL','RDV ophtalmo','RDV orthophoniste','RDV kiné','RDV ostéopathe','Visite médicale','Bilan de santé','Échographie','Analyse de sang'],vaccine:['DTP (Diphtérie-Tétanos-Polio)','Coqueluche','ROR (Rougeole-Oreillons-Rubéole)','Méningocoque B','Méningocoque C','Pneumocoque','Hépatite B','Haemophilus influenzae B','HPV (Papillomavirus)','Grippe saisonnière','Rotavirus','Varicelle'],medication:['Doliprane','Paracétamol','Ibuprofène','Antibiotique','Vitamine D','Sirop pour la toux','Serum physiologique','Probiotiques'],illness:['Rhume','Gastro-entérite','Fièvre','Otite','Angine','Bronchiolite','Varicelle','Conjonctivite','Roséole','Coup de soleil','Allergie'],activity:['Parc','Piscine','Anniversaire','Sortie famille','Cinéma','Bibliothèque','Musée','Pique-nique','Zoo','Plage','Ferme pédagogique','Atelier creatif'],school:['Rentrée','Vacances','Réunion parents-prof','Sortie scolaire','Photo de classe','Carnaval','Kermesse','Spectacle','Remise bulletins','Portes ouvertes'],sleep:['Nuit complète','Réveil nocturne','Sieste','Cauchemar','Terreur nocturne','Couchage difficile','Changement de rythme'],meal:['Nouvel aliment','DME','Petit-déjeuner','Déjeuner','Goûter','Dîner','Refus alimentaire','Biberon','Allaitement','Diversification'],note:['Souvenir','Première fois','Progrès','Moment spécial','Citation amusanté','Anecdote'],milestone:['Première dent','Premiers pas','Premiers mots','Propreté (jour)','Propreté (nuit)','Rentrée école','Perte première dent','Première nuit complète','Premier sourire','Se tient assis','Marche a quatre pattes'],other:['Rappel','Administratif','Achat','Inscription','Réunion école']};
+const ACCOMP_SUG=['Maman','Papa','Parent 1','Parent 2','Nounou','Grand-mère','Grand-père','Tata','Tonton','Assistante maternelle','Creche'];
 const REM_OPTS=[['','Aucun'],['15','15 minutes avant'],['60','1 heure avant'],['180','3 heures avant'],['1440','La veille'],['2880','2 jours avant'],['10080','1 semaine avant']];
 const REC_OPTS=[['','Aucune'],['weekly','Toutes les semaines'],['biweekly','Toutes les 2 semaines'],['monthly','Tous les mois'],['yearly','Tous les ans']];
-const MOOD_OPTS=[['','Non renseignee'],['radieux','Rayonnant'],['content','Content'],['neutre','Neutre'],['grognon','Grognon'],['triste','Triste'],['fatigue','Fatigue']];
-const PH_MAP={appointment:'Ex: RDV pediatre',vaccine:'Ex: ROR',medication:'Ex: Doliprane',illness:'Ex: Rhume',activity:'Ex: Parc',school:'Ex: Rentree',sleep:'Ex: Nuit agitee',meal:'Ex: Avocat',note:'Ex: Souvenir',milestone:'Ex: Premiers pas',other:'Ex: Rappel'};
+const MOOD_OPTS=[['','Non renseignée'],['radieux','Rayonnant'],['content','Content'],['neutre','Neutre'],['grognon','Grognon'],['triste','Triste'],['fatigue','Fatigué']];
+const PH_MAP={appointment:'Ex: RDV pédiatre',vaccine:'Ex: ROR',medication:'Ex: Doliprane',illness:'Ex: Rhume',activity:'Ex: Parc',school:'Ex: Rentrée',sleep:'Ex: Nuit agitée',meal:'Ex: Avocat',note:'Ex: Souvenir',milestone:'Ex: Premiers pas',other:'Ex: Rappel'};
 
 function childSel(cid,ch,cb){const c=document.getElementById(cid);if(!ch.length){c.innerHTML='';return}if(!S.sel||!ch.find(x=>x.id===S.sel))S.sel=ch[0].id;c.innerHTML='<div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:6px">'+ch.map(x=>'<button onclick="selCh(\''+cid+"','"+x.id+'\')" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;border:1.5px solid '+(S.sel===x.id?'var(--pk3)':'var(--bd)')+';background:'+(S.sel===x.id?'var(--pk)':'#fff')+';font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap"><span style="width:24px;height:24px;display:inline-flex">'+avSvg(x.photoUrl||'lion')+'</span>'+x.firstName+'</button>').join('')+'</div>';cb(S.sel)}
 window.selCh=function(cid,id){S.sel=id;if(cid.includes('ms'))loadMs();if(cid.includes('gr'))loadGr();if(cid.includes('ag'))loadAgenda()}
@@ -472,15 +472,15 @@ async function loadHome(){
 
   // Insight
   let ins='';
-  if(am<3)ins="Votre bebe decouvre le monde par le toucher et le regard. Le peau-a-peau et votre voix sont ses meilleurs stimulants.";
+  if(am<3)ins="Votre bébé découvre le monde par le toucher et le regard. Le peau-a-peau et votre voix sont ses meilleurs stimulants.";
   else if(am<6)ins="Les mains deviennent de vrais outils d'exploration. Proposez des hochets de textures variees.";
-  else if(am<9)ins="La mobilite explose ! Le quatre pattes approche. Securisez votre interieur et laissez explorer.";
+  else if(am<9)ins="La mobilite explose ! Le quatre pattes approche. Securisez votre intérieur et laissez explorer.";
   else if(am<12)ins="Les premiers mots arrivent. Nommez tout ce que vous faites ensemble, c'est le carburant du langage.";
   else if(am<18)ins="L'explosion du vocabulaire et de la marche. Jeux d'empilement et transvasement ideaux.";
   else if(am<24)ins="Le 'non' et l'affirmation de soi. Proposez des choix pour canaliser le besoin d'autonomie.";
-  else if(am<36)ins="Le jeu symbolique se developpe. Poupees, dinettes, deguisements stimulent l'imagination.";
-  else ins="L'age des 'pourquoi'. Repondez avec simplicite et encouragez la curiosite naturelle.";
-  document.getElementById('hi').innerHTML='<div class="ins"><div class="il">'+ico('lightbulb',14)+' Eclairage personnalise</div><div class="it">Ce qui se passe a '+am+' mois</div><div class="ix">'+ins+'</div></div>';
+  else if(am<36)ins="Le jeu symbolique se développe. Poupees, dinettes, déguisements stimulent l'imagination.";
+  else ins="L'age des 'pourquoi'. Répondez avec simplicite et encouragez la curiosité naturelle.";
+  document.getElementById('hi').innerHTML='<div class="ins"><div class="il">'+ico('lightbulb',14)+' Éclairage personnalisé</div><div class="it">Ce qui se passe a '+am+' mois</div><div class="ix">'+ins+'</div></div>';
 
   document.getElementById('st').innerHTML=ico('sparkle',16)+' Outils du quotidien';
   const tk=toolsKey(am),tools=TOOLS[tk]||TOOLS["0-6m"];
@@ -506,15 +506,15 @@ function expandRec(list){
   list.forEach(e=>{
     out.push(e);
     const ex=exParse(e);
-    if(!ex.recurrence)return;
+    if(!ex.récurrence)return;
     let d=new Date(e.date+'T00:00:00');
     let count=0;
-    const max=ex.recurrence==='weekly'?26:(ex.recurrence==='biweekly'?13:(ex.recurrence==='monthly'?6:3));
+    const max=ex.récurrence==='weekly'?26:(ex.récurrence==='biweekly'?13:(ex.récurrence==='monthly'?6:3));
     while(count<max){
-      if(ex.recurrence==='weekly')d.setDate(d.getDate()+7);
-      else if(ex.recurrence==='biweekly')d.setDate(d.getDate()+14);
-      else if(ex.recurrence==='monthly')d.setMonth(d.getMonth()+1);
-      else if(ex.recurrence==='yearly')d.setFullYear(d.getFullYear()+1);
+      if(ex.récurrence==='weekly')d.setDate(d.getDate()+7);
+      else if(ex.récurrence==='biweekly')d.setDate(d.getDate()+14);
+      else if(ex.récurrence==='monthly')d.setMonth(d.getMonth()+1);
+      else if(ex.récurrence==='yearly')d.setFullYear(d.getFullYear()+1);
       else break;
       if(d>horizon)break;
       out.push(Object.assign({},e,{date:d.toISOString().slice(0,10),_virt:true,_parentId:e.id,id:e.id+'__r'+count,_ex:ex}));
@@ -546,13 +546,13 @@ function renderAgContent(){
   if(S.agTab==='upcoming'){
     const today=new Date().toISOString().slice(0,10);
     const exp=expandRec(S.ag);
-    const upc=exp.filter(e=>e.date>=today&&!e.completed).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
+    const upc=exp.filter(e=>e.date>=today&&!e.complèted).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
     const vacUp=S.vc.filter(v=>v.status!=='done').slice(0,5);
     let h='';
-    if(!upc.length&&!vacUp.length){h='<div style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Rien de prevu</p><button class="btn bp mt" onclick="openAddAg()">+ Nouvel evenement</button></div>';}
+    if(!upc.length&&!vacUp.length){h='<div style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Rien de prevu</p><button class="btn bp mt" onclick="openAddAg()">+ Nouvel événement</button></div>';}
     else{
       if(vacUp.length){h+='<div class="stl">'+ico('syringe',16)+' Prochains vaccins</div>';h+=vacUp.slice(0,3).map(v=>vcCard(v)).join('')}
-      if(upc.length){h+='<div class="stl">'+ico('cal',16)+' Prochains evenements</div>';h+=upc.map(e=>evCard(e)).join('')}
+      if(upc.length){h+='<div class="stl">'+ico('cal',16)+' Prochains événements</div>';h+=upc.map(e=>evCard(e)).join('')}
     }
     c.innerHTML=h;
   }else if(S.agTab==='calendar'){
@@ -563,13 +563,13 @@ function renderAgContent(){
     const tot=S.vc.length,pct=tot?Math.round(done.length/tot*100):0;
     let h='<div class="pillstats"><div class="pillstat"><div class="psi" style="background:var(--mt);color:var(--mt3)">'+ico('check',18)+'</div><div><div class="psn">'+done.length+'/'+tot+'</div><div class="psl">Vaccins faits</div></div></div><div class="pillstat"><div class="psi" style="background:var(--pk);color:var(--pk3)">'+ico('bell',18)+'</div><div><div class="psn">'+upc.length+'</div><div class="psl">A venir</div></div></div></div>';
     if(upc.length){h+='<div class="stl">A venir</div>';h+=upc.map(v=>vcCard(v)).join('')}
-    if(done.length){h+='<div class="stl">Deja faits</div>';h+=done.map(v=>vcCard(v)).join('')}
+    if(done.length){h+='<div class="stl">Déjà faits</div>';h+=done.map(v=>vcCard(v)).join('')}
     h+='<div class="px mt"><button class="btn bs bw bsm" onclick="openAddVc()">+ Ajouter un vaccin</button></div>';
     c.innerHTML=h;
   }else if(S.agTab==='notes'){
     const notes=S.ag.filter(e=>e.category==='note').sort((a,b)=>b.date.localeCompare(a.date));
     let h='';
-    if(!notes.length)h='<div style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Aucune note pour le moment</p><button class="btn bp mt" onclick="openAddAg(\'note\')">+ Premiere note</button></div>';
+    if(!notes.length)h='<div style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Aucune note pour le moment</p><button class="btn bp mt" onclick="openAddAg(\'note\')">+ Première note</button></div>';
     else h=notes.map(e=>evCard(e)).join('')+'<div class="px mt"><button class="btn bs bw bsm" onclick="openAddAg(\'note\')">+ Nouvelle note</button></div>';
     c.innerHTML=h;
   }
@@ -583,7 +583,7 @@ function evExtrasHtml(e,full){
   if(ex.practitioner)chips.push('<span>'+ico('user',10)+ex.practitioner+'</span>');
   if(ex.phone)chips.push('<span>'+ico('bell',10)+ex.phone+'</span>');
   if(ex.accompaniedBy)chips.push('<span>'+ico('user',10)+'Avec: '+ex.accompaniedBy+'</span>');
-  if(ex.recurrence){const rl={weekly:'Hebdo',biweekly:'Bi-hebdo',monthly:'Mensuel',yearly:'Annuel'};chips.push('<span style="background:var(--lv);color:var(--lv3)">'+ico('clock',10)+(rl[ex.recurrence]||ex.recurrence)+'</span>')}
+  if(ex.récurrence){const rl={weekly:'Hebdo',biweekly:'Bi-hebdo',monthly:'Mensuel',yearly:'Annuel'};chips.push('<span style="background:var(--lv);color:var(--lv3)">'+ico('clock',10)+(rl[ex.récurrence]||ex.récurrence)+'</span>')}
   if(ex.reminderMinutes){const rml={15:'15 min',60:'1h',180:'3h',1440:'Veille',2880:'2 jours',10080:'1 semaine'};chips.push('<span>'+ico('bell',10)+'Rappel: '+(rml[ex.reminderMinutes]||(ex.reminderMinutes+' min'))+'</span>')}
   if(ex.dose)chips.push('<span>'+ico('droplet',10)+'Dose: '+ex.dose+'</span>');
   if(ex.frequency)chips.push('<span>'+ico('clock',10)+ex.frequency+'</span>');
@@ -591,9 +591,9 @@ function evExtrasHtml(e,full){
   if(ex.temperature)chips.push('<span>'+ico('heart',10)+ex.temperature+'&deg;C</span>');
   if(ex.symptoms)chips.push('<span>'+ex.symptoms+'</span>');
   if(ex.bedtime||ex.wakeup){const q={great:'Excellente',good:'Bonne',ok:'Correcte',bad:'Difficile',very_bad:'Tres difficile'};chips.push('<span>'+ico('moon',10)+(ex.bedtime||'?')+' - '+(ex.wakeup||'?')+(ex.quality?' ('+(q[ex.quality]||ex.quality)+')':'')+'</span>')}
-  if(ex.mealType){const mt={breakfast:'Petit-dej',lunch:'Dejeuner',snack:'Gouter',dinner:'Diner'};chips.push('<span>'+ico('utensils',10)+(mt[ex.mealType]||ex.mealType)+'</span>')}
+  if(ex.mealType){const mt={breakfast:'Petit-dej',lunch:'Déjeuner',snack:'Goûter',dinner:'Dîner'};chips.push('<span>'+ico('utensils',10)+(mt[ex.mealType]||ex.mealType)+'</span>')}
   if(ex.newFood)chips.push('<span>'+ico('sparkle',10)+'Nouveau: '+ex.newFood+'</span>');
-  if(ex.mood){const ml={radieux:'Rayonnant',content:'Content',neutre:'Neutre',grognon:'Grognon',triste:'Triste',fatigue:'Fatigue'};chips.push('<span>'+ico('smile',10)+(ml[ex.mood]||ex.mood)+'</span>')}
+  if(ex.mood){const ml={radieux:'Rayonnant',content:'Content',neutre:'Neutre',grognon:'Grognon',triste:'Triste',fatigue:'Fatigué'};chips.push('<span>'+ico('smile',10)+(ml[ex.mood]||ex.mood)+'</span>')}
   if(ex.schoolInfo)chips.push('<span>'+ex.schoolInfo+'</span>');
   if(ex.boosterDate)chips.push('<span>'+ico('syringe',10)+'Rappel le '+fmt(ex.boosterDate)+'</span>');
   let h=chips.length?'<div class="ev-extra">'+chips.join('')+'</div>':'';
@@ -603,12 +603,12 @@ function evExtrasHtml(e,full){
 }
 function evCard(e){
   const d=new Date(e.date+'T00:00:00'),cat=CAT[e.category]||CAT.note;
-  const done=e.completed?' done':'';
+  const done=e.complèted?' done':'';
   const ex=exParse(e);
-  const recBadge=ex.recurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
+  const recBadge=ex.récurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
   const chkDisabled=e._virt?'':'';
-  const chkClick=e._virt?'':'onclick="event.stopPropagation();toggleAg(\''+e.id+'\','+(!e.completed)+')"';
-  return '<div class="ev'+done+'"><div class="evd"><div class="evday">'+d.getDate()+'</div><div class="evmo">'+MONTHS_SHORT[d.getMonth()]+'</div></div><div class="evb"><div class="evt">'+e.title+recBadge+'</div>'+(e.content?'<div class="evx">'+e.content+'</div>':'')+'<div class="evmeta"><span class="catp cat-'+e.category+'">'+ico(cat.i,10)+' '+cat.l+'</span>'+(e.time?'<span style="font-size:10px;color:var(--tx3);font-weight:600">'+e.time+'</span>':'')+'</div>'+evExtrasHtml(e,true)+'</div><div class="ev-chk'+(e.completed?' done':'')+'" '+chkClick+'>'+(e.completed?ico('check',12):'')+'</div></div>';
+  const chkClick=e._virt?'':'onclick="event.stopPropagation();toggleAg(\''+e.id+'\','+(!e.complèted)+')"';
+  return '<div class="ev'+done+'"><div class="evd"><div class="evday">'+d.getDate()+'</div><div class="evmo">'+MONTHS_SHORT[d.getMonth()]+'</div></div><div class="evb"><div class="evt">'+e.title+recBadge+'</div>'+(e.content?'<div class="evx">'+e.content+'</div>':'')+'<div class="evmeta"><span class="catp cat-'+e.category+'">'+ico(cat.i,10)+' '+cat.l+'</span>'+(e.time?'<span style="font-size:10px;color:var(--tx3);font-weight:600">'+e.time+'</span>':'')+'</div>'+evExtrasHtml(e,true)+'</div><div class="ev-chk'+(e.complèted?' done':'')+'" '+chkClick+'>'+(e.complèted?ico('check',12):'')+'</div></div>';
 }
 function vcCard(v){
   const cls=v.status==='done'?'done':(daysUntil(v.recommendedDate)<0?'overdue':'upcoming');
@@ -646,7 +646,7 @@ function renderCalendar(){
   const monthVac=S.vc.filter(v=>v.status!=='done'&&v.recommendedDate&&v.recommendedDate.startsWith(monthKey));
   if(monthVac.length){h+='<div class="stl">'+ico('syringe',14)+' Vaccins ce mois-ci</div>';h+=monthVac.map(vcCard).join('')}
   if(monthEvents.length){h+='<div class="stl">Evenements ce mois-ci</div>';h+=monthEvents.map(evCard).join('')}
-  if(!monthVac.length&&!monthEvents.length)h+='<div style="text-align:center;padding:30px;color:var(--tx3);font-size:12px">Aucun evenement ce mois-ci</div>';
+  if(!monthVac.length&&!monthEvents.length)h+='<div style="text-align:center;padding:30px;color:var(--tx3);font-size:12px">Aucun événement ce mois-ci</div>';
   return h;
 }
 window.navCal=function(k){S.calMonth=k;renderAgContent()}
@@ -670,25 +670,25 @@ window.selDay=function(d){
       h+=dayEvs.map(e=>{
         const cat=CAT[e.category]||CAT.note;
         const ex=exParse(e);
-        const recBadge=ex.recurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
+        const recBadge=ex.récurrence&&e._virt?'<span class="recbadge">RECURRENT</span>':'';
         return '<div class="ev" style="margin:0 0 8px;border-left-color:'+cat.c+'"><div class="evb"><div class="evt">'+e.title+recBadge+'</div>'+(e.content?'<div class="evx">'+e.content+'</div>':'')+'<div class="evmeta"><span class="catp cat-'+e.category+'">'+ico(cat.i,10)+' '+cat.l+'</span>'+(e.time?'<span style="font-size:10px;color:var(--tx3);font-weight:600">'+e.time+'</span>':'')+'</div>'+evExtrasHtml(e,true)+'</div></div>';
       }).join('');
       h+='</div>';
     }
   }
-  h+='<div class="fg"><button class="btn bp bw" onclick="closeMdl();openAddAg(null,\''+d+'\')">+ Ajouter un evenement</button></div>';
+  h+='<div class="fg"><button class="btn bp bw" onclick="closeMdl();openAddAg(null,\''+d+'\')">+ Ajouter un événement</button></div>';
   openMdl(h);
 }
 
-window.toggleAg=async function(id,completed){await api('/api/agenda/'+id,'PUT',{completed});S.ag=await api('/api/children/'+S.sel+'/agenda');renderAgContent()}
-window.openVcDetail=function(id){const v=S.vc.find(x=>x.id===id);if(!v)return;const isDone=v.status==='done';openMdl('<h3>'+v.name+'</h3><div class="fg"><div style="font-size:11px;color:var(--tx2);line-height:1.6">Age recommande : <strong>'+(v.recommendedAge||'--')+'</strong><br>Date recommandee : <strong>'+(v.recommendedDate?fmt(v.recommendedDate):'--')+'</strong>'+(v.givenDate?'<br>Fait le : <strong>'+fmt(v.givenDate)+'</strong>':'')+'</div></div>'+(!isDone?'<div class="fg"><label class="fl">Date d\'administration</label><input class="fi" id="vc-gd" type="date" value="'+(new Date().toISOString().slice(0,10))+'"></div><div class="fg"><button class="btn bp bw" onclick="markVcDone(\''+id+'\')">Marquer comme fait</button></div>':'<div class="fg"><button class="btn bs bw" onclick="resetVc(\''+id+'\')">Marquer comme non fait</button></div>')+'<div class="fg"><button class="btn bs bw" style="color:var(--rs3)" onclick="delVc(\''+id+'\')">Supprimer</button></div>')}
+window.toggleAg=async function(id,complèted){await api('/api/agenda/'+id,'PUT',{complèted});S.ag=await api('/api/children/'+S.sel+'/agenda');renderAgContent()}
+window.openVcDetail=function(id){const v=S.vc.find(x=>x.id===id);if(!v)return;const isDone=v.status==='done';openMdl('<h3>'+v.name+'</h3><div class="fg"><div style="font-size:11px;color:var(--tx2);line-height:1.6">Age recommande : <strong>'+(v.recommendedAge||'--')+'</strong><br>Date recommandée : <strong>'+(v.recommendedDate?fmt(v.recommendedDate):'--')+'</strong>'+(v.givenDate?'<br>Fait le : <strong>'+fmt(v.givenDate)+'</strong>':'')+'</div></div>'+(!isDone?'<div class="fg"><label class="fl">Date d\'administration</label><input class="fi" id="vc-gd" type="date" value="'+(new Date().toISOString().slice(0,10))+'"></div><div class="fg"><button class="btn bp bw" onclick="markVcDone(\''+id+'\')">Marquer comme fait</button></div>':'<div class="fg"><button class="btn bs bw" onclick="resetVc(\''+id+'\')">Marquer comme non fait</button></div>')+'<div class="fg"><button class="btn bs bw" style="color:var(--rs3)" onclick="delVc(\''+id+'\')">Supprimer</button></div>')}
 window.markVcDone=async function(id){const gd=document.getElementById('vc-gd').value;await api('/api/vaccines/'+id,'PUT',{givenDate:gd,status:'done',reminderDate:null});closeMdl();loadAgenda();loadHome()}
 window.resetVc=async function(id){await api('/api/vaccines/'+id,'PUT',{givenDate:null,status:'upcoming'});closeMdl();loadAgenda();loadHome()}
 window.delVc=async function(id){await api('/api/vaccines/'+id,'DELETE');closeMdl();loadAgenda();loadHome()}
 
 // ============= MILESTONES (sorted newest first by server) =============
 async function loadMs(){if(!S.cp)return;const p=await api('/api/parents/'+S.cp.id);childSel('mssel',p.children,async id=>{S.sel=id;S.ms=await api('/api/children/'+id+'/milestones');renderMs()})}
-function renderMs(){const c=document.getElementById('mslist');if(!S.ms.length){c.innerHTML='<div style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Aucune etape notee</p></div>';return}c.innerHTML=S.ms.map(m=>'<div class="msi"><div class="msd" style="background:'+( MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+(m.notes?' - '+m.notes:'')+'</div></div><span class="badge" style="background:'+(MB[m.type]||MB.other)+';color:var(--tx)">'+(ML[m.type]||'Autre')+'</span></div>').join('')}
+function renderMs(){const c=document.getElementById('mslist');if(!S.ms.length){c.innerHTML='<div style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Aucune étape notee</p></div>';return}c.innerHTML=S.ms.map(m=>'<div class="msi"><div class="msd" style="background:'+( MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+(m.notes?' - '+m.notes:'')+'</div></div><span class="badge" style="background:'+(MB[m.type]||MB.other)+';color:var(--tx)">'+(ML[m.type]||'Autre')+'</span></div>').join('')}
 
 // ============= GROWTH & SLEEP =============
 async function loadGr(){if(!S.cp)return;const p=await api('/api/parents/'+S.cp.id);childSel('grsel',p.children,async id=>{S.sel=id;const[g,sl]=await Promise.all([api('/api/children/'+id+'/growth'),api('/api/children/'+id+'/sleep')]);S.gr=g;S.sl=sl;const ch=p.children.find(x=>x.id===id);if(ch)S.childAge=ageM(ch.birthDate);renderSleep();renderChTabs();renderChart()})}
@@ -701,17 +701,17 @@ function renderChart(){const svg=document.getElementById('chsvg');if(S.gr.length
 async function loadGuide(){
   await refreshContentIfStale();
   try{
-  document.getElementById('devref').innerHTML=Object.entries(DEV).map(([k,d])=>{try{const stepCount=d.ages?Object.values(d.ages).flat().length:0;return '<div class="rd"><div class="rdh" onclick="toggleRD(this)"><div class="rdi" style="background:'+(d.bg||'#f0f0f0')+'"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,18)+'</span></div><span class="rdt">'+(d.t||k)+'</span><span class="badge" style="background:'+(d.bg||'#f0f0f0')+';color:'+(d.c||'#666')+'">'+stepCount+' etapes</span><span class="rda">'+I.chevR+'</span></div><div class="rdb" data-domain="'+k+'"></div></div>'}catch(e){console.warn('[loadGuide] domain err',k,e);return ''}}).join('');
+  document.getElementById('devref').innerHTML=Object.entries(DEV).map(([k,d])=>{try{const stepCount=d.ages?Object.values(d.ages).flat().length:0;return '<div class="rd"><div class="rdh" onclick="toggleRD(this)"><div class="rdi" style="background:'+(d.bg||'#f0f0f0')+'"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,18)+'</span></div><span class="rdt">'+(d.t||k)+'</span><span class="badge" style="background:'+(d.bg||'#f0f0f0')+';color:'+(d.c||'#666')+'">'+stepCount+' étapes</span><span class="rda">'+I.chevR+'</span></div><div class="rdb" data-domain="'+k+'"></div></div>'}catch(e){console.warn('[loadGuide] domain err',k,e);return ''}}).join('');
   document.getElementById('glist').innerHTML=Object.entries(GUIDE).map(([k,g])=>{try{return '<div class="gc" onclick="showGD(\''+k+'\')"><div class="gci" style="background:'+(g.bg||'#f0f0f0')+'"><span style="color:'+(g.c||'#666')+'">'+ico(g.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+(g.t||k)+'</div><div class="gcd">'+(g.tips?g.tips.length:0)+' conseils bienveillants</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>'}catch(e){console.warn('[loadGuide] guide err',k,e);return ''}}).join('')}catch(e){console.error('[loadGuide]',e)}}
 
 window.toggleRD=function(el){try{const body=el.nextElementSibling,arrow=el.querySelector('.rda'),dom=body.dataset.domain;const isOpen=body.classList.contains('op');body.classList.toggle('op');arrow.classList.toggle('op');if(isOpen)return;
-  const d=DEV[dom];if(!d){body.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucune donnee disponible</p>';return}const ages=Object.keys(d.ages);if(!ages.length){body.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repere disponible</p>';return}let cur=ages[0];try{const ak=devAgeKey(S.childAge||0);if(ages.includes(ak))cur=ak}catch(e){}
+  const d=DEV[dom];if(!d){body.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucune donnee disponible</p>';return}const ages=Object.keys(d.ages);if(!ages.length){body.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repère disponible</p>';return}let cur=ages[0];try{const ak=devAgeKey(S.childAge||0);if(ages.includes(ak))cur=ak}catch(e){}
   body.innerHTML='<div class="agetabs">'+ages.map(a=>'<button class="agetab'+(a===cur?' on':'')+'" onclick="showAge(\''+dom+"','"+a+"',this)\">"+a+'</button>').join('')+'</div><div id="age-'+dom+'"></div>';
   showAgeContent(dom,cur)}catch(e){console.error('[toggleRD]',e)}}
 
 window.showAge=function(dom,age,btn){try{btn.parentElement.querySelectorAll('.agetab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');showAgeContent(dom,age)}catch(e){console.error('[showAge]',e)}}
 
-function showAgeContent(dom,age){try{const d=DEV[dom];if(!d)return;const steps=d.ages[age]||[];const el=document.getElementById('age-'+dom);if(!el)return;el.innerHTML=steps.map(s=>{const acts=Array.isArray(s.acts)?s.acts:(typeof s.acts==='string'?[s.acts]:[]);return '<div class="mcard"><div class="mca">'+age+'</div><div class="mcl">'+(s.l||'')+'</div><div class="acts"><div class="acts-t">Activites & Jeux</div>'+acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>'}).join('')||'<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repere pour cette tranche</p>'}catch(e){console.error('[showAgeContent]',e);const el=document.getElementById('age-'+dom);if(el)el.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Erreur de chargement</p>'}}
+function showAgeContent(dom,age){try{const d=DEV[dom];if(!d)return;const steps=d.ages[age]||[];const el=document.getElementById('age-'+dom);if(!el)return;el.innerHTML=steps.map(s=>{const acts=Array.isArray(s.acts)?s.acts:(typeof s.acts==='string'?[s.acts]:[]);return '<div class="mcard"><div class="mca">'+age+'</div><div class="mcl">'+(s.l||'')+'</div><div class="acts"><div class="acts-t">Activités & Jeux</div>'+acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>'}).join('')||'<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repère pour cette tranche</p>'}catch(e){console.error('[showAgeContent]',e);const el=document.getElementById('age-'+dom);if(el)el.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Erreur de chargement</p>'}}
 
 window.showGD=function(key){const g=GUIDE[key];if(!g)return;document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
   document.getElementById('gdc').innerHTML=g.tips.map((t,i)=>{
@@ -969,7 +969,7 @@ window.saveProfileEdit=async function(){
 window.openAvatarPicker=function(){openProfileEdit()}
 
 // ============= CHILD DETAIL =============
-window.showCD=async function(id){const ch=await api('/api/children/'+id),ms=await api('/api/children/'+id+'/milestones'),gr=await api('/api/children/'+id+'/growth'),sl=await api('/api/children/'+id+'/sleep'),qz=await api('/api/children/'+id+'/questionnaire');const lg=gr.length?gr[gr.length-1]:null;const avg=sl.length?(sl.reduce((s,r)=>s+(r.nightHours||0)+(r.napHours||0),0)/sl.length).toFixed(1):'--';const bilanBlk=qz&&qz.createdAt?'<div class="br-card" onclick="showLastBilan(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalise</b><span>Dernier bilan : '+fmt(qz.createdAt.slice(0,10))+' - Voir les conseils</span></div><span style="color:var(--tx3)">'+I.chevR+'</span></div>':'<div class="br-card" onclick="openQuiz(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalise</b><span>10 questions, 2 min, pour des conseils adaptes</span></div><span style="color:var(--pk3)">'+I.chevR+'</span></div>';document.getElementById('cdc').innerHTML='<div class="deth" style="background:linear-gradient(135deg,'+(ch.gender==='boy'?'var(--sk),var(--lv)':'var(--rs),var(--pk)')+')"><button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - Ne(e) le '+fmt(ch.birthDate)+'</p></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 20px"><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.weightKg+'kg':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Poids</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.heightCm+'cm':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Taille</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+avg+'h</div><div style="font-size:10px;color:var(--tx3)">Sommeil</div></div></div>'+bilanBlk+'<div class="stl">Etapes notees ('+ms.length+')</div><div class="msl">'+ms.slice(0,8).map(m=>'<div class="msi"><div class="msd" style="background:'+(MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+'</div></div></div>').join('')+'</div>';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-child-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
+window.showCD=async function(id){const ch=await api('/api/children/'+id),ms=await api('/api/children/'+id+'/milestones'),gr=await api('/api/children/'+id+'/growth'),sl=await api('/api/children/'+id+'/sleep'),qz=await api('/api/children/'+id+'/questionnaire');const lg=gr.length?gr[gr.length-1]:null;const avg=sl.length?(sl.reduce((s,r)=>s+(r.nightHours||0)+(r.napHours||0),0)/sl.length).toFixed(1):'--';const bilanBlk=qz&&qz.createdAt?'<div class="br-card" onclick="showLastBilan(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>Dernier bilan : '+fmt(qz.createdAt.slice(0,10))+' - Voir les conseils</span></div><span style="color:var(--tx3)">'+I.chevR+'</span></div>':'<div class="br-card" onclick="openQuiz(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>10 questions, 2 min, pour des conseils adaptes</span></div><span style="color:var(--pk3)">'+I.chevR+'</span></div>';document.getElementById('cdc').innerHTML='<div class="deth" style="background:linear-gradient(135deg,'+(ch.gender==='boy'?'var(--sk),var(--lv)':'var(--rs),var(--pk)')+')"><button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - Ne(e) le '+fmt(ch.birthDate)+'</p></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 20px"><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.weightKg+'kg':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Poids</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.heightCm+'cm':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Taille</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+avg+'h</div><div style="font-size:10px;color:var(--tx3)">Sommeil</div></div></div>'+bilanBlk+'<div class="stl">Étapes notees ('+ms.length+')</div><div class="msl">'+ms.slice(0,8).map(m=>'<div class="msi"><div class="msd" style="background:'+(MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+'</div></div></div>').join('')+'</div>';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-child-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
 
 // ============= QUESTIONNAIRE FLOW =============
 let QZ={childId:null,ch:null,step:0,responses:{}};
@@ -989,8 +989,8 @@ function renderQuizIntro(){
   const ch=QZ.ch;
   document.getElementById('qzh').style.background='linear-gradient(135deg,var(--pk),var(--lv))';
   document.getElementById('qzh').style.color='var(--tx)';
-  document.getElementById('qzh').innerHTML='<button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:var(--pk3)">'+ico('clip',26)+'</span><div><h2>Bilan personnalise</h2><p class="ds">Pour '+ch.firstName+'</p></div></div>';
-  document.getElementById('qzc').innerHTML='<div class="qz-intro"><h3>10 questions, 2 minutes</h3><p>Repondez spontanement, sans chercher la "bonne" reponse. Le but est de dresser un panorama bienveillant et d\'obtenir des conseils adaptes a votre enfant.</p><p style="font-size:12px;color:var(--tx3)">Vos reponses restent sur cet appareil. Vous pouvez refaire le questionnaire a tout moment pour voir l\'evolution.</p></div><div class="qz-nav"><button class="next" onclick="quizStart()">Commencer le questionnaire</button></div>';
+  document.getElementById('qzh').innerHTML='<button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:var(--pk3)">'+ico('clip',26)+'</span><div><h2>Bilan personnalisé</h2><p class="ds">Pour '+ch.firstName+'</p></div></div>';
+  document.getElementById('qzc').innerHTML='<div class="qz-intro"><h3>10 questions, 2 minutes</h3><p>Répondez spontanement, sans chercher la "bonne" reponse. Le but est de dresser un panorama bienveillant et d\'obtenir des conseils adaptes a votre enfant.</p><p style="font-size:12px;color:var(--tx3)">Vos reponses restent sur cet appareil. Vous pouvez refaire le questionnaire a tout moment pour voir l\'evolution.</p></div><div class="qz-nav"><button class="next" onclick="quizStart()">Commencer le questionnaire</button></div>';
 }
 
 window.quizStart=function(){QZ.step=0;renderQuizStep()}
@@ -1033,7 +1033,7 @@ function renderBilan(summary,ch,rec){
   document.getElementById('qrh').style.background='linear-gradient(135deg,var(--pk),var(--lv))';
   document.getElementById('qrh').style.color='var(--tx)';
   document.getElementById('qrh').innerHTML='<button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:var(--pk3)">'+ico('sparkle',26)+'</span><div><h2>Votre bilan</h2><p class="ds">Pour '+ch.firstName+(rec&&rec.createdAt?' - '+fmt(rec.createdAt.slice(0,10)):'')+'</p></div></div>';
-  const intro='<div class="br-intro"><p>Voici un panorama par repere. Les conseils sont adaptes aux reponses donnees : ils visent a rassurer ou a orienter, jamais a juger.</p></div>';
+  const intro='<div class="br-intro"><p>Voici un panorama par repère. Les conseils sont adaptes aux reponses donnees : ils visent a rassurer où a orienter, jamais a juger.</p></div>';
   const cards=summary.map(b=>{const d=QDOMS[b.dom];return '<div class="br-dom"><div class="br-head"><div class="ic" style="background:'+d.bg+';color:'+d.c+'">'+ico(d.ico,20)+'</div><div class="tt"><b>'+d.t+'</b><span>'+LVL_LBL[b.lvl]+'</span></div><span class="br-pill '+b.lvl+'">'+LVL_LBL[b.lvl]+'</span></div><div class="br-body"><p class="br-summary">'+b.summary+'</p><div class="br-tips">'+b.tips.map(t=>'<div class="br-tip"><span class="tk">•</span><span>'+t+'</span></div>').join('')+'</div></div></div>'}).join('');
   const actions='<div class="br-actions"><button class="redo" onclick="openQuiz(\''+QZ.childId+'\')">Refaire</button><button class="ok" onclick="go(\'profile\')">Terminer</button></div>';
   document.getElementById('qrc').innerHTML=intro+cards+actions;
@@ -1058,22 +1058,22 @@ window.openAddChild=function(){openMdl('<h3>Ajouter un enfant</h3><div class="fg
 window.pickAv=function(id,el){window._av=id;document.querySelectorAll('.avi').forEach(a=>a.classList.remove('sel'));el.classList.add('sel')}
 window.submitChild=async function(){const n=document.getElementById('nc-n').value.trim(),b=document.getElementById('nc-b').value,g=document.getElementById('nc-g').value;if(!n||!b)return;await api('/api/parents/'+S.cp.id+'/children','POST',{firstName:n,birthDate:b,gender:g,avatar:window._av||'lion'});closeMdl();loadHome();loadProf()}
 
-window.openAddMs=function(){if(!S.sel)return;openMdl('<h3>Nouvelle etape</h3><div class="fg"><label class="fl">Categorie</label><select class="fsl" id="nm-t"><option value="motor">Motricite</option><option value="language">Langage</option><option value="social">Social</option><option value="cognitive">Cognitif</option><option value="autonomy">Autonomie</option><option value="other">Autre</option></select></div><div class="fg"><label class="fl">Description</label><input class="fi" id="nm-l" placeholder="Ex: Premiers pas"></div><div class="fg"><label class="fl">Age (mois)</label><input class="fi" id="nm-a" type="number" placeholder="12"></div><div class="fg"><label class="fl">Date</label><input class="fi" id="nm-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Notes</label><input class="fi" id="nm-n" placeholder="Un souvenir..."></div><div class="fg"><button class="btn bp bw" onclick="submitMs()">Enregistrer</button></div>')}
+window.openAddMs=function(){if(!S.sel)return;openMdl('<h3>Nouvelle étape</h3><div class="fg"><label class="fl">Catégorie</label><select class="fsl" id="nm-t"><option value="motor">Motricité</option><option value="language">Langage</option><option value="social">Social</option><option value="cognitive">Cognitif</option><option value="autonomy">Autonomie</option><option value="other">Autre</option></select></div><div class="fg"><label class="fl">Description</label><input class="fi" id="nm-l" placeholder="Ex: Premiers pas"></div><div class="fg"><label class="fl">Age (mois)</label><input class="fi" id="nm-a" type="number" placeholder="12"></div><div class="fg"><label class="fl">Date</label><input class="fi" id="nm-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Notes</label><input class="fi" id="nm-n" placeholder="Un souvenir..."></div><div class="fg"><button class="btn bp bw" onclick="submitMs()">Enregistrer</button></div>')}
 window.submitMs=async function(){const t=document.getElementById('nm-t').value,l=document.getElementById('nm-l').value.trim(),a=parseFloat(document.getElementById('nm-a').value)||null,d=document.getElementById('nm-d').value||null,n=document.getElementById('nm-n').value.trim()||null;if(!l)return;await api('/api/children/'+S.sel+'/milestones','POST',{type:t,label:l,ageInMonths:a,date:d,notes:n});closeMdl();loadMs()}
 
 window.openAddSleep=function(){if(!S.sel)return;const showNap=S.childAge<36;openMdl('<h3>Ajouter une nuit</h3><div class="fg"><label class="fl">Date</label><input class="fi" id="ns-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Heures de nuit</label><input class="fi" id="ns-n" type="number" step="0.5" placeholder="10"></div>'+(showNap?'<div class="fg"><label class="fl">Heures de sieste</label><input class="fi" id="ns-np" type="number" step="0.5" placeholder="2"></div>':'')+'<div class="fg"><label class="fl">Qualite</label><select class="fsl" id="ns-q"><option value="great">Excellente</option><option value="good">Bonne</option><option value="fair">Moyenne</option><option value="poor">Difficile</option></select></div><div class="fg"><button class="btn bp bw" onclick="submitSl()">Enregistrer</button></div>')}
 window.submitSl=async function(){const d=document.getElementById('ns-d').value,n=parseFloat(document.getElementById('ns-n').value)||null,npEl=document.getElementById('ns-np'),np=npEl?parseFloat(npEl.value)||null:null,q=document.getElementById('ns-q').value;await api('/api/children/'+S.sel+'/sleep','POST',{date:d,nightHours:n,napHours:np,quality:q});closeMdl();loadGr()}
 
-window.openAddGrowth=function(){if(!S.sel)return;const showHead=S.childAge<=12;openMdl('<h3>Nouvelle mesure</h3><div class="fg"><label class="fl">Date</label><input class="fi" id="ng-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Poids (kg)</label><input class="fi" id="ng-w" type="number" step="0.1" placeholder="8.5"></div><div class="fg"><label class="fl">Taille (cm)</label><input class="fi" id="ng-h" type="number" step="0.5" placeholder="72"></div>'+(showHead?'<div class="fg"><label class="fl">Perimetre cranien (cm)</label><input class="fi" id="ng-hc" type="number" step="0.5" placeholder="45"></div>':'')+'<div class="fg"><button class="btn bp bw" onclick="submitGr()">Enregistrer</button></div>')}
+window.openAddGrowth=function(){if(!S.sel)return;const showHead=S.childAge<=12;openMdl('<h3>Nouvelle mesure</h3><div class="fg"><label class="fl">Date</label><input class="fi" id="ng-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Poids (kg)</label><input class="fi" id="ng-w" type="number" step="0.1" placeholder="8.5"></div><div class="fg"><label class="fl">Taille (cm)</label><input class="fi" id="ng-h" type="number" step="0.5" placeholder="72"></div>'+(showHead?'<div class="fg"><label class="fl">Perimêtre cranien (cm)</label><input class="fi" id="ng-hc" type="number" step="0.5" placeholder="45"></div>':'')+'<div class="fg"><button class="btn bp bw" onclick="submitGr()">Enregistrer</button></div>')}
 window.submitGr=async function(){const d=document.getElementById('ng-d').value,w=parseFloat(document.getElementById('ng-w').value)||null,h=parseFloat(document.getElementById('ng-h').value)||null,hcEl=document.getElementById('ng-hc'),hc=hcEl?parseFloat(hcEl.value)||null:null;await api('/api/children/'+S.sel+'/growth','POST',{date:d,weightKg:w,heightCm:h,headCircCm:hc});closeMdl();loadGr()}
 
 function renderAdaptFields(cat){
   if(cat==='appointment')return '<div class="fg"><label class="fl">Nom du praticien</label><input class="fi" id="na-pract" placeholder="Dr Martin"></div><div class="fg"><label class="fl">Telephone</label><input class="fi" id="na-phone" type="tel" placeholder="01 23 45 67 89"></div>';
   if(cat==='vaccine')return '<div class="fg"><label class="fl">Age recommande</label><input class="fi" id="na-vca" placeholder="Ex: 12 mois"></div><div class="fg"><label class="fl">Prochain rappel (auto)</label><input class="fi" id="na-boost" type="date"><div style="font-size:11px;color:var(--tx3);margin-top:4px">Laisse vide pour auto-calculer selon le vaccin</div></div>';
   if(cat==='medication')return '<div class="fg"><label class="fl">Dose</label><input class="fi" id="na-dose" placeholder="Ex: 2.5 ml, 1 comprime"></div><div class="fg"><label class="fl">Frequence</label><input class="fi" id="na-freq" placeholder="Ex: toutes les 6h, matin et soir"></div><div class="fg"><label class="fl">Duree (jours)</label><input class="fi" id="na-dur" type="number" placeholder="Ex: 5"></div>';
-  if(cat==='illness')return '<div class="fg"><label class="fl">Temperature (&deg;C)</label><input class="fi" id="na-temp" type="number" step="0.1" placeholder="Ex: 38.5"></div><div class="fg"><label class="fl">Symptomes</label><input class="fi" id="na-symp" placeholder="Fievre, toux, diarrhee..."></div>';
-  if(cat==='sleep')return '<div class="fg" style="display:flex;gap:8px"><div style="flex:1"><label class="fl">Coucher</label><input class="fi" id="na-slpBt" type="time"></div><div style="flex:1"><label class="fl">Lever</label><input class="fi" id="na-slpWk" type="time"></div></div><div class="fg"><label class="fl">Qualite</label><select class="fsl" id="na-slpq"><option value="">Non renseignee</option><option value="great">Excellente</option><option value="good">Bonne</option><option value="ok">Correcte</option><option value="bad">Difficile</option><option value="very_bad">Tres difficile</option></select></div>';
-  if(cat==='meal')return '<div class="fg"><label class="fl">Type de repas</label><select class="fsl" id="na-mtp"><option value="">Non precise</option><option value="breakfast">Petit-dejeuner</option><option value="lunch">Dejeuner</option><option value="snack">Gouter</option><option value="dinner">Diner</option></select></div><div class="fg"><label class="fl">Nouvel aliment teste</label><input class="fi" id="na-food" placeholder="Ex: Avocat, Tomate..."></div>';
+  if(cat==='illness')return '<div class="fg"><label class="fl">Temperature (&deg;C)</label><input class="fi" id="na-temp" type="number" step="0.1" placeholder="Ex: 38.5"></div><div class="fg"><label class="fl">Symptomes</label><input class="fi" id="na-symp" placeholder="Fièvre, toux, diarrhee..."></div>';
+  if(cat==='sleep')return '<div class="fg" style="display:flex;gap:8px"><div style="flex:1"><label class="fl">Coucher</label><input class="fi" id="na-slpBt" type="time"></div><div style="flex:1"><label class="fl">Lever</label><input class="fi" id="na-slpWk" type="time"></div></div><div class="fg"><label class="fl">Qualite</label><select class="fsl" id="na-slpq"><option value="">Non renseignée</option><option value="great">Excellente</option><option value="good">Bonne</option><option value="ok">Correcte</option><option value="bad">Difficile</option><option value="very_bad">Tres difficile</option></select></div>';
+  if(cat==='meal')return '<div class="fg"><label class="fl">Type de repas</label><select class="fsl" id="na-mtp"><option value="">Non precise</option><option value="breakfast">Petit-déjeuner</option><option value="lunch">Déjeuner</option><option value="snack">Goûter</option><option value="dinner">Dîner</option></select></div><div class="fg"><label class="fl">Nouvel aliment teste</label><input class="fi" id="na-food" placeholder="Ex: Avocat, Tomate..."></div>';
   if(cat==='note')return '<div class="fg"><label class="fl">Humeur de l\'enfant</label><select class="fsl" id="na-mood">'+MOOD_OPTS.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('')+'</select></div><div class="fg"><label class="fl">Photo (optionnel)</label><input class="fi" id="na-photo" type="file" accept="image/*" onchange="agPhotoPick(event)"><div id="na-photoprev" style="margin-top:8px"></div></div>';
   if(cat==='school')return '<div class="fg"><label class="fl">Etablissement / Classe</label><input class="fi" id="na-school" placeholder="Ex: Ecole Jules Ferry - CP"></div>';
   return '';
@@ -1083,21 +1083,21 @@ window.openAddAg=function(defaultCat,defaultDate){
   if(!S.sel)return;
   const dd=defaultDate||new Date().toISOString().slice(0,10);
   const dc=defaultCat||'appointment';
-  const opts=[['appointment','Rendez-vous'],['vaccine','Vaccin'],['medication','Medicament'],['illness','Maladie / Symptomes'],['activity','Activite'],['school','Scolaire'],['sleep','Sommeil'],['meal','Repas'],['note','Note / Souvenir'],['milestone','Etape a preparer'],['other','Autre']];
+  const opts=[['appointment','Rendez-vous'],['vaccine','Vaccin'],['medication','Médicament'],['illness','Maladie / Symptomes'],['activity','Activité'],['school','Scolaire'],['sleep','Sommeil'],['meal','Repas'],['note','Note / Souvenir'],['milestone','Étape a préparer'],['other','Autre']];
   const selHtml='<select class="fsl" id="na-c" onchange="agTypeChanged()">'+opts.map(o=>'<option value="'+o[0]+'"'+(dc===o[0]?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>';
   const dlHtml='<datalist id="na-tsug">'+(TITLE_SUG[dc]||[]).map(s=>'<option value="'+s+'"></option>').join('')+'</datalist>';
   const accDl='<datalist id="na-accsug">'+ACCOMP_SUG.map(s=>'<option value="'+s+'"></option>').join('')+'</datalist>';
-  let h='<h3>Nouvel evenement</h3>';
+  let h='<h3>Nouvel événement</h3>';
   h+='<div class="fg"><label class="fl">Type</label>'+selHtml+'</div>';
-  h+='<div class="fg"><label class="fl">Titre</label><input class="fi" id="na-t" list="na-tsug" placeholder="'+(PH_MAP[dc]||'Titre')+'" autocomplete="off">'+dlHtml+'</div>';
+  h+='<div class="fg"><label class="fl">Titre</label><input class="fi" id="na-t" list="na-tsug" placeholder="'+(PH_MAP[dc]||'Titre')+'" autocomplète="off">'+dlHtml+'</div>';
   h+='<div id="na-adapt">'+renderAdaptFields(dc)+'</div>';
   h+='<div class="fg" style="display:flex;gap:8px"><div style="flex:1"><label class="fl">Date</label><input class="fi" id="na-d" type="date" value="'+dd+'"></div><div style="flex:1"><label class="fl">Heure</label><input class="fi" id="na-h" type="time"></div></div>';
-  h+='<details class="nadet"><summary class="nadet-s">Plus d\'options (lieu, rappel, recurrence...)</summary>';
+  h+='<details class="nadet"><summary class="nadet-s">Plus d\'options (lieu, rappel, récurrence...)</summary>';
   h+='<div class="fg"><label class="fl">Lieu (optionnel)</label><input class="fi" id="na-loc" placeholder="Ex: Cabinet Dr Martin, 12 rue..."></div>';
-  h+='<div class="fg"><label class="fl">Qui accompagne</label><input class="fi" id="na-acc" list="na-accsug" placeholder="Ex: Maman, Nounou..." autocomplete="off">'+accDl+'</div>';
+  h+='<div class="fg"><label class="fl">Qui accompagne</label><input class="fi" id="na-acc" list="na-accsug" placeholder="Ex: Maman, Nounou..." autocomplète="off">'+accDl+'</div>';
   h+='<div class="fg"><label class="fl">Rappel avant</label><select class="fsl" id="na-rem">'+REM_OPTS.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('')+'</select></div>';
   h+='<div class="fg"><label class="fl">Recurrence</label><select class="fsl" id="na-rec">'+REC_OPTS.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('')+'</select></div>';
-  h+='<div class="fg"><label class="fl">Checklist a apporter</label><textarea class="fta" id="na-chk" placeholder="Un element par ligne - ex:&#10;Doudou&#10;Carnet de sante&#10;Biberon"></textarea></div>';
+  h+='<div class="fg"><label class="fl">Checklist a apporter</label><textarea class="fta" id="na-chk" placeholder="Un element par ligne - ex:&#10;Doudou&#10;Carnet de santé&#10;Biberon"></textarea></div>';
   h+='</details>';
   h+='<div class="fg"><label class="fl">Notes / details</label><textarea class="fta" id="na-x" placeholder="Informations complementaires..."></textarea></div>';
   h+='<div class="fg"><button class="btn bp bw" onclick="submitAg()">Enregistrer</button></div>';
@@ -1112,7 +1112,7 @@ function buildExtras(){
   const loc=gvn('na-loc');if(loc)ex.location=loc;
   const acc=gvn('na-acc');if(acc)ex.accompaniedBy=acc;
   const rem=gvn('na-rem');if(rem)ex.reminderMinutes=parseInt(rem);
-  const rec=gvn('na-rec');if(rec)ex.recurrence=rec;
+  const rec=gvn('na-rec');if(rec)ex.récurrence=rec;
   const chk=gvn('na-chk');if(chk)ex.checklist=chk.split('\n').map(s=>s.trim()).filter(Boolean);
   if(c==='appointment'){const p=gvn('na-pract');if(p)ex.practitioner=p;const ph=gvn('na-phone');if(ph)ex.phone=ph}
   if(c==='vaccine'){const a=gvn('na-vca');if(a)ex.ageLabel=a;const b=gvn('na-boost');if(b)ex.boosterDate=b}
@@ -1133,7 +1133,7 @@ window.submitAg=async function(){
   closeMdl();loadAgenda();loadHome();
 }
 
-window.openAddVc=function(){if(!S.sel)return;openMdl('<h3>Nouveau vaccin</h3><div class="fg"><label class="fl">Nom du vaccin</label><input class="fi" id="nv-n" placeholder="Ex: Grippe saisonniere"></div><div class="fg"><label class="fl">Age recommande</label><input class="fi" id="nv-a" placeholder="Ex: 6 mois"></div><div class="fg"><label class="fl">Date recommandee</label><input class="fi" id="nv-d" type="date"></div><div class="fg"><button class="btn bp bw" onclick="submitVc()">Enregistrer</button></div>')}
+window.openAddVc=function(){if(!S.sel)return;openMdl('<h3>Nouveau vaccin</h3><div class="fg"><label class="fl">Nom du vaccin</label><input class="fi" id="nv-n" placeholder="Ex: Grippe saisonnière"></div><div class="fg"><label class="fl">Age recommande</label><input class="fi" id="nv-a" placeholder="Ex: 6 mois"></div><div class="fg"><label class="fl">Date recommandée</label><input class="fi" id="nv-d" type="date"></div><div class="fg"><button class="btn bp bw" onclick="submitVc()">Enregistrer</button></div>')}
 window.submitVc=async function(){const n=document.getElementById('nv-n').value.trim(),a=document.getElementById('nv-a').value.trim(),d=document.getElementById('nv-d').value;if(!n)return;await api('/api/children/'+S.sel+'/vaccines','POST',{name:n,recommendedAge:a,recommendedDate:d,reminderDate:d,status:'upcoming'});closeMdl();loadAgenda();loadHome()}
 
 // ============= CHILD SWITCHING / TOOLS / NOTIFS =============
@@ -1173,7 +1173,7 @@ window.openNotifCenter=function(){
   let h='<h3>'+ico('bell',16)+' Centre de notifications</h3>';
   const perm=('Notification' in window)?Notification.permission:'unsupported';
   if(perm==='default'){
-    h+='<div class="fg"><div style="background:var(--sk);border-radius:var(--rs);padding:12px 14px;display:flex;gap:10px;align-items:center"><div style="flex:1;font-size:11px;color:var(--tx2);line-height:1.5">Activez les notifications du navigateur pour etre averti des urgences meme quand l\'app est fermee.</div><button class="btn bp bsm" onclick="enableNotifs()">Activer</button></div></div>';
+    h+='<div class="fg"><div style="background:var(--sk);border-radius:var(--rs);padding:12px 14px;display:flex;gap:10px;align-items:center"><div style="flex:1;font-size:11px;color:var(--tx2);line-height:1.5">Activez les notifications du navigateur pour être averti des urgences même quand l\'app est fermee.</div><button class="btn bp bsm" onclick="enableNotifs()">Activer</button></div></div>';
   } else if(perm==='granted'){
     h+='<div class="fg"><div style="background:var(--mt);border-radius:var(--rs);padding:10px 14px;font-size:11px;color:var(--mt3);font-weight:700">'+ico('check',12)+' Notifications activees</div></div>';
   }
@@ -1183,7 +1183,7 @@ window.openNotifCenter=function(){
     h+='</div>';
   }
   if(soon.length){
-    h+='<div style="padding:0 20px"><div style="font-size:10px;font-weight:800;color:var(--tx3);text-transform:uppercase;margin:14px 0 6px;letter-spacing:.04em">Bientot - dans 2 semaines</div>';
+    h+='<div style="padding:0 20px"><div style="font-size:10px;font-weight:800;color:var(--tx3);text-transform:uppercase;margin:14px 0 6px;letter-spacing:.04em">Bientôt - dans 2 semaines</div>';
     h+=soon.map(r=>{const cat=CAT[r.category]||CAT.appointment;return '<div class="alert" style="margin:0 0 8px;border-left-color:'+cat.c+'" onclick="closeMdl();go(\'agenda\')"><div class="ai" style="background:'+cat.bg+';color:'+cat.c+'">'+ico(cat.i,18)+'</div><div style="flex:1;min-width:0"><div class="at">'+r.name+'</div><div class="ax">'+cat.l+(r.recommendedAge?' - '+r.recommendedAge:'')+'</div><div class="aa" style="color:'+cat.c+'">'+relDate(r.date)+'</div></div></div>'}).join('');
     h+='</div>';
   }
