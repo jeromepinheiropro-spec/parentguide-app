@@ -46,7 +46,21 @@ const AVS=[
 {id:'butterfly',svg:'<svg viewBox="0 0 40 40"><ellipse cx="11" cy="15" rx="8" ry="9" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1"/><ellipse cx="29" cy="15" rx="8" ry="9" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/><ellipse cx="11" cy="27" rx="6" ry="7" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1"/><ellipse cx="29" cy="27" rx="6" ry="7" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1"/><line x1="20" y1="8" x2="20" y2="36" stroke="#8D6E63" stroke-width="2"/></svg>'},
 {id:'starav',svg:'<svg viewBox="0 0 40 40"><polygon points="20,4 24,14 35,14 26,21 29,32 20,25 11,32 14,21 5,14 16,14" fill="#FFF9C4" stroke="#FFD54F" stroke-width="1.5"/><circle cx="16" cy="17" r="1.2" fill="#5D4E37"/><circle cx="24" cy="17" r="1.2" fill="#5D4E37"/><path d="M17 21a4 4 0 006 0" stroke="#FFB74D" stroke-width="1" fill="none"/></svg>'},
 ];
-function avSvg(id){const a=AVS.find(x=>x.id===id);return a?a.svg:AVS[0].svg}
+function avSvg(id){const a=AVS.find(x=>x.id===id)||PAVS.find(x=>x.id===id);return a?a.svg:AVS[0].svg}
+
+// ============= PARENT AVATARS =============
+const PAVS=[
+{id:'parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E8E0F5"/><circle cx="20" cy="15" r="7" fill="#D4C4E8"/><path d="M8 34c0-7 5.5-12 12-12s12 5 12 12" fill="#D4C4E8"/></svg>'},
+{id:'mama',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#FCE4EC"/><circle cx="20" cy="14" r="7" fill="#F8BBD0"/><path d="M8 34c0-7 5.5-12 12-12s12 5 12 12" fill="#F8BBD0"/><path d="M12 10c2-4 6-5 8-4" stroke="#C2185B" stroke-width="1.5" fill="none"/><path d="M28 10c-2-4-6-5-8-4" stroke="#C2185B" stroke-width="1.5" fill="none"/></svg>'},
+{id:'papa',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E3F2FD"/><circle cx="20" cy="14" r="7" fill="#BBDEFB"/><path d="M8 34c0-7 5.5-12 12-12s12 5 12 12" fill="#BBDEFB"/><rect x="13" y="8" width="14" height="4" rx="2" fill="#1565C0" opacity="0.3"/></svg>'},
+{id:'heart_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#FFF3E0"/><path d="M20 28l-8-8a5 5 0 017-7l1 1 1-1a5 5 0 017 7z" fill="#FF8A65"/><circle cx="20" cy="13" r="5" fill="#FFE0B2"/></svg>'},
+{id:'star_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#FFFDE7"/><polygon points="20,6 23,15 33,15 25,21 28,30 20,24 12,30 15,21 7,15 17,15" fill="#FFD54F" opacity="0.6"/><circle cx="20" cy="16" r="5" fill="#FFF9C4"/><path d="M12 32c0-5 3.5-9 8-9s8 4 8 9" fill="#FFF9C4"/></svg>'},
+{id:'flower_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#F3E5F5"/><circle cx="20" cy="12" r="5" fill="#CE93D8" opacity="0.4"/><circle cx="14" cy="16" r="5" fill="#F48FB1" opacity="0.4"/><circle cx="26" cy="16" r="5" fill="#80CBC4" opacity="0.4"/><circle cx="20" cy="15" r="6" fill="#E1BEE7"/><path d="M10 34c0-6 4.5-10 10-10s10 4 10 10" fill="#E1BEE7"/></svg>'},
+{id:'sun_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#FFF8E1"/><circle cx="20" cy="17" r="8" fill="#FFE082"/><line x1="20" y1="5" x2="20" y2="8" stroke="#FFB300" stroke-width="2"/><line x1="20" y1="26" x2="20" y2="29" stroke="#FFB300" stroke-width="2"/><line x1="9" y1="17" x2="12" y2="17" stroke="#FFB300" stroke-width="2"/><line x1="28" y1="17" x2="31" y2="17" stroke="#FFB300" stroke-width="2"/><circle cx="17" cy="16" r="1.2" fill="#5D4E37"/><circle cx="23" cy="16" r="1.2" fill="#5D4E37"/><path d="M17 20a4 4 0 006 0" stroke="#F57F17" stroke-width="1" fill="none"/></svg>'},
+{id:'moon_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E8EAF6"/><path d="M24 10A10 10 0 1016 30a12 12 0 008-20z" fill="#C5CAE9"/><circle cx="15" cy="18" r="1" fill="#5D4E37"/><circle cx="20" cy="17" r="1" fill="#5D4E37"/><path d="M14 22a5 5 0 007 0" stroke="#7986CB" stroke-width="1" fill="none"/></svg>'},
+{id:'leaf_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E8F5E9"/><path d="M10 30Q10 10 30 10Q30 30 10 30Z" fill="#A5D6A7" opacity="0.5"/><path d="M10 30Q20 20 30 10" stroke="#66BB6A" stroke-width="1.5" fill="none"/><circle cx="20" cy="16" r="5.5" fill="#C8E6C9"/><path d="M12 33c0-5 3.5-9 8-9s8 4 8 9" fill="#C8E6C9"/></svg>'},
+{id:'cloud_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E0F7FA"/><circle cx="14" cy="18" r="6" fill="#B2EBF2"/><circle cx="24" cy="16" r="7" fill="#B2EBF2"/><circle cx="20" cy="20" r="6" fill="#B2EBF2"/><circle cx="17" cy="25" r="1.2" fill="#5D4E37"/><circle cx="23" cy="25" r="1.2" fill="#5D4E37"/><path d="M18 28a3 3 0 004 0" stroke="#0097A7" stroke-width="1" fill="none"/></svg>'},
+];
 
 // ============= DEV REF DATA =============
 const DEV={
@@ -400,7 +414,9 @@ window.selCh=function(cid,id){S.sel=id;if(cid.includes('ms'))loadMs();if(cid.inc
 // ============= HOME =============
 async function loadHome(){
   if(!S.cp){S.parents=await api('/api/parents');if(!S.parents.length)return;S.cp=S.parents[0];}
-  document.getElementById('greeting').textContent='Bonjour '+S.cp.firstName+' !';
+  const greetEl=document.getElementById('greeting');
+  const pAvatar=S.cp.avatar||'parent';
+  greetEl.innerHTML='<span style="display:inline-flex;width:28px;height:28px;vertical-align:middle;margin-right:6px;border-radius:50%;overflow:hidden">'+avSvg(pAvatar)+'</span>Bonjour '+S.cp.firstName+' !';
   const p=await api('/api/parents/'+S.cp.id);const c=document.getElementById('hc');
   if(!p.children.length){c.innerHTML='<div class="crd" style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Ajoutez votre premier enfant</p><button class="btn bp mt" onclick="openAddChild()">Ajouter un enfant</button></div>';document.getElementById('hi').innerHTML='';document.getElementById('st').innerHTML='';document.getElementById('ht').innerHTML='';document.getElementById('hremind').innerHTML='';return}
   const ch=p.children.find(x=>x.id===S.sel)||p.children[0];S.sel=ch.id;const am=ageM(ch.birthDate);S.childAge=am;
@@ -708,8 +724,9 @@ async function loadProf(){
   if(!S.cp)return;
   const p=await api('/api/parents/'+S.cp.id);
 
-  // Profile card
-  document.getElementById('pi').innerHTML='<div class="prc"><div class="pra">'+ico('user',32)+'</div><div class="prn">'+p.firstName+' '+p.lastName+'</div><div class="pre">'+p.email+'</div></div>';
+  // Profile card with avatar picker
+  const curAv=p.avatar||'parent';
+  document.getElementById('pi').innerHTML='<div class="prc"><div class="pra" onclick="openAvatarPicker()" style="cursor:pointer;position:relative;width:64px;height:64px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg2)"><span style="width:56px;height:56px;display:flex">'+avSvg(curAv)+'</span><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.35);color:white;font-size:9px;text-align:center;padding:2px 0">Changer</div></div><div class="prn">'+p.firstName+' '+p.lastName+'</div><div class="pre">'+p.email+'</div></div>';
 
   // Citation inspirante
   const dayOfYear=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/86400000);
@@ -891,6 +908,35 @@ window.submitCalEvent=async function(dateStr){
 }
 
 window.openChildHome=function(id){S.sel=id;go('home')}
+
+// ============= AVATAR PICKER =============
+window.openAvatarPicker=function(){
+  const overlay=document.createElement('div');
+  overlay.id='avatarOverlay';
+  overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s ease';
+  const panel=document.createElement('div');
+  panel.style.cssText='background:white;border-radius:20px 20px 0 0;padding:24px 20px 32px;width:100%;max-width:480px;max-height:70vh;overflow-y:auto';
+  panel.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:16px;font-weight:700;color:var(--tx)">Choisir mon avatar</h3><button onclick="document.getElementById(\'avatarOverlay\').remove()" style="background:none;border:none;font-size:22px;color:var(--tx3);cursor:pointer">&times;</button></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">'+
+    PAVS.map(a=>'<div onclick="selectParentAvatar(\''+a.id+'\')" style="cursor:pointer;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid transparent;transition:all .2s" onmouseover="this.style.borderColor=\'#7C5CFC\';this.style.transform=\'scale(1.1)\'" onmouseout="this.style.borderColor=\'transparent\';this.style.transform=\'scale(1)\'">'+a.svg+'</div>').join('')+
+    '</div>';
+  overlay.appendChild(panel);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+  document.body.appendChild(overlay);
+}
+
+window.selectParentAvatar=async function(avatarId){
+  if(!S.cp)return;
+  try{
+    const p=await api('/api/parents/'+S.cp.id);
+    await api('/api/parents/'+S.cp.id,'PUT',{firstName:p.firstName,lastName:p.lastName,email:p.email,avatar:avatarId});
+    S.cp.avatar=avatarId;
+    const ov=document.getElementById('avatarOverlay');
+    if(ov)ov.remove();
+    showToast('Avatar mis a jour !');
+    loadProf();
+  }catch(e){showToast('Erreur lors de la mise a jour')}
+}
 
 // ============= CHILD DETAIL =============
 window.showCD=async function(id){const ch=await api('/api/children/'+id),ms=await api('/api/children/'+id+'/milestones'),gr=await api('/api/children/'+id+'/growth'),sl=await api('/api/children/'+id+'/sleep'),qz=await api('/api/children/'+id+'/questionnaire');const lg=gr.length?gr[gr.length-1]:null;const avg=sl.length?(sl.reduce((s,r)=>s+(r.nightHours||0)+(r.napHours||0),0)/sl.length).toFixed(1):'--';const bilanBlk=qz&&qz.createdAt?'<div class="br-card" onclick="showLastBilan(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalise</b><span>Dernier bilan : '+fmt(qz.createdAt.slice(0,10))+' - Voir les conseils</span></div><span style="color:var(--tx3)">'+I.chevR+'</span></div>':'<div class="br-card" onclick="openQuiz(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalise</b><span>10 questions, 2 min, pour des conseils adaptes</span></div><span style="color:var(--pk3)">'+I.chevR+'</span></div>';document.getElementById('cdc').innerHTML='<div class="deth" style="background:linear-gradient(135deg,'+(ch.gender==='boy'?'var(--sk),var(--lv)':'var(--rs),var(--pk)')+')"><button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - Ne(e) le '+fmt(ch.birthDate)+'</p></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 20px"><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.weightKg+'kg':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Poids</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.heightCm+'cm':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Taille</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+avg+'h</div><div style="font-size:10px;color:var(--tx3)">Sommeil</div></div></div>'+bilanBlk+'<div class="stl">Etapes notees ('+ms.length+')</div><div class="msl">'+ms.slice(0,8).map(m=>'<div class="msi"><div class="msd" style="background:'+(MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+'</div></div></div>').join('')+'</div>';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-child-detail').classList.add('active');document.getElementById('navbar').style.display='none'}

@@ -313,7 +313,7 @@ app.post('/api/auth/register', (req, res) => {
     const passwordHash = hashPassword(password);
     db.prepare('INSERT INTO parents (id, firstName, lastName, email, passwordHash) VALUES (?, ?, ?, ?, ?)').run(id, firstName, lastName, email, passwordHash);
     const token = generateToken(id);
-    const parent = { id, firstName, lastName, email };
+    const parent = { id, firstName, lastName, email, avatar: 'parent' };
     res.json({ token, parent });
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -333,7 +333,7 @@ app.post('/api/auth/login', (req, res) => {
     return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
   }
   const token = generateToken(parent.id);
-  res.json({ token, parent: { id: parent.id, firstName: parent.firstName, lastName: parent.lastName, email: parent.email } });
+  res.json({ token, parent: { id: parent.id, firstName: parent.firstName, lastName: parent.lastName, email: parent.email, avatar: parent.avatar || 'parent' } });
 });
 
 // -- Parents --
@@ -362,8 +362,12 @@ app.get('/api/parents/:id', (req, res) => {
 });
 
 app.put('/api/parents/:id', (req, res) => {
-  const { firstName, lastName, email } = req.body;
-  db.prepare('UPDATE parents SET firstName = ?, lastName = ?, email = ? WHERE id = ?').run(firstName, lastName, email, req.params.id);
+  const { firstName, lastName, email, avatar } = req.body;
+  if (avatar !== undefined) {
+    db.prepare('UPDATE parents SET firstName = ?, lastName = ?, email = ?, avatar = ? WHERE id = ?').run(firstName, lastName, email, avatar, req.params.id);
+  } else {
+    db.prepare('UPDATE parents SET firstName = ?, lastName = ?, email = ? WHERE id = ?').run(firstName, lastName, email, req.params.id);
+  }
   res.json({ success: true });
 });
 
