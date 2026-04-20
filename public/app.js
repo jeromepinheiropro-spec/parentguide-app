@@ -1398,14 +1398,25 @@ function showAuthPage() {
   document.getElementById('fab').style.display = 'none';
 }
 
+function showWelcome() {
+  document.getElementById('auth-welcome').style.display = 'block';
+  document.getElementById('auth-signup').style.display = 'none';
+  document.getElementById('auth-login').style.display = 'none';
+  window.scrollTo(0,0);
+}
 function showLoginForm() {
+  document.getElementById('auth-welcome').style.display = 'none';
   document.getElementById('auth-signup').style.display = 'none';
   document.getElementById('auth-login').style.display = 'block';
+  window.scrollTo(0,0);
 }
 function showSignupForm() {
+  document.getElementById('auth-welcome').style.display = 'none';
   document.getElementById('auth-login').style.display = 'none';
   document.getElementById('auth-signup').style.display = 'block';
+  window.scrollTo(0,0);
 }
+window.showWelcome = showWelcome;
 window.showLoginForm = showLoginForm;
 window.showSignupForm = showSignupForm;
 
