@@ -724,9 +724,9 @@ async function loadProf(){
   if(!S.cp)return;
   const p=await api('/api/parents/'+S.cp.id);
 
-  // Profile card with avatar picker
+  // Profile card - large avatar + Modifier button
   const curAv=p.avatar||'parent';
-  document.getElementById('pi').innerHTML='<div class="prc"><div class="pra" onclick="openAvatarPicker()" style="cursor:pointer;position:relative;width:64px;height:64px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg2)"><span style="width:56px;height:56px;display:flex">'+avSvg(curAv)+'</span><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.35);color:white;font-size:9px;text-align:center;padding:2px 0">Changer</div></div><div class="prn">'+p.firstName+' '+p.lastName+'</div><div class="pre">'+p.email+'</div></div>';
+  document.getElementById('pi').innerHTML='<div class="prc" style="padding:36px 28px 28px;"><div style="width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.25);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;border:3px solid rgba(255,255,255,.3)"><span style="width:80px;height:80px;display:flex">'+avSvg(curAv)+'</span></div><div class="prn">'+p.firstName+' '+p.lastName+'</div><div class="pre">'+p.email+'</div><button onclick="openProfileEdit()" style="margin-top:16px;padding:10px 28px;border-radius:24px;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s ease">Modifier le profil</button></div>';
 
   // Citation inspirante
   const dayOfYear=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/86400000);
@@ -910,33 +910,61 @@ window.submitCalEvent=async function(dateStr){
 window.openChildHome=function(id){S.sel=id;go('home')}
 
 // ============= AVATAR PICKER =============
-window.openAvatarPicker=function(){
+window.openProfileEdit=async function(){
+  if(!S.cp)return;
+  const p=await api('/api/parents/'+S.cp.id);
+  const curAv=p.avatar||'parent';
   const overlay=document.createElement('div');
-  overlay.id='avatarOverlay';
-  overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s ease';
+  overlay.id='profileEditOverlay';
+  overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(45,42,38,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:flex-end;justify-content:center';
   const panel=document.createElement('div');
-  panel.style.cssText='background:white;border-radius:20px 20px 0 0;padding:24px 20px 32px;width:100%;max-width:480px;max-height:70vh;overflow-y:auto';
-  panel.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:16px;font-weight:700;color:var(--tx)">Choisir mon avatar</h3><button onclick="document.getElementById(\'avatarOverlay\').remove()" style="background:none;border:none;font-size:22px;color:var(--tx3);cursor:pointer">&times;</button></div>'+
-    '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">'+
-    PAVS.map(a=>'<div onclick="selectParentAvatar(\''+a.id+'\')" style="cursor:pointer;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid transparent;transition:all .2s" onmouseover="this.style.borderColor=\'#7C5CFC\';this.style.transform=\'scale(1.1)\'" onmouseout="this.style.borderColor=\'transparent\';this.style.transform=\'scale(1)\'">'+a.svg+'</div>').join('')+
-    '</div>';
+  panel.style.cssText='background:var(--bg);border-radius:24px 24px 0 0;padding:24px 20px 36px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;animation:su .35s cubic-bezier(.4,0,.2,1)';
+  panel.innerHTML='<div style="width:40px;height:4px;background:rgba(124,92,252,.2);border-radius:2px;margin:0 auto 16px"></div>'+
+    '<h3 style="font-size:18px;font-weight:900;margin-bottom:20px;letter-spacing:-.01em">Modifier le profil</h3>'+
+    // Avatar selection
+    '<div style="text-align:center;margin-bottom:20px"><div id="peAvPreview" style="width:80px;height:80px;border-radius:50%;background:var(--pk);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;border:3px solid var(--pk3)"><span style="width:64px;height:64px;display:flex">'+avSvg(curAv)+'</span></div><div style="font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:10px">Choisir un avatar</div><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:280px;margin:0 auto">'+
+    PAVS.map(a=>'<div onclick="peSelectAv(\''+a.id+'\')" id="peav-'+a.id+'" style="cursor:pointer;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid '+(a.id===curAv?'#7C5CFC':'rgba(124,92,252,.1)')+';transition:all .2s;background:'+(a.id===curAv?'var(--pk)':'transparent')+'">'+a.svg+'</div>').join('')+
+    '</div></div>'+
+    // Info fields
+    '<div class="fg"><label class="fl">Prenom</label><input class="fi" id="pe-fn" value="'+escHtml(p.firstName)+'"></div>'+
+    '<div class="fg"><label class="fl">Nom</label><input class="fi" id="pe-ln" value="'+escHtml(p.lastName)+'"></div>'+
+    '<div class="fg"><label class="fl">Email</label><input class="fi" id="pe-email" type="email" value="'+escHtml(p.email)+'"></div>'+
+    '<div style="padding:16px 0 0;display:flex;gap:10px"><button class="btn bs" style="flex:1" onclick="document.getElementById(\'profileEditOverlay\').remove()">Annuler</button><button class="btn bp" style="flex:1" onclick="saveProfileEdit()">Enregistrer</button></div>';
   overlay.appendChild(panel);
   overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
   document.body.appendChild(overlay);
+  S._peAvatar=curAv;
 }
 
-window.selectParentAvatar=async function(avatarId){
+window.peSelectAv=function(id){
+  S._peAvatar=id;
+  // Update preview
+  document.getElementById('peAvPreview').innerHTML='<span style="width:64px;height:64px;display:flex">'+avSvg(id)+'</span>';
+  // Update selection borders
+  PAVS.forEach(a=>{
+    const el=document.getElementById('peav-'+a.id);
+    if(el){el.style.borderColor=a.id===id?'#7C5CFC':'rgba(124,92,252,.1)';el.style.background=a.id===id?'var(--pk)':'transparent';}
+  });
+}
+
+window.saveProfileEdit=async function(){
   if(!S.cp)return;
+  const fn=document.getElementById('pe-fn').value.trim();
+  const ln=document.getElementById('pe-ln').value.trim();
+  const email=document.getElementById('pe-email').value.trim();
+  if(!fn||!ln||!email){showToast('Remplissez tous les champs');return;}
   try{
-    const p=await api('/api/parents/'+S.cp.id);
-    await api('/api/parents/'+S.cp.id,'PUT',{firstName:p.firstName,lastName:p.lastName,email:p.email,avatar:avatarId});
-    S.cp.avatar=avatarId;
-    const ov=document.getElementById('avatarOverlay');
+    await api('/api/parents/'+S.cp.id,'PUT',{firstName:fn,lastName:ln,email:email,avatar:S._peAvatar||'parent'});
+    S.cp.firstName=fn;S.cp.lastName=ln;S.cp.email=email;S.cp.avatar=S._peAvatar;
+    const ov=document.getElementById('profileEditOverlay');
     if(ov)ov.remove();
-    showToast('Avatar mis a jour !');
+    showToast('Profil mis a jour !');
     loadProf();
   }catch(e){showToast('Erreur lors de la mise a jour')}
 }
+
+// Legacy alias
+window.openAvatarPicker=function(){openProfileEdit()}
 
 // ============= CHILD DETAIL =============
 window.showCD=async function(id){const ch=await api('/api/children/'+id),ms=await api('/api/children/'+id+'/milestones'),gr=await api('/api/children/'+id+'/growth'),sl=await api('/api/children/'+id+'/sleep'),qz=await api('/api/children/'+id+'/questionnaire');const lg=gr.length?gr[gr.length-1]:null;const avg=sl.length?(sl.reduce((s,r)=>s+(r.nightHours||0)+(r.napHours||0),0)/sl.length).toFixed(1):'--';const bilanBlk=qz&&qz.createdAt?'<div class="br-card" onclick="showLastBilan(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalise</b><span>Dernier bilan : '+fmt(qz.createdAt.slice(0,10))+' - Voir les conseils</span></div><span style="color:var(--tx3)">'+I.chevR+'</span></div>':'<div class="br-card" onclick="openQuiz(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalise</b><span>10 questions, 2 min, pour des conseils adaptes</span></div><span style="color:var(--pk3)">'+I.chevR+'</span></div>';document.getElementById('cdc').innerHTML='<div class="deth" style="background:linear-gradient(135deg,'+(ch.gender==='boy'?'var(--sk),var(--lv)':'var(--rs),var(--pk)')+')"><button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - Ne(e) le '+fmt(ch.birthDate)+'</p></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 20px"><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.weightKg+'kg':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Poids</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.heightCm+'cm':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Taille</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+avg+'h</div><div style="font-size:10px;color:var(--tx3)">Sommeil</div></div></div>'+bilanBlk+'<div class="stl">Etapes notees ('+ms.length+')</div><div class="msl">'+ms.slice(0,8).map(m=>'<div class="msi"><div class="msd" style="background:'+(MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+'</div></div></div>').join('')+'</div>';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-child-detail').classList.add('active');document.getElementById('navbar').style.display='none'}

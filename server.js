@@ -18,9 +18,16 @@ app.use((req, res, next) => {
 });
 
 // ============================================================
-// DATABASE SETUP
+// DATABASE SETUP - Persistent storage support
 // ============================================================
-const db = new Database(path.join(__dirname, 'parentguide.db'));
+const fs = require('fs');
+const DB_DIR = process.env.DATABASE_DIR || __dirname;
+if (DB_DIR !== __dirname && !fs.existsSync(DB_DIR)) {
+  fs.mkdirSync(DB_DIR, { recursive: true });
+}
+const dbPath = path.join(DB_DIR, 'parentguide.db');
+console.log('[DB] Using database at:', dbPath);
+const db = new Database(dbPath);
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 
