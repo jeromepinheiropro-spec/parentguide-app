@@ -1015,6 +1015,30 @@ app.get('/api/content/dev', (req, res) => {
   }
 });
 
+// -- Single unified content endpoint (replaces 8 individual calls) --
+app.get('/api/content/all', (req, res) => {
+  try {
+    const quotes = db.prepare('SELECT * FROM content_quotes WHERE active = 1 ORDER BY sortOrder ASC, id ASC').all();
+    const categories = db.prepare('SELECT * FROM content_guide_categories ORDER BY sortOrder ASC, id ASC').all();
+    const guide = categories.map(cat => ({
+      ...cat,
+      tips: db.prepare('SELECT * FROM content_guide_tips WHERE categoryKey = ? ORDER BY sortOrder ASC, id ASC').all(cat.key)
+    }));
+    const dailyTips = {};
+    for (const ag of ['0-6m','6-12m','12-24m','2-3a','3-6a']) {
+      dailyTips[ag] = db.prepare('SELECT * FROM content_daily_tips WHERE ageGroup = ? ORDER BY sortOrder ASC, id ASC').all(ag);
+    }
+    const domains = db.prepare('SELECT * FROM content_dev_domains ORDER BY sortOrder ASC, id ASC').all();
+    const dev = domains.map(dom => ({
+      ...dom,
+      steps: db.prepare('SELECT * FROM content_dev_steps WHERE domainKey = ? ORDER BY sortOrder ASC, id ASC').all(dom.key)
+    }));
+    res.json({ quotes, guide, dailyTips, dev });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // -- Dashboard stats --
 app.get('/api/admin/stats', (req, res) => {
   try {

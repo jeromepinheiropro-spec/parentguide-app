@@ -413,7 +413,7 @@ window.selCh=function(cid,id){S.sel=id;if(cid.includes('ms'))loadMs();if(cid.inc
 
 // ============= HOME =============
 async function loadHome(){
-  await refreshContentIfStale();
+  refreshContentIfStale(); // non-blocking: don't await, content refreshes in background
   if(!S.cp){S.parents=await api('/api/parents');if(!S.parents.length)return;S.cp=S.parents[0];}
   const greetEl=document.getElementById('greeting');
   const pAvatar=S.cp.avatar||'parent';
@@ -1207,24 +1207,21 @@ async function refreshContentIfStale() {
 async function loadDynamicContent(){
   _contentLastFetch = Date.now();
   try{
-    // Load quotes
-    const qr=await fetch('/api/content/quotes');
-    if(qr.ok){const q=await qr.json();if(q.length>0){PARENT_QUOTES.length=0;q.forEach(x=>PARENT_QUOTES.push({q:x.text,a:x.author||''}))}}
+    const r=await fetch('/api/content/all');
+    if(!r.ok) return;
+    const data=await r.json();
 
-    // Load guide
-    const gr=await fetch('/api/content/guide');
-    if(gr.ok){const g=await gr.json();if(g.length>0){Object.keys(GUIDE).forEach(k=>delete GUIDE[k]);g.forEach(cat=>{GUIDE[cat.key]={t:cat.title,ico:cat.icon,c:cat.color,bg:cat.bgColor,tips:(cat.tips||[]).map(t=>({t:t.title,a:t.ageRange,x:t.text}))}})}}
+    // Quotes
+    if(data.quotes&&data.quotes.length>0){PARENT_QUOTES.length=0;data.quotes.forEach(x=>PARENT_QUOTES.push({q:x.text,a:x.author||''}))}
 
-    // Load daily tips
-    const agGroups=['0-6m','6-12m','12-24m','2-3a','3-6a'];
-    for(const ag of agGroups){
-      const dr=await fetch('/api/content/daily-tips/'+ag);
-      if(dr.ok){const d=await dr.json();if(d.length>0){DAILY_TIPS[ag]=d.map(t=>({t:t.title,x:t.text}))}}
-    }
+    // Guide
+    if(data.guide&&data.guide.length>0){Object.keys(GUIDE).forEach(k=>delete GUIDE[k]);data.guide.forEach(cat=>{GUIDE[cat.key]={t:cat.title,ico:cat.icon,c:cat.color,bg:cat.bgColor,tips:(cat.tips||[]).map(t=>({t:t.title,a:t.ageRange,x:t.text}))}})}
 
-    // Load dev milestones
-    const dvr=await fetch('/api/content/dev');
-    if(dvr.ok){const dv=await dvr.json();if(dv.length>0){Object.keys(DEV).forEach(k=>delete DEV[k]);dv.forEach(dom=>{try{const ages={};(dom.steps||[]).forEach(s=>{if(!ages[s.ageGroup])ages[s.ageGroup]=[];let acts;try{acts=typeof s.activities==='string'?JSON.parse(s.activities):s.activities;if(!Array.isArray(acts))acts=acts?[String(acts)]:[]}catch(e){acts=s.activities?[String(s.activities)]:[]}ages[s.ageGroup].push({l:s.label||'',acts:acts})});DEV[dom.key]={t:dom.title,ico:dom.icon,c:dom.color,bg:dom.bgColor,ages}}catch(e){console.warn('[content] Error parsing domain',dom.key,e)}})}}
+    // Daily tips
+    if(data.dailyTips){for(const ag of Object.keys(data.dailyTips)){const d=data.dailyTips[ag];if(d&&d.length>0){DAILY_TIPS[ag]=d.map(t=>({t:t.title,x:t.text}))}}}
+
+    // Dev milestones
+    if(data.dev&&data.dev.length>0){Object.keys(DEV).forEach(k=>delete DEV[k]);data.dev.forEach(dom=>{try{const ages={};(dom.steps||[]).forEach(s=>{if(!ages[s.ageGroup])ages[s.ageGroup]=[];let acts;try{acts=typeof s.activities==='string'?JSON.parse(s.activities):s.activities;if(!Array.isArray(acts))acts=acts?[String(acts)]:[]}catch(e){acts=s.activities?[String(s.activities)]:[]}ages[s.ageGroup].push({l:s.label||'',acts:acts})});DEV[dom.key]={t:dom.title,ico:dom.icon,c:dom.color,bg:dom.bgColor,ages}}catch(e){console.warn('[content] Error parsing domain',dom.key,e)}})}
   }catch(e){console.log('[content] Using hardcoded defaults',e)}
 }
 
