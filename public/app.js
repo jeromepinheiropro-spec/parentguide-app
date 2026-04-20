@@ -1517,14 +1517,16 @@ function showOnboarding() {
 
 // ============= APP START =============
 async function startApp(isNewUser) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('p-home').classList.add('active');
+  document.body.classList.remove('auth-mode');
   document.getElementById('navbar').style.display = '';
   await loadDynamicContent();
-  await loadHome();
   await syncUserProfile();
   if (isNewUser || !localStorage.getItem('pg_onboarded')) {
+    go('home');
+    await loadHome();
     showOnboarding();
+  } else {
+    go('profile');
   }
 }
 
