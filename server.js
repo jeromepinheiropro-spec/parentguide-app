@@ -946,6 +946,22 @@ app.get('/api/admin/stats', (req, res) => {
     const pendingReports = db.prepare("SELECT COUNT(*) as count FROM reports WHERE status='pending'").get();
     const bannedUsers = db.prepare("SELECT COUNT(*) as count FROM user_profiles WHERE status='banned'").get();
     const bannedWords = db.prepare('SELECT COUNT(*) as count FROM banned_words').get();
+
+    // Enhanced analytics
+    const parents = db.prepare('SELECT COUNT(*) as count FROM parents').get();
+    const parentsList = db.prepare('SELECT id, firstName, lastName, email, createdAt FROM parents ORDER BY createdAt DESC LIMIT 10').all();
+    const childrenList = db.prepare('SELECT c.firstName, c.birthDate, p.firstName as parentFirstName, p.lastName as parentLastName FROM children c LEFT JOIN parents p ON c.parentId = p.id ORDER BY c.id DESC LIMIT 10').all();
+    const milestones = db.prepare('SELECT COUNT(*) as count FROM milestones').get();
+    const growthEntries = db.prepare('SELECT COUNT(*) as count FROM growth_records').get();
+    const sleepEntries = db.prepare('SELECT COUNT(*) as count FROM sleep_records').get();
+    const agendaEvents = db.prepare('SELECT COUNT(*) as count FROM agenda_events').get();
+    const vaccines = db.prepare('SELECT COUNT(*) as count FROM vaccines').get();
+
+    // Recent activity (registrations in last 7 days)
+    const recentParents = db.prepare("SELECT COUNT(*) as count FROM parents WHERE createdAt >= datetime('now','-7 days')").get();
+    // Children age distribution
+    const childAges = db.prepare("SELECT birthDate FROM children").all();
+
     res.json({
       quotes: quotes.count,
       guideCategories: categories.count,
@@ -967,7 +983,19 @@ app.get('/api/admin/stats', (req, res) => {
       flaggedComments: flaggedComments.count,
       reports: reports.count,
       pendingReports: pendingReports.count,
-      bannedWords: bannedWords.count
+      bannedWords: bannedWords.count,
+      // Enhanced analytics
+      parents: parents.count,
+      recentParents: recentParents.count,
+      recentParentsList: parentsList,
+      childrenList: childrenList,
+      milestones: milestones.count,
+      growthEntries: growthEntries.count,
+      sleepEntries: sleepEntries.count,
+      agendaEvents: agendaEvents.count,
+      vaccines: vaccines.count,
+      childAges: childAges.map(c => c.birthDate),
+      lastUpdate: new Date().toISOString()
     });
   } catch (e) {
     res.status(500).json({ error: e.message });

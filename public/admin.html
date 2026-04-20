@@ -716,6 +716,7 @@
                 <div class="header">
                     <h2>Tableau de bord</h2>
                     <div class="header-actions">
+                        <span id="autoRefreshIndicator" style="font-size:12px;color:#999;margin-right:12px;">Actualisation auto toutes les 30s</span>
                         <button class="btn btn-primary" id="seedBtn">
                             <span>🔄</span>
                             <span>Initialiser le contenu</span>
@@ -723,6 +724,59 @@
                     </div>
                 </div>
                 <div class="content">
+                    <!-- User Analytics Section -->
+                    <h3 style="margin-bottom:12px;color:#7C5CFC;">👥 Utilisateurs & Engagement</h3>
+                    <div class="stats-grid" id="userStatsGrid">
+                        <div class="stat-card" style="border-left:4px solid #7C5CFC;">
+                            <div class="stat-label">Parents inscrits</div>
+                            <div class="stat-value" id="statParents">0</div>
+                        </div>
+                        <div class="stat-card" style="border-left:4px solid #4CAF7D;">
+                            <div class="stat-label">Nouveaux (7j)</div>
+                            <div class="stat-value" id="statRecentParents" style="color:#4CAF7D;">0</div>
+                        </div>
+                        <div class="stat-card" style="border-left:4px solid #E8956A;">
+                            <div class="stat-label">Enfants</div>
+                            <div class="stat-value" id="statChildren">0</div>
+                        </div>
+                        <div class="stat-card" style="border-left:4px solid #4A90D9;">
+                            <div class="stat-label">Événements agenda</div>
+                            <div class="stat-value" id="statAgenda">0</div>
+                        </div>
+                        <div class="stat-card" style="border-left:4px solid #8B6DB5;">
+                            <div class="stat-label">Étapes notées</div>
+                            <div class="stat-value" id="statMilestones">0</div>
+                        </div>
+                        <div class="stat-card" style="border-left:4px solid #85C1E9;">
+                            <div class="stat-label">Mesures croissance</div>
+                            <div class="stat-value" id="statGrowth">0</div>
+                        </div>
+                        <div class="stat-card" style="border-left:4px solid #B8A9C9;">
+                            <div class="stat-label">Entrées sommeil</div>
+                            <div class="stat-value" id="statSleep">0</div>
+                        </div>
+                        <div class="stat-card" style="border-left:4px solid #D46B6B;">
+                            <div class="stat-label">Vaccins</div>
+                            <div class="stat-value" id="statVaccines">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Age Distribution Chart -->
+                    <div style="margin:24px 0;background:white;border-radius:12px;padding:20px;border:1px solid #e0e0e0;">
+                        <h3 style="margin-bottom:16px;font-size:15px;">📊 Répartition par âge des enfants</h3>
+                        <div id="ageDistribution" style="display:flex;align-items:flex-end;gap:12px;height:120px;padding:0 20px;">
+                            <p style="color:#999;font-size:13px;">Aucune donnée</p>
+                        </div>
+                    </div>
+
+                    <!-- Recent Registrations -->
+                    <div style="margin:24px 0;background:white;border-radius:12px;padding:20px;border:1px solid #e0e0e0;">
+                        <h3 style="margin-bottom:16px;font-size:15px;">🆕 Dernières inscriptions</h3>
+                        <div id="recentRegistrations" style="font-size:13px;color:#666;">Aucune inscription</div>
+                    </div>
+
+                    <!-- Content Stats Section -->
+                    <h3 style="margin:24px 0 12px;color:#E8956A;">📚 Contenu</h3>
                     <div class="stats-grid" id="statsGrid">
                         <div class="stat-card">
                             <div class="stat-label">Citations</div>
@@ -749,12 +803,41 @@
                             <div class="stat-value" id="statDailyTips">0</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Clients</div>
+                            <div class="stat-label">Profils clients</div>
                             <div class="stat-value" id="statDashUsers">0</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Suggestions</div>
                             <div class="stat-value" id="statDashSuggestions">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Community Stats -->
+                    <h3 style="margin:24px 0 12px;color:#4CAF7D;">💬 Communauté & Modération</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Commentaires</div>
+                            <div class="stat-value" id="statDashComments">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Signalés</div>
+                            <div class="stat-value" id="statDashFlagged" style="color:#D46B6B;">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Signalements</div>
+                            <div class="stat-value" id="statDashReports">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">En attente</div>
+                            <div class="stat-value" id="statDashPendingReports" style="color:#E8956A;">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Utilisateurs bannis</div>
+                            <div class="stat-value" id="statDashBanned" style="color:#D46B6B;">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Suggestions en attente</div>
+                            <div class="stat-value" id="statDashPendingSuggestions" style="color:#E8956A;">0</div>
                         </div>
                     </div>
 
@@ -1444,6 +1527,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners();
             loadData();
+            // Auto-refresh dashboard every 30 seconds
+            setInterval(() => {
+                if (document.visibilityState === 'visible') {
+                    loadData();
+                    // Also refresh the current section data
+                    if (state.currentSection === 'users') loadUsers();
+                    else if (state.currentSection === 'moderation') { loadComments(); loadReports(); }
+                    else if (state.currentSection === 'suggestions') loadSuggestions();
+                }
+            }, 30000);
         });
 
         // Setup event listeners
@@ -1513,31 +1606,106 @@
                 const response = await fetch('/api/admin/stats?_=' + Date.now(), {cache: 'no-store'});
                 const stats = await response.json();
 
-                document.getElementById('statQuotes').textContent = stats.quotes || 0;
-                document.getElementById('statCategories').textContent = stats.guideCategories || stats.categories || 0;
-                document.getElementById('statTips').textContent = stats.guideTips || stats.tips || 0;
-                document.getElementById('statDomains').textContent = stats.devDomains || stats.domains || 0;
-                document.getElementById('statSteps').textContent = stats.devSteps || stats.steps || 0;
-                document.getElementById('statDailyTips').textContent = stats.dailyTips || 0;
-
-                // New section stats
                 const el = (id) => document.getElementById(id);
-                if (el('statUsers')) el('statUsers').textContent = stats.users || 0;
-                if (el('statBannedUsers')) el('statBannedUsers').textContent = stats.bannedUsers || 0;
-                if (el('statSuggestions')) el('statSuggestions').textContent = stats.suggestions || 0;
-                if (el('statPendingSuggestions')) el('statPendingSuggestions').textContent = stats.pendingSuggestions || 0;
-                if (el('statComments')) el('statComments').textContent = stats.comments || 0;
-                if (el('statFlaggedComments')) el('statFlaggedComments').textContent = stats.flaggedComments || 0;
-                if (el('statReports')) el('statReports').textContent = stats.reports || 0;
-                if (el('statPendingReports')) el('statPendingReports').textContent = stats.pendingReports || 0;
-                if (el('statDashUsers')) el('statDashUsers').textContent = stats.users || 0;
-                if (el('statDashSuggestions')) el('statDashSuggestions').textContent = stats.suggestions || 0;
+                const set = (id, val) => { const e = el(id); if (e) e.textContent = val || 0; };
+
+                // Content stats
+                set('statQuotes', stats.quotes);
+                set('statCategories', stats.guideCategories || stats.categories);
+                set('statTips', stats.guideTips || stats.tips);
+                set('statDomains', stats.devDomains || stats.domains);
+                set('statSteps', stats.devSteps || stats.steps);
+                set('statDailyTips', stats.dailyTips);
+
+                // User engagement stats
+                set('statParents', stats.parents);
+                set('statRecentParents', stats.recentParents);
+                set('statChildren', stats.children);
+                set('statAgenda', stats.agendaEvents);
+                set('statMilestones', stats.milestones);
+                set('statGrowth', stats.growthEntries);
+                set('statSleep', stats.sleepEntries);
+                set('statVaccines', stats.vaccines);
+
+                // Community stats
+                set('statDashUsers', stats.users);
+                set('statDashSuggestions', stats.suggestions);
+                set('statDashComments', stats.comments);
+                set('statDashFlagged', stats.flaggedComments);
+                set('statDashReports', stats.reports);
+                set('statDashPendingReports', stats.pendingReports);
+                set('statDashBanned', stats.bannedUsers);
+                set('statDashPendingSuggestions', stats.pendingSuggestions);
+
+                // Section-level stats
+                set('statUsers', stats.users);
+                set('statBannedUsers', stats.bannedUsers);
+                set('statSuggestions', stats.suggestions);
+                set('statPendingSuggestions', stats.pendingSuggestions);
+                set('statComments', stats.comments);
+                set('statFlaggedComments', stats.flaggedComments);
+                set('statReports', stats.reports);
+                set('statPendingReports', stats.pendingReports);
+
+                // Age distribution chart
+                renderAgeDistribution(stats.childAges || []);
+
+                // Recent registrations
+                renderRecentRegistrations(stats.recentParentsList || []);
 
                 const lastUpdate = new Date(stats.lastUpdate || Date.now()).toLocaleString('fr-FR');
                 document.getElementById('lastUpdate').textContent = lastUpdate;
+
+                // Pulse the refresh indicator
+                const indicator = el('autoRefreshIndicator');
+                if (indicator) {
+                    indicator.style.color = '#4CAF7D';
+                    setTimeout(() => { indicator.style.color = '#999'; }, 1000);
+                }
             } catch (error) {
                 console.error('Error loading stats:', error);
             }
+        }
+
+        function renderAgeDistribution(birthDates) {
+            const container = document.getElementById('ageDistribution');
+            if (!container || !birthDates.length) {
+                if (container) container.innerHTML = '<p style="color:#999;font-size:13px;">Aucun enfant enregistré</p>';
+                return;
+            }
+            const now = new Date();
+            const buckets = {'0-6m': 0, '6-12m': 0, '1-2a': 0, '2-3a': 0, '3-6a': 0, '6a+': 0};
+            const colors = {'0-6m': '#7C5CFC', '6-12m': '#E8956A', '1-2a': '#4CAF7D', '2-3a': '#4A90D9', '3-6a': '#8B6DB5', '6a+': '#C4A882'};
+            birthDates.forEach(bd => {
+                const m = (now.getFullYear() - new Date(bd).getFullYear()) * 12 + now.getMonth() - new Date(bd).getMonth();
+                if (m < 6) buckets['0-6m']++;
+                else if (m < 12) buckets['6-12m']++;
+                else if (m < 24) buckets['1-2a']++;
+                else if (m < 36) buckets['2-3a']++;
+                else if (m < 72) buckets['3-6a']++;
+                else buckets['6a+']++;
+            });
+            const max = Math.max(...Object.values(buckets), 1);
+            container.innerHTML = Object.entries(buckets).map(([label, count]) => {
+                const h = Math.max((count / max) * 90, count > 0 ? 20 : 4);
+                return '<div style="flex:1;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;">' +
+                    '<span style="font-size:13px;font-weight:700;color:' + (colors[label] || '#666') + ';">' + count + '</span>' +
+                    '<div style="width:100%;max-width:48px;height:' + h + 'px;background:' + (colors[label] || '#ccc') + ';border-radius:6px 6px 0 0;margin:4px auto 0;"></div>' +
+                    '<span style="font-size:11px;color:#999;margin-top:6px;">' + label + '</span></div>';
+            }).join('');
+        }
+
+        function renderRecentRegistrations(parents) {
+            const container = document.getElementById('recentRegistrations');
+            if (!container) return;
+            if (!parents.length) { container.innerHTML = '<p style="color:#999;font-size:13px;">Aucune inscription</p>'; return; }
+            container.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:13px;">' +
+                '<tr style="border-bottom:1px solid #eee;color:#999;"><th style="text-align:left;padding:6px 8px;font-weight:600;">Nom</th><th style="text-align:left;padding:6px 8px;font-weight:600;">Email</th><th style="text-align:right;padding:6px 8px;font-weight:600;">Date</th></tr>' +
+                parents.map(p => '<tr style="border-bottom:1px solid #f5f5f5;">' +
+                    '<td style="padding:8px;">' + (p.firstName || '') + ' ' + (p.lastName || '') + '</td>' +
+                    '<td style="padding:8px;color:#666;">' + (p.email || '') + '</td>' +
+                    '<td style="padding:8px;text-align:right;color:#999;">' + (p.createdAt ? new Date(p.createdAt).toLocaleDateString('fr-FR') : '') + '</td></tr>'
+                ).join('') + '</table>';
         }
 
         // Quotes
