@@ -418,10 +418,10 @@ async function loadHome(){
   const greetEl=document.getElementById('greeting');
   const pAvatar=S.cp.avatar||'parent';
   greetEl.innerHTML='<span style="display:inline-flex;width:28px;height:28px;vertical-align:middle;margin-right:6px;border-radius:50%;overflow:hidden">'+avSvg(pAvatar)+'</span>Bonjour '+S.cp.firstName+' !';
-  const p=await api('/api/parents/'+S.cp.id);const c=document.getElementById('hc');
+  const p=await api('/api/home/'+S.cp.id);const c=document.getElementById('hc');
   if(!p.children.length){c.innerHTML='<div class="crd" style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Ajoutez votre premier enfant</p><button class="btn bp mt" onclick="openAddChild()">Ajouter un enfant</button></div>';document.getElementById('hi').innerHTML='';document.getElementById('st').innerHTML='';document.getElementById('ht').innerHTML='';document.getElementById('hremind').innerHTML='';return}
   const ch=p.children.find(x=>x.id===S.sel)||p.children[0];S.sel=ch.id;const am=ageM(ch.birthDate);S.childAge=am;
-  const [gr,rem]=await Promise.all([api('/api/children/'+ch.id+'/growth'),api('/api/children/'+ch.id+'/reminders')]);
+  const gr=ch.growth||[];const rem=ch.reminders||{vaccines:[],events:[]};
   S.rem=rem;
   const lg=gr.length?gr[gr.length-1]:null;
   const ageShort=am<12?am+' m':(Math.floor(am/12)+(am%12>0?' a '+(am%12)+' m':' an'+(Math.floor(am/12)>1?'s':'')));
@@ -1529,8 +1529,7 @@ function showOnboarding() {
 async function startApp(isNewUser) {
   document.body.classList.remove('auth-mode');
   document.getElementById('navbar').style.display = '';
-  await loadDynamicContent();
-  await syncUserProfile();
+  await Promise.all([loadDynamicContent(), syncUserProfile()]);
   if (isNewUser || !localStorage.getItem('pg_onboarded')) {
     go('home');
     await loadHome();

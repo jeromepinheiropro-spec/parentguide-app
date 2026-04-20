@@ -573,6 +573,26 @@ app.delete('/api/questionnaires/:id', (req, res) => {
   res.json({ success: true });
 });
 
+// -- Unified home data (parent + children + growth + reminders in one call) --
+app.get('/api/home/:parentId', (req, res) => {
+  try {
+    const parent = db.prepare('SELECT * FROM parents WHERE id = ?').get(req.params.parentId);
+    if (!parent) return res.status(404).json({ error: 'Parent not found' });
+    const children = db.prepare('SELECT * FROM children WHERE parentId = ? ORDER BY birthDate DESC').all(req.params.parentId);
+    const today = new Date().toISOString().slice(0,10);
+    const in60 = new Date(Date.now() + 60*86400000).toISOString().slice(0,10);
+    const childrenData = children.map(ch => {
+      const growth = db.prepare('SELECT * FROM growth_records WHERE childId = ? ORDER BY date ASC').all(ch.id);
+      const vaccines = db.prepare("SELECT id, name, recommendedAge, recommendedDate as date, extras, 'vaccine' as kind FROM vaccines WHERE childId = ? AND status != 'done' AND recommendedDate <= ? ORDER BY recommendedDate ASC").all(ch.id, in60);
+      const events = db.prepare("SELECT id, title as name, category, date, time, extras, 'event' as kind FROM agenda_events WHERE childId = ? AND date >= ? AND date <= ? AND completed = 0 AND category != 'note' ORDER BY date ASC").all(ch.id, today, in60);
+      return { ...ch, growth, reminders: { vaccines, events } };
+    });
+    res.json({ ...parent, children: childrenData });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // -- Proactive dashboard endpoint (all reminders in one call) --
 app.get('/api/children/:childId/reminders', (req, res) => {
   const today = new Date().toISOString().slice(0,10);
