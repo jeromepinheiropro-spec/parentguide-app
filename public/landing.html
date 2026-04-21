@@ -14,10 +14,10 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <link rel="icon" type="image/svg+xml" href="/cocon-favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--primary:#7C5CFC;--primary-light:#A78BFA;--primary-dark:#9B7FFF;--bg:#F8F7FF;--tx:#2D2A26;--tx2:#7A7570;--tx3:#ADA39A;--card:#FFFFFF;--border:#E8E0F5;--accent-green:#4CAF7D;--accent-blue:#4A90D9;--accent-rose:#E8789A;--accent-sand:#C4A882}
+:root{--primary:#7C5CFC;--primary-light:#A78BFA;--primary-dark:#9B7FFF;--bg:#F8F7FF;--tx:#2D2A26;--tx2:#7A7570;--tx3:#ADA39A;--card:#FFFFFF;--border:#E8E0F5;--accent-green:#4CAF7D;--accent-blue:#4A90D9;--accent-rose:#E8789A;--accent-sand:#C4A882;--pk:#FFF0E8;--lv:#FFF0EB;--mt:#E8F5EE;--sk:#E8F2FC;--sd:#FFF5EB}
 html{scroll-behavior:smooth}
 body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
@@ -26,8 +26,7 @@ a{color:inherit;text-decoration:none}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .3s}
 nav.scrolled{background:rgba(248,247,255,.92);backdrop-filter:blur(20px);box-shadow:0 1px 20px rgba(124,92,252,.08)}
 .nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;color:var(--primary-dark)}
-.nav-logo svg.logo-icon{width:36px;height:40px}
+.nav-logo{display:flex;align-items:center;gap:0;font-weight:800;font-size:22px;color:var(--primary-dark)}
 .logo-text{display:inline-flex;align-items:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.02em;color:var(--primary-dark)}
 .logo-text svg{width:22px;height:24px;margin:0 -1px;position:relative;top:1px}
 .nav-links{display:flex;gap:32px;align-items:center}
@@ -54,18 +53,71 @@ nav.scrolled{background:rgba(248,247,255,.92);backdrop-filter:blur(20px);box-sha
 .hero-stat strong{display:block;font-size:28px;font-weight:900;color:var(--primary)}
 .hero-stat span{font-size:12px;color:var(--tx3);font-weight:600}
 .hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
-.phone-mockup{width:280px;height:560px;border-radius:40px;background:linear-gradient(180deg,var(--primary-light),var(--primary));box-shadow:0 40px 80px rgba(124,92,252,.25),0 0 0 8px rgba(255,255,255,.4);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.phone-mockup::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;border-radius:0 0 16px 16px;background:rgba(0,0,0,.15)}
-.phone-screen{width:90%;height:92%;border-radius:32px;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;padding:20px 16px}
-.phone-header{font-weight:800;font-size:14px;color:var(--tx);margin-bottom:12px}
-.phone-card{background:white;border-radius:14px;padding:12px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.phone-card-title{font-size:11px;font-weight:700;color:var(--tx)}
-.phone-card-sub{font-size:9px;color:var(--tx3);margin-top:2px}
-.phone-bar{height:6px;border-radius:3px;margin-top:6px}
+
+/* PHONE MOCKUP SHARED */
+.phone{width:280px;height:560px;border-radius:40px;background:linear-gradient(180deg,var(--primary-light),var(--primary));box-shadow:0 40px 80px rgba(124,92,252,.25),0 0 0 8px rgba(255,255,255,.4);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:28px;border-radius:0 0 16px 16px;background:rgba(0,0,0,.15);z-index:2}
+.phone-in{width:90%;height:92%;border-radius:32px;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;font-family:'Nunito',system-ui,sans-serif}
 .floating-card{position:absolute;background:white;border-radius:16px;padding:14px 18px;box-shadow:0 12px 40px rgba(0,0,0,.08);animation:float 4s ease-in-out infinite}
 .fc-1{top:60px;right:-30px;animation-delay:0s}
 .fc-2{bottom:100px;left:-40px;animation-delay:1.5s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* APP MOCKUP PIECES (faithful to app) */
+.m-hbar{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 8px}
+.m-hbar-l{display:flex;align-items:center;gap:6px}
+.m-hbar .gr{font-size:8px;color:var(--tx2)}
+.m-hbar h3{font-size:11px;font-weight:800;color:var(--tx)}
+.m-bell{width:22px;height:22px;border-radius:50%;background:rgba(124,92,252,.08);display:flex;align-items:center;justify-content:center}
+.m-bell svg{width:12px;height:12px;stroke:var(--primary)}
+.m-crd{background:white;border-radius:14px;margin:0 10px 6px;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.m-crd.hero-card{background:linear-gradient(135deg,#7C5CFC,#A78BFA);color:white;padding:12px}
+.m-av{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:14px}
+.m-nm{font-size:10px;font-weight:800}
+.m-age{font-size:7px;opacity:.8}
+.m-sts{display:flex;justify-content:space-around;margin-top:8px;gap:4px}
+.m-st{text-align:center}
+.m-st .v{font-size:10px;font-weight:800}
+.m-st .l{font-size:6px;opacity:.7;text-transform:uppercase}
+.m-stl{font-size:8px;font-weight:800;color:var(--tx);padding:8px 14px 4px;display:flex;align-items:center;gap:4px}
+.m-stl svg{width:10px;height:10px;stroke:var(--primary)}
+.m-alert{display:flex;gap:6px;align-items:center;margin:0 10px 4px;padding:8px;background:white;border-radius:10px;border-left:3px solid var(--accent-blue);box-shadow:0 1px 4px rgba(0,0,0,.03)}
+.m-alert-i{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.m-alert-i svg{width:12px;height:12px}
+.m-alert-t{font-size:8px;font-weight:700;color:var(--tx)}
+.m-alert-s{font-size:6px;color:var(--tx3)}
+.m-alert-d{font-size:6px;font-weight:700}
+.m-ins{margin:0 10px 6px;padding:10px;border-radius:12px;background:linear-gradient(135deg,rgba(124,92,252,.06),rgba(167,139,250,.06));border:1px solid rgba(124,92,252,.1)}
+.m-ins-l{font-size:7px;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:3px;margin-bottom:3px}
+.m-ins-l svg{width:8px;height:8px;stroke:var(--primary)}
+.m-ins-t{font-size:8px;font-weight:800;color:var(--tx);margin-bottom:2px}
+.m-ins-x{font-size:7px;color:var(--tx2);line-height:1.4}
+.m-nav{display:flex;justify-content:space-around;margin-top:auto;padding:6px 4px 4px;border-top:1px solid var(--border);background:rgba(255,255,255,.8)}
+.m-nav-i{display:flex;flex-direction:column;align-items:center;gap:1px}
+.m-nav-i svg{width:12px;height:12px;stroke:var(--tx3)}
+.m-nav-i.on svg{stroke:var(--primary)}
+.m-nav-i span{font-size:5px;color:var(--tx3)}
+.m-nav-i.on span{color:var(--primary);font-weight:700}
+.m-hdr{padding:14px 14px 6px}
+.m-hdr h3{font-size:12px;font-weight:800;color:var(--tx)}
+.m-hdr p{font-size:7px;color:var(--tx2)}
+.m-tabs{display:flex;gap:4px;padding:0 10px;margin-bottom:6px}
+.m-tab{padding:4px 8px;border-radius:8px;font-size:7px;font-weight:700;color:var(--tx3);background:rgba(0,0,0,.03)}
+.m-tab.on{background:var(--primary);color:white}
+.m-bar-chart{display:flex;align-items:flex-end;gap:3px;height:45px;padding:0 4px}
+.m-bar-chart div{flex:1;border-radius:2px}
+.m-sleep-bar{display:flex;gap:2px;margin:4px 0}
+.m-sleep-bar div{height:8px;border-radius:3px}
+.m-dev-item{display:flex;align-items:center;gap:6px;margin:0 10px 4px;padding:8px;background:white;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.03)}
+.m-dev-ico{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.m-dev-ico svg{width:12px;height:12px}
+.m-dev-t{font-size:8px;font-weight:700;color:var(--tx)}
+.m-dev-s{font-size:6px;color:var(--tx3)}
+.m-week{display:flex;gap:3px;padding:0 10px;margin-bottom:6px}
+.m-week-d{flex:1;text-align:center;padding:4px 0;border-radius:8px;font-size:6px;color:var(--tx3)}
+.m-week-d .dn{font-size:5px}
+.m-week-d .dd{font-weight:800;font-size:8px;margin-top:1px}
+.m-week-d.on{background:var(--primary);color:white}
 
 /* SECTIONS */
 .section{padding:100px 24px}
@@ -85,32 +137,13 @@ nav.scrolled{background:rgba(248,247,255,.92);backdrop-filter:blur(20px);box-sha
 
 /* SCREENSHOTS */
 .screenshots{padding:80px 24px;overflow:hidden}
-.screenshots-inner{max-width:1100px;margin:0 auto;text-align:center}
-.screens-track{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:48px}
-.screen-item{width:240px;flex-shrink:0;text-align:center}
-.screen-frame{width:240px;height:420px;border-radius:32px;background:linear-gradient(180deg,var(--primary-light),var(--primary));box-shadow:0 20px 50px rgba(124,92,252,.18);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.screen-frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:20px;border-radius:0 0 12px 12px;background:rgba(0,0,0,.12)}
-.screen-inner{width:88%;height:90%;border-radius:24px;background:var(--bg);overflow:hidden;padding:14px 12px;display:flex;flex-direction:column}
+.screenshots-inner{max-width:1200px;margin:0 auto;text-align:center}
+.screens-track{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:48px}
+.screen-item{text-align:center}
 .screen-label{font-size:13px;font-weight:700;color:var(--tx2);margin-top:14px}
-
-/* mini components inside screenshots */
-.s-hdr{font-weight:800;font-size:11px;color:var(--tx);margin-bottom:8px}
-.s-card{background:white;border-radius:10px;padding:8px 10px;margin-bottom:6px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.s-card-t{font-size:9px;font-weight:700;color:var(--tx)}
-.s-card-s{font-size:7px;color:var(--tx3);margin-top:1px}
-.s-bar{height:4px;border-radius:2px;margin-top:4px}
-.s-nav{display:flex;justify-content:space-around;margin-top:auto;padding:8px 0 4px;border-top:1px solid var(--border)}
-.s-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px}
-.s-nav-item svg{width:14px;height:14px;stroke:var(--tx3)}
-.s-nav-item.active svg{stroke:var(--primary)}
-.s-nav-item span{font-size:6px;color:var(--tx3)}
-.s-nav-item.active span{color:var(--primary);font-weight:700}
-.s-tag{display:inline-block;padding:2px 6px;border-radius:6px;font-size:7px;font-weight:700}
-.s-row{display:flex;gap:6px;margin-bottom:6px}
-.s-col{flex:1}
-.s-progress{height:3px;border-radius:2px;background:var(--border);overflow:hidden;margin-top:3px}
-.s-progress-fill{height:100%;border-radius:2px}
-.s-avatar{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px}
+.phone-sm{width:240px;height:480px;border-radius:34px}
+.phone-sm::before{width:90px;height:22px}
+.phone-sm .phone-in{border-radius:26px}
 
 /* SOCIAL PROOF */
 .proof{background:linear-gradient(180deg,rgba(124,92,252,.04),transparent);padding:80px 24px}
@@ -128,24 +161,29 @@ nav.scrolled{background:rgba(248,247,255,.92);backdrop-filter:blur(20px);box-sha
 .step h3{font-size:16px;font-weight:800;margin-bottom:8px}
 .step p{font-size:14px;color:var(--tx2);line-height:1.6}
 
-/* CONTACT */
-.contact{padding:80px 24px}
-.contact-inner{max-width:700px;margin:0 auto;text-align:center}
-.contact-card{background:white;border-radius:24px;padding:48px 40px;border:1px solid var(--border);margin-top:32px}
-.contact-methods{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-.contact-method{display:flex;align-items:center;gap:12px;padding:14px 24px;border-radius:14px;background:var(--bg);border:1px solid var(--border);transition:all .3s;text-decoration:none;color:var(--tx)}
-.contact-method:hover{border-color:var(--primary);box-shadow:0 4px 16px rgba(124,92,252,.1)}
-.contact-method svg{width:22px;height:22px;stroke:var(--primary);flex-shrink:0}
-.contact-method span{font-size:14px;font-weight:600}
-
 /* CTA */
-.cta-section{padding:100px 24px;text-align:center}
+.cta-section{padding:60px 24px;text-align:center}
 .cta-box{max-width:700px;margin:0 auto;background:linear-gradient(135deg,var(--primary-light),var(--primary));border-radius:32px;padding:60px 40px;color:white;position:relative;overflow:hidden}
 .cta-box::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08)}
 .cta-box h2{font-size:clamp(24px,4vw,36px);font-weight:900;margin-bottom:12px}
 .cta-box p{font-size:16px;opacity:.9;margin-bottom:32px;max-width:450px;margin-left:auto;margin-right:auto;line-height:1.7}
 .btn-white{background:white;color:var(--primary-dark);font-weight:800;padding:16px 36px;border-radius:50px;font-size:15px;box-shadow:0 8px 24px rgba(0,0,0,.12);transition:all .3s;display:inline-flex;align-items:center;gap:8px}
 .btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.18)}
+
+/* CONTACT FORM */
+.contact-section{padding:80px 24px 60px}
+.contact-inner{max-width:600px;margin:0 auto;text-align:center}
+.contact-form{background:white;border-radius:24px;padding:40px;border:1px solid var(--border);margin-top:32px;text-align:left}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:700;color:var(--tx);margin-bottom:6px}
+.form-group input,.form-group textarea{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;background:var(--bg);transition:border-color .2s;outline:none;color:var(--tx)}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(124,92,252,.1)}
+.form-group textarea{min-height:120px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-submit{width:100%;padding:14px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:white;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,92,252,.3)}
+.contact-alt{margin-top:20px;font-size:13px;color:var(--tx3);line-height:1.6}
+.contact-alt a{color:var(--primary);font-weight:600}
 
 /* FOOTER */
 footer{padding:40px 24px;text-align:center;color:var(--tx3);font-size:13px}
@@ -158,16 +196,16 @@ footer a{color:var(--primary);font-weight:600}
   .hero-cta{justify-content:center}
   .hero-stats{justify-content:center}
   .hero-visual{order:-1;margin-bottom:20px}
-  .phone-mockup{width:220px;height:440px}
+  .phone{width:220px;height:440px}
   .features-grid,.proof-grid,.steps{grid-template-columns:1fr}
   .nav-links a:not(.btn){display:none}
   .floating-card{display:none}
   .section-desc{margin-left:auto;margin-right:auto}
   .screens-track{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:16px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
-  .screen-item{scroll-snap-align:center;min-width:220px}
-  .screen-frame{width:220px;height:385px}
-  .contact-methods{flex-direction:column;align-items:center}
-  .contact-card{padding:32px 20px}
+  .screen-item{scroll-snap-align:center;flex-shrink:0}
+  .phone-sm{width:210px;height:420px}
+  .form-row{grid-template-columns:1fr}
+  .contact-form{padding:24px}
 }
 </style>
 </head>
@@ -177,7 +215,6 @@ footer a{color:var(--primary);font-weight:600}
 <nav id="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
-      <svg class="logo-icon" viewBox="-260 -180 520 480" fill="none" stroke="#7C5CFC" stroke-linejoin="round"><path d="M 0 -55 C -10 -80,-45 -155,-130 -155 C -215 -155,-240 -65,-225 -10 C -210 50,-165 120,-95 185 C -50 225,-15 255,0 270 C 15 255,50 225,95 185 C 165 120,210 50,225 -10 C 240 -65,215 -155,130 -155 C 45 -155,10 -80,0 -55 Z" stroke-width="52"/><path d="M -205 -5 C -140 40,-70 62,0 62 C 70 62,140 40,205 -5" stroke-width="38" stroke-linecap="round"/><path d="M -155 110 C -95 153,-40 173,0 173 C 40 173,95 153,155 110" stroke-width="38" stroke-linecap="round"/></svg>
       <span class="logo-text">coc<svg viewBox="-260 -180 520 480" fill="none" stroke="#7C5CFC" stroke-linejoin="round"><path d="M 0 -55 C -10 -80,-45 -155,-130 -155 C -215 -155,-240 -65,-225 -10 C -210 50,-165 120,-95 185 C -50 225,-15 255,0 270 C 15 255,50 225,95 185 C 165 120,210 50,225 -10 C 240 -65,215 -155,130 -155 C 45 -155,10 -80,0 -55 Z" stroke-width="52"/><path d="M -205 -2 C -140 40,-70 62,0 62 C 70 62,140 40,205 -2" stroke-width="38" stroke-linecap="round"/><path d="M -155 110 C -95 150,-40 170,0 170 C 40 170,95 150,155 110" stroke-width="38" stroke-linecap="round"/></svg>n</span>
     </a>
     <div class="nav-links">
@@ -210,23 +247,42 @@ footer a{color:var(--primary);font-weight:600}
       </div>
     </div>
     <div class="hero-visual">
-      <div class="phone-mockup">
-        <div class="phone-screen">
-          <div class="phone-header">Bonjour, Marie</div>
-          <div class="phone-card">
-            <div class="phone-card-title">Léna, 8 mois</div>
-            <div class="phone-card-sub">Croissance : tout va bien</div>
-            <div class="phone-bar" style="background:linear-gradient(90deg,var(--accent-green),#A8E0C0);width:75%"></div>
+      <div class="phone">
+        <div class="phone-in">
+          <!-- faithful: hdrbar with greeting + bell -->
+          <div class="m-hbar">
+            <div class="m-hbar-l"><div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#FFD4B8,#FF8F6B);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="11" height="11"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="gr">Bonjour Marie !</p><h3>Tableau de bord</h3></div></div>
+            <div class="m-bell"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
           </div>
-          <div class="phone-card">
-            <div class="phone-card-title">Prochain vaccin</div>
-            <div class="phone-card-sub">ROR — dans 12 jours</div>
-            <div class="phone-bar" style="background:linear-gradient(90deg,var(--accent-blue),#A8D4F5);width:60%"></div>
+          <!-- faithful: child hero card -->
+          <div class="m-crd hero-card">
+            <div style="display:flex;align-items:center;gap:8px"><div class="m-av"><svg viewBox="0 0 36 36" width="20" height="20"><text x="18" y="26" text-anchor="middle" font-size="24">🦁</text></svg></div><div><div class="m-nm">Léna</div><div class="m-age">8 mois</div></div></div>
+            <div class="m-sts"><div class="m-st"><div class="v">69 cm</div><div class="l">Taille</div></div><div class="m-st"><div class="v">8.2 kg</div><div class="l">Poids</div></div><div class="m-st"><div class="v">8 m</div><div class="l">Âge</div></div></div>
           </div>
-          <div class="phone-card">
-            <div class="phone-card-title">Conseil du jour</div>
-            <div class="phone-card-sub">L'éveil musical stimule le langage...</div>
-            <div class="phone-bar" style="background:linear-gradient(90deg,var(--primary),var(--primary-light));width:90%"></div>
+          <!-- faithful: reminder alerts -->
+          <div class="m-stl"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg> À venir prochainement</div>
+          <div class="m-alert" style="border-left-color:var(--accent-blue)">
+            <div class="m-alert-i" style="background:var(--sk)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
+            <div><div class="m-alert-t">Vaccin ROR</div><div class="m-alert-s">Vaccin recommandé</div><div class="m-alert-d" style="color:var(--accent-blue)">Dans 12 jours</div></div>
+          </div>
+          <div class="m-alert" style="border-left-color:var(--accent-green)">
+            <div class="m-alert-i" style="background:var(--mt)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg></div>
+            <div><div class="m-alert-t">Visite 9 mois</div><div class="m-alert-s">Rendez-vous</div><div class="m-alert-d" style="color:var(--accent-green)">Dans 28 jours</div></div>
+          </div>
+          <!-- faithful: insight -->
+          <div class="m-ins">
+            <div class="m-ins-l"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Éclairage personnalisé</div>
+            <div class="m-ins-t">Ce qui se passe à 8 mois</div>
+            <div class="m-ins-x">La mobilité explose ! Le quatre pattes approche. Sécurisez votre intérieur.</div>
+          </div>
+          <!-- faithful: 6-tab nav bar -->
+          <div class="m-nav">
+            <div class="m-nav-i on"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></div>
+            <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Agenda</span></div>
+            <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Carnet</span></div>
+            <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Suivi</span></div>
+            <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg><span>Repères</span></div>
+            <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
           </div>
         </div>
       </div>
@@ -250,47 +306,34 @@ footer a{color:var(--primary);font-weight:600}
     <div class="section-tag">Fonctionnalités</div>
     <h2 class="section-title">Tout ce dont vous avez besoin, au même endroit</h2>
     <p class="section-desc">Cocon regroupe les outils essentiels pour suivre et accompagner le développement de vos enfants, de la naissance à 6 ans.</p>
-
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(76,175,125,.1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF7D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
+        <div class="feature-icon" style="background:rgba(76,175,125,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF7D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <h3>Suivi de croissance</h3>
         <p>Taille, poids, périmètre crânien. Visualisez les courbes et détectez les tendances en un coup d'œil.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(124,92,252,.1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7C5CFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
+        <div class="feature-icon" style="background:rgba(124,92,252,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#7C5CFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <h3>Agenda intelligent</h3>
         <p>Vaccins, rendez-vous médicaux, événements. Recevez des rappels pour ne jamais rien oublier.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(74,144,217,.1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-        </div>
+        <div class="feature-icon" style="background:rgba(74,144,217,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#4A90D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg></div>
         <h3>Repères développementaux</h3>
         <p>Suivez les grandes étapes : motricité, langage, socialisation, cognition, autonomie et créativité.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(232,120,154,.1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#E8789A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-        </div>
+        <div class="feature-icon" style="background:rgba(232,120,154,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#E8789A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 006 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
         <h3>Conseils personnalisés</h3>
         <p>87+ conseils adaptés à l'âge de votre enfant, rédigés par des professionnels de la petite enfance.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(255,183,77,.1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#FFB74D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg>
-        </div>
+        <div class="feature-icon" style="background:rgba(255,183,77,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#FFB74D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg></div>
         <h3>Suivi du sommeil</h3>
         <p>Enregistrez les cycles de sommeil et identifiez les patterns pour de meilleures nuits.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(196,168,130,.1)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-        </div>
+        <div class="feature-icon" style="background:rgba(196,168,130,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#C4A882" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
         <h3>Guide parental</h3>
         <p>Alimentation, santé, éducation, sécurité... Un guide complet organisé par thèmes.</p>
       </div>
@@ -298,180 +341,136 @@ footer a{color:var(--primary);font-weight:600}
   </div>
 </section>
 
-<!-- SCREENSHOTS -->
+<!-- SCREENSHOTS — faithful to actual app -->
 <section class="screenshots">
   <div class="screenshots-inner">
     <div class="section-tag">L'application</div>
     <h2 class="section-title">Découvrez Cocon en images</h2>
     <p class="section-desc" style="margin-left:auto;margin-right:auto">Une interface pensée pour les parents : claire, rapide et agréable à utiliser au quotidien.</p>
-
     <div class="screens-track">
-      <!-- Screen 1: Dashboard -->
+
+      <!-- Screen 1: Suivi & Courbes -->
       <div class="screen-item">
-        <div class="screen-frame">
-          <div class="screen-inner">
-            <div class="s-hdr">Bonjour, Marie</div>
-            <div class="s-card">
-              <div style="display:flex;align-items:center;gap:6px">
-                <div class="s-avatar" style="background:rgba(124,92,252,.12);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" width="12" height="12"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </div>
-                <div>
-                  <div class="s-card-t">Léna, 8 mois</div>
-                  <div class="s-card-s">Tout va bien</div>
-                </div>
+        <div class="phone phone-sm">
+          <div class="phone-in">
+            <div class="m-hdr"><h3>Suivi & Courbes</h3><p>Croissance et sommeil</p></div>
+            <div class="m-stl">Sommeil cette semaine</div>
+            <div class="m-crd" style="margin:0 10px 6px;padding:8px 10px">
+              <div class="m-sleep-bar"><div style="flex:3;background:var(--accent-blue);opacity:.7"></div><div style="flex:1;background:var(--border)"></div><div style="flex:4;background:var(--accent-blue)"></div></div>
+              <div style="font-size:7px;color:var(--tx2)">10h20 au total</div>
+            </div>
+            <div class="m-stl">Courbes de croissance</div>
+            <div class="m-tabs"><div class="m-tab on">Poids</div><div class="m-tab">Taille</div><div class="m-tab">PC</div></div>
+            <div class="m-crd" style="margin:0 10px 6px;padding:8px">
+              <div class="m-bar-chart">
+                <div style="background:rgba(124,92,252,.15);height:30%"></div>
+                <div style="background:rgba(124,92,252,.2);height:42%"></div>
+                <div style="background:rgba(124,92,252,.25);height:55%"></div>
+                <div style="background:rgba(124,92,252,.3);height:62%"></div>
+                <div style="background:rgba(124,92,252,.4);height:70%"></div>
+                <div style="background:rgba(124,92,252,.5);height:78%"></div>
+                <div style="background:var(--primary);height:85%"></div>
               </div>
-              <div class="s-bar" style="background:linear-gradient(90deg,var(--accent-green),#A8E0C0);width:75%;height:4px;border-radius:2px;margin-top:6px"></div>
+              <div style="font-size:7px;color:var(--tx2);margin-top:4px;padding:0 4px">8.2 kg — +350g ce mois</div>
             </div>
-            <div class="s-card">
-              <div class="s-card-t">Prochain vaccin</div>
-              <div class="s-card-s">ROR — dans 12 jours</div>
-              <div class="s-bar" style="background:linear-gradient(90deg,var(--accent-blue),#A8D4F5);width:60%;height:4px;border-radius:2px;margin-top:6px"></div>
-            </div>
-            <div class="s-card" style="background:linear-gradient(135deg,rgba(124,92,252,.06),rgba(167,139,250,.06));">
-              <div class="s-card-t" style="color:var(--primary)">Conseil du jour</div>
-              <div class="s-card-s">L'éveil musical stimule le langage...</div>
-            </div>
-            <div class="s-nav">
-              <div class="s-nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Accueil</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span>Agenda</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Suivi</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
+            <div style="padding:0 10px"><button style="width:100%;padding:6px;border:none;border-radius:10px;background:rgba(124,92,252,.08);color:var(--primary);font-size:8px;font-weight:700;font-family:inherit">+ Ajouter une mesure</button></div>
+            <div class="m-nav">
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Accueil</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span>Agenda</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Carnet</span></div>
+              <div class="m-nav-i on"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Suivi</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg><span>Repères</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
             </div>
           </div>
         </div>
-        <div class="screen-label">Tableau de bord</div>
+        <div class="screen-label">Suivi & Courbes</div>
       </div>
 
-      <!-- Screen 2: Growth tracking -->
+      <!-- Screen 2: Agenda -->
       <div class="screen-item">
-        <div class="screen-frame">
-          <div class="screen-inner">
-            <div class="s-hdr">Suivi & Courbes</div>
-            <div class="s-card">
-              <div class="s-card-t">Poids</div>
-              <div style="display:flex;align-items:flex-end;gap:3px;height:50px;margin-top:6px;padding:0 4px;">
-                <div style="flex:1;background:rgba(124,92,252,.15);border-radius:2px;height:30%"></div>
-                <div style="flex:1;background:rgba(124,92,252,.2);border-radius:2px;height:42%"></div>
-                <div style="flex:1;background:rgba(124,92,252,.25);border-radius:2px;height:55%"></div>
-                <div style="flex:1;background:rgba(124,92,252,.3);border-radius:2px;height:62%"></div>
-                <div style="flex:1;background:rgba(124,92,252,.4);border-radius:2px;height:70%"></div>
-                <div style="flex:1;background:rgba(124,92,252,.5);border-radius:2px;height:78%"></div>
-                <div style="flex:1;background:var(--primary);border-radius:2px;height:85%"></div>
-              </div>
-              <div class="s-card-s" style="margin-top:4px">8.2 kg — +350g ce mois</div>
+        <div class="phone phone-sm">
+          <div class="phone-in">
+            <div class="m-hdr"><h3>Agenda</h3><p>Vos rendez-vous, notes & rappels vaccins</p></div>
+            <div class="m-week">
+              <div class="m-week-d"><div class="dn">Lun</div><div class="dd">14</div></div>
+              <div class="m-week-d"><div class="dn">Mar</div><div class="dd">15</div></div>
+              <div class="m-week-d on"><div class="dn">Mer</div><div class="dd">16</div></div>
+              <div class="m-week-d"><div class="dn">Jeu</div><div class="dd">17</div></div>
+              <div class="m-week-d"><div class="dn">Ven</div><div class="dd">18</div></div>
+              <div class="m-week-d"><div class="dn">Sam</div><div class="dd">19</div></div>
+              <div class="m-week-d"><div class="dn">Dim</div><div class="dd">20</div></div>
             </div>
-            <div class="s-card">
-              <div class="s-card-t">Taille</div>
-              <div style="display:flex;align-items:flex-end;gap:3px;height:50px;margin-top:6px;padding:0 4px;">
-                <div style="flex:1;background:rgba(76,175,125,.15);border-radius:2px;height:35%"></div>
-                <div style="flex:1;background:rgba(76,175,125,.2);border-radius:2px;height:45%"></div>
-                <div style="flex:1;background:rgba(76,175,125,.25);border-radius:2px;height:55%"></div>
-                <div style="flex:1;background:rgba(76,175,125,.35);border-radius:2px;height:65%"></div>
-                <div style="flex:1;background:rgba(76,175,125,.45);border-radius:2px;height:73%"></div>
-                <div style="flex:1;background:rgba(76,175,125,.55);border-radius:2px;height:80%"></div>
-                <div style="flex:1;background:var(--accent-green);border-radius:2px;height:90%"></div>
-              </div>
-              <div class="s-card-s" style="margin-top:4px">69 cm — +2.5 cm ce mois</div>
+            <div class="m-tabs"><div class="m-tab on">Tout</div><div class="m-tab">Vaccins</div><div class="m-tab">RDV</div><div class="m-tab">Notes</div></div>
+            <div class="m-alert" style="border-left-color:var(--accent-blue)">
+              <div class="m-alert-i" style="background:var(--sk)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
+              <div><div class="m-alert-t">Vaccin ROR</div><div class="m-alert-s">09h30 — Dr. Martin</div><div class="m-alert-d" style="color:var(--accent-blue)">Aujourd'hui</div></div>
             </div>
-            <div class="s-card">
-              <div class="s-card-t">Sommeil cette nuit</div>
-              <div style="display:flex;gap:2px;margin-top:6px;">
-                <div style="flex:3;height:10px;background:var(--accent-blue);border-radius:3px;opacity:.7"></div>
-                <div style="flex:1;height:10px;background:var(--border);border-radius:3px"></div>
-                <div style="flex:4;height:10px;background:var(--accent-blue);border-radius:3px"></div>
-              </div>
-              <div class="s-card-s" style="margin-top:4px">10h20 au total</div>
+            <div class="m-alert" style="border-left-color:var(--accent-green)">
+              <div class="m-alert-i" style="background:var(--mt)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg></div>
+              <div><div class="m-alert-t">Visite 9 mois</div><div class="m-alert-s">14h00 — Pédiatre</div><div class="m-alert-d" style="color:var(--accent-green)">Demain</div></div>
             </div>
-            <div class="s-nav">
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Accueil</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span>Agenda</span></div>
-              <div class="s-nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Suivi</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
+            <div class="m-alert" style="border-left-color:var(--primary)">
+              <div class="m-alert-i" style="background:rgba(124,92,252,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+              <div><div class="m-alert-t">Rappel pesée</div><div class="m-alert-s">À la maison</div><div class="m-alert-d" style="color:var(--primary)">Vendredi</div></div>
             </div>
-          </div>
-        </div>
-        <div class="screen-label">Courbes de croissance</div>
-      </div>
-
-      <!-- Screen 3: Guide -->
-      <div class="screen-item">
-        <div class="screen-frame">
-          <div class="screen-inner">
-            <div class="s-hdr">Repères & Guide</div>
-            <div class="s-card" style="display:flex;align-items:center;gap:8px">
-              <div style="width:28px;height:28px;border-radius:8px;background:rgba(124,92,252,.1);display:flex;align-items:center;justify-content:center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div><div class="s-card-t">Motricité</div><div class="s-card-s">6 étapes franchies</div></div>
+            <div class="m-alert" style="border-left-color:var(--accent-rose)">
+              <div class="m-alert-i" style="background:rgba(232,120,154,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div><div class="m-alert-t">Anniversaire Léna</div><div class="m-alert-s">12 mois !</div><div class="m-alert-d" style="color:var(--accent-rose)">Dans 4 mois</div></div>
             </div>
-            <div class="s-card" style="display:flex;align-items:center;gap:8px">
-              <div style="width:28px;height:28px;border-radius:8px;background:rgba(74,144,217,.1);display:flex;align-items:center;justify-content:center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" width="14" height="14"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-              </div>
-              <div><div class="s-card-t">Langage</div><div class="s-card-s">Babille et imite</div></div>
-            </div>
-            <div class="s-card" style="display:flex;align-items:center;gap:8px">
-              <div style="width:28px;height:28px;border-radius:8px;background:rgba(232,120,154,.1);display:flex;align-items:center;justify-content:center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="2" width="14" height="14"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-              </div>
-              <div><div class="s-card-t">Socialisation</div><div class="s-card-s">Sourit aux visages familiers</div></div>
-            </div>
-            <div class="s-card" style="display:flex;align-items:center;gap:8px">
-              <div style="width:28px;height:28px;border-radius:8px;background:rgba(196,168,130,.1);display:flex;align-items:center;justify-content:center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-sand)" stroke-width="2" width="14" height="14"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-              </div>
-              <div><div class="s-card-t">Guide quotidien</div><div class="s-card-s">12 thèmes disponibles</div></div>
-            </div>
-            <div class="s-nav">
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Accueil</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span>Agenda</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Suivi</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="screen-label">Guide & Repères</div>
-      </div>
-
-      <!-- Screen 4: Agenda -->
-      <div class="screen-item">
-        <div class="screen-frame">
-          <div class="screen-inner">
-            <div class="s-hdr">Agenda</div>
-            <div class="s-row" style="gap:4px;margin-bottom:8px">
-              <div style="flex:1;text-align:center;padding:4px;border-radius:8px;font-size:7px;color:var(--tx3)"><div>Lun</div><div style="font-weight:800;font-size:9px;margin-top:2px">14</div></div>
-              <div style="flex:1;text-align:center;padding:4px;border-radius:8px;font-size:7px;color:var(--tx3)"><div>Mar</div><div style="font-weight:800;font-size:9px;margin-top:2px">15</div></div>
-              <div style="flex:1;text-align:center;padding:4px;border-radius:8px;font-size:7px;background:var(--primary);color:white"><div>Mer</div><div style="font-weight:800;font-size:9px;margin-top:2px">16</div></div>
-              <div style="flex:1;text-align:center;padding:4px;border-radius:8px;font-size:7px;color:var(--tx3)"><div>Jeu</div><div style="font-weight:800;font-size:9px;margin-top:2px">17</div></div>
-              <div style="flex:1;text-align:center;padding:4px;border-radius:8px;font-size:7px;color:var(--tx3)"><div>Ven</div><div style="font-weight:800;font-size:9px;margin-top:2px">18</div></div>
-            </div>
-            <div class="s-card" style="border-left:3px solid var(--accent-blue)">
-              <div class="s-card-t">Vaccin ROR</div>
-              <div class="s-card-s">09h30 — Dr. Martin</div>
-            </div>
-            <div class="s-card" style="border-left:3px solid var(--accent-green)">
-              <div class="s-card-t">Visite 9 mois</div>
-              <div class="s-card-s">14h00 — Pédiatre</div>
-            </div>
-            <div class="s-card" style="border-left:3px solid var(--primary)">
-              <div class="s-card-t">Rappel pesée</div>
-              <div class="s-card-s">À la maison</div>
-            </div>
-            <div class="s-card" style="border-left:3px solid var(--accent-rose)">
-              <div class="s-card-t">Anniversaire Léna</div>
-              <div class="s-card-s">Dans 4 mois</div>
-            </div>
-            <div class="s-nav">
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Accueil</span></div>
-              <div class="s-nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span>Agenda</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Suivi</span></div>
-              <div class="s-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
+            <div class="m-nav">
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Accueil</span></div>
+              <div class="m-nav-i on"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span>Agenda</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Carnet</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Suivi</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg><span>Repères</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
             </div>
           </div>
         </div>
         <div class="screen-label">Agenda familial</div>
       </div>
+
+      <!-- Screen 3: Repères & Guide -->
+      <div class="screen-item">
+        <div class="phone phone-sm">
+          <div class="phone-in">
+            <div class="m-hdr"><h3>Repères & Guide</h3><p>Comprendre le développement</p></div>
+            <div class="m-stl">Repères de développement</div>
+            <div class="m-dev-item">
+              <div class="m-dev-ico" style="background:var(--pk)"><svg viewBox="0 0 24 24" fill="none" stroke="#FF8F6B" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
+              <div><div class="m-dev-t">Motricité</div><div class="m-dev-s">Se retourne, tient assis avec soutien</div></div>
+            </div>
+            <div class="m-dev-item">
+              <div class="m-dev-ico" style="background:var(--sk)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+              <div><div class="m-dev-t">Langage</div><div class="m-dev-s">Babille et imite les sons</div></div>
+            </div>
+            <div class="m-dev-item">
+              <div class="m-dev-ico" style="background:rgba(232,120,154,.1)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div><div class="m-dev-t">Socialisation</div><div class="m-dev-s">Sourit aux visages familiers</div></div>
+            </div>
+            <div class="m-stl">Guide du quotidien</div>
+            <div class="m-dev-item">
+              <div class="m-dev-ico" style="background:var(--mt)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+              <div><div class="m-dev-t">Alimentation</div><div class="m-dev-s">11 conseils</div></div>
+            </div>
+            <div class="m-dev-item">
+              <div class="m-dev-ico" style="background:var(--sd)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-sand)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+              <div><div class="m-dev-t">Éducation & Éveil</div><div class="m-dev-s">18 conseils</div></div>
+            </div>
+            <div class="m-nav">
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Accueil</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span>Agenda</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Carnet</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Suivi</span></div>
+              <div class="m-nav-i on"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg><span>Repères</span></div>
+              <div class="m-nav-i"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">Repères & Guide</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -482,24 +481,23 @@ footer a{color:var(--primary);font-weight:600}
     <div class="section-tag">Comment ça marche</div>
     <h2 class="section-title">Prêt en 30 secondes</h2>
     <p class="section-desc" style="margin-left:auto;margin-right:auto">Pas de configuration compliquée. Créez votre compte, ajoutez votre enfant et commencez.</p>
-
     <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Créez votre compte</h3>
-        <p>Email et mot de passe. C'est tout ce qu'il faut pour commencer.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Ajoutez votre enfant</h3>
-        <p>Prénom, date de naissance, et choisissez un avatar adorable.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Profitez de Cocon</h3>
-        <p>Suivi, conseils, rappels... tout est prêt pour vous accompagner.</p>
-      </div>
+      <div class="step"><div class="step-num">1</div><h3>Créez votre compte</h3><p>Email et mot de passe. C'est tout ce qu'il faut pour commencer.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Ajoutez votre enfant</h3><p>Prénom, date de naissance, et choisissez un avatar adorable.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Profitez de Cocon</h3><p>Suivi, conseils, rappels... tout est prêt pour vous accompagner.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- CTA (moved up) -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>Rejoignez Cocon aujourd'hui</h2>
+    <p>Gratuit, sans engagement, sans publicité. Parce que la parentalité mérite un espace bienveillant.</p>
+    <a href="/app" class="btn-white">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+      Créer mon compte gratuit
+    </a>
   </div>
 </section>
 
@@ -508,7 +506,6 @@ footer a{color:var(--primary);font-weight:600}
   <div class="proof-inner">
     <div class="section-tag">Témoignages</div>
     <h2 class="section-title">Les parents adorent Cocon</h2>
-
     <div class="proof-grid">
       <div class="proof-card">
         <div class="stars">★★★★★</div>
@@ -529,38 +526,36 @@ footer a{color:var(--primary);font-weight:600}
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
+<!-- CONTACT FORM (at bottom) -->
+<section class="contact-section" id="contact">
   <div class="contact-inner">
     <div class="section-tag">Contact</div>
     <h2 class="section-title">Une question ? Écrivez-nous</h2>
     <p class="section-desc" style="margin-left:auto;margin-right:auto">Notre équipe est à votre écoute pour toute question, suggestion ou retour d'expérience.</p>
 
-    <div class="contact-card">
-      <div class="contact-methods">
-        <a href="mailto:contact@cocon-app.fr" class="contact-method">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>contact@cocon-app.fr</span>
-        </a>
-        <a href="https://instagram.com/cocon.app" target="_blank" rel="noopener" class="contact-method">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          <span>@cocon.app</span>
-        </a>
+    <form class="contact-form" action="mailto:jeromepinheiro.pro@gmail.com" method="POST" enctype="text/plain">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Prénom</label>
+          <input type="text" id="cf-name" name="name" placeholder="Votre prénom" required>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" placeholder="votre@email.fr" required>
+        </div>
       </div>
-      <p style="margin-top:24px;font-size:13px;color:var(--tx3);line-height:1.6">Vous pouvez aussi utiliser la <strong style="color:var(--tx2)">Boîte à idées</strong> directement dans l'application pour nous envoyer vos suggestions.</p>
-    </div>
-  </div>
-</section>
+      <div class="form-group">
+        <label for="cf-subject">Sujet</label>
+        <input type="text" id="cf-subject" name="subject" placeholder="Question, suggestion, bug...">
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" placeholder="Écrivez votre message ici..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Envoyer le message</button>
+    </form>
 
-<!-- CTA FINAL -->
-<section class="cta-section">
-  <div class="cta-box">
-    <h2>Rejoignez Cocon aujourd'hui</h2>
-    <p>Gratuit, sans engagement, sans publicité. Parce que la parentalité mérite un espace bienveillant.</p>
-    <a href="/app" class="btn-white">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-      Créer mon compte gratuit
-    </a>
+    <p class="contact-alt">Vous pouvez aussi nous écrire directement à <a href="mailto:jeromepinheiro.pro@gmail.com">jeromepinheiro.pro@gmail.com</a> ou utiliser la <strong>Boîte à idées</strong> dans l'application.</p>
   </div>
 </section>
 
@@ -572,50 +567,14 @@ footer a{color:var(--primary);font-weight:600}
 </footer>
 
 <script>
-// Nav scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// Smooth reveal on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.feature-card, .proof-card, .step, .screen-item, .contact-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(30px)';
-  el.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
-  observer.observe(el);
-});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:0.1});
+document.querySelectorAll('.feature-card,.proof-card,.step,.screen-item,.contact-form').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='all 0.6s cubic-bezier(0.22,1,0.36,1)';observer.observe(el)});
 </script>
 
-<!-- Structured Data for SEO -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Cocon",
-  "applicationCategory": "HealthApplication",
-  "operatingSystem": "Web",
-  "description": "Application de parentalité bienveillante : suivi de croissance, conseils personnalisés, agenda vaccinal et repères développementaux.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "127"
-  }
-}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Cocon","applicationCategory":"HealthApplication","operatingSystem":"Web","description":"Application de parentalité bienveillante : suivi de croissance, conseils personnalisés, agenda vaccinal et repères développementaux.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"127"}}
 </script>
 </body>
 </html>
