@@ -725,7 +725,7 @@ window.showGD=function(key){const g=GUIDE[key];if(!g)return;document.getElementB
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
 
 // ============= PROFILE =============
-const CHILD_COLORS=['#D4896A','#E8956A','#4CAF7D','#4A90D9','#D46B6B','#C4A882','#8B6DB5','#FFB74D'];
+const CHILD_COLORS=['#7C5CFC','#E8956A','#4CAF7D','#4A90D9','#D46B6B','#C4A882','#8B6DB5','#FFB74D'];
 
 async function loadProf(){
   if(!S.cp)return;
@@ -930,7 +930,7 @@ window.openProfileEdit=async function(){
     '<h3 style="font-size:18px;font-weight:900;margin-bottom:20px;letter-spacing:-.01em">Modifier le profil</h3>'+
     // Avatar selection
     '<div style="text-align:center;margin-bottom:20px"><div id="peAvPreview" style="width:80px;height:80px;border-radius:50%;background:var(--pk);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;border:3px solid var(--pk3)"><span style="width:64px;height:64px;display:flex">'+avSvg(curAv)+'</span></div><div style="font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:10px">Choisir un avatar</div><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:280px;margin:0 auto">'+
-    PAVS.map(a=>'<div onclick="peSelectAv(\''+a.id+'\')" id="peav-'+a.id+'" style="cursor:pointer;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid '+(a.id===curAv?'#D4896A':'rgba(124,92,252,.1)')+';transition:all .2s;background:'+(a.id===curAv?'var(--pk)':'transparent')+'">'+a.svg+'</div>').join('')+
+    PAVS.map(a=>'<div onclick="peSelectAv(\''+a.id+'\')" id="peav-'+a.id+'" style="cursor:pointer;width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid '+(a.id===curAv?'#7C5CFC':'rgba(124,92,252,.1)')+';transition:all .2s;background:'+(a.id===curAv?'var(--pk)':'transparent')+'">'+a.svg+'</div>').join('')+
     '</div></div>'+
     // Info fields
     '<div class="fg"><label class="fl">Prenom</label><input class="fi" id="pe-fn" value="'+escHtml(p.firstName)+'"></div>'+
@@ -950,7 +950,7 @@ window.peSelectAv=function(id){
   // Update selection borders
   PAVS.forEach(a=>{
     const el=document.getElementById('peav-'+a.id);
-    if(el){el.style.borderColor=a.id===id?'#D4896A':'rgba(124,92,252,.1)';el.style.background=a.id===id?'var(--pk)':'transparent';}
+    if(el){el.style.borderColor=a.id===id?'#7C5CFC':'rgba(124,92,252,.1)';el.style.background=a.id===id?'var(--pk)':'transparent';}
   });
 }
 
