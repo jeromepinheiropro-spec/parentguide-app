@@ -1577,9 +1577,8 @@ app.delete('/api/admin/banned-words/:id', (req, res) => {
 // ============================================================
 // SERVE FRONTEND
 // ============================================================
-app.use(express.static(path.join(__dirname, 'public'), { etag: false, maxAge: 0 }));
 
-// Landing page (site vitrine)
+// Landing page (site vitrine) — MUST be before express.static
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'landing.html'));
 });
@@ -1594,6 +1593,9 @@ app.get('/admin', (req, res) => {
   res.set('Expires', '0');
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
+
+// Static files (CSS, JS, images, favicon, etc.)
+app.use(express.static(path.join(__dirname, 'public'), { etag: false, maxAge: 0, index: false }));
 
 app.get('/{*path}', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
