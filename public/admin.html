@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ParentGuide Admin</title>
+    <title>Cocon Admin</title>
     <style>
         * {
             margin: 0;
@@ -44,7 +44,7 @@
         .sidebar-header h1 {
             font-size: 18px;
             font-weight: 700;
-            color: #7C5CFC;
+            color: #D4896A;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -75,13 +75,13 @@
 
         .nav-item:hover {
             background: #f9f9f9;
-            color: #7C5CFC;
+            color: #D4896A;
         }
 
         .nav-item.active {
-            background: #f0ebff;
-            border-left-color: #7C5CFC;
-            color: #7C5CFC;
+            background: #FFF0E8;
+            border-left-color: #D4896A;
+            color: #D4896A;
         }
 
         .nav-icon {
@@ -140,7 +140,7 @@
         }
 
         .btn-primary {
-            background: #7C5CFC;
+            background: #D4896A;
             color: white;
         }
 
@@ -199,7 +199,7 @@
         .stat-value {
             font-size: 32px;
             font-weight: 700;
-            color: #7C5CFC;
+            color: #D4896A;
             margin: 12px 0;
         }
 
@@ -233,10 +233,10 @@
 
         .quick-action-btn {
             padding: 12px 16px;
-            background: #f0ebff;
+            background: #FFF0E8;
             border: 1px solid #e0d5ff;
             border-radius: 6px;
-            color: #7C5CFC;
+            color: #D4896A;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
@@ -245,9 +245,9 @@
         }
 
         .quick-action-btn:hover {
-            background: #7C5CFC;
+            background: #D4896A;
             color: white;
-            border-color: #7C5CFC;
+            border-color: #D4896A;
         }
 
         /* List views */
@@ -301,8 +301,8 @@
         }
 
         .list-item.active {
-            background: #f0ebff;
-            border-left: 3px solid #7C5CFC;
+            background: #FFF0E8;
+            border-left: 3px solid #D4896A;
         }
 
         .list-item-content {
@@ -403,7 +403,7 @@
         .form-textarea:focus,
         .form-select:focus {
             outline: none;
-            border-color: #7C5CFC;
+            border-color: #D4896A;
             box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.1);
         }
 
@@ -484,12 +484,12 @@
         }
 
         .tab:hover {
-            color: #7C5CFC;
+            color: #D4896A;
         }
 
         .tab.active {
-            color: #7C5CFC;
-            border-bottom-color: #7C5CFC;
+            color: #D4896A;
+            border-bottom-color: #D4896A;
         }
 
         .tab-content {
@@ -515,7 +515,7 @@
         }
 
         .toggle.active {
-            background: #7C5CFC;
+            background: #D4896A;
         }
 
         .toggle-thumb {
@@ -581,7 +581,7 @@
             width: 16px;
             height: 16px;
             border: 2px solid #f0f0f0;
-            border-top-color: #7C5CFC;
+            border-top-color: #D4896A;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -673,7 +673,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <h1>ParentGuide Admin</h1>
+                <h1>Cocon Admin</h1>
                 <p>Gestion de contenu</p>
             </div>
             <nav class="sidebar-nav">
@@ -735,7 +735,7 @@
 
                     <!-- KPI Cards Row -->
                     <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
-                        <div class="stat-card" style="border-left:4px solid #7C5CFC;position:relative;">
+                        <div class="stat-card" style="border-left:4px solid #D4896A;position:relative;">
                             <div class="stat-label">Total inscrits</div>
                             <div class="stat-value" id="statParents" style="font-size:28px;">0</div>
                             <div id="parentsTrend" style="font-size:11px;margin-top:4px;color:#4CAF7D;"></div>
@@ -1364,11 +1364,11 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Couleur</label>
-                    <input type="color" class="form-input" id="categoryColor" value="#7C5CFC">
+                    <input type="color" class="form-input" id="categoryColor" value="#D4896A">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Couleur de fond</label>
-                    <input type="color" class="form-input" id="categoryBgColor" value="#f0ebff">
+                    <input type="color" class="form-input" id="categoryBgColor" value="#FFF0E8">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('categoryModal')">
@@ -1435,11 +1435,11 @@
                 <div class="form-group" style="display:flex;gap:12px;">
                     <div style="flex:1;">
                         <label class="form-label">Couleur</label>
-                        <input type="color" class="form-input" id="domainColor" value="#7C5CFC">
+                        <input type="color" class="form-input" id="domainColor" value="#D4896A">
                     </div>
                     <div style="flex:1;">
                         <label class="form-label">Couleur fond</label>
-                        <input type="color" class="form-input" id="domainBgColor" value="#f0ebff">
+                        <input type="color" class="form-input" id="domainBgColor" value="#FFF0E8">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -1660,7 +1660,7 @@
         function setChartView(view) {
             currentChartView = view;
             document.querySelectorAll('#chartDaily,#chartWeekly,#chartMonthly').forEach(b => {
-                b.style.background = b.id === 'chart' + view.charAt(0).toUpperCase() + view.slice(1) ? '#7C5CFC' : '';
+                b.style.background = b.id === 'chart' + view.charAt(0).toUpperCase() + view.slice(1) ? '#D4896A' : '';
                 b.style.color = b.id === 'chart' + view.charAt(0).toUpperCase() + view.slice(1) ? 'white' : '';
             });
             renderRegistrationChart();
@@ -1784,8 +1784,8 @@
                 const h = Math.max((count / max) * 160, count > 0 ? 8 : 2);
                 const showLabel = currentChartView === 'daily' ? (i % 5 === 0 || i === data.length - 1) : true;
                 return '<div style="flex:1;min-width:0;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;">' +
-                    (count > 0 ? '<span style="font-size:10px;font-weight:700;color:#7C5CFC;margin-bottom:2px;">' + count + '</span>' : '') +
-                    '<div style="width:80%;max-width:32px;height:' + h + 'px;background:' + (count > 0 ? 'linear-gradient(180deg,#7C5CFC,#9B7FFF)' : '#f0f0f0') + ';border-radius:4px 4px 0 0;"></div>' +
+                    (count > 0 ? '<span style="font-size:10px;font-weight:700;color:#D4896A;margin-bottom:2px;">' + count + '</span>' : '') +
+                    '<div style="width:80%;max-width:32px;height:' + h + 'px;background:' + (count > 0 ? 'linear-gradient(180deg,#D4896A,#C07A5E)' : '#f0f0f0') + ';border-radius:4px 4px 0 0;"></div>' +
                     (showLabel ? '<span style="font-size:9px;color:#999;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;">' + labels[i] + '</span>' : '') +
                     '</div>';
             }).join('');
@@ -1799,7 +1799,7 @@
             }
             const now = new Date();
             const buckets = {'0-6m': 0, '6-12m': 0, '1-2a': 0, '2-3a': 0, '3-6a': 0, '6a+': 0};
-            const colors = {'0-6m': '#7C5CFC', '6-12m': '#E8956A', '1-2a': '#4CAF7D', '2-3a': '#4A90D9', '3-6a': '#8B6DB5', '6a+': '#C4A882'};
+            const colors = {'0-6m': '#D4896A', '6-12m': '#E8956A', '1-2a': '#4CAF7D', '2-3a': '#4A90D9', '3-6a': '#8B6DB5', '6a+': '#C4A882'};
             birthDates.forEach(bd => {
                 const m = (now.getFullYear() - new Date(bd).getFullYear()) * 12 + now.getMonth() - new Date(bd).getMonth();
                 if (m < 6) buckets['0-6m']++;
@@ -1990,7 +1990,7 @@
             }
 
             container.innerHTML = state.categories.map(cat => `
-                <div class="list-item" onclick="selectCategory('${cat.id}')" ${state.selectedCategory === cat.id ? 'style="background: #f0ebff; border-left: 3px solid #7C5CFC;"' : ''}>
+                <div class="list-item" onclick="selectCategory('${cat.id}')" ${state.selectedCategory === cat.id ? 'style="background: #FFF0E8; border-left: 3px solid #D4896A;"' : ''}>
                     <div class="list-item-content">
                         <div class="list-item-title">${cat.icon} ${escapeHtml(cat.title)}</div>
                     </div>
@@ -2013,8 +2013,8 @@
             state.editingCategoryId = null;
             document.getElementById('categoryModalTitle').textContent = 'Nouvelle catégorie';
             document.getElementById('categoryForm').reset();
-            document.getElementById('categoryColor').value = '#7C5CFC';
-            document.getElementById('categoryBgColor').value = '#f0ebff';
+            document.getElementById('categoryColor').value = '#D4896A';
+            document.getElementById('categoryBgColor').value = '#FFF0E8';
             openModal('categoryModal');
         }
 
@@ -2255,7 +2255,7 @@
             }
 
             container.innerHTML = state.domains.map(domain => `
-                <div class="list-item" onclick="selectDomain('${domain.id}')" ${state.selectedDomain === domain.id ? 'style="background: #f0ebff; border-left: 3px solid #7C5CFC;"' : ''}>
+                <div class="list-item" onclick="selectDomain('${domain.id}')" ${state.selectedDomain === domain.id ? 'style="background: #FFF0E8; border-left: 3px solid #D4896A;"' : ''}>
                     <div class="list-item-content">
                         <div class="list-item-title">${escapeHtml(domain.title)}</div>
                     </div>
@@ -2291,8 +2291,8 @@
             document.getElementById('domainKey').value = domain.key;
             document.getElementById('domainTitle').value = domain.title;
             document.getElementById('domainIcon').value = domain.icon || '';
-            document.getElementById('domainColor').value = domain.color || '#7C5CFC';
-            document.getElementById('domainBgColor').value = domain.bgColor || '#f0ebff';
+            document.getElementById('domainColor').value = domain.color || '#D4896A';
+            document.getElementById('domainBgColor').value = domain.bgColor || '#FFF0E8';
             openModal('domainModal');
         }
 
@@ -2391,7 +2391,7 @@
                 if (groupedSteps[ag] && groupedSteps[ag].length > 0) {
                     stepsHtml += `
                         <div style="margin-bottom: 24px;">
-                            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #7C5CFC;">${ageGroupLabels[ag]}</h4>
+                            <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #D4896A;">${ageGroupLabels[ag]}</h4>
                     `;
                     groupedSteps[ag].forEach(step => {
                         stepsHtml += `
@@ -3074,7 +3074,7 @@
                         <div class="list-item-title">${statusBadge(r.status)} Signalement de <strong>${escapeHtml(r.reporterName || 'Inconnu')}</strong> contre <strong>${escapeHtml(r.reportedName || 'Inconnu')}</strong></div>
                         <div style="margin:4px 0;font-size:13px;"><strong>Raison:</strong> ${escapeHtml(r.reason)}</div>
                         ${r.details ? `<div style="font-size:12px;color:#666;">${escapeHtml(r.details)}</div>` : ''}
-                        ${r.adminNote ? `<div style="font-size:12px;color:#7C5CFC;margin-top:4px;">Note admin: ${escapeHtml(r.adminNote)}</div>` : ''}
+                        ${r.adminNote ? `<div style="font-size:12px;color:#D4896A;margin-top:4px;">Note admin: ${escapeHtml(r.adminNote)}</div>` : ''}
                         <div class="list-item-subtitle">${new Date(r.createdAt).toLocaleDateString('fr-FR')}</div>
                     </div>
                     <div class="list-item-actions">
@@ -3228,7 +3228,7 @@
                     <div class="list-item-content" style="flex:1;">
                         <div class="list-item-title">${statusBadge(s.status)} ${escapeHtml(s.userName || 'Anonyme')}</div>
                         <div style="margin:8px 0;font-size:14px;line-height:1.5;">${escapeHtml(s.text)}</div>
-                        ${s.adminNote ? `<div style="font-size:12px;color:#7C5CFC;margin-top:4px;padding:4px 8px;background:#f0ebff;border-radius:4px;">Note: ${escapeHtml(s.adminNote)}</div>` : ''}
+                        ${s.adminNote ? `<div style="font-size:12px;color:#D4896A;margin-top:4px;padding:4px 8px;background:#FFF0E8;border-radius:4px;">Note: ${escapeHtml(s.adminNote)}</div>` : ''}
                         <div class="list-item-subtitle">${new Date(s.createdAt).toLocaleDateString('fr-FR')}</div>
                     </div>
                     <div class="list-item-actions" style="flex-direction:column;gap:4px;">
@@ -3331,7 +3331,7 @@
                 return '<div class="list-item" style="flex-wrap:wrap;gap:8px;padding:16px;">' +
                     '<div style="flex:1;min-width:200px;">' +
                         '<div style="display:flex;align-items:center;gap:8px;">' +
-                            '<span style="font-family:monospace;font-size:16px;font-weight:700;color:#7C5CFC;letter-spacing:1px;">' + escapeHtml(code.code) + '</span>' +
+                            '<span style="font-family:monospace;font-size:16px;font-weight:700;color:#D4896A;letter-spacing:1px;">' + escapeHtml(code.code) + '</span>' +
                             '<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:' + statusColor + '20;color:' + statusColor + ';font-weight:600;">' + statusText + '</span>' +
                         '</div>' +
                         '<div style="font-size:12px;color:#666;margin-top:4px;">' + escapeHtml(code.description || 'Aucune description') + '</div>' +

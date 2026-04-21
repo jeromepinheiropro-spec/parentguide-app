@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="7" fill="#D4896A"/>
+  <g transform="translate(16,16.5) scale(0.056)" fill="none" stroke="white" stroke-linejoin="round">
+    <path d="M 0 -55 C -10 -80,-45 -155,-130 -155 C -215 -155,-240 -65,-225 -10 C -210 50,-165 120,-95 185 C -50 225,-15 255,0 270 C 15 255,50 225,95 185 C 165 120,210 50,225 -10 C 240 -65,215 -155,130 -155 C 45 -155,10 -80,0 -55 Z" stroke-width="52"/>
+    <path d="M -205 -5 C -140 40,-70 62,0 62 C 70 62,140 40,205 -5" stroke-width="38" stroke-linecap="round"/>
+    <path d="M -155 110 C -95 153,-40 173,0 173 C 40 173,95 153,155 110" stroke-width="38" stroke-linecap="round"/>
+  </g>
+</svg>

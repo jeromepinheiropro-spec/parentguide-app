@@ -1579,6 +1579,15 @@ app.delete('/api/admin/banned-words/:id', (req, res) => {
 // ============================================================
 app.use(express.static(path.join(__dirname, 'public'), { etag: false, maxAge: 0 }));
 
+// Landing page (site vitrine)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'landing.html'));
+});
+
+app.get('/app', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.get('/admin', (req, res) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
   res.set('Pragma', 'no-cache');
@@ -1595,7 +1604,7 @@ app.get('/{*path}', (req, res) => {
 // ============================================================
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`\n  🍼 ParentGuide running at http://localhost:${PORT}\n`);
+  console.log(`\n  🧡 Cocon running at http://localhost:${PORT}\n`);
 });
 
 // Global error handler (catch unhandled route errors)
