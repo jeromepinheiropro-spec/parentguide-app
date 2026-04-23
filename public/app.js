@@ -1076,23 +1076,54 @@ window.showCD=async function(id){
     ?'<div class="br-card" onclick="showLastBilan(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>Dernier bilan : '+fmt(qz.createdAt.slice(0,10))+' - Voir les conseils</span></div><span style="color:var(--tx3)">'+I.chevR+'</span></div>'
     :'<div class="br-card" onclick="openQuiz(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>10 questions, 2 min, pour des conseils adaptés</span></div><span style="color:var(--pk3)">'+I.chevR+'</span></div>';
 
-  // Recommended guides based on questionnaire results
+  // Recommended guides based on questionnaire results — show actual tips
   let recoBlk='';
   if(qz&&qz.summary){
     try{
       const summary=JSON.parse(qz.summary);
       const needsWork=summary.filter(b=>b.lvl==='watch'||b.lvl==='alert');
       if(needsWork.length){
-        const guideMap={motor:'activities',language:'activities',social:'émotions',cognitive:'activities',autonomy:'hygiene',sleep:'sleep',food:'food'};
-        recoBlk='<div class="stl">'+ico('sparkle',16)+' Recommandé pour '+ch.firstName+'</div>';
-        recoBlk+=needsWork.slice(0,3).map(b=>{
+        // Map questionnaire domains to guide categories
+        const guideMap={sleep:['sleep'],food:['food'],émotions:['émotions','behavior'],language:['activities'],motor:['activities'],social:['behavior','émotions'],screens:['activities'],bonding:['activities','émotions'],autonomy:['hygiene']};
+        // Find relevant tips for child's age
+        function tipsMatchAge(tipAge,childAgeM){
+          if(!tipAge||tipAge==='Tous ages')return true;
+          const s=ageStartMonths(tipAge),e=ageEndMonths(tipAge);
+          return childAgeM>=s&&childAgeM<=e;
+        }
+        recoBlk='<div class="stl">'+ico('sparkle',16)+' Conseils pour '+ch.firstName+'</div>';
+        recoBlk+='<div style="padding:0 20px;margin-bottom:12px"><p style="font-size:12px;color:var(--tx3);line-height:1.5;margin-bottom:12px">Basé sur le bilan personnalisé — domaines à renforcer</p></div>';
+        needsWork.forEach(b=>{
           const d=QDOMS[b.dom];
-          const gKey=guideMap[b.dom];
-          const g=gKey&&GUIDE[gKey]?GUIDE[gKey]:null;
-          return '<div class="gc" style="margin:0 0 6px" onclick="'+(g?'showGD(\''+gKey+'\')':'go(\'guide\')')+'"><div class="gci" style="background:'+d.bg+'"><span style="color:'+d.c+'">'+ico(d.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+d.t+' — à renforcer</div><div class="gcd">'+b.summary.slice(0,60)+'...</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>';
-        }).join('');
+          const gKeys=guideMap[b.dom]||[];
+          // Collect matching tips from guide
+          let matchedTips=[];
+          gKeys.forEach(gk=>{
+            const g=GUIDE[gk];if(!g)return;
+            g.tips.forEach(t=>{if(tipsMatchAge(t.a,am))matchedTips.push({...t,guideColor:g.c,guideBg:g.bg,guideKey:gk})});
+          });
+          // Also add bilan tips (expert advice from questionnaire)
+          const bilanTips=b.tips||[];
+          // Build section
+          recoBlk+='<div style="margin:0 20px 16px;padding:16px;background:white;border-radius:var(--rl);border:1px solid var(--border);box-shadow:var(--sh)">';
+          recoBlk+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:'+d.bg+';display:flex;align-items:center;justify-content:center"><span style="color:'+d.c+'">'+ico(d.ico,18)+'</span></div><div><div style="font-size:14px;font-weight:800">'+d.t+'</div><div style="font-size:11px;color:var(--tx3)">'+LVL_LBL[b.lvl]+'</div></div></div>';
+          // Show bilan expert tips first
+          recoBlk+='<div style="margin-bottom:8px">';
+          bilanTips.slice(0,3).forEach(t=>{
+            recoBlk+='<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:'+d.c+';flex-shrink:0;margin-top:2px">'+ico('check',12)+'</span><span style="font-size:12px;color:var(--tx2);line-height:1.5">'+t+'</span></div>';
+          });
+          recoBlk+='</div>';
+          // Show 2 matching guide tips
+          if(matchedTips.length){
+            recoBlk+='<div style="font-size:11px;font-weight:700;color:var(--tx3);margin:8px 0 6px;text-transform:uppercase;letter-spacing:.5px">Guide du quotidien</div>';
+            matchedTips.slice(0,2).forEach(t=>{
+              recoBlk+='<div class="gc" style="margin:0 0 4px;padding:10px" onclick="showGD(\''+t.guideKey+'\')"><div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--tx)">'+t.t+'</div><div style="font-size:11px;color:var(--tx3);margin-top:2px">'+t.x.slice(0,80)+'...</div></div><span style="color:var(--tx4);flex-shrink:0">'+I.chevR+'</span></div>';
+            });
+          }
+          recoBlk+='</div>';
+        });
       }
-    }catch(e){}
+    }catch(e){console.error('[recoBlk]',e)}
   }
 
   document.getElementById('cdc').innerHTML=
