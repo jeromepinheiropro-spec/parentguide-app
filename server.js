@@ -1230,7 +1230,7 @@ app.post('/api/admin/seed', (req, res) => {
   try {
     const quoteCount = db.prepare('SELECT COUNT(*) as count FROM content_quotes').get();
     if (quoteCount.count > 0) {
-      return res.status(400).json({ error: 'Contenu deja initialise. Supprimez les tables pour re-initialiser.' });
+      return res.status(400).json({ error: 'Contenu déjà initialisé. Supprimez les tables pour réinitialiser.' });
     }
 
     // If body has data, use it (sent from admin panel)

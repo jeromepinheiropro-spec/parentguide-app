@@ -2710,7 +2710,7 @@
 
                 const result = await response.json();
                 if (response.ok) {
-                    showNotification('Contenu initialise : ' + (payload.quotes.length) + ' citations, ' + (payload.guideCategories.length) + ' catégories, ' + (payload.guideTips.length) + ' conseils', 'success');
+                    showNotification('Contenu initialisé : ' + (payload.quotes.length) + ' citations, ' + (payload.guideCategories.length) + ' catégories, ' + (payload.guideTips.length) + ' conseils', 'success');
                     loadData();
                 } else {
                     showNotification(result.error || 'Erreur', 'error');
