@@ -346,10 +346,10 @@ const DAILY_TIPS={
 
 // ============= CITATIONS INSPIRANTES POUR PARENTS =============
 const PARENT_QUOTES=[
-{q:"Vous n'avez pas besoin d'être parfait. Vous avez juste besoin d'être present.",a:""},
-{q:"Chaque jour où vous vous levez pour votre enfant, vous etes déjà un parent formidable.",a:""},
+{q:"Vous n'avez pas besoin d'être parfait. Vous avez juste besoin d'être présent.",a:""},
+{q:"Chaque jour où vous vous levez pour votre enfant, vous êtes déjà un parent formidable.",a:""},
 {q:"Un enfant n'a pas besoin d'un parent parfait. Il a besoin d'un parent heureux.",a:""},
-{q:"Ce que vous faites ne suffit peut-être pas toujours, mais ce que vous etes suffit toujours.",a:""},
+{q:"Ce que vous faites ne suffit peut-être pas toujours, mais ce que vous êtes suffit toujours.",a:""},
 {q:"Douter de soi-même, c'est la preuve qu'on prend la parentalité au sérieux.",a:""},
 {q:"Votre enfant ne se souviendra pas de la maison parfaite. Il se souviendra des fous rires.",a:""},
 {q:"Un câlin n'a jamais gâté un enfant. Il l'a seulement rassuré.",a:""},
@@ -357,24 +357,24 @@ const PARENT_QUOTES=[
 {q:"Chaque erreur est une occasion d'apprendre. Vous grandissez avec votre enfant.",a:""},
 {q:"Être parent, c'est aussi apprendre à se pardonner chaque soir.",a:""},
 {q:"Votre enfant ne voit pas vos imperfections. Il voit son monde entier.",a:""},
-{q:"Le plus beau cadeau que vous pouvez offrir a votre enfant, c'est votre présence attentive.",a:""},
-{q:"Personne ne connait votre enfant mieux que vous. Faites-vous confiance.",a:""},
+{q:"Le plus beau cadeau que vous pouvez offrir à votre enfant, c'est votre présence attentive.",a:""},
+{q:"Personne ne connaît votre enfant mieux que vous. Faites-vous confiance.",a:""},
 {q:"Les petits moments du quotidien sont les grands souvenirs de demain.",a:""},
-{q:"Prendre soin de soi n'est pas de l'égoïsme. C'est s'assurer d'avoir de l'amour a donner.",a:""},
-{q:"Un parent fatigue reste un bon parent. Le simple fait d'être la compte énormement.",a:""},
+{q:"Prendre soin de soi n'est pas de l'égoïsme. C'est s'assurer d'avoir de l'amour à donner.",a:""},
+{q:"Un parent fatigué reste un bon parent. Le simple fait d'être là compte énormément.",a:""},
 {q:"Les enfants ne demandent pas la perfection. Ils demandent la connexion.",a:""},
 {q:"Votre patience d'aujourd'hui construit la confiance de votre enfant pour la vie.",a:""},
-{q:"Il n'y a pas de mode d'emploi. Et c'est normal : chaque famille ecrit sa propre histoire.",a:""},
-{q:"Même les jours difficiles, vous etes en train de construire quelque chose de beau.",a:""},
+{q:"Il n'y a pas de mode d'emploi. Et c'est normal : chaque famille écrit sa propre histoire.",a:""},
+{q:"Même les jours difficiles, vous êtes en train de construire quelque chose de beau.",a:""},
 {q:"L'amour que vous donnez ne se perd jamais. Il devient la force intérieure de votre enfant.",a:""},
-{q:"Vous n'etes pas seul. Tous les parents doutent. Les meilleurs osent en parler.",a:""},
-{q:"Chaque bataille de pyjama, chaque crise au supermarche : ça passera. Et vous en rirez.",a:""},
-{q:"Votre enfant n'a pas besoin que vous fassiez tout. Il a besoin que vous soyez la.",a:""},
-{q:"Le fait que vous cherchiez a mieux faire prouve déjà que vous faites bien.",a:""},
-{q:"Lacher prise sur le menage pour jouer 10 minutes : c'est la bonne priorite.",a:""},
+{q:"Vous n'êtes pas seul. Tous les parents doutent. Les meilleurs osent en parler.",a:""},
+{q:"Chaque bataille de pyjama, chaque crise au supermarché : ça passera. Et vous en rirez.",a:""},
+{q:"Votre enfant n'a pas besoin que vous fassiez tout. Il a besoin que vous soyez là.",a:""},
+{q:"Le fait que vous cherchiez à mieux faire prouve déjà que vous faites bien.",a:""},
+{q:"Lâcher prise sur le ménage pour jouer 10 minutes : c'est la bonne priorité.",a:""},
 {q:"Un parent qui demande de l'aide n'est pas faible. Il est courageux.",a:""},
 {q:"Votre voix est la première musique de votre enfant. Parlez-lui, chantez-lui, même faux.",a:""},
-{q:"Aujourd'hui, autorisez-vous a faire 'juste assez'. C'est déjà beaucoup.",a:""},
+{q:"Aujourd'hui, autorisez-vous à faire 'juste assez'. C'est déjà beaucoup.",a:""},
 {q:"L'enfance passe vite. Mais chaque moment d'attention laisse une empreinte pour la vie.",a:""}
 ];
 
@@ -507,8 +507,9 @@ async function loadHome(){
   document.getElementById('stTip').innerHTML=ico('lightbulb',16)+' Conseil du jour pour '+ch.firstName+' ('+ageLabel+')';
   document.getElementById('tipDay').innerHTML='<div class="tipcard"><div class="tci">'+ico('sparkle',18)+'</div><div style="flex:1"><div class="tct">'+tip.t+'</div><div class="tcx">'+tip.x+'</div></div></div>';
 
-  // Citation inspirante du jour
-  const quoteIdx=(dayOfYear+3)%PARENT_QUOTES.length;
+  // Citation inspirante du jour (pseudo-random based on date seed)
+  const dateSeed=new Date().getFullYear()*1000+dayOfYear;
+  const quoteIdx=((dateSeed*2654435761)>>>0)%PARENT_QUOTES.length;
   const quote=PARENT_QUOTES[quoteIdx];
   document.getElementById('homeQuote').innerHTML='<div class="quotecard" style="margin:0"><div class="qi-ico">'+ico('heart',18)+'</div><div style="flex:1"><p class="qt">\u00AB '+quote.q+' \u00BB</p>'+(quote.a?'<p class="qa">\u2014 '+quote.a+'</p>':'')+'</div></div>';
 
@@ -830,9 +831,10 @@ async function loadProf(){
   const curAv=p.avatar||'parent';
   document.getElementById('pi').innerHTML='<div class="prc" style="padding:36px 28px 28px;"><div style="width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.25);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;border:3px solid rgba(255,255,255,.3)"><span style="width:80px;height:80px;display:flex">'+avSvg(curAv)+'</span></div><div class="prn">'+p.firstName+' '+p.lastName+'</div><div class="pre">'+p.email+'</div><button onclick="openProfileEdit()" style="margin-top:16px;padding:10px 28px;border-radius:24px;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s ease">Modifier le profil</button></div>';
 
-  // Citation inspirante
+  // Citation inspirante (pseudo-random, different from home)
   const dayOfYear=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/86400000);
-  const quoteIdx=(dayOfYear+7)%PARENT_QUOTES.length;
+  const profSeed=new Date().getFullYear()*1000+dayOfYear+42;
+  const quoteIdx=((profSeed*2654435761)>>>0)%PARENT_QUOTES.length;
   const quote=PARENT_QUOTES[quoteIdx];
   document.getElementById('profQuote').innerHTML='<div class="quotecard"><div class="qi-ico">'+ico('heart',18)+'</div><div style="flex:1"><p class="qt">\u00AB '+quote.q+' \u00BB</p>'+(quote.a?'<p class="qa">'+quote.a+'</p>':'')+'</div></div>';
 
@@ -1034,6 +1036,11 @@ window.openProfileEdit=async function(){
     '<div style="padding:16px 0 0;display:flex;gap:10px"><button class="btn bs" style="flex:1" onclick="document.getElementById(\'profileEditOverlay\').remove()">Annuler</button><button class="btn bp" style="flex:1" onclick="saveProfileEdit()">Enregistrer</button></div>';
   overlay.appendChild(panel);
   overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+  // Swipe-down to dismiss
+  let touchY=0,panelY=0,dragging=false;
+  panel.addEventListener('touchstart',e=>{const t=e.touches[0];touchY=t.clientY;panelY=0;dragging=panel.scrollTop<=0},{passive:true});
+  panel.addEventListener('touchmove',e=>{if(!dragging)return;const dy=e.touches[0].clientY-touchY;if(dy>0){panelY=dy;panel.style.transform='translateY('+dy+'px)';panel.style.transition='none';e.preventDefault()}},{passive:false});
+  panel.addEventListener('touchend',()=>{if(panelY>100){panel.style.transition='transform .25s ease';panel.style.transform='translateY(100%)';setTimeout(()=>overlay.remove(),250)}else{panel.style.transition='transform .2s ease';panel.style.transform='translateY(0)'}dragging=false;panelY=0});
   document.body.appendChild(overlay);
   S._peAvatar=curAv;
 }
