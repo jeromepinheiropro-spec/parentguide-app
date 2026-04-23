@@ -702,43 +702,78 @@ function renderChTabs(){const showHead=S.childAge<=12;if(S.cht==='head'&&!showHe
 window.swCh=function(t,btn){S.cht=t;document.querySelectorAll('.chtab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderChart()}
 function renderChart(){const svg=document.getElementById('chsvg');if(S.gr.length<2){svg.innerHTML='<text x="50%" y="50%" text-anchor="middle" fill="#ADA39A" font-family="Inter" font-size="13">Pas assez de donnees</text>';return}const k=S.cht==='weight'?'weightKg':S.cht==='height'?'heightCm':'headCircCm';const u=S.cht==='weight'?'kg':'cm';const cl=S.cht==='weight'?'#E8956A':S.cht==='height'?'#85C1E9':'#B8A9C9';const d=S.gr.filter(r=>r[k]!=null);if(d.length<2){svg.innerHTML='';return}const v=d.map(r=>r[k]),mn=Math.min(...v)*.95,mx=Math.max(...v)*1.05;const w=svg.clientWidth||380,h=200,pL=40,pR=10,pT=10,pB=30,cW=w-pL-pR,cH=h-pT-pB;const pts=d.map((r,i)=>({x:pL+(i/(d.length-1))*cW,y:pT+cH-((r[k]-mn)/(mx-mn))*cH}));const pD=pts.map((p,i)=>(i===0?'M':'L')+' '+p.x+' '+p.y).join(' ');const aD=pD+' L '+pts[pts.length-1].x+' '+(pT+cH)+' L '+pts[0].x+' '+(pT+cH)+' Z';let yL='';for(let i=0;i<=4;i++){const val=mn+(mx-mn)*(i/4),y=pT+cH-(i/4)*cH;yL+='<text x="'+(pL-5)+'" y="'+(y+4)+'" text-anchor="end" fill="#ADA39A" font-size="10" font-family="Inter">'+val.toFixed(1)+'</text><line x1="'+pL+'" y1="'+y+'" x2="'+(pL+cW)+'" y2="'+y+'" stroke="#F0E0CC" stroke-width="0.5"/>'}const dots=pts.map(p=>'<circle cx="'+p.x+'" cy="'+p.y+'" r="3.5" fill="'+cl+'" stroke="white" stroke-width="2"/>').join('');svg.innerHTML='<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+cl+'" stop-opacity="0.25"/><stop offset="100%" stop-color="'+cl+'" stop-opacity="0.02"/></linearGradient></defs>'+yL+'<path d="'+aD+'" fill="url(#ag)"/><path d="'+pD+'" fill="none" stroke="'+cl+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'+dots+'<text x="'+(w-pR)+'" y="'+(pT+14)+'" text-anchor="end" fill="'+cl+'" font-size="12" font-weight="700" font-family="Inter">'+v[v.length-1]+' '+u+'</text>'}
 
+// ============= AGE SORT UTILITY =============
+function ageToMonths(s){
+  if(!s)return 9999;
+  const l=s.toLowerCase().replace(/è/g,'e').replace(/é/g,'e');
+  if(l.includes('tous'))return 9998;
+  if(l.includes('regle'))return 9997;
+  // Extract first number
+  const m1=l.match(/^(\d+)/);if(!m1)return 9990;
+  const n=parseInt(m1[1]);
+  // "0-6m" "6-12m" format (months)
+  if(l.match(/^\d+-\d+m$/))return n;
+  // "1-2a" "3-6a" format (years)
+  if(l.match(/^\d+-\d+a$/))return n*12;
+  // "0-6 mois" "6-12 mois" "4-15 mois"
+  if(l.includes('mois'))return n;
+  // "6m-3 ans" "8m-3 ans" "12m-6 ans" "18m-"
+  if(l.match(/^\d+m-/))return n;
+  // "1-3 ans" "2-6 ans" "3-6 ans" "5-12 ans"
+  if(l.includes('ans'))return n*12;
+  // "Des 3 mois" "Des la 1ere dent"
+  if(l.includes('des'))return n;
+  return 9990+n;
+}
+function sortAges(ages){return [...ages].sort((a,b)=>ageToMonths(a)-ageToMonths(b))}
+
 // ============= GUIDE =============
 async function loadGuide(){
   await refreshContentIfStale();
   try{
-  document.getElementById('devref').innerHTML=Object.entries(DEV).map(([k,d])=>{try{const stepCount=d.ages?Object.values(d.ages).flat().length:0;return '<div class="rd"><div class="rdh" onclick="toggleRD(this)"><div class="rdi" style="background:'+(d.bg||'#f0f0f0')+'"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,18)+'</span></div><span class="rdt">'+(d.t||k)+'</span><span class="badge" style="background:'+(d.bg||'#f0f0f0')+';color:'+(d.c||'#666')+'">'+stepCount+' étapes</span><span class="rda">'+I.chevR+'</span></div><div class="rdb" data-domain="'+k+'"></div></div>'}catch(e){console.warn('[loadGuide] domain err',k,e);return ''}}).join('');
+  // Repères: same card-style list as guide
+  document.getElementById('devref').innerHTML=Object.entries(DEV).map(([k,d])=>{try{const stepCount=d.ages?Object.values(d.ages).flat().length:0;return '<div class="gc" onclick="showDevDetail(\''+k+'\')"><div class="gci" style="background:'+(d.bg||'#f0f0f0')+'"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+(d.t||k)+'</div><div class="gcd">'+stepCount+' étapes</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>'}catch(e){console.warn('[loadGuide] domain err',k,e);return ''}}).join('');
   document.getElementById('glist').innerHTML=Object.entries(GUIDE).map(([k,g])=>{try{return '<div class="gc" onclick="showGD(\''+k+'\')"><div class="gci" style="background:'+(g.bg||'#f0f0f0')+'"><span style="color:'+(g.c||'#666')+'">'+ico(g.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+(g.t||k)+'</div><div class="gcd">'+(g.tips?g.tips.length:0)+' conseils bienveillants</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>'}catch(e){console.warn('[loadGuide] guide err',k,e);return ''}}).join('')}catch(e){console.error('[loadGuide]',e)}}
 
-window.toggleRD=function(el){try{const body=el.nextElementSibling,arrow=el.querySelector('.rda'),dom=body.dataset.domain;const isOpen=body.classList.contains('op');body.classList.toggle('op');arrow.classList.toggle('op');if(isOpen)return;
-  const d=DEV[dom];if(!d){body.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucune donnee disponible</p>';return}const ages=Object.keys(d.ages);if(!ages.length){body.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repère disponible</p>';return}let cur=ages[0];try{const ak=devAgeKey(S.childAge||0);if(ages.includes(ak))cur=ak}catch(e){}
-  body.innerHTML='<div class="agetabs">'+ages.map(a=>'<button class="agetab'+(a===cur?' on':'')+'" onclick="showAge(\''+dom+"','"+a+"',this)\">"+a+'</button>').join('')+'</div><div id="age-'+dom+'"></div>';
-  showAgeContent(dom,cur)}catch(e){console.error('[toggleRD]',e)}}
+// ============= REPÈRES DETAIL (age tabs) =============
+window.showDevDetail=function(key){
+  const d=DEV[key];if(!d)return;
+  const ages=sortAges(Object.keys(d.ages));if(!ages.length)return;
+  let cur=ages[0];try{const ak=devAgeKey(S.childAge||0);if(ages.includes(ak))cur=ak}catch(e){}
 
-window.showAge=function(dom,age,btn){try{btn.parentElement.querySelectorAll('.agetab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');showAgeContent(dom,age)}catch(e){console.error('[showAge]',e)}}
+  document.getElementById('gdh').style.background=d.bg||'#f0f0f0';document.getElementById('gdh').style.color='var(--tx)';
+  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,28)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+Object.values(d.ages).flat().length+' étapes</p></div></div>';
 
-function showAgeContent(dom,age){try{const d=DEV[dom];if(!d)return;const steps=d.ages[age]||[];const el=document.getElementById('age-'+dom);if(!el)return;el.innerHTML=steps.map(s=>{const acts=Array.isArray(s.acts)?s.acts:(typeof s.acts==='string'?[s.acts]:[]);return '<div class="mcard"><div class="mca">'+age+'</div><div class="mcl">'+(s.l||'')+'</div><div class="acts"><div class="acts-t">Activités & Jeux</div>'+acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>'}).join('')||'<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repère pour cette tranche</p>'}catch(e){console.error('[showAgeContent]',e);const el=document.getElementById('age-'+dom);if(el)el.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Erreur de chargement</p>'}}
+  const tabsHtml='<div class="agetabs" style="margin:12px 0 8px">'+ages.map(a=>'<button class="agetab'+(a===cur?' on':'')+'" onclick="showDevAge(\''+key+"','"+a+"',this)\">"+a+'</button>').join('')+'</div>';
+  document.getElementById('gdc').innerHTML=tabsHtml+'<div id="dev-age-content"></div>';
+  showDevAgeContent(key,cur,d);
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
 
+window.showDevAge=function(key,age,btn){try{btn.parentElement.querySelectorAll('.agetab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');const d=DEV[key];if(d)showDevAgeContent(key,age,d)}catch(e){console.error('[showDevAge]',e)}}
+
+function showDevAgeContent(key,age,d){
+  const el=document.getElementById('dev-age-content');if(!el)return;
+  const steps=d.ages[age]||[];
+  el.innerHTML=steps.map(s=>{const acts=Array.isArray(s.acts)?s.acts:(typeof s.acts==='string'?[s.acts]:[]);return '<div class="mcard"><div class="mca">'+age+'</div><div class="mcl">'+(s.l||'')+'</div><div class="acts"><div class="acts-t">Activités & Jeux</div>'+acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>'}).join('')||'<p style="padding:16px;font-size:13px;color:var(--tx3);text-align:center">Aucun repère pour cette tranche d\'âge</p>'
+}
+
+// ============= GUIDE DETAIL (age tabs) =============
 window.showGD=function(key){const g=GUIDE[key];if(!g)return;
   // Group tips by age range
-  const ageOrder=['0-3 mois','0-6 mois','0-12 mois','3-6 mois','4-6 mois','4-12 mois','4-15 mois','3-24 mois','4-24 mois','6m-3 ans','6-12 mois','8m-3 ans','12m-6 ans','1-3 ans','1-4 ans','1-5 ans','1-6 ans','18m-3 ans','18m-4 ans','18m-6 ans','2-3 ans','2-4 ans','2-5 ans','2-6 ans','3-6 ans','3-8 ans','5-12 ans','6 mois+','Des 3 mois','Des la 1ere dent','6 mois - 3 ans','0-2 ans','0-4 ans','0-6 ans','Regle 4-6-9-12','Tous ages'];
   const ageGroups={};
   g.tips.forEach(t=>{const a=t.a||'Tous ages';if(!ageGroups[a])ageGroups[a]=[];ageGroups[a].push(t)});
-  // Sort age groups
-  const sortedAges=Object.keys(ageGroups).sort((a,b)=>{const ia=ageOrder.indexOf(a),ib=ageOrder.indexOf(b);return (ia===-1?999:ia)-(ib===-1?999:ib)});
+  const sortedAges=sortAges(Object.keys(ageGroups));
   // Determine best default tab based on child age
-  let defaultAge='Tous ages';
+  let defaultAge=sortedAges[0]||'Tous ages';
   if(S.childAge!==undefined){
     const m=S.childAge;
     const agePref=m<6?'0-6 mois':m<12?'6-12 mois':m<18?'1-3 ans':m<24?'18m-3 ans':m<36?'2-5 ans':m<48?'3-6 ans':'Tous ages';
-    // Find closest matching tab
-    for(const a of sortedAges){if(a===agePref||a==='Tous ages'){defaultAge=a;break}}
-    if(defaultAge==='Tous ages'&&sortedAges.length>0)defaultAge=sortedAges[0];
-  }else if(sortedAges.length>0){defaultAge=sortedAges[0]}
+    for(const a of sortedAges){if(a===agePref){defaultAge=a;break}}
+  }
 
   document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';
   document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
 
-  // Render age tabs + tips
   const tabsHtml='<div class="agetabs" style="margin:12px 0 8px">'+sortedAges.map(a=>'<button class="agetab'+(a===defaultAge?' on':'')+'" onclick="showGuideAge(\''+key+"','"+a.replace(/'/g,"\\'")+"',this)\">"+a+' <span style="opacity:.6;font-size:10px">('+ageGroups[a].length+')</span></button>').join('')+'</div>';
   document.getElementById('gdc').innerHTML=tabsHtml+'<div id="guide-age-content"></div>';
   showGuideAgeContent(key,defaultAge,g);
