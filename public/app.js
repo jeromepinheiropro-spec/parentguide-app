@@ -790,57 +790,93 @@ async function loadGuide(){
   document.getElementById('devref').innerHTML=Object.entries(DEV).map(([k,d])=>{try{const stepCount=d.ages?Object.values(d.ages).flat().length:0;return '<div class="gc" onclick="showDevDetail(\''+k+'\')"><div class="gci" style="background:'+(d.bg||'#f0f0f0')+'"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+(d.t||k)+'</div><div class="gcd">'+stepCount+' étapes</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>'}catch(e){console.warn('[loadGuide] domain err',k,e);return ''}}).join('');
   document.getElementById('glist').innerHTML=Object.entries(GUIDE).map(([k,g])=>{try{return '<div class="gc" onclick="showGD(\''+k+'\')"><div class="gci" style="background:'+(g.bg||'#f0f0f0')+'"><span style="color:'+(g.c||'#666')+'">'+ico(g.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+(g.t||k)+'</div><div class="gcd">'+(g.tips?g.tips.length:0)+' conseils bienveillants</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>'}catch(e){console.warn('[loadGuide] guide err',k,e);return ''}}).join('')}catch(e){console.error('[loadGuide]',e)}}
 
-// ============= REPÈRES DETAIL (age tabs) =============
-window.showDevDetail=function(key){
-  const d=DEV[key];if(!d)return;
-  const ages=sortAges(Object.keys(d.ages));if(!ages.length)return;
-  let cur=ages[0];try{const ak=devAgeKey(S.childAge||0);if(ages.includes(ak))cur=ak}catch(e){}
-
-  document.getElementById('gdh').style.background=d.bg||'#f0f0f0';document.getElementById('gdh').style.color='var(--tx)';
-  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,28)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+Object.values(d.ages).flat().length+' étapes</p></div></div>';
-
-  const tabsHtml='<div class="agetabs" style="margin:12px 0 8px">'+ages.map(a=>'<button class="agetab'+(a===cur?' on':'')+'" onclick="showDevAge(\''+key+"','"+a+"',this)\">"+a+'</button>').join('')+'</div>';
-  document.getElementById('gdc').innerHTML=tabsHtml+'<div id="dev-age-content"></div>';
-  showDevAgeContent(key,cur,d);
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
-
-window.showDevAge=function(key,age,btn){try{btn.parentElement.querySelectorAll('.agetab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');const d=DEV[key];if(d)showDevAgeContent(key,age,d)}catch(e){console.error('[showDevAge]',e)}}
-
-function showDevAgeContent(key,age,d){
-  const el=document.getElementById('dev-age-content');if(!el)return;
-  const steps=d.ages[age]||[];
-  el.innerHTML=steps.map(s=>{const acts=Array.isArray(s.acts)?s.acts:(typeof s.acts==='string'?[s.acts]:[]);return '<div class="mcard"><div class="mca">'+age+'</div><div class="mcl">'+(s.l||'')+'</div><div class="acts"><div class="acts-t">Activités & Jeux</div>'+acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>'}).join('')||'<p style="padding:16px;font-size:13px;color:var(--tx3);text-align:center">Aucun repère pour cette tranche d\'âge</p>'
+// ============= AGE RANGE SLIDER (shared) =============
+function ageSliderHtml(id,minM,maxM,color){
+  // Convert months to display: 0-72 months range (0-6 years)
+  const minV=Math.max(0,minM),maxV=Math.min(72,maxM);
+  return '<div class="age-slider-wrap" style="padding:16px 20px 8px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
+      '<span class="age-slider-label" id="'+id+'-label" style="font-size:13px;font-weight:700;color:var(--tx)">'+ageLabel(minV)+' — '+ageLabel(maxV)+'</span>'+
+      '<span id="'+id+'-count" style="font-size:11px;color:var(--tx3);font-weight:600"></span>'+
+    '</div>'+
+    '<div class="age-slider" style="position:relative;height:36px;margin-bottom:4px">'+
+      '<div style="position:absolute;top:14px;left:0;right:0;height:6px;border-radius:3px;background:var(--border)"></div>'+
+      '<div id="'+id+'-track" style="position:absolute;top:14px;height:6px;border-radius:3px;background:'+color+'"></div>'+
+      '<input type="range" id="'+id+'-min" min="0" max="72" step="1" value="'+minV+'" style="position:absolute;top:6px;left:0;width:100%;pointer-events:none;-webkit-appearance:none;appearance:none;background:transparent;z-index:2" oninput="onAgeSlider(\''+id+'\')">'+
+      '<input type="range" id="'+id+'-max" min="0" max="72" step="1" value="'+maxV+'" style="position:absolute;top:6px;left:0;width:100%;pointer-events:none;-webkit-appearance:none;appearance:none;background:transparent;z-index:3" oninput="onAgeSlider(\''+id+'\')">'+
+    '</div>'+
+    '<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--tx3);font-weight:600">'+
+      '<span>Naissance</span><span>1 an</span><span>2 ans</span><span>3 ans</span><span>4 ans</span><span>5 ans</span><span>6 ans</span>'+
+    '</div>'+
+  '</div>';
+}
+function ageLabel(m){if(m===0)return'Naissance';if(m<12)return m+' mois';const y=Math.floor(m/12),r=m%12;return r>0?y+' an'+(y>1?'s':'')+' '+r+'m':y+' an'+(y>1?'s':'')}
+function updateSliderTrack(id){
+  const mn=parseInt(document.getElementById(id+'-min').value);
+  const mx=parseInt(document.getElementById(id+'-max').value);
+  const track=document.getElementById(id+'-track');
+  const pL=(mn/72)*100,pR=(mx/72)*100;
+  track.style.left=pL+'%';track.style.width=(pR-pL)+'%';
+  document.getElementById(id+'-label').textContent=ageLabel(mn)+' — '+ageLabel(mx);
 }
 
-// ============= GUIDE DETAIL (age tabs) =============
+// ============= REPÈRES DETAIL (age slider) =============
+window.showDevDetail=function(key){
+  const d=DEV[key];if(!d)return;
+  const allSteps=[];const ages=sortAges(Object.keys(d.ages));
+  ages.forEach(a=>{(d.ages[a]||[]).forEach(s=>allSteps.push({...s,ageKey:a,startM:ageStartMonths(a),endM:ageEndMonths(a)}))});
+  const childM=S.childAge||0;const defMin=Math.max(0,childM-3),defMax=Math.min(72,childM+12);
+
+  document.getElementById('gdh').style.background=d.bg||'#f0f0f0';document.getElementById('gdh').style.color='var(--tx)';
+  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,28)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+allSteps.length+' étapes</p></div></div>';
+
+  document.getElementById('gdc').innerHTML=ageSliderHtml('dev-sl',defMin,defMax,d.c||'var(--primary)')+'<div id="dev-age-content"></div>';
+  window._devSteps=allSteps;window._devColor=d.c;
+  updateSliderTrack('dev-sl');
+  filterDevBySlider();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
+
+function filterDevBySlider(){
+  const mn=parseInt(document.getElementById('dev-sl-min').value);
+  const mx=parseInt(document.getElementById('dev-sl-max').value);
+  const steps=window._devSteps.filter(s=>s.endM>=mn&&s.startM<=mx);
+  const el=document.getElementById('dev-age-content');
+  document.getElementById('dev-sl-count').textContent=steps.length+' étape'+(steps.length>1?'s':'');
+  el.innerHTML=steps.map(s=>{const acts=Array.isArray(s.acts)?s.acts:(typeof s.acts==='string'?[s.acts]:[]);return '<div class="mcard"><div class="mca">'+s.ageKey+'</div><div class="mcl">'+(s.l||'')+'</div><div class="acts"><div class="acts-t">Activités & Jeux</div>'+acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>'}).join('')||'<p style="padding:16px;font-size:13px;color:var(--tx3);text-align:center">Aucun repère pour cette tranche d\'âge</p>';
+}
+
+// ============= GUIDE DETAIL (age slider) =============
 window.showGD=function(key){const g=GUIDE[key];if(!g)return;
-  // Group tips by age range
-  const ageGroups={};
-  g.tips.forEach(t=>{const a=t.a||'Tous ages';if(!ageGroups[a])ageGroups[a]=[];ageGroups[a].push(t)});
-  const sortedAges=sortAges(Object.keys(ageGroups));
-  // Determine best default tab based on child age
-  let defaultAge=sortedAges[0]||'Tous ages';
-  if(S.childAge!==undefined){
-    const m=S.childAge;
-    const agePref=m<6?'0-6 mois':m<12?'6-12 mois':m<18?'1-3 ans':m<24?'18m-3 ans':m<36?'2-5 ans':m<48?'3-6 ans':'Tous ages';
-    for(const a of sortedAges){if(a===agePref){defaultAge=a;break}}
-  }
+  const childM=S.childAge||0;const defMin=Math.max(0,childM-3),defMax=Math.min(72,childM+12);
 
   document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';
   document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
 
-  const tabsHtml='<div class="agetabs" style="margin:12px 0 8px">'+sortedAges.map(a=>'<button class="agetab'+(a===defaultAge?' on':'')+'" onclick="showGuideAge(\''+key+"','"+a.replace(/'/g,"\\'")+"',this)\">"+a+' <span style="opacity:.6;font-size:10px">('+ageGroups[a].length+')</span></button>').join('')+'</div>';
-  document.getElementById('gdc').innerHTML=tabsHtml+'<div id="guide-age-content"></div>';
-  showGuideAgeContent(key,defaultAge,g);
+  document.getElementById('gdc').innerHTML=ageSliderHtml('guide-sl',defMin,defMax,g.c||'var(--primary)')+'<div id="guide-age-content"></div>';
+  window._guideTips=g.tips.map(t=>({...t,startM:ageStartMonths(t.a),endM:ageEndMonths(t.a)}));
+  window._guideColor=g.c;window._guideBg=g.bg;window._guideKey=key;
+  updateSliderTrack('guide-sl');
+  filterGuideBySlider();
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
 
-window.showGuideAge=function(key,age,btn){try{btn.parentElement.querySelectorAll('.agetab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');const g=GUIDE[key];if(g)showGuideAgeContent(key,age,g)}catch(e){console.error('[showGuideAge]',e)}}
+function filterGuideBySlider(){
+  const mn=parseInt(document.getElementById('guide-sl-min').value);
+  const mx=parseInt(document.getElementById('guide-sl-max').value);
+  const tips=window._guideTips.filter(t=>t.endM>=mn&&t.startM<=mx);
+  const el=document.getElementById('guide-age-content');
+  const c=window._guideColor,bg=window._guideBg;
+  document.getElementById('guide-sl-count').textContent=tips.length+' conseil'+(tips.length>1?'s':'');
+  el.innerHTML=tips.map(t=>'<div class="tip" style="border-left-color:'+c+'"><div class="tph"><span class="tpt">'+t.t+'</span><span class="badge" style="background:'+bg+';color:'+c+'">'+t.a+'</span></div><div class="tpx">'+t.x+'</div></div>').join('')||'<p style="padding:16px;font-size:13px;color:var(--tx3);text-align:center">Aucun conseil pour cette tranche d\'âge</p>';
+}
 
-function showGuideAgeContent(key,age,g){
-  const el=document.getElementById('guide-age-content');if(!el)return;
-  const ageGroups={};g.tips.forEach(t=>{const a=t.a||'Tous ages';if(!ageGroups[a])ageGroups[a]=[];ageGroups[a].push(t)});
-  const tips=ageGroups[age]||[];
-  el.innerHTML=tips.map(t=>'<div class="tip" style="border-left-color:'+g.c+'"><div class="tph"><span class="tpt">'+t.t+'</span><span class="badge" style="background:'+g.bg+';color:'+g.c+'">'+t.a+'</span></div><div class="tpx">'+t.x+'</div></div>').join('')||'<p style="padding:16px;font-size:13px;color:var(--tx3);text-align:center">Aucun conseil pour cette tranche d\'âge</p>'
+// Unified slider handler
+window.onAgeSlider=function(id){
+  const minEl=document.getElementById(id+'-min'),maxEl=document.getElementById(id+'-max');
+  let mn=parseInt(minEl.value),mx=parseInt(maxEl.value);
+  if(mn>mx){const t=mn;mn=mx;mx=t;minEl.value=mn;maxEl.value=mx}
+  updateSliderTrack(id);
+  if(id==='guide-sl')filterGuideBySlider();
+  else if(id==='dev-sl')filterDevBySlider();
 }
 
 // ============= PROFILE =============
