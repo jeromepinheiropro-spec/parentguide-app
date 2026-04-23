@@ -718,11 +718,40 @@ window.showAge=function(dom,age,btn){try{btn.parentElement.querySelectorAll('.ag
 
 function showAgeContent(dom,age){try{const d=DEV[dom];if(!d)return;const steps=d.ages[age]||[];const el=document.getElementById('age-'+dom);if(!el)return;el.innerHTML=steps.map(s=>{const acts=Array.isArray(s.acts)?s.acts:(typeof s.acts==='string'?[s.acts]:[]);return '<div class="mcard"><div class="mca">'+age+'</div><div class="mcl">'+(s.l||'')+'</div><div class="acts"><div class="acts-t">Activités & Jeux</div>'+acts.map(a=>'<div class="act">'+a+'</div>').join('')+'</div></div>'}).join('')||'<p style="padding:10px;font-size:12px;color:var(--tx3)">Aucun repère pour cette tranche</p>'}catch(e){console.error('[showAgeContent]',e);const el=document.getElementById('age-'+dom);if(el)el.innerHTML='<p style="padding:10px;font-size:12px;color:var(--tx3)">Erreur de chargement</p>'}}
 
-window.showGD=function(key){const g=GUIDE[key];if(!g)return;document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
-  document.getElementById('gdc').innerHTML=g.tips.map((t,i)=>{
-    return '<div class="tip" style="border-left-color:'+g.c+'"><div class="tph"><span class="tpt">'+t.t+'</span><span class="badge" style="background:'+g.bg+';color:'+g.c+'">'+t.a+'</span></div><div class="tpx">'+t.x+'</div></div>'
-  }).join('');
+window.showGD=function(key){const g=GUIDE[key];if(!g)return;
+  // Group tips by age range
+  const ageOrder=['0-3 mois','0-6 mois','0-12 mois','3-6 mois','4-6 mois','4-12 mois','4-15 mois','3-24 mois','4-24 mois','6m-3 ans','6-12 mois','8m-3 ans','12m-6 ans','1-3 ans','1-4 ans','1-5 ans','1-6 ans','18m-3 ans','18m-4 ans','18m-6 ans','2-3 ans','2-4 ans','2-5 ans','2-6 ans','3-6 ans','3-8 ans','5-12 ans','6 mois+','Des 3 mois','Des la 1ere dent','6 mois - 3 ans','0-2 ans','0-4 ans','0-6 ans','Regle 4-6-9-12','Tous ages'];
+  const ageGroups={};
+  g.tips.forEach(t=>{const a=t.a||'Tous ages';if(!ageGroups[a])ageGroups[a]=[];ageGroups[a].push(t)});
+  // Sort age groups
+  const sortedAges=Object.keys(ageGroups).sort((a,b)=>{const ia=ageOrder.indexOf(a),ib=ageOrder.indexOf(b);return (ia===-1?999:ia)-(ib===-1?999:ib)});
+  // Determine best default tab based on child age
+  let defaultAge='Tous ages';
+  if(S.childAge!==undefined){
+    const m=S.childAge;
+    const agePref=m<6?'0-6 mois':m<12?'6-12 mois':m<18?'1-3 ans':m<24?'18m-3 ans':m<36?'2-5 ans':m<48?'3-6 ans':'Tous ages';
+    // Find closest matching tab
+    for(const a of sortedAges){if(a===agePref||a==='Tous ages'){defaultAge=a;break}}
+    if(defaultAge==='Tous ages'&&sortedAges.length>0)defaultAge=sortedAges[0];
+  }else if(sortedAges.length>0){defaultAge=sortedAges[0]}
+
+  document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';
+  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
+
+  // Render age tabs + tips
+  const tabsHtml='<div class="agetabs" style="margin:12px 0 8px">'+sortedAges.map(a=>'<button class="agetab'+(a===defaultAge?' on':'')+'" onclick="showGuideAge(\''+key+"','"+a.replace(/'/g,"\\'")+"',this)\">"+a+' <span style="opacity:.6;font-size:10px">('+ageGroups[a].length+')</span></button>').join('')+'</div>';
+  document.getElementById('gdc').innerHTML=tabsHtml+'<div id="guide-age-content"></div>';
+  showGuideAgeContent(key,defaultAge,g);
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
+
+window.showGuideAge=function(key,age,btn){try{btn.parentElement.querySelectorAll('.agetab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');const g=GUIDE[key];if(g)showGuideAgeContent(key,age,g)}catch(e){console.error('[showGuideAge]',e)}}
+
+function showGuideAgeContent(key,age,g){
+  const el=document.getElementById('guide-age-content');if(!el)return;
+  const ageGroups={};g.tips.forEach(t=>{const a=t.a||'Tous ages';if(!ageGroups[a])ageGroups[a]=[];ageGroups[a].push(t)});
+  const tips=ageGroups[age]||[];
+  el.innerHTML=tips.map(t=>'<div class="tip" style="border-left-color:'+g.c+'"><div class="tph"><span class="tpt">'+t.t+'</span><span class="badge" style="background:'+g.bg+';color:'+g.c+'">'+t.a+'</span></div><div class="tpx">'+t.x+'</div></div>').join('')||'<p style="padding:16px;font-size:13px;color:var(--tx3);text-align:center">Aucun conseil pour cette tranche d\'âge</p>'
+}
 
 // ============= PROFILE =============
 const CHILD_COLORS=['#7C5CFC','#E8956A','#4CAF7D','#4A90D9','#D46B6B','#C4A882','#8B6DB5','#FFB74D'];
