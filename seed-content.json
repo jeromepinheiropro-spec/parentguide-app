@@ -35,8 +35,8 @@
     {"key": "sleep", "title": "Sommeil", "icon": "moon", "color": "var(--lv3)", "bgColor": "var(--lv)", "sortOrder": 0},
     {"key": "food", "title": "Alimentation", "icon": "utensils", "color": "var(--mt3)", "bgColor": "var(--mt)", "sortOrder": 1},
     {"key": "behavior", "title": "Comportement", "icon": "heart", "color": "var(--rs3)", "bgColor": "var(--rs)", "sortOrder": 2},
-    {"key": "hygiene", "title": "Soins & Hygiene", "icon": "droplet", "color": "var(--sk3)", "bgColor": "var(--sk)", "sortOrder": 3},
-    {"key": "émotions", "title": "Emotions", "icon": "heart", "color": "var(--pk3)", "bgColor": "var(--pk)", "sortOrder": 4},
+    {"key": "hygiene", "title": "Soins & Hygiène", "icon": "droplet", "color": "var(--sk3)", "bgColor": "var(--sk)", "sortOrder": 3},
+    {"key": "émotions", "title": "Émotions", "icon": "heart", "color": "var(--pk3)", "bgColor": "var(--pk)", "sortOrder": 4},
     {"key": "activities", "title": "Activités & Jeux", "icon": "palette", "color": "var(--lv3)", "bgColor": "var(--lv)", "sortOrder": 5},
     {"key": "teeth", "title": "Dents & Bouche", "icon": "tooth", "color": "var(--sd3)", "bgColor": "var(--sd)", "sortOrder": 6}
   ],
@@ -62,26 +62,26 @@
     "0-6m": [
       {"ageGroup": "0-6m", "title": "Parlez-lui de tout ce que vous faites", "text": "Commenter vos gestes enrichit son bain de langage : \"Maintenant on met la petite chaussette...\"", "sortOrder": 0},
       {"ageGroup": "0-6m", "title": "5 minutes de tummy time après chaque change", "text": "C'est l'exercice fondamental pour muscler le cou, le dos, et préparer la motricité.", "sortOrder": 1},
-      {"ageGroup": "0-6m", "title": "Répondez aux pleurs sans tarder", "text": "A cet âge, on ne gate pas un bébé. Répondre = construire sa sécurité intérieure.", "sortOrder": 2},
-      {"ageGroup": "0-6m", "title": "Limitez les sollicitations en fin de journee", "text": "Les bébés accumulent la fatigue. Une ambiance calme des 17h previent les pleurs du soir.", "sortOrder": 3}
+      {"ageGroup": "0-6m", "title": "Répondez aux pleurs sans tarder", "text": "À cet âge, on ne gâte pas un bébé. Répondre = construire sa sécurité intérieure.", "sortOrder": 2},
+      {"ageGroup": "0-6m", "title": "Limitez les sollicitations en fin de journée", "text": "Les bébés accumulent la fatigue. Une ambiance calme des 17h prévient les pleurs du soir.", "sortOrder": 3}
     ],
     "6-12m": [
-      {"ageGroup": "6-12m", "title": "Proposez du doigt aujourd'hui", "text": "Petits morceaux fondants (banane, avocat, courgette cuite). Il apprend a gerer les textures et la satiété.", "sortOrder": 0},
-      {"ageGroup": "6-12m", "title": "Cachez un jouet sous un tissu", "text": "Jeu magique qui travaille la permanence de l'objet, base de la confiance et de la separation.", "sortOrder": 1},
-      {"ageGroup": "6-12m", "title": "Lisez un livre cartonne 10 minutes", "text": "Même s'il le mange où tourne les pages au hasard, c'est le debut de l'amour des livres.", "sortOrder": 2},
-      {"ageGroup": "6-12m", "title": "Laissez-le se déplacer librement au sol", "text": "Plus que le parc, le sol securise est son meilleur terrain de développement moteur.", "sortOrder": 3}
+      {"ageGroup": "6-12m", "title": "Proposez du doigt aujourd'hui", "text": "Petits morceaux fondants (banane, avocat, courgette cuite). Il apprend à gérer les textures et la satiété.", "sortOrder": 0},
+      {"ageGroup": "6-12m", "title": "Cachez un jouet sous un tissu", "text": "Jeu magique qui travaille la permanence de l'objet, base de la confiance et de la séparation.", "sortOrder": 1},
+      {"ageGroup": "6-12m", "title": "Lisez un livre cartonné 10 minutes", "text": "Même s'il le mange ou tourne les pages au hasard, c'est le début de l'amour des livres.", "sortOrder": 2},
+      {"ageGroup": "6-12m", "title": "Laissez-le se déplacer librement au sol", "text": "Plus que le parc, le sol sécurisé est son meilleur terrain de développement moteur.", "sortOrder": 3}
     ],
     "12-24m": [
-      {"ageGroup": "12-24m", "title": "Donnez deux choix plutôt qu'un ordre", "text": "\"Tu veux la banane où la pomme ?\" reduit les crises en donnant de l'autonomie.", "sortOrder": 0},
-      {"ageGroup": "12-24m", "title": "Nommez l'émotion que vous voyez", "text": "\"Tu es en colere parce que...\". Il apprend a mettre des mots et a se réguler.", "sortOrder": 1},
+      {"ageGroup": "12-24m", "title": "Donnez deux choix plutôt qu'un ordre", "text": "\"Tu veux la banane ou la pomme ?\" réduit les crises en donnant de l'autonomie.", "sortOrder": 0},
+      {"ageGroup": "12-24m", "title": "Nommez l'émotion que vous voyez", "text": "\"Tu es en colère parce que...\". Il apprend à mettre des mots et à se réguler.", "sortOrder": 1},
       {"ageGroup": "12-24m", "title": "Moment imitation en cuisine", "text": "Un petit saladier, une cuillere en bois. Il vous copie et développe sa motricité fine.", "sortOrder": 2},
-      {"ageGroup": "12-24m", "title": "Lecture interactive : montrez et questionnez", "text": "\"Ou est le chien ?\" Le pointage declenche les premiers mots.", "sortOrder": 3}
+      {"ageGroup": "12-24m", "title": "Lecture interactive : montrez et questionnez", "text": "\"Où est le chien ?\" Le pointage déclenche les premiers mots.", "sortOrder": 3}
     ],
     "2-3a": [
-      {"ageGroup": "2-3a", "title": "Instaurez une routine du soir visuelle", "text": "Une suite fixe d'étapes (bain, pyjama, livre, calin) secretse. Les routines calment.", "sortOrder": 0},
-      {"ageGroup": "2-3a", "title": "Proposez un coin calme", "text": "Coussins, doudou, livres. Un refuge, pas une punition, pour quand ça débordé.", "sortOrder": 1},
-      {"ageGroup": "2-3a", "title": "Dessin libre aujourd'hui", "text": "Grandes feuilles, crayons gras. Laissez-le faire, ne corrigez pas. C'est sa pensee qui se pose.", "sortOrder": 2},
-      {"ageGroup": "2-3a", "title": "Un livre sur les émotions ce soir", "text": "\"La couleur des émotions\" où \"Quand je suis...\". Aide a mettre des mots sur ce qu'il vit.", "sortOrder": 3}
+      {"ageGroup": "2-3a", "title": "Instaurez une routine du soir visuelle", "text": "Une suite fixe d'étapes (bain, pyjama, livre, câlin) secrète. Les routines calment.", "sortOrder": 0},
+      {"ageGroup": "2-3a", "title": "Proposez un coin calme", "text": "Coussins, doudou, livres. Un refuge, pas une punition, pour quand ça déborde.", "sortOrder": 1},
+      {"ageGroup": "2-3a", "title": "Dessin libre aujourd'hui", "text": "Grandes feuilles, crayons gras. Laissez-le faire, ne corrigez pas. C'est sa pensée qui se pose.", "sortOrder": 2},
+      {"ageGroup": "2-3a", "title": "Un livre sur les émotions ce soir", "text": "\"La couleur des émotions\" ou \"Quand je suis...\". Aide à mettre des mots sur ce qu'il vit.", "sortOrder": 3}
     ],
     "3-6a": [
       {"ageGroup": "3-6a", "title": "Donnez-lui une vraie responsabilité", "text": "Mettre la table, nourrir le chat, arroser la plante. La fierté d'être utile = confiance en soi.", "sortOrder": 0},

@@ -1,0 +1,20 @@
+{
+  "name": "Cocon",
+  "short_name": "Cocon",
+  "description": "Votre cocon de parentalité bienveillante",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#FFFAF7",
+  "theme_color": "#7C5CFC",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/cocon-favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "fr",
+  "categories": ["health", "lifestyle"]
+}
