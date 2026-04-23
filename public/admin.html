@@ -2837,11 +2837,59 @@
                         ${user.status === 'active' ? `<button class="btn btn-secondary btn-small" onclick="changeUserStatus(${user.id}, 'suspended')" title="Suspendre">⏸️</button>` : ''}
                         ${user.status === 'active' ? `<button class="btn btn-danger btn-small" onclick="banUser(${user.id})" title="Bannir">🚫</button>` : ''}
                         ${user.status !== 'active' ? `<button class="btn btn-secondary btn-small" onclick="changeUserStatus(${user.id}, 'active')" title="Réactiver" style="background:#27ae60;color:white;">✅</button>` : ''}
+                        <button class="btn btn-secondary btn-small" onclick="viewUserDetail(${user.id})" title="Détails">👁️</button>
                         <button class="btn btn-secondary btn-small" onclick="editUser(${user.id})">✏️</button>
                         <button class="btn btn-danger btn-small" onclick="deleteUser(${user.id})">🗑️</button>
                     </div>
                 </div>
             `).join('');
+        }
+
+        async function viewUserDetail(id) {
+            try {
+                const user = await fetch('/api/admin/users/' + id).then(r => r.json());
+                let childrenHtml = '';
+                if (user.children && user.children.length) {
+                    childrenHtml = user.children.map(c => `
+                        <div style="display:flex;align-items:center;gap:10px;padding:10px;background:#f8f7ff;border-radius:10px;margin-bottom:6px">
+                            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#A78BFA,#7C5CFC);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px">${escapeHtml(c.firstName[0])}</div>
+                            <div style="flex:1">
+                                <div style="font-weight:700;font-size:14px">${escapeHtml(c.firstName)}</div>
+                                <div style="font-size:12px;color:#888">Né(e) le ${new Date(c.birthDate).toLocaleDateString('fr-FR')} · ${c.ageLabel}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    childrenHtml = '<div style="color:#999;font-size:13px;text-align:center;padding:12px">Aucun enfant enregistré</div>';
+                }
+
+                const modal = document.getElementById('adminModal');
+                const modalTitle = document.getElementById('adminModalTitle');
+                const modalBody = document.getElementById('adminModalBody');
+                modalTitle.textContent = user.firstName + ' ' + user.lastName;
+                modalBody.innerHTML = `
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+                        <div style="background:#f8f7ff;border-radius:12px;padding:16px;text-align:center">
+                            <div style="font-size:24px;font-weight:800;color:#7C5CFC">${user.childrenCount || 0}</div>
+                            <div style="font-size:11px;color:#888;font-weight:600">Enfant(s)</div>
+                        </div>
+                        <div style="background:#f8f7ff;border-radius:12px;padding:16px;text-align:center">
+                            <div style="font-size:24px;font-weight:800;color:#7C5CFC">${user.questionnaireCount || 0}</div>
+                            <div style="font-size:11px;color:#888;font-weight:600">Questionnaire(s)</div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <div style="font-size:13px;color:#666;margin-bottom:4px">📧 ${escapeHtml(user.email || 'Non renseigné')}</div>
+                        <div style="font-size:13px;color:#666;margin-bottom:4px">📅 Inscrit le ${new Date(user.createdAt).toLocaleDateString('fr-FR')}</div>
+                        ${user.lastLogin ? '<div style="font-size:13px;color:#666;margin-bottom:4px">🔑 Dernière connexion : ' + new Date(user.lastLogin).toLocaleDateString('fr-FR') + '</div>' : ''}
+                    </div>
+                    <h4 style="font-size:14px;font-weight:700;margin-bottom:10px;color:#333">Enfants</h4>
+                    ${childrenHtml}
+                `;
+                modal.style.display = 'flex';
+            } catch (e) {
+                console.error('viewUserDetail error:', e);
+            }
         }
 
         function openUserModal() {

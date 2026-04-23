@@ -431,6 +431,14 @@ async function loadHome(){
   }
   c.innerHTML=childSw+'<div class="crd hero" onclick="showCD(\''+ch.id+'\')"><div class="hr"><div class="av">'+avSvg(ch.photoUrl||'lion')+'</div><div><div class="nm">'+ch.firstName+'</div><div class="ag">'+calcAge(ch.birthDate)+'</div></div></div><div class="sts"><div class="st"><div class="sv">'+(lg&&lg.heightCm?lg.heightCm+' cm':'--')+'</div><div class="sl">Taille</div></div><div class="st"><div class="sv">'+(lg&&lg.weightKg?lg.weightKg+' kg':'--')+'</div><div class="sl">Poids</div></div><div class="st"><div class="sv">'+ageShort+'</div><div class="sl">Age</div></div></div></div>';
 
+  // === BIRTHDAY CHECK ===
+  const today=new Date(),bday=new Date(ch.birthDate);
+  const isBirthday=today.getMonth()===bday.getMonth()&&today.getDate()===bday.getDate();
+  const bdayAge=Math.floor(am/12);
+  if(isBirthday&&am>=12){
+    c.innerHTML+='<div class="crd" style="background:linear-gradient(135deg,var(--pk),var(--lv));padding:20px;border-radius:var(--rl);margin:8px 20px;text-align:center"><div style="font-size:32px;margin-bottom:8px">'+ico('heart',28)+'</div><h3 style="font-size:16px;font-weight:800;margin-bottom:6px">Joyeux anniversaire '+ch.firstName+' !</h3><p style="font-size:13px;color:var(--tx2);margin-bottom:14px;line-height:1.5">'+ch.firstName+' a '+bdayAge+' an'+(bdayAge>1?'s':'')+' aujourd\'hui ! Un moment parfait pour mettre a jour son bilan personnalise.</p><button class="btn bp" onclick="openQuiz(\''+ch.id+'\')" style="font-size:12px;padding:10px 24px">Refaire le bilan</button></div>';
+  }
+
   // === PROACTIVE REMINDERS + NOTIFICATIONS ===
   let rh='';
   const allRemFull=[...rem.vaccines.map(v=>({...v,kind:'vaccine'})),...rem.events.map(e=>({...e,kind:'event'}))].sort((a,b)=>new Date(a.date)-new Date(b.date));
@@ -703,29 +711,48 @@ window.swCh=function(t,btn){S.cht=t;document.querySelectorAll('.chtab').forEach(
 function renderChart(){const svg=document.getElementById('chsvg');if(S.gr.length<2){svg.innerHTML='<text x="50%" y="50%" text-anchor="middle" fill="#ADA39A" font-family="Inter" font-size="13">Pas assez de donnees</text>';return}const k=S.cht==='weight'?'weightKg':S.cht==='height'?'heightCm':'headCircCm';const u=S.cht==='weight'?'kg':'cm';const cl=S.cht==='weight'?'#E8956A':S.cht==='height'?'#85C1E9':'#B8A9C9';const d=S.gr.filter(r=>r[k]!=null);if(d.length<2){svg.innerHTML='';return}const v=d.map(r=>r[k]),mn=Math.min(...v)*.95,mx=Math.max(...v)*1.05;const w=svg.clientWidth||380,h=200,pL=40,pR=10,pT=10,pB=30,cW=w-pL-pR,cH=h-pT-pB;const pts=d.map((r,i)=>({x:pL+(i/(d.length-1))*cW,y:pT+cH-((r[k]-mn)/(mx-mn))*cH}));const pD=pts.map((p,i)=>(i===0?'M':'L')+' '+p.x+' '+p.y).join(' ');const aD=pD+' L '+pts[pts.length-1].x+' '+(pT+cH)+' L '+pts[0].x+' '+(pT+cH)+' Z';let yL='';for(let i=0;i<=4;i++){const val=mn+(mx-mn)*(i/4),y=pT+cH-(i/4)*cH;yL+='<text x="'+(pL-5)+'" y="'+(y+4)+'" text-anchor="end" fill="#ADA39A" font-size="10" font-family="Inter">'+val.toFixed(1)+'</text><line x1="'+pL+'" y1="'+y+'" x2="'+(pL+cW)+'" y2="'+y+'" stroke="#F0E0CC" stroke-width="0.5"/>'}const dots=pts.map(p=>'<circle cx="'+p.x+'" cy="'+p.y+'" r="3.5" fill="'+cl+'" stroke="white" stroke-width="2"/>').join('');svg.innerHTML='<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+cl+'" stop-opacity="0.25"/><stop offset="100%" stop-color="'+cl+'" stop-opacity="0.02"/></linearGradient></defs>'+yL+'<path d="'+aD+'" fill="url(#ag)"/><path d="'+pD+'" fill="none" stroke="'+cl+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'+dots+'<text x="'+(w-pR)+'" y="'+(pT+14)+'" text-anchor="end" fill="'+cl+'" font-size="12" font-weight="700" font-family="Inter">'+v[v.length-1]+' '+u+'</text>'}
 
 // ============= AGE SORT UTILITY =============
-function ageToMonths(s){
+function ageStartMonths(s){
   if(!s)return 9999;
-  const l=s.toLowerCase().replace(/è/g,'e').replace(/é/g,'e');
+  const l=s.toLowerCase().replace(/[èé]/g,'e').trim();
   if(l.includes('tous'))return 9998;
   if(l.includes('regle'))return 9997;
-  // Extract first number
-  const m1=l.match(/^(\d+)/);if(!m1)return 9990;
-  const n=parseInt(m1[1]);
-  // "0-6m" "6-12m" format (months)
-  if(l.match(/^\d+-\d+m$/))return n;
-  // "1-2a" "3-6a" format (years)
-  if(l.match(/^\d+-\d+a$/))return n*12;
-  // "0-6 mois" "6-12 mois" "4-15 mois"
-  if(l.includes('mois'))return n;
-  // "6m-3 ans" "8m-3 ans" "12m-6 ans" "18m-"
-  if(l.match(/^\d+m-/))return n;
-  // "1-3 ans" "2-6 ans" "3-6 ans" "5-12 ans"
-  if(l.includes('ans'))return n*12;
-  // "Des 3 mois" "Des la 1ere dent"
-  if(l.includes('des'))return n;
-  return 9990+n;
+  if(l.includes('1ere dent'))return 6;
+  const dm=l.match(/des\s+(\d+)/);if(dm)return parseInt(dm[1]);
+  const n=l.match(/^(\d+)/);if(!n)return 9990;
+  const v=parseInt(n[1]);
+  // "6m-" "18m-" → months
+  if(l.match(/^\d+m-/))return v;
+  // "0-6m" → months
+  if(l.match(/^\d+-\d+m$/))return v;
+  // "1-2a" → years
+  if(l.match(/^\d+-\d+a$/))return v*12;
+  // "X mois" or "X-Y mois" → months
+  if(l.includes('mois'))return v;
+  // "X-Y ans" or "X ans" → years
+  if(l.includes('ans'))return v*12;
+  return 9990;
 }
-function sortAges(ages){return [...ages].sort((a,b)=>ageToMonths(a)-ageToMonths(b))}
+function ageEndMonths(s){
+  if(!s)return 9999;
+  const l=s.toLowerCase().replace(/[èé]/g,'e').trim();
+  if(l.includes('tous')||l.includes('regle'))return 9999;
+  if(l.match(/mois\s*\+/))return 72;
+  if(l.includes('1ere dent'))return 6;
+  // "Xm-Y ans" → Y*12
+  const ma=l.match(/\d+m-(\d+)\s*ans/);if(ma)return parseInt(ma[1])*12;
+  // "X mois - Y ans"
+  const moa=l.match(/mois\s*-\s*(\d+)\s*ans/);if(moa)return parseInt(moa[1])*12;
+  // "X-Ym"
+  const sm=l.match(/\d+-(\d+)m$/);if(sm)return parseInt(sm[1]);
+  // "X-Ya"
+  const sa=l.match(/\d+-(\d+)a$/);if(sa)return parseInt(sa[1])*12;
+  // "X-Y mois"
+  const mo=l.match(/\d+-(\d+)\s*mois/);if(mo)return parseInt(mo[1]);
+  // "X-Y ans"
+  const an=l.match(/\d+-(\d+)\s*ans/);if(an)return parseInt(an[1])*12;
+  return 9999;
+}
+function sortAges(ages){return [...ages].sort((a,b)=>{const d=ageStartMonths(a)-ageStartMonths(b);return d!==0?d:ageEndMonths(a)-ageEndMonths(b)})}
 
 // ============= GUIDE =============
 async function loadGuide(){
@@ -1038,7 +1065,53 @@ window.saveProfileEdit=async function(){
 window.openAvatarPicker=function(){openProfileEdit()}
 
 // ============= CHILD DETAIL =============
-window.showCD=async function(id){const ch=await api('/api/children/'+id),ms=await api('/api/children/'+id+'/milestones'),gr=await api('/api/children/'+id+'/growth'),sl=await api('/api/children/'+id+'/sleep'),qz=await api('/api/children/'+id+'/questionnaire');const lg=gr.length?gr[gr.length-1]:null;const avg=sl.length?(sl.reduce((s,r)=>s+(r.nightHours||0)+(r.napHours||0),0)/sl.length).toFixed(1):'--';const bilanBlk=qz&&qz.createdAt?'<div class="br-card" onclick="showLastBilan(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>Dernier bilan : '+fmt(qz.createdAt.slice(0,10))+' - Voir les conseils</span></div><span style="color:var(--tx3)">'+I.chevR+'</span></div>':'<div class="br-card" onclick="openQuiz(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>10 questions, 2 min, pour des conseils adaptes</span></div><span style="color:var(--pk3)">'+I.chevR+'</span></div>';document.getElementById('cdc').innerHTML='<div class="deth" style="background:linear-gradient(135deg,'+(ch.gender==='boy'?'var(--sk),var(--lv)':'var(--rs),var(--pk)')+')"><button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - Ne(e) le '+fmt(ch.birthDate)+'</p></div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 20px"><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.weightKg+'kg':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Poids</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.heightCm+'cm':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Taille</div></div><div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+avg+'h</div><div style="font-size:10px;color:var(--tx3)">Sommeil</div></div></div>'+bilanBlk+'<div class="stl">Étapes notees ('+ms.length+')</div><div class="msl">'+ms.slice(0,8).map(m=>'<div class="msi"><div class="msd" style="background:'+(MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+'</div></div></div>').join('')+'</div>';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-child-detail').classList.add('active');document.getElementById('navbar').style.display='none'}
+window.showCD=async function(id){
+  const ch=await api('/api/children/'+id),ms=await api('/api/children/'+id+'/milestones'),gr=await api('/api/children/'+id+'/growth'),sl=await api('/api/children/'+id+'/sleep'),qz=await api('/api/children/'+id+'/questionnaire');
+  const lg=gr.length?gr[gr.length-1]:null;
+  const avg=sl.length?(sl.reduce((s,r)=>s+(r.nightHours||0)+(r.napHours||0),0)/sl.length).toFixed(1):'--';
+  const am=ageM(ch.birthDate);
+
+  // Bilan block
+  const bilanBlk=qz&&qz.createdAt
+    ?'<div class="br-card" onclick="showLastBilan(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>Dernier bilan : '+fmt(qz.createdAt.slice(0,10))+' - Voir les conseils</span></div><span style="color:var(--tx3)">'+I.chevR+'</span></div>'
+    :'<div class="br-card" onclick="openQuiz(\''+id+'\')"><div class="bci">'+ico('clip',20)+'</div><div class="bct" style="flex:1"><b>Bilan personnalisé</b><span>10 questions, 2 min, pour des conseils adaptés</span></div><span style="color:var(--pk3)">'+I.chevR+'</span></div>';
+
+  // Recommended guides based on questionnaire results
+  let recoBlk='';
+  if(qz&&qz.summary){
+    try{
+      const summary=JSON.parse(qz.summary);
+      const needsWork=summary.filter(b=>b.lvl==='watch'||b.lvl==='alert');
+      if(needsWork.length){
+        const guideMap={motor:'activities',language:'activities',social:'émotions',cognitive:'activities',autonomy:'hygiene',sleep:'sleep',food:'food'};
+        recoBlk='<div class="stl">'+ico('sparkle',16)+' Recommandé pour '+ch.firstName+'</div>';
+        recoBlk+=needsWork.slice(0,3).map(b=>{
+          const d=QDOMS[b.dom];
+          const gKey=guideMap[b.dom];
+          const g=gKey&&GUIDE[gKey]?GUIDE[gKey]:null;
+          return '<div class="gc" style="margin:0 0 6px" onclick="'+(g?'showGD(\''+gKey+'\')':'go(\'guide\')')+'"><div class="gci" style="background:'+d.bg+'"><span style="color:'+d.c+'">'+ico(d.ico,20)+'</span></div><div style="flex:1"><div class="gct">'+d.t+' — à renforcer</div><div class="gcd">'+b.summary.slice(0,60)+'...</div></div><span style="color:var(--tx4)">'+I.chevR+'</span></div>';
+        }).join('');
+      }
+    }catch(e){}
+  }
+
+  document.getElementById('cdc').innerHTML=
+    '<div class="deth" style="background:linear-gradient(135deg,'+(ch.gender==='boy'?'var(--sk),var(--lv)':'var(--rs),var(--pk)')+')">'
+    +'<button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button>'
+    +'<div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - Né(e) le '+fmt(ch.birthDate)+'</p></div></div></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 20px">'
+      +'<div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.weightKg+'kg':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Poids</div></div>'
+      +'<div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.heightCm+'cm':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Taille</div></div>'
+      +'<div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+avg+'h</div><div style="font-size:10px;color:var(--tx3)">Sommeil</div></div>'
+    +'</div>'
+    +bilanBlk
+    +recoBlk
+    +'<div class="stl">Étapes notées ('+ms.length+')</div>'
+    +'<div class="msl">'+ms.slice(0,8).map(m=>'<div class="msi"><div class="msd" style="background:'+(MB[m.type]||MB.other)+'">'+ico(MI[m.type]||'pin',16)+'</div><div style="flex:1"><div class="mslb">'+m.label+'</div><div class="msm">'+(m.ageInMonths?'A '+m.ageInMonths+' mois':'')+(m.date?' - '+fmt(m.date):'')+'</div></div></div>').join('')+'</div>';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p-child-detail').classList.add('active');
+  document.getElementById('navbar').style.display='none';
+}
 
 // ============= QUESTIONNAIRE FLOW =============
 let QZ={childId:null,ch:null,step:0,responses:{}};
@@ -1125,7 +1198,26 @@ window.closeMdl=closeMdl;
 
 window.openAddChild=function(){openMdl('<h3>Ajouter un enfant</h3><div class="fg"><label class="fl">Prenom</label><input class="fi" id="nc-n" placeholder="Prenom"></div><div class="fg"><label class="fl">Date de naissance</label><input class="fi" id="nc-b" type="date"></div><div class="fg"><label class="fl">Sexe</label><select class="fsl" id="nc-g"><option value="boy">Garcon</option><option value="girl">Fille</option></select></div><div class="fg"><label class="fl">Choisir un avatar</label></div><div class="avg">'+AVS.map(a=>'<div class="avi'+(a.id==='lion'?' sel':'')+'" onclick="pickAv(\''+a.id+'\',this)">'+a.svg+'</div>').join('')+'</div><div class="fg"><button class="btn bp bw" onclick="submitChild()">Ajouter</button></div>');window._av='lion'}
 window.pickAv=function(id,el){window._av=id;document.querySelectorAll('.avi').forEach(a=>a.classList.remove('sel'));el.classList.add('sel')}
-window.submitChild=async function(){const n=document.getElementById('nc-n').value.trim(),b=document.getElementById('nc-b').value,g=document.getElementById('nc-g').value;if(!n||!b)return;await api('/api/parents/'+S.cp.id+'/children','POST',{firstName:n,birthDate:b,gender:g,avatar:window._av||'lion'});closeMdl();loadHome();loadProf()}
+window.submitChild=async function(){
+  const n=document.getElementById('nc-n').value.trim(),b=document.getElementById('nc-b').value,g=document.getElementById('nc-g').value;
+  if(!n||!b)return;
+  const res=await api('/api/parents/'+S.cp.id+'/children','POST',{firstName:n,birthDate:b,gender:g,avatar:window._av||'lion'});
+  // Auto-add birthday event to agenda
+  if(res&&res.id){
+    const bd=new Date(b);
+    const nextBday=new Date(new Date().getFullYear(),bd.getMonth(),bd.getDate());
+    if(nextBday<new Date())nextBday.setFullYear(nextBday.getFullYear()+1);
+    const bStr=nextBday.toISOString().slice(0,10);
+    try{await api('/api/children/'+res.id+'/agenda','POST',{title:'Anniversaire de '+n,date:bStr,type:'note',recurring:'yearly',notes:'Joyeux anniversaire ! Pensez a refaire le bilan personnalise.'})}catch(e){}
+  }
+  closeMdl();
+  // Launch questionnaire directly after child creation
+  if(res&&res.id){
+    await loadHome();await loadProf();
+    S.sel=res.id;
+    openQuiz(res.id.toString());
+  }else{loadHome();loadProf()}
+}
 
 window.openAddMs=function(){if(!S.sel)return;openMdl('<h3>Nouvelle étape</h3><div class="fg"><label class="fl">Catégorie</label><select class="fsl" id="nm-t"><option value="motor">Motricité</option><option value="language">Langage</option><option value="social">Social</option><option value="cognitive">Cognitif</option><option value="autonomy">Autonomie</option><option value="other">Autre</option></select></div><div class="fg"><label class="fl">Description</label><input class="fi" id="nm-l" placeholder="Ex: Premiers pas"></div><div class="fg"><label class="fl">Age (mois)</label><input class="fi" id="nm-a" type="number" placeholder="12"></div><div class="fg"><label class="fl">Date</label><input class="fi" id="nm-d" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div><div class="fg"><label class="fl">Notes</label><input class="fi" id="nm-n" placeholder="Un souvenir..."></div><div class="fg"><button class="btn bp bw" onclick="submitMs()">Enregistrer</button></div>')}
 window.submitMs=async function(){const t=document.getElementById('nm-t').value,l=document.getElementById('nm-l').value.trim(),a=parseFloat(document.getElementById('nm-a').value)||null,d=document.getElementById('nm-d').value||null,n=document.getElementById('nm-n').value.trim()||null;if(!l)return;await api('/api/children/'+S.sel+'/milestones','POST',{type:t,label:l,ageInMonths:a,date:d,notes:n});closeMdl();loadMs()}

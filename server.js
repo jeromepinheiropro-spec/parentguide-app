@@ -1288,6 +1288,25 @@ app.get('/api/admin/users/:id', (req, res) => {
   try {
     const user = db.prepare('SELECT * FROM user_profiles WHERE id = ?').get(req.params.id);
     if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé' });
+    // Enrich with children info
+    const parent = db.prepare('SELECT id FROM parents WHERE email = ?').get(user.email);
+    if (parent) {
+      const children = db.prepare('SELECT id, firstName, birthDate, avatar FROM children WHERE parentId = ?').all(parent.id);
+      user.children = children.map(c => {
+        const bd = new Date(c.birthDate);
+        const now = new Date();
+        const ageMonths = (now.getFullYear() - bd.getFullYear()) * 12 + (now.getMonth() - bd.getMonth());
+        const ageLabel = ageMonths < 12 ? ageMonths + ' mois' : Math.floor(ageMonths/12) + ' an' + (Math.floor(ageMonths/12) > 1 ? 's' : '') + (ageMonths%12 > 0 ? ' ' + (ageMonths%12) + ' mois' : '');
+        return { id: c.id, firstName: c.firstName, birthDate: c.birthDate, avatar: c.avatar, ageMonths, ageLabel };
+      });
+      user.childrenCount = children.length;
+      const qCount = db.prepare('SELECT COUNT(*) as c FROM questionnaires WHERE childId IN (SELECT id FROM children WHERE parentId = ?)').get(parent.id);
+      user.questionnaireCount = qCount ? qCount.c : 0;
+    } else {
+      user.children = [];
+      user.childrenCount = 0;
+      user.questionnaireCount = 0;
+    }
     res.json(user);
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
