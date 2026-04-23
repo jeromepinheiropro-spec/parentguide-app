@@ -1,0 +1,117 @@
+{
+  "quotes": [
+    {"q": "Vous n'avez pas besoin d'être parfait. Vous avez juste besoin d'être présent.", "a": ""},
+    {"q": "Chaque jour où vous vous levez pour votre enfant, vous êtes déjà un parent formidable.", "a": ""},
+    {"q": "Un enfant n'a pas besoin d'un parent parfait. Il a besoin d'un parent heureux.", "a": ""},
+    {"q": "Ce que vous faites ne suffit peut-être pas toujours, mais ce que vous êtes suffit toujours.", "a": ""},
+    {"q": "Douter de soi-même, c'est la preuve qu'on prend la parentalité au sérieux.", "a": ""},
+    {"q": "Votre enfant ne se souviendra pas de la maison parfaite. Il se souviendra des fous rires.", "a": ""},
+    {"q": "Un câlin n'a jamais gâté un enfant. Il l'a seulement rassuré.", "a": ""},
+    {"q": "Vous êtes le premier modèle de votre enfant. Soyez doux avec vous-même.", "a": ""},
+    {"q": "Chaque erreur est une occasion d'apprendre. Vous grandissez avec votre enfant.", "a": ""},
+    {"q": "Être parent, c'est aussi apprendre à se pardonner chaque soir.", "a": ""},
+    {"q": "Votre enfant ne voit pas vos imperfections. Il voit son monde entier.", "a": ""},
+    {"q": "Le plus beau cadeau que vous pouvez offrir à votre enfant, c'est votre présence attentive.", "a": ""},
+    {"q": "Personne ne connaît votre enfant mieux que vous. Faites-vous confiance.", "a": ""},
+    {"q": "Les petits moments du quotidien sont les grands souvenirs de demain.", "a": ""},
+    {"q": "Prendre soin de soi n'est pas de l'égoïsme. C'est s'assurer d'avoir de l'amour à donner.", "a": ""},
+    {"q": "Un parent fatigué reste un bon parent. Le simple fait d'être là compte énormément.", "a": ""},
+    {"q": "Les enfants ne demandent pas la perfection. Ils demandent la connexion.", "a": ""},
+    {"q": "Votre patience d'aujourd'hui construit la confiance de votre enfant pour la vie.", "a": ""},
+    {"q": "Il n'y a pas de mode d'emploi. Et c'est normal : chaque famille écrit sa propre histoire.", "a": ""},
+    {"q": "Même les jours difficiles, vous êtes en train de construire quelque chose de beau.", "a": ""},
+    {"q": "L'amour que vous donnez ne se perd jamais. Il devient la force intérieure de votre enfant.", "a": ""},
+    {"q": "Vous n'êtes pas seul. Tous les parents doutent. Les meilleurs osent en parler.", "a": ""},
+    {"q": "Chaque bataille de pyjama, chaque crise au supermarché : ça passera. Et vous en rirez.", "a": ""},
+    {"q": "Votre enfant n'a pas besoin que vous fassiez tout. Il a besoin que vous soyez là.", "a": ""},
+    {"q": "Le fait que vous cherchiez à mieux faire prouve déjà que vous faites bien.", "a": ""},
+    {"q": "Lâcher prise sur le ménage pour jouer 10 minutes : c'est la bonne priorité.", "a": ""},
+    {"q": "Un parent qui demande de l'aide n'est pas faible. Il est courageux.", "a": ""},
+    {"q": "Votre voix est la première musique de votre enfant. Parlez-lui, chantez-lui, même faux.", "a": ""},
+    {"q": "Aujourd'hui, autorisez-vous à faire 'juste assez'. C'est déjà beaucoup.", "a": ""},
+    {"q": "L'enfance passe vite. Mais chaque moment d'attention laisse une empreinte pour la vie.", "a": ""}
+  ],
+  "guideCategories": [
+    {"key": "sleep", "title": "Sommeil", "icon": "moon", "color": "var(--lv3)", "bgColor": "var(--lv)", "sortOrder": 0},
+    {"key": "food", "title": "Alimentation", "icon": "utensils", "color": "var(--mt3)", "bgColor": "var(--mt)", "sortOrder": 1},
+    {"key": "behavior", "title": "Comportement", "icon": "heart", "color": "var(--rs3)", "bgColor": "var(--rs)", "sortOrder": 2},
+    {"key": "hygiene", "title": "Soins & Hygiene", "icon": "droplet", "color": "var(--sk3)", "bgColor": "var(--sk)", "sortOrder": 3},
+    {"key": "émotions", "title": "Emotions", "icon": "heart", "color": "var(--pk3)", "bgColor": "var(--pk)", "sortOrder": 4},
+    {"key": "activities", "title": "Activités & Jeux", "icon": "palette", "color": "var(--lv3)", "bgColor": "var(--lv)", "sortOrder": 5},
+    {"key": "teeth", "title": "Dents & Bouche", "icon": "tooth", "color": "var(--sd3)", "bgColor": "var(--sd)", "sortOrder": 6}
+  ],
+  "guideTips": [
+    {"categoryKey": "sleep", "title": "Le rituel du coucher", "ageRange": "Tous âges", "text": "Un rituel régulier aide votre enfant à se sentir en sécurité. Bain, pyjama, histoire, câlin... Gardez le même ordre chaque soir pour signaler au cerveau qu'il est temps de dormir.", "sortOrder": 0},
+    {"categoryKey": "sleep", "title": "Position et sécurité du bébé", "ageRange": "0-12 mois", "text": "Position de sommeil : TOUJOURS sur le dos (réduction du risque de mort subite de 50%). Lit ferme et plat, matelas respirant, gigoteuse adaptée à la taille. AUCUN coussin, couette, tour de lit ni draperie avant 12 mois : risque d'étouffement et de coincement.", "sortOrder": 1},
+    {"categoryKey": "sleep", "title": "L'environnement idéal", "ageRange": "Tous âges", "text": "Chambre 18-20 degrés, obscurité ou veilleuse douce rouge (pas bleue). Évitez les écrans 1h avant le coucher. La mélatonine se bloque avec la lumière bleue.", "sortOrder": 2},
+    {"categoryKey": "sleep", "title": "L'objet transitionnel", "ageRange": "6m-3 ans", "text": "Le doudou aide à se rassurer lors des micro-réveils. Gardez-le contre vous quelques nuits pour votre odeur avant de lui donner. À partir de 12 mois seulement (pas de risque d'étouffement).", "sortOrder": 3},
+    {"categoryKey": "food", "title": "La diversification", "ageRange": "4-6 mois", "text": "Entre 4 et 6 mois selon pédiatre. Un nouvel aliment à la fois pendant 3 jours pour détecter une réaction. Le lait reste l'aliment principal jusqu'à 1 an.", "sortOrder": 0},
+    {"categoryKey": "food", "title": "Du lait aux morceaux", "ageRange": "6-12 mois", "text": "Purées lisses (6m) puis textures écrasées (8m) puis petits morceaux fondants (10-12m). Ne sautez pas la texture grumeleuse.", "sortOrder": 1},
+    {"categoryKey": "behavior", "title": "Tempêtes émotionnelles", "ageRange": "18m-4 ans", "text": "Le cerveau de votre enfant est encore immature : il ne peut pas réguler seul ses émotions (le préfrontal n'est pas développé). Restez calme, à sa hauteur, nommez l'émotion. Câlinez quand il est prêt. Ne raisonnez pas pendant la crise.", "sortOrder": 0},
+    {"categoryKey": "behavior", "title": "Le \"non\" magique", "ageRange": "18m-3 ans", "text": "Le \"non\" affirme son moi, étape saine. Proposez 2 choix (\"tu veux la pomme ou la banane ?\"). Moins de \"non\", plus de \"quand tu auras fini, on...\".", "sortOrder": 1},
+    {"categoryKey": "hygiene", "title": "Le bain", "ageRange": "Tous âges", "text": "Jouets, bulles, chansons. Température idéale : 37 degrés. Il est essentiel de rester toujours présent, même pour 30 secondes. Un doigt prêt à tenir.", "sortOrder": 0},
+    {"categoryKey": "hygiene", "title": "Brossage des dents", "ageRange": "1-6 ans", "text": "Dès la première dent. Matin et soir, 2 minutes. Dentifrice fluoré adapté à l'âge (500 ppm avant 3 ans). Jusqu'à 8 ans les parents finissent le brossage.", "sortOrder": 1},
+    {"categoryKey": "émotions", "title": "Nommer les émotions", "ageRange": "Tous âges", "text": "Aidez à mettre des mots sur ce qu'il ressent. \"Je vois que tu es triste, tu voulais le jouet.\" Les livres émotionnels sont précieux.", "sortOrder": 0},
+    {"categoryKey": "émotions", "title": "Le coin calme", "ageRange": "2-6 ans", "text": "Espace douillet avec coussins, doudous, livres. Pas une punition mais un refuge. \"Veux-tu aller au coin calme ?\" est bien plus invitant que de l'envoyer dans sa chambre.", "sortOrder": 1},
+    {"categoryKey": "activities", "title": "Éveil sensoriel", "ageRange": "0-18 mois", "text": "Bacs sensoriels (riz, pâtes, lentilles sous surveillance), tapis d'éveil, musique variée, textures variées. Le cerveau se construit par les sens.", "sortOrder": 0},
+    {"categoryKey": "activities", "title": "Jeu libre", "ageRange": "Tous âges", "text": "Cartons, bols, cuillères en bois, foulards. L'imagination se développe davantage qu'avec des jouets à pile. Moins, mais mieux.", "sortOrder": 1},
+    {"categoryKey": "teeth", "title": "La première dent", "ageRange": "4-15 mois", "text": "Apparaît en général entre 4 et 10 mois, souvent les incisives centrales du bas en premier. Très variable : jusqu'à 15 mois sans souci. Certains bébés naissent avec une dent, d'autres attendent leur 1 an. C'est tout à fait courant.", "sortOrder": 0},
+    {"categoryKey": "teeth", "title": "Symptômes de poussée dentaire", "ageRange": "3-24 mois", "text": "Salivation abondante, joues rouges, envie de mordre, irritabilité, sommeil perturbé, selles plus molles. Important : la fièvre supérieure à 38 degrés, la diarrhée et les vomissements NE sont PAS causés par les dents. Si présents, consulter.", "sortOrder": 1}
+  ],
+  "dailyTips": {
+    "0-6m": [
+      {"ageGroup": "0-6m", "title": "Parlez-lui de tout ce que vous faites", "text": "Commenter vos gestes enrichit son bain de langage : \"Maintenant on met la petite chaussette...\"", "sortOrder": 0},
+      {"ageGroup": "0-6m", "title": "5 minutes de tummy time après chaque change", "text": "C'est l'exercice fondamental pour muscler le cou, le dos, et préparer la motricité.", "sortOrder": 1},
+      {"ageGroup": "0-6m", "title": "Répondez aux pleurs sans tarder", "text": "A cet âge, on ne gate pas un bébé. Répondre = construire sa sécurité intérieure.", "sortOrder": 2},
+      {"ageGroup": "0-6m", "title": "Limitez les sollicitations en fin de journee", "text": "Les bébés accumulent la fatigue. Une ambiance calme des 17h previent les pleurs du soir.", "sortOrder": 3}
+    ],
+    "6-12m": [
+      {"ageGroup": "6-12m", "title": "Proposez du doigt aujourd'hui", "text": "Petits morceaux fondants (banane, avocat, courgette cuite). Il apprend a gerer les textures et la satiété.", "sortOrder": 0},
+      {"ageGroup": "6-12m", "title": "Cachez un jouet sous un tissu", "text": "Jeu magique qui travaille la permanence de l'objet, base de la confiance et de la separation.", "sortOrder": 1},
+      {"ageGroup": "6-12m", "title": "Lisez un livre cartonne 10 minutes", "text": "Même s'il le mange où tourne les pages au hasard, c'est le debut de l'amour des livres.", "sortOrder": 2},
+      {"ageGroup": "6-12m", "title": "Laissez-le se déplacer librement au sol", "text": "Plus que le parc, le sol securise est son meilleur terrain de développement moteur.", "sortOrder": 3}
+    ],
+    "12-24m": [
+      {"ageGroup": "12-24m", "title": "Donnez deux choix plutôt qu'un ordre", "text": "\"Tu veux la banane où la pomme ?\" reduit les crises en donnant de l'autonomie.", "sortOrder": 0},
+      {"ageGroup": "12-24m", "title": "Nommez l'émotion que vous voyez", "text": "\"Tu es en colere parce que...\". Il apprend a mettre des mots et a se réguler.", "sortOrder": 1},
+      {"ageGroup": "12-24m", "title": "Moment imitation en cuisine", "text": "Un petit saladier, une cuillere en bois. Il vous copie et développe sa motricité fine.", "sortOrder": 2},
+      {"ageGroup": "12-24m", "title": "Lecture interactive : montrez et questionnez", "text": "\"Ou est le chien ?\" Le pointage declenche les premiers mots.", "sortOrder": 3}
+    ],
+    "2-3a": [
+      {"ageGroup": "2-3a", "title": "Instaurez une routine du soir visuelle", "text": "Une suite fixe d'étapes (bain, pyjama, livre, calin) secretse. Les routines calment.", "sortOrder": 0},
+      {"ageGroup": "2-3a", "title": "Proposez un coin calme", "text": "Coussins, doudou, livres. Un refuge, pas une punition, pour quand ça débordé.", "sortOrder": 1},
+      {"ageGroup": "2-3a", "title": "Dessin libre aujourd'hui", "text": "Grandes feuilles, crayons gras. Laissez-le faire, ne corrigez pas. C'est sa pensee qui se pose.", "sortOrder": 2},
+      {"ageGroup": "2-3a", "title": "Un livre sur les émotions ce soir", "text": "\"La couleur des émotions\" où \"Quand je suis...\". Aide a mettre des mots sur ce qu'il vit.", "sortOrder": 3}
+    ],
+    "3-6a": [
+      {"ageGroup": "3-6a", "title": "Donnez-lui une vraie responsabilité", "text": "Mettre la table, nourrir le chat, arroser la plante. La fierté d'être utile = confiance en soi.", "sortOrder": 0},
+      {"ageGroup": "3-6a", "title": "Inventez une histoire ensemble", "text": "Vous commencez, il continue. Stimule imagination, vocabulaire, narration.", "sortOrder": 1},
+      {"ageGroup": "3-6a", "title": "Limitez les écrans à 30 min maxi", "text": "Préférez la nature, les jeux de société, la cuisine. Les écrans avant 3 ans : éviter.", "sortOrder": 2},
+      {"ageGroup": "3-6a", "title": "Acceptez la lenteur ce matin", "text": "Laissez-le mettre ses chaussures seul, même si c'est long. L'autonomie se construit là.", "sortOrder": 3}
+    ]
+  },
+  "devDomains": [
+    {"key": "motor_gross", "title": "Motricité globale", "icon": "run", "color": "var(--sk3)", "bgColor": "var(--sk)", "sortOrder": 0},
+    {"key": "motor_fine", "title": "Motricité fine", "icon": "hand", "color": "var(--lv3)", "bgColor": "var(--lv)", "sortOrder": 1},
+    {"key": "language", "title": "Langage", "icon": "speech", "color": "var(--pk3)", "bgColor": "var(--pk)", "sortOrder": 2},
+    {"key": "cognitive", "title": "Cognitif", "icon": "brain", "color": "var(--mt3)", "bgColor": "var(--mt)", "sortOrder": 3},
+    {"key": "social", "title": "Socio-émotionnel", "icon": "smile", "color": "var(--rs3)", "bgColor": "var(--rs)", "sortOrder": 4},
+    {"key": "autonomy", "title": "Autonomie", "icon": "star", "color": "var(--sd3)", "bgColor": "var(--sd)", "sortOrder": 5}
+  ],
+  "devSteps": [
+    {"domainKey": "motor_gross", "ageGroup": "0-6m", "label": "Tient sa tête, soulève le buste sur le ventre", "activities": ["Tummy time : 2-3 min sur le ventre après chaque change", "Portage vertical pour renforcer les muscles du cou", "Jeu du miroir : allongé sur le ventre face à un miroir"], "sortOrder": 0},
+    {"domainKey": "motor_gross", "ageGroup": "0-6m", "label": "Se retourne du ventre sur le dos", "activities": ["Attirez-le sur le côté avec un jouet musical", "Roulade douce guidée avec vos mains", "Tummy time sur tapis ferme, surface plane"], "sortOrder": 1},
+    {"domainKey": "motor_gross", "ageGroup": "6-12m", "label": "S'assoit seul, rampe, quatre pattes", "activities": ["Tunnel avec une grande boîte en carton percée", "Tapis d'éveil avec textures variées", "Jouets placés hors de portée pour motiver"], "sortOrder": 2},
+    {"domainKey": "motor_gross", "ageGroup": "6-12m", "label": "Se met debout en s'accrochant", "activities": ["Table basse stable pour se hisser", "Dansez debout en le tenant par les mains", "Jouets posés sur le canapé pour l'attirer"], "sortOrder": 3},
+    {"domainKey": "motor_fine", "ageGroup": "0-6m", "label": "Ouvre les mains, attrape un objet", "activities": ["Hochets légers de différentes textures", "Chaussette coloriée sur la main", "Mobile à portée de main"], "sortOrder": 0},
+    {"domainKey": "motor_fine", "ageGroup": "6-12m", "label": "Pince pouce-index, tape deux objets", "activities": ["Petits morceaux de nourriture (finger food)", "Boîtes à ouvrir et fermer", "Transvasement de gros haricots entre bols"], "sortOrder": 1},
+    {"domainKey": "language", "ageGroup": "0-6m", "label": "Gazouillis, rires, réagit aux voix", "activities": ["Parlez de tout ce que vous faites", "Chantez berceuses et comptines", "Imitez ses sons : dialogue de babillage"], "sortOrder": 0},
+    {"domainKey": "language", "ageGroup": "6-12m", "label": "Babillage, premiers mots, pointe", "activities": ["Nommez tout ce que vous montrez", "Lecture interactive avec images", "Coucou-cache avec des mots"], "sortOrder": 1},
+    {"domainKey": "cognitive", "ageGroup": "0-6m", "label": "Suit des yeux, explore avec la bouche", "activities": ["Mobile contraste noir/blanc (0-2 mois)", "Jeu du miroir", "Hochets sonores pour cause et effet"], "sortOrder": 0},
+    {"domainKey": "cognitive", "ageGroup": "6-12m", "label": "Permanence de l'objet, cause et effet", "activities": ["Coucou-cache sous une couverture", "Boîte à formes simples", "Cacher un jouet sous un tissu"], "sortOrder": 1},
+    {"domainKey": "social", "ageGroup": "0-6m", "label": "Sourire social, attachement", "activities": ["Peau-à-peau quotidien", "Massage bébé", "Répondre aux pleurs = confiance"], "sortOrder": 0},
+    {"domainKey": "social", "ageGroup": "6-12m", "label": "Angoisse de séparation, joie", "activities": ["Coucou pour la séparation", "Rencontres avec d'autres bébés", "Toujours dire au revoir"], "sortOrder": 1},
+    {"domainKey": "autonomy", "ageGroup": "0-6m", "label": "Tient son biberon, coopère habillage", "activities": ["Laissez tenir le biberon", "Décrivez chaque geste d'habillage", "Routine prévisible"], "sortOrder": 0},
+    {"domainKey": "autonomy", "ageGroup": "6-12m", "label": "Mange avec les doigts, gobelet", "activities": ["Finger food adapté", "Gobelet à bec puis ouvert", "Brosse à dents à mordiller"], "sortOrder": 1}
+  ]
+}

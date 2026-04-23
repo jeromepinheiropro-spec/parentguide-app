@@ -296,6 +296,99 @@ db.exec(`
 `);
 
 // ============================================================
+// AUTO-SEED CONTENT IF EMPTY
+// ============================================================
+const contentCount = db.prepare('SELECT COUNT(*) as c FROM content_guide_categories').get();
+if (contentCount.c === 0) {
+  console.log('[seed] Content tables empty, auto-seeding...');
+  try {
+    const seedData = require('./seed-content.json');
+
+    // Seed quotes
+    if (seedData.quotes && seedData.quotes.length > 0) {
+      const insertQuote = db.prepare('INSERT INTO content_quotes (text, author, active, sortOrder) VALUES (?, ?, 1, ?)');
+      const txInsertQuotes = db.transaction((quotes) => {
+        quotes.forEach((q, idx) => {
+          insertQuote.run(q.q, q.a || '', idx);
+        });
+      });
+      txInsertQuotes(seedData.quotes);
+      console.log('[seed] Inserted', seedData.quotes.length, 'quotes');
+    }
+
+    // Seed guide categories
+    if (seedData.guideCategories && seedData.guideCategories.length > 0) {
+      const insertCat = db.prepare('INSERT INTO content_guide_categories (key, title, icon, color, bgColor, sortOrder) VALUES (?, ?, ?, ?, ?, ?)');
+      const txInsertCats = db.transaction((cats) => {
+        cats.forEach(c => {
+          insertCat.run(c.key, c.title, c.icon, c.color, c.bgColor, c.sortOrder);
+        });
+      });
+      txInsertCats(seedData.guideCategories);
+      console.log('[seed] Inserted', seedData.guideCategories.length, 'guide categories');
+    }
+
+    // Seed guide tips
+    if (seedData.guideTips && seedData.guideTips.length > 0) {
+      const insertTip = db.prepare('INSERT INTO content_guide_tips (categoryKey, title, ageRange, text, sortOrder) VALUES (?, ?, ?, ?, ?)');
+      const txInsertTips = db.transaction((tips) => {
+        tips.forEach(t => {
+          insertTip.run(t.categoryKey, t.title, t.ageRange, t.text, t.sortOrder);
+        });
+      });
+      txInsertTips(seedData.guideTips);
+      console.log('[seed] Inserted', seedData.guideTips.length, 'guide tips');
+    }
+
+    // Seed daily tips
+    if (seedData.dailyTips) {
+      const insertDaily = db.prepare('INSERT INTO content_daily_tips (ageGroup, title, text, sortOrder) VALUES (?, ?, ?, ?)');
+      const txInsertDaily = db.transaction((dailyObj) => {
+        Object.keys(dailyObj).forEach(ageGroup => {
+          const tips = dailyObj[ageGroup];
+          if (Array.isArray(tips)) {
+            tips.forEach(t => {
+              insertDaily.run(ageGroup, t.title, t.text, t.sortOrder);
+            });
+          }
+        });
+      });
+      txInsertDaily(seedData.dailyTips);
+      console.log('[seed] Inserted daily tips');
+    }
+
+    // Seed dev domains
+    if (seedData.devDomains && seedData.devDomains.length > 0) {
+      const insertDom = db.prepare('INSERT INTO content_dev_domains (key, title, icon, color, bgColor, sortOrder) VALUES (?, ?, ?, ?, ?, ?)');
+      const txInsertDoms = db.transaction((doms) => {
+        doms.forEach(d => {
+          insertDom.run(d.key, d.title, d.icon, d.color, d.bgColor, d.sortOrder);
+        });
+      });
+      txInsertDoms(seedData.devDomains);
+      console.log('[seed] Inserted', seedData.devDomains.length, 'dev domains');
+    }
+
+    // Seed dev steps
+    if (seedData.devSteps && seedData.devSteps.length > 0) {
+      const insertStep = db.prepare('INSERT INTO content_dev_steps (domainKey, ageGroup, label, activities, sortOrder) VALUES (?, ?, ?, ?, ?)');
+      const txInsertSteps = db.transaction((steps) => {
+        steps.forEach(s => {
+          const activitiesJson = typeof s.activities === 'string' ? s.activities : JSON.stringify(s.activities);
+          insertStep.run(s.domainKey, s.ageGroup, s.label, activitiesJson, s.sortOrder);
+        });
+      });
+      txInsertSteps(seedData.devSteps);
+      console.log('[seed] Inserted', seedData.devSteps.length, 'dev steps');
+    }
+
+    console.log('[seed] Content auto-seeding complete');
+  } catch(e) {
+    console.log('[seed] No seed file or error:', e.message);
+  }
+}
+
+// ============================================================
 // AUTH HELPERS
 // ============================================================
 function hashPassword(password) {

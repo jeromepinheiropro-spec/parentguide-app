@@ -387,6 +387,28 @@ async function api(u,m='GET',b=null){const o={method:m,headers:{'Content-Type':'
 document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>go(b.dataset.p)));
 function go(p){document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.nb').forEach(n=>n.classList.toggle('on',n.dataset.p===p));const nav=document.getElementById('navbar'),fab=document.getElementById('fab');document.body.classList.toggle('auth-mode',p==='auth');nav.style.display=['auth','guide-detail','child-detail','quiz','quizres','suggestions'].includes(p)?'none':'flex';fab.style.display=p==='agenda'?'flex':'none';if(p==='home')loadHome();if(p==='agenda')loadAgenda();if(p==='milestones')loadMs();if(p==='growth')loadGr();if(p==='guide')loadGuide();if(p==='profile')loadProf();if(p==='suggestions')loadMySuggestions();if(!['auth','guide-detail','child-detail','quiz','quizres'].includes(p)){try{localStorage.setItem('pg_lastpage',p)}catch(e){}}window.scrollTo(0,0)}
 
+// ============= SWIPE-RIGHT GESTURE TO GO BACK =============
+let _swX = 0;
+document.addEventListener('touchstart', e => {
+  _swX = e.touches[0].clientX;
+}, {passive: true});
+
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - _swX;
+  // Swipe right from left edge (>80px swipe, started <40px from left)
+  if (dx > 80 && _swX < 40) {
+    const activePage = document.querySelector('.page.active');
+    if (activePage) {
+      const id = activePage.id;
+      // Go back on detail pages
+      if (id === 'p-guide-detail') go('guide');
+      else if (id === 'p-quiz') go('home');
+      else if (id === 'p-quizres') go('home');
+      else if (id === 'p-child-detail') go('home');
+    }
+  }
+}, {passive: true});
+
 // ============= GENDER UTILS =============
 function gTxt(gender,m,f){return gender==='girl'?f:m}
 // Usage: gTxt(ch.gender, 'Né le', 'Née le')
@@ -418,7 +440,7 @@ window.selCh=function(cid,id){S.sel=id;if(cid.includes('ms'))loadMs();if(cid.inc
 
 // ============= HOME =============
 async function loadHome(){
-  refreshContentIfStale(); // non-blocking: don't await, content refreshes in background
+  await refreshContentIfStale(); // Always load content from backend on page load
   if(!S.cp){S.parents=await api('/api/parents');if(!S.parents.length)return;S.cp=S.parents[0];}
   const greetEl=document.getElementById('greeting');
   const pAvatar=S.cp.avatar||'parent';
@@ -1399,7 +1421,7 @@ window.openNotifCenter=function(){
 
 // ============= DYNAMIC CONTENT LOADING =============
 // Override hardcoded constants with DB content when available
-let _contentLastFetch = 0;
+let _contentLastFetch = 0; // Force reload on first page load
 const CONTENT_TTL = 15000; // 15 seconds cache
 
 async function refreshContentIfStale() {
