@@ -1475,7 +1475,7 @@ async function refreshContentIfStale() {
 async function loadDynamicContent(){
   _contentLastFetch = Date.now();
   try{
-    const r=await fetch('/api/content/all');
+    const r=await fetch('/api/content/all?_='+Date.now());
     if(!r.ok) return;
     const data=await r.json();
 
