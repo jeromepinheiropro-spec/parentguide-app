@@ -871,6 +871,7 @@
                 <div class="header">
                     <h2>Guide</h2>
                     <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="exportGuideCSV()" style="margin-right:8px">📥 Export CSV</button>
                         <button class="btn btn-primary" onclick="openCategoryModal()">
                             <span>➕</span>
                             <span>Nouvelle catégorie</span>
@@ -908,6 +909,7 @@
                 <div class="header">
                     <h2>Repères développementaux</h2>
                     <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="exportDevsCSV()" style="margin-right:8px">📥 Export CSV</button>
                         <button class="btn btn-primary" onclick="openDomainModal()">
                             <span>➕</span>
                             <span>Nouveau domaine</span>
@@ -1046,6 +1048,7 @@
                 <div class="header">
                     <h2>Profils clients</h2>
                     <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="exportUsersCSV()" style="margin-right:8px">📥 Export CSV</button>
                         <button class="btn btn-primary" onclick="openUserModal()">➕ Nouveau client</button>
                     </div>
                 </div>
@@ -3485,6 +3488,64 @@
                 }
             });
         });
+        // ============================================================
+        // CSV EXPORT FUNCTIONS
+        // ============================================================
+        function downloadCSV(filename, csvContent) {
+            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+            URL.revokeObjectURL(link.href);
+            showNotification('Export CSV téléchargé', 'success');
+        }
+
+        function escCSV(val) {
+            if (val === null || val === undefined) return '';
+            const s = String(val);
+            if (s.includes(',') || s.includes('"') || s.includes('\n')) return '"' + s.replace(/"/g, '""') + '"';
+            return s;
+        }
+
+        async function exportUsersCSV() {
+            try {
+                const users = await fetch('/api/admin/users').then(r => r.json());
+                let csv = 'ID,Prénom,Nom,Email,Statut,Nb enfants,Date inscription,Dernière connexion\n';
+                users.forEach(u => {
+                    csv += [u.id, escCSV(u.firstName), escCSV(u.lastName), escCSV(u.email), u.status, u.childrenCount || 0, u.createdAt || '', u.lastLogin || ''].join(',') + '\n';
+                });
+                downloadCSV('cocon-clients-' + new Date().toISOString().slice(0, 10) + '.csv', csv);
+            } catch (e) { showNotification('Erreur export', 'error'); }
+        }
+
+        async function exportGuideCSV() {
+            try {
+                const cats = await fetch('/api/admin/guide-categories').then(r => r.json());
+                const tips = await fetch('/api/admin/guide-tips').then(r => r.json());
+                let csv = 'Catégorie,Titre du conseil,Tranche d\'âge,Contenu\n';
+                tips.forEach(t => {
+                    const cat = cats.find(c => c.key === t.categoryKey);
+                    csv += [escCSV(cat ? cat.title : t.categoryKey), escCSV(t.title), escCSV(t.ageRange), escCSV(t.text)].join(',') + '\n';
+                });
+                downloadCSV('cocon-guide-' + new Date().toISOString().slice(0, 10) + '.csv', csv);
+            } catch (e) { showNotification('Erreur export', 'error'); }
+        }
+
+        async function exportDevsCSV() {
+            try {
+                const domains = await fetch('/api/admin/dev-domains').then(r => r.json());
+                const steps = await fetch('/api/admin/dev-steps').then(r => r.json());
+                let csv = 'Domaine,Tranche d\'âge,Repère,Activités\n';
+                steps.forEach(s => {
+                    const dom = domains.find(d => d.key === s.domainKey);
+                    let acts = '';
+                    try { acts = typeof s.activities === 'string' ? JSON.parse(s.activities).join(' | ') : (Array.isArray(s.activities) ? s.activities.join(' | ') : s.activities); } catch(e) { acts = s.activities || ''; }
+                    csv += [escCSV(dom ? dom.title : s.domainKey), escCSV(s.ageGroup), escCSV(s.label), escCSV(acts)].join(',') + '\n';
+                });
+                downloadCSV('cocon-reperes-' + new Date().toISOString().slice(0, 10) + '.csv', csv);
+            } catch (e) { showNotification('Erreur export', 'error'); }
+        }
     </script>
 </body>
 </html>
