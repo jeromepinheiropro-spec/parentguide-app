@@ -837,7 +837,7 @@ window.showDevDetail=function(key){
   window._devSteps=allSteps;window._devColor=d.c;
   updateSliderTrack('dev-sl');
   filterDevBySlider();
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');
   window.scrollTo(0,0)}
 
 function filterDevBySlider(){
@@ -861,7 +861,7 @@ window.showGD=function(key){const g=GUIDE[key];if(!g)return;
   window._guideColor=g.c;window._guideBg=g.bg;window._guideKey=key;
   updateSliderTrack('guide-sl');
   filterGuideBySlider();
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');document.getElementById('navbar').style.display='none';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p-guide-detail').classList.add('active');
   window.scrollTo(0,0)}
 
 function filterGuideBySlider(){
