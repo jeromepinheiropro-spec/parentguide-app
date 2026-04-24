@@ -792,18 +792,17 @@ async function loadGuide(){
 
 // ============= AGE RANGE SLIDER (shared) =============
 function ageSliderHtml(id,minM,maxM,color){
-  // Convert months to display: 0-72 months range (0-6 years)
   const minV=Math.max(0,minM),maxV=Math.min(72,maxM);
   return '<div class="age-slider-wrap" style="padding:16px 20px 8px;--slider-color:'+color+'">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
-      '<span class="age-slider-label" id="'+id+'-label" style="font-size:13px;font-weight:700;color:var(--tx)">'+ageLabel(minV)+' — '+ageLabel(maxV)+'</span>'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
+      '<span id="'+id+'-label" style="font-size:13px;font-weight:700;color:var(--tx)">'+ageLabel(minV)+' — '+ageLabel(maxV)+'</span>'+
       '<span id="'+id+'-count" style="font-size:11px;color:var(--tx3);font-weight:600"></span>'+
     '</div>'+
-    '<div class="age-slider" style="position:relative;height:40px;margin-bottom:4px">'+
-      '<div style="position:absolute;top:17px;left:0;right:0;height:6px;border-radius:3px;background:var(--border)"></div>'+
-      '<div id="'+id+'-track" style="position:absolute;top:17px;height:6px;border-radius:3px;background:'+color+';opacity:.7"></div>'+
-      '<input type="range" id="'+id+'-min" min="0" max="72" step="1" value="'+minV+'" style="position:absolute;top:8px;left:0;width:100%;pointer-events:none;-webkit-appearance:none;appearance:none;background:transparent;z-index:2" oninput="onAgeSlider(\''+id+'\')">'+
-      '<input type="range" id="'+id+'-max" min="0" max="72" step="1" value="'+maxV+'" style="position:absolute;top:8px;left:0;width:100%;pointer-events:none;-webkit-appearance:none;appearance:none;background:transparent;z-index:3" oninput="onAgeSlider(\''+id+'\')">'+
+    '<div class="age-slider" style="margin-bottom:8px">'+
+      '<div class="sl-bg"></div>'+
+      '<div class="sl-fill" id="'+id+'-track"></div>'+
+      '<input type="range" id="'+id+'-min" min="0" max="72" step="1" value="'+minV+'" oninput="onAgeSlider(\''+id+'\')">'+
+      '<input type="range" id="'+id+'-max" min="0" max="72" step="1" value="'+maxV+'" style="z-index:3" oninput="onAgeSlider(\''+id+'\')">'+
     '</div>'+
     '<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--tx3);font-weight:600">'+
       '<span>Naissance</span><span>1 an</span><span>2 ans</span><span>3 ans</span><span>4 ans</span><span>5 ans</span><span>6 ans</span>'+
@@ -815,13 +814,12 @@ function updateSliderTrack(id){
   const mn=parseInt(document.getElementById(id+'-min').value);
   const mx=parseInt(document.getElementById(id+'-max').value);
   const track=document.getElementById(id+'-track');
-  const slider=document.getElementById(id+'-min');
-  const w=slider.offsetWidth||300;
-  const thumbR=12; // thumb radius (24px / 2)
-  const usable=w-thumbR*2;
-  const posL=thumbR+(mn/72)*usable;
-  const posR=thumbR+(mx/72)*usable;
-  track.style.left=posL+'px';track.style.width=(posR-posL)+'px';
+  // Use percentage positioning — browser handles thumb offset natively
+  const pL=(mn/72)*100;
+  const pR=(mx/72)*100;
+  track.style.left=pL+'%';
+  track.style.right=(100-pR)+'%';
+  track.style.width='auto';
   document.getElementById(id+'-label').textContent=ageLabel(mn)+' — '+ageLabel(mx);
 }
 
