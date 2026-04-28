@@ -1307,6 +1307,23 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 }
 #p-guide-detail .deth .back:hover{background:rgba(255,255,255,.30)!important;color:#fff!important}
 
+/* ===== Guide/Repère detail content — adapt to category color =====
+   --cat-c (strong) and --cat-bg (light) are set inline by app.js
+   showGD/showDevDetail. Falls back to violet when not set.       */
+#p-guide-detail .mcard{border-color:color-mix(in srgb, var(--cat-c, var(--pk3)) 12%, transparent)!important}
+#p-guide-detail .mcard:hover{border-color:color-mix(in srgb, var(--cat-c, var(--pk3)) 22%, transparent)!important}
+#p-guide-detail .mcard .mca{color:var(--cat-c, var(--pk3))!important}
+#p-guide-detail .mcard .acts{
+  background:linear-gradient(135deg, var(--cat-bg, var(--pk)) 0%, color-mix(in srgb, var(--cat-bg, var(--pk)) 70%, #fff) 100%)!important;
+  border:1px solid color-mix(in srgb, var(--cat-c, var(--pk3)) 14%, transparent);
+}
+#p-guide-detail .mcard .acts-t{color:var(--cat-c, var(--pk3))!important}
+#p-guide-detail .mcard .act::before{background:var(--cat-c, var(--pk3))!important;opacity:.65!important;width:8px!important;height:8px!important;top:9px!important}
+#p-guide-detail .tip{border-left-color:var(--cat-c, var(--pk3))!important}
+#p-guide-detail .tip .badge{background:var(--cat-bg, var(--pk))!important;color:var(--cat-c, var(--pk3))!important}
+/* Slider track + thumbs already pick up the color via inline d.c/g.c —
+   leave them alone */
+
 /* ===== Quiz detail header ===== */
 #p-quiz .deth,#p-quizres .deth{
   background:

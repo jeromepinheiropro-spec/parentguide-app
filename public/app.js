@@ -2,7 +2,7 @@
 const I={
 run:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="m7 21 3-7"/><path d="m17 21-3-7"/><path d="M10 14h4l2-4-5-3-3 4"/></svg>',
 hand:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 00-4 0"/><path d="M14 10V4a2 2 0 00-4 0v2"/><path d="M10 10.5V6a2 2 0 00-4 0v8"/><path d="M18 8a2 2 0 114 0v6a8 8 0 01-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 012.83-2.82L7 15"/></svg>',
-brain:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44 2.5 2.5 0 01-2.96-3.08 3 3 0 01-.34-5.58 2.5 2.5 0 011.32-4.24A2.5 2.5 0 019.5 2z"/><path d="M14.5 2A2.5 2.5 0 0012 4.5v15a2.5 2.5 0 004.96.44 2.5 2.5 0 002.96-3.08 3 3 0 00.34-5.58 2.5 2.5 0 00-1.32-4.24A2.5 2.5 0 0014.5 2z"/></svg>',
+brain:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>',
 speech:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>',
 smile:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
 star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>',
@@ -831,9 +831,11 @@ window.showDevDetail=function(key){
   const childM=S.childAge||0;const defMin=Math.max(0,childM-3),defMax=Math.min(72,childM+12);
 
   const _devBg=d.bg||'#f0f0f0',_devC=d.c||'#666';
+  const _pgD=document.getElementById('p-guide-detail');
+  _pgD.style.setProperty('--cat-c',_devC);_pgD.style.setProperty('--cat-bg',_devBg);
   document.getElementById('gdh').style.background='radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.30) 0%,transparent 60%),linear-gradient(135deg,'+_devBg+' 0%,'+_devC+' 100%)';
   document.getElementById('gdh').style.color='#fff';
-  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.32)">'+ico(d.ico,26)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+allSteps.length+' étapes</p></div></div>';
+  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:54px;height:54px;border-radius:16px;background:#fff;display:flex;align-items:center;justify-content:center;color:'+_devC+';box-shadow:0 6px 16px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.7);flex-shrink:0">'+ico(d.ico,28)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+allSteps.length+' étapes</p></div></div>';
 
   document.getElementById('gdc').innerHTML=ageSliderHtml('dev-sl',defMin,defMax,d.c||'var(--primary)')+'<div id="dev-age-content"></div>';
   window._devSteps=allSteps;window._devColor=d.c;
@@ -855,9 +857,11 @@ function filterDevBySlider(){
 window.showGD=function(key){const g=GUIDE[key];if(!g)return;
   const childM=S.childAge||0;const defMin=Math.max(0,childM-3),defMax=Math.min(72,childM+12);
 
+  const _pgG=document.getElementById('p-guide-detail');
+  _pgG.style.setProperty('--cat-c',g.c);_pgG.style.setProperty('--cat-bg',g.bg);
   document.getElementById('gdh').style.background='radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.30) 0%,transparent 60%),linear-gradient(135deg,'+g.bg+' 0%,'+g.c+' 100%)';
   document.getElementById('gdh').style.color='#fff';
-  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.32)">'+ico(g.ico,26)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
+  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:54px;height:54px;border-radius:16px;background:#fff;display:flex;align-items:center;justify-content:center;color:'+g.c+';box-shadow:0 6px 16px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.7);flex-shrink:0">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
 
   document.getElementById('gdc').innerHTML=ageSliderHtml('guide-sl',defMin,defMax,g.c||'var(--primary)')+'<div id="guide-age-content"></div>';
   window._guideTips=g.tips.map(t=>({...t,startM:ageStartMonths(t.a),endM:ageEndMonths(t.a)}));
