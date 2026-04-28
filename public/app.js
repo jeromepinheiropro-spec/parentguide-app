@@ -830,8 +830,10 @@ window.showDevDetail=function(key){
   ages.forEach(a=>{(d.ages[a]||[]).forEach(s=>allSteps.push({...s,ageKey:a,startM:ageStartMonths(a),endM:ageEndMonths(a)}))});
   const childM=S.childAge||0;const defMin=Math.max(0,childM-3),defMax=Math.min(72,childM+12);
 
-  document.getElementById('gdh').style.background=d.bg||'#f0f0f0';document.getElementById('gdh').style.color='var(--tx)';
-  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+(d.c||'#666')+'">'+ico(d.ico,28)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+allSteps.length+' étapes</p></div></div>';
+  const _devBg=d.bg||'#f0f0f0',_devC=d.c||'#666';
+  document.getElementById('gdh').style.background='radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.30) 0%,transparent 60%),linear-gradient(135deg,'+_devBg+' 0%,'+_devC+' 100%)';
+  document.getElementById('gdh').style.color='#fff';
+  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.32)">'+ico(d.ico,26)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+allSteps.length+' étapes</p></div></div>';
 
   document.getElementById('gdc').innerHTML=ageSliderHtml('dev-sl',defMin,defMax,d.c||'var(--primary)')+'<div id="dev-age-content"></div>';
   window._devSteps=allSteps;window._devColor=d.c;
@@ -853,8 +855,9 @@ function filterDevBySlider(){
 window.showGD=function(key){const g=GUIDE[key];if(!g)return;
   const childM=S.childAge||0;const defMin=Math.max(0,childM-3),defMax=Math.min(72,childM+12);
 
-  document.getElementById('gdh').style.background=g.bg;document.getElementById('gdh').style.color='var(--tx)';
-  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:12px"><span style="color:'+g.c+'">'+ico(g.ico,28)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
+  document.getElementById('gdh').style.background='radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.30) 0%,transparent 60%),linear-gradient(135deg,'+g.bg+' 0%,'+g.c+' 100%)';
+  document.getElementById('gdh').style.color='#fff';
+  document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.32)">'+ico(g.ico,26)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
 
   document.getElementById('gdc').innerHTML=ageSliderHtml('guide-sl',defMin,defMax,g.c||'var(--primary)')+'<div id="guide-age-content"></div>';
   window._guideTips=g.tips.map(t=>({...t,startM:ageStartMonths(t.a),endM:ageEndMonths(t.a)}));
