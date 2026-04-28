@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cgMaskBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="55%" stop-color="#8E73FB"/>
+      <stop offset="100%" stop-color="#7C5CFC"/>
+    </linearGradient>
+    <radialGradient id="cgMaskGloss" cx="30%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Full-bleed square fill so iOS/Android can mask it without exposing transparent corners -->
+  <rect width="64" height="64" fill="url(#cgMaskBg)"/>
+  <rect width="64" height="64" fill="url(#cgMaskGloss)"/>
+  <!-- Heart + cocoon line, sized to stay inside the 80% safe zone (12.8 .. 51.2) -->
+  <g transform="translate(32 32)">
+    <g transform="translate(-32 -32) scale(1)">
+      <path d="M32 49.5 C 18 40, 12.5 30, 14.5 23 C 16.5 17.5, 23.5 16, 32 23 C 40.5 16, 47.5 17.5, 49.5 23 C 51.5 30, 46 40, 32 49.5 Z"
+            fill="none" stroke="#FFFFFF" stroke-width="3.4"
+            stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M20.5 33.5 Q 32 41 43.5 33.5"
+            fill="none" stroke="#FFFFFF" stroke-width="3.4"
+            stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
