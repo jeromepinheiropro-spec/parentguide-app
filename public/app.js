@@ -953,10 +953,13 @@ async function loadProf(){
   const quote=PARENT_QUOTES[quoteIdx];
   document.getElementById('profQuote').innerHTML='<div class="quotecard"><div class="qi-ico">'+ico('heart',18)+'</div><div style="flex:1"><p class="qt">\u00AB '+quote.q+' \u00BB</p>'+(quote.a?'<p class="qa">'+quote.a+'</p>':'')+'</div></div>';
 
-  // Children list
+  // Children list — avatar circle takes the child's THEME color; pencil opens edit
   document.getElementById('cl').innerHTML=p.children.map((c,i)=>{
-    const col=CHILD_COLORS[i%CHILD_COLORS.length];
-    return '<div class="cli" onclick="openChildHome(\''+c.id+'\')"><div style="width:38px;height:38px;border-radius:50%;background:'+col+'20;border:2px solid '+col+';display:flex;align-items:center;justify-content:center">'+avSvg(c.photoUrl||'lion')+'</div><div style="flex:1"><div style="font-size:14px;font-weight:700">'+c.firstName+'</div><div style="font-size:11px;color:var(--tx2)">'+calcAge(c.birthDate)+'</div></div><button class="cli-det" onclick="event.stopPropagation();showCD(\''+c.id+'\')" title="Details">'+ico('chevR',14)+'</button></div>'
+    const t=themeBy(c.theme||'lavande');
+    const col=t.primary;
+    const bgCol=t.p100;
+    const editIco='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>';
+    return '<div class="cli" onclick="openChildHome(\''+c.id+'\')"><div style="width:38px;height:38px;border-radius:50%;background:'+bgCol+';border:2px solid '+col+';display:flex;align-items:center;justify-content:center">'+avSvg(c.photoUrl||'lion')+'</div><div style="flex:1"><div style="font-size:14px;font-weight:700">'+c.firstName+'</div><div style="font-size:11px;color:var(--tx2)">'+calcAge(c.birthDate)+'</div></div><button class="cli-det" onclick="event.stopPropagation();openEditChild(\''+c.id+'\')" title="Modifier le profil" style="color:'+col+';border-color:'+bgCol+';background:'+bgCol+'">'+editIco+'</button></div>'
   }).join('');
 
   // Multi-child family calendar
