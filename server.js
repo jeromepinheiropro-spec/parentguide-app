@@ -272,6 +272,7 @@ function ensureColumn(table, col, decl) {
 ensureColumn('agenda_events', 'extras', 'TEXT');
 ensureColumn('vaccines', 'extras', 'TEXT');
 ensureColumn('parents', 'passwordHash', 'TEXT');
+ensureColumn('children', 'theme', 'TEXT');
 
 // ============================================================
 // INDEXES (idempotent)
@@ -515,10 +516,10 @@ app.get('/api/parents/:parentId/children', (req, res) => {
 });
 
 app.post('/api/parents/:parentId/children', (req, res) => {
-  const { firstName, birthDate, gender, avatar } = req.body;
+  const { firstName, birthDate, gender, avatar, theme } = req.body;
   const id = uuidv4();
-  db.prepare('INSERT INTO children (id, parentId, firstName, birthDate, gender, photoUrl) VALUES (?, ?, ?, ?, ?, ?)').run(id, req.params.parentId, firstName, birthDate, gender, avatar || null);
-  res.json({ id, parentId: req.params.parentId, firstName, birthDate, gender, photoUrl: avatar });
+  db.prepare('INSERT INTO children (id, parentId, firstName, birthDate, gender, photoUrl, theme) VALUES (?, ?, ?, ?, ?, ?, ?)').run(id, req.params.parentId, firstName, birthDate, gender, avatar || null, theme || 'lavande');
+  res.json({ id, parentId: req.params.parentId, firstName, birthDate, gender, photoUrl: avatar, theme: theme || 'lavande' });
 });
 
 app.get('/api/children/:id', (req, res) => {
@@ -528,13 +529,23 @@ app.get('/api/children/:id', (req, res) => {
 });
 
 app.put('/api/children/:id', (req, res) => {
-  const { firstName, birthDate, gender, avatar } = req.body;
-  if (avatar !== undefined) {
-    db.prepare('UPDATE children SET firstName = ?, birthDate = ?, gender = ?, photoUrl = ? WHERE id = ?').run(firstName, birthDate, gender, avatar, req.params.id);
-  } else {
-    db.prepare('UPDATE children SET firstName = ?, birthDate = ?, gender = ? WHERE id = ?').run(firstName, birthDate, gender, req.params.id);
-  }
+  const { firstName, birthDate, gender, avatar, theme } = req.body;
+  // Build dynamic update
+  const sets = ['firstName = ?', 'birthDate = ?', 'gender = ?'];
+  const vals = [firstName, birthDate, gender];
+  if (avatar !== undefined) { sets.push('photoUrl = ?'); vals.push(avatar); }
+  if (theme !== undefined)  { sets.push('theme = ?');    vals.push(theme); }
+  vals.push(req.params.id);
+  db.prepare('UPDATE children SET ' + sets.join(', ') + ' WHERE id = ?').run(...vals);
   res.json({ success: true });
+});
+
+// Lightweight endpoint to only update the theme (no full form re-submit)
+app.patch('/api/children/:id/theme', (req, res) => {
+  const { theme } = req.body;
+  if (typeof theme !== 'string' || !theme.length) return res.status(400).json({ error: 'theme required' });
+  db.prepare('UPDATE children SET theme = ? WHERE id = ?').run(theme, req.params.id);
+  res.json({ success: true, theme });
 });
 
 app.delete('/api/children/:id', (req, res) => {

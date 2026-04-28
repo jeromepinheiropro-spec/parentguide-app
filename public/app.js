@@ -62,6 +62,48 @@ const PAVS=[
 {id:'cloud_parent',svg:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E0F7FA"/><circle cx="14" cy="18" r="6" fill="#B2EBF2"/><circle cx="24" cy="16" r="7" fill="#B2EBF2"/><circle cx="20" cy="20" r="6" fill="#B2EBF2"/><circle cx="17" cy="25" r="1.2" fill="#5D4E37"/><circle cx="23" cy="25" r="1.2" fill="#5D4E37"/><path d="M18 28a3 3 0 004 0" stroke="#0097A7" stroke-width="1" fill="none"/></svg>'},
 ];
 
+// ============= CHILD THEMES =============
+// Each theme drives navigation/home/profil colors via body[data-theme]
+// The "photo" is a thematic gradient + emblematic illustration
+const THEMES=[
+  {id:'lavande', n:'Lavande',  primary:'#7C5CFC', light:'#A78BFA', dark:'#6B4DEB', deep:'#4F3DBA', p50:'#F4F1FF', p100:'#EAE3FF', p200:'#D6CAFF', g1:'#C4B5FD', g2:'#7C5CFC', emoji:'\u{1FA77}'},
+  {id:'ocean',   n:'Océan',    primary:'#2563EB', light:'#60A5FA', dark:'#1D4ED8', deep:'#1E3A8A', p50:'#EFF6FF', p100:'#DBEAFE', p200:'#BFDBFE', g1:'#7DD3FC', g2:'#2563EB', emoji:'\u{1F30A}'},
+  {id:'foret',   n:'Forêt',    primary:'#16A34A', light:'#4ADE80', dark:'#15803D', deep:'#14532D', p50:'#F0FDF4', p100:'#DCFCE7', p200:'#BBF7D0', g1:'#86EFAC', g2:'#16A34A', emoji:'\u{1F33F}'},
+  {id:'soleil',  n:'Soleil',   primary:'#F59E0B', light:'#FBBF24', dark:'#D97706', deep:'#92400E', p50:'#FFFBEB', p100:'#FEF3C7', p200:'#FDE68A', g1:'#FCD34D', g2:'#F59E0B', emoji:'\u{2600}\u{FE0F}'},
+  {id:'rose',    n:'Rose',     primary:'#EC4899', light:'#F472B6', dark:'#DB2777', deep:'#831843', p50:'#FDF2F8', p100:'#FCE7F3', p200:'#FBCFE8', g1:'#FBCFE8', g2:'#EC4899', emoji:'\u{1F338}'},
+  {id:'corail',  n:'Corail',   primary:'#F97316', light:'#FB923C', dark:'#EA580C', deep:'#9A3412', p50:'#FFF7ED', p100:'#FFEDD5', p200:'#FED7AA', g1:'#FDBA74', g2:'#F97316', emoji:'\u{1F990}'},
+  {id:'lagon',   n:'Lagon',    primary:'#0D9488', light:'#2DD4BF', dark:'#0F766E', deep:'#134E4A', p50:'#F0FDFA', p100:'#CCFBF1', p200:'#99F6E4', g1:'#5EEAD4', g2:'#0D9488', emoji:'\u{1F420}'},
+  {id:'nuit',    n:'Nuit',     primary:'#6366F1', light:'#818CF8', dark:'#4F46E5', deep:'#312E81', p50:'#EEF2FF', p100:'#E0E7FF', p200:'#C7D2FE', g1:'#A5B4FC', g2:'#4338CA', emoji:'\u{1F319}'}
+];
+function themeBy(id){return THEMES.find(t=>t.id===id)||THEMES[0]}
+// Photo card for theme (gradient bg + emoji illustration)
+function themePhoto(id,size){
+  const t=themeBy(id);
+  const s=size||64;
+  return '<div style="width:100%;aspect-ratio:1;border-radius:14px;background:linear-gradient(135deg,'+t.g1+' 0%,'+t.g2+' 100%);display:flex;align-items:center;justify-content:center;font-size:'+(s*0.5)+'px;line-height:1;box-shadow:0 4px 12px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.35)">'+t.emoji+'</div>';
+}
+// Apply theme by setting body[data-theme] and CSS vars (overrides --primary family)
+function applyTheme(id){
+  const t=themeBy(id);
+  document.body.setAttribute('data-theme',t.id);
+  const r=document.body.style;
+  r.setProperty('--primary',t.primary);
+  r.setProperty('--primary-light',t.light);
+  r.setProperty('--primary-dark',t.dark);
+  r.setProperty('--primary-deep',t.deep);
+  r.setProperty('--primary-50',t.p50);
+  r.setProperty('--primary-100',t.p100);
+  r.setProperty('--primary-200',t.p200);
+  // Legacy purple tokens used in older selectors
+  r.setProperty('--pk',t.p100);
+  r.setProperty('--pk2',t.p200);
+  r.setProperty('--pk3',t.primary);
+  // Theme color for status bar (PWA)
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.setAttribute('content',t.primary);
+}
+window.applyTheme=applyTheme;
+
 // ============= DEV REF DATA =============
 const DEV={
 motor_gross:{t:"Motricité globale",ico:"run",bg:"var(--sk)",c:"var(--sk3)",ages:{"0-6m":[{l:"Tient sa tête, soulève le buste sur le ventre",acts:["Tummy time : 2-3 min sur le ventre après chaque change","Portage vertical pour renforcer les muscles du cou","Jeu du miroir : allongé sur le ventre face à un miroir"]},{l:"Se retourne du ventre sur le dos",acts:["Attirez-le sur le côté avec un jouet musical","Roulade douce guidée avec vos mains","Tummy time sur tapis ferme, surface plane"]}],"6-12m":[{l:"S'assoit seul, rampe, quatre pattes",acts:["Tunnel avec une grande boîte en carton percée","Tapis d'éveil avec textures variées","Jouets placés hors de portée pour motiver"]},{l:"Se met debout en s'accrochant",acts:["Table basse stable pour se hisser","Dansez debout en le tenant par les mains","Jouets posés sur le canapé pour l'attirer"]}],"1-2a":[{l:"Premiers pas, commence à courir",acts:["Promenade pieds nus dans l'herbe","Jeu de la balle à rouler puis lancer","Mini parcours d'obstacles dans le salon"]},{l:"Monte les escaliers à quatre pattes",acts:["Accompagnez-le dans les escaliers (supervisé)","Blocs de mousse empilables pour grimper","Boîtes en carton stables à escalader"]}],"2-3a":[{l:"Court, saute à pieds joints, pédale",acts:["Course dans le jardin avec obstacles","Sauter dans les flaques avec des bottes","Premier tricycle où draisienne au parc"]},{l:"Monte les marches en alternant",acts:["Marelle simplifiée","Parcours au parc avec pentes","Danse rythmée avec sauts"]}],"3-6a":[{l:"Vélo, corde à sauter, équilibre",acts:["Vélo avec puis sans stabilisateurs","Parcours d'agilité au parc","Jeu de la statue"]},{l:"Nage, sports collectifs",acts:["Cours de natation dès 4 ans","Football où basket en famille","Jeux de ballon entre copains"]}]}},
@@ -448,6 +490,8 @@ async function loadHome(){
   const p=await api('/api/home/'+S.cp.id);const c=document.getElementById('hc');
   if(!p.children.length){c.innerHTML='<div class="crd" style="text-align:center;padding:40px 20px"><p style="font-size:13px;color:var(--tx2)">Ajoutez votre premier enfant</p><button class="btn bp mt" onclick="openAddChild()">Ajouter un enfant</button></div>';document.getElementById('hi').innerHTML='';document.getElementById('st').innerHTML='';document.getElementById('ht').innerHTML='';document.getElementById('hremind').innerHTML='';return}
   const ch=p.children.find(x=>x.id===S.sel)||p.children[0];S.sel=ch.id;const am=ageM(ch.birthDate);S.childAge=am;
+  // Apply this child's theme to the global navigation/home colors
+  applyTheme(ch.theme||'lavande');
   const gr=ch.growth||[];const rem=ch.reminders||{vaccines:[],events:[]};
   S.rem=rem;
   const lg=gr.length?gr[gr.length-1]:null;
@@ -1211,7 +1255,7 @@ window.showCD=async function(id){
   document.getElementById('cdc').innerHTML=
     '<div class="deth" style="background:linear-gradient(135deg,'+(ch.gender==='boy'?'var(--sk),var(--lv)':'var(--rs),var(--pk)')+')">'
     +'<button class="back" onclick="go(\'profile\')" style="color:var(--tx)">'+ico('arrowL',14)+' Retour</button>'
-    +'<div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - '+gTxt(ch.gender,'Né','Née')+' le '+fmt(ch.birthDate)+'</p></div></div></div>'
+    +'<div style="display:flex;align-items:center;gap:14px"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center">'+avSvg(ch.photoUrl||'lion')+'</div><div style="flex:1"><h2 style="font-size:22px">'+ch.firstName+'</h2><p style="font-size:12px;color:var(--tx2)">'+calcAge(ch.birthDate)+' - '+gTxt(ch.gender,'Né','Née')+' le '+fmt(ch.birthDate)+'</p></div><button onclick="openEditChild(\''+ch.id+'\')" title="Modifier" style="background:rgba(255,255,255,.55);border:1.5px solid rgba(255,255,255,.7);color:var(--tx);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button></div></div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 20px">'
       +'<div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.weightKg+'kg':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Poids</div></div>'
       +'<div style="background:#fff;border-radius:var(--rs);padding:12px;text-align:center;box-shadow:var(--sh)"><div style="font-size:18px;font-weight:700">'+(lg?lg.heightCm+'cm':'--')+'</div><div style="font-size:10px;color:var(--tx3)">Taille</div></div>'
@@ -1310,12 +1354,40 @@ function openMdl(h){document.getElementById('mb').innerHTML=h;document.getElemen
 function closeMdl(){document.getElementById('mbg').classList.remove('show')}
 window.closeMdl=closeMdl;
 
-window.openAddChild=function(){openMdl('<h3>Ajouter un enfant</h3><div class="fg"><label class="fl">Prénom</label><input class="fi" id="nc-n" placeholder="Prénom de l\'enfant"></div><div class="fg"><label class="fl">Date de naissance</label><input class="fi" id="nc-b" type="date"></div><div class="fg"><label class="fl">Sexe</label><select class="fsl" id="nc-g"><option value="boy">Garçon</option><option value="girl">Fille</option></select></div><div class="fg"><label class="fl">Choisir un avatar</label></div><div class="avg">'+AVS.map(a=>'<div class="avi'+(a.id==='lion'?' sel':'')+'" onclick="pickAv(\''+a.id+'\',this)">'+avSvg(a.id)+'</div>').join('')+'</div><div class="fg"><button class="btn bp bw" onclick="submitChild()">Ajouter</button></div>');window._av='lion'}
+window.openAddChild=function(){openMdl('<h3>Ajouter un enfant</h3><div class="fg"><label class="fl">Prénom</label><input class="fi" id="nc-n" placeholder="Prénom de l\'enfant"></div><div class="fg"><label class="fl">Date de naissance</label><input class="fi" id="nc-b" type="date"></div><div class="fg"><label class="fl">Sexe</label><select class="fsl" id="nc-g"><option value="boy">Garçon</option><option value="girl">Fille</option></select></div><div class="fg"><label class="fl">Choisir un avatar</label></div><div class="avg">'+AVS.map(a=>'<div class="avi'+(a.id==='lion'?' sel':'')+'" onclick="pickAv(\''+a.id+'\',this)">'+avSvg(a.id)+'</div>').join('')+'</div><div class="fg"><label class="fl">Thème de l\'app pour cet enfant</label><div style="font-size:11px;color:var(--tx3);margin-bottom:8px">Influence les couleurs de la navigation. Sans effet sur Repère & Guide.</div></div><div class="thg" id="thg">'+THEMES.map(t=>'<div class="thi'+(t.id==='lavande'?' sel':'')+'" data-theme="'+t.id+'" onclick="pickTh(\''+t.id+'\',this)"><div class="thi-ph">'+themePhoto(t.id)+'</div><div class="thi-n">'+t.n+'</div></div>').join('')+'</div><div class="fg"><button class="btn bp bw" onclick="submitChild()">Ajouter</button></div>');window._av='lion';window._th='lavande'}
 window.pickAv=function(id,el){window._av=id;document.querySelectorAll('.avi').forEach(a=>a.classList.remove('sel'));el.classList.add('sel')}
+window.pickTh=function(id,el){window._th=id;document.querySelectorAll('#thg .thi').forEach(a=>a.classList.remove('sel'));el.classList.add('sel')}
+// Edit child profile (incl. theme + avatar + name + birthdate + gender)
+window.openEditChild=async function(cid){
+  const ch=await api('/api/children/'+cid);
+  if(!ch)return;
+  window._editCid=cid;
+  window._av=ch.photoUrl||'lion';
+  window._th=ch.theme||'lavande';
+  openMdl('<h3>Modifier '+ch.firstName+'</h3>'
+    +'<div class="fg"><label class="fl">Prénom</label><input class="fi" id="ec-n" value="'+(ch.firstName||'').replace(/"/g,'&quot;')+'"></div>'
+    +'<div class="fg"><label class="fl">Date de naissance</label><input class="fi" id="ec-b" type="date" value="'+(ch.birthDate||'')+'"></div>'
+    +'<div class="fg"><label class="fl">Sexe</label><select class="fsl" id="ec-g"><option value="boy"'+(ch.gender==='boy'?' selected':'')+'>Garçon</option><option value="girl"'+(ch.gender==='girl'?' selected':'')+'>Fille</option></select></div>'
+    +'<div class="fg"><label class="fl">Avatar</label></div>'
+    +'<div class="avg">'+AVS.map(a=>'<div class="avi'+(a.id===window._av?' sel':'')+'" onclick="pickAv(\''+a.id+'\',this)">'+avSvg(a.id)+'</div>').join('')+'</div>'
+    +'<div class="fg"><label class="fl">Thème de l\'app</label><div style="font-size:11px;color:var(--tx3);margin-bottom:8px">Influence les couleurs de la navigation. Sans effet sur Repère & Guide.</div></div>'
+    +'<div class="thg" id="thg">'+THEMES.map(t=>'<div class="thi'+(t.id===window._th?' sel':'')+'" data-theme="'+t.id+'" onclick="pickTh(\''+t.id+'\',this)"><div class="thi-ph">'+themePhoto(t.id)+'</div><div class="thi-n">'+t.n+'</div></div>').join('')+'</div>'
+    +'<div class="fg" style="display:flex;gap:8px"><button class="btn bp bw" onclick="submitEditChild()" style="flex:1">Enregistrer</button></div>');
+}
+window.submitEditChild=async function(){
+  const cid=window._editCid;if(!cid)return;
+  const n=document.getElementById('ec-n').value.trim(),b=document.getElementById('ec-b').value,g=document.getElementById('ec-g').value;
+  if(!n||!b)return;
+  await api('/api/children/'+cid,'PUT',{firstName:n,birthDate:b,gender:g,avatar:window._av||'lion',theme:window._th||'lavande'});
+  closeMdl();
+  // Re-apply theme if this is the active child
+  if(S.sel===cid)applyTheme(window._th||'lavande');
+  loadHome();loadProf();
+}
 window.submitChild=async function(){
   const n=document.getElementById('nc-n').value.trim(),b=document.getElementById('nc-b').value,g=document.getElementById('nc-g').value;
   if(!n||!b)return;
-  const res=await api('/api/parents/'+S.cp.id+'/children','POST',{firstName:n,birthDate:b,gender:g,avatar:window._av||'lion'});
+  const res=await api('/api/parents/'+S.cp.id+'/children','POST',{firstName:n,birthDate:b,gender:g,avatar:window._av||'lion',theme:window._th||'lavande'});
   // Auto-add birthday event to agenda
   if(res&&res.id){
     const bd=new Date(b);
