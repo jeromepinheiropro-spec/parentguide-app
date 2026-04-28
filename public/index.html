@@ -812,11 +812,7 @@ body{font-feature-settings:'cv02','cv03','cv04','ss01';text-rendering:optimizeLe
 .hdr{padding:28px 20px 4px}
 .hdr h1,.hdr h2{
   font-weight:800;letter-spacing:-.025em;
-  background:linear-gradient(135deg,var(--tx) 60%,var(--primary) 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--tx);
-}
-@supports not ((-webkit-background-clip:text) or (background-clip:text)){
-  .hdr h1,.hdr h2{color:var(--tx);-webkit-text-fill-color:currentColor;background:none}
+  color:var(--tx);background:none;-webkit-text-fill-color:currentColor;
 }
 .hdr .sub{font-size:12.5px;color:var(--tx2);margin-top:6px;font-weight:500;line-height:1.5}
 
