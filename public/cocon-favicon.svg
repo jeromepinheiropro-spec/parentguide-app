@@ -1,8 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="7" fill="#7C5CFC"/>
-  <g transform="translate(16,16.5) scale(0.056)" fill="none" stroke="white" stroke-linejoin="round">
-    <path d="M 0 -55 C -10 -80,-45 -155,-130 -155 C -215 -155,-240 -65,-225 -10 C -210 50,-165 120,-95 185 C -50 225,-15 255,0 270 C 15 255,50 225,95 185 C 165 120,210 50,225 -10 C 240 -65,215 -155,130 -155 C 45 -155,10 -80,0 -55 Z" stroke-width="52"/>
-    <path d="M -205 -5 C -140 40,-70 62,0 62 C 70 62,140 40,205 -5" stroke-width="38" stroke-linecap="round"/>
-    <path d="M -155 110 C -95 153,-40 173,0 173 C 40 173,95 153,155 110" stroke-width="38" stroke-linecap="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cgBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="55%" stop-color="#8E73FB"/>
+      <stop offset="100%" stop-color="#7C5CFC"/>
+    </linearGradient>
+    <radialGradient id="cgGloss" cx="30%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" ry="16" fill="url(#cgBg)"/>
+  <rect width="64" height="64" rx="16" ry="16" fill="url(#cgGloss)"/>
+  <path d="M32 51 C 16 41, 10 30, 12.5 22.5 C 15 16.5, 23 14.5, 32 22.5 C 41 14.5, 49 16.5, 51.5 22.5 C 54 30, 48 41, 32 51 Z"
+        fill="none" stroke="#FFFFFF" stroke-width="3.6"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M19.5 33.5 Q 32 41.2 44.5 33.5"
+        fill="none" stroke="#FFFFFF" stroke-width="3.6"
+        stroke-linecap="round"/>
 </svg>

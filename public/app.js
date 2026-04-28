@@ -833,7 +833,7 @@ window.showDevDetail=function(key){
   const _devBg=d.bg||'#f0f0f0',_devC=d.c||'#666';
   const _pgD=document.getElementById('p-guide-detail');
   _pgD.style.setProperty('--cat-c',_devC);_pgD.style.setProperty('--cat-bg',_devBg);
-  document.getElementById('gdh').style.background='radial-gradient(120% 80% at 100% 100%,rgba(255,255,255,.32) 0%,transparent 60%),linear-gradient(135deg,'+_devC+' 0%,'+_devBg+' 100%)';
+  document.getElementById('gdh').style.background='radial-gradient(110% 80% at 100% 0%,rgba(255,255,255,.55) 0%,rgba(255,255,255,.18) 32%,transparent 65%),linear-gradient(135deg,'+_devC+' 0%,'+_devBg+' 100%)';
   document.getElementById('gdh').style.color='#fff';
   document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.32);flex-shrink:0">'+ico(d.ico,26)+'</span><div><h2>'+d.t+'</h2><p class="ds">'+allSteps.length+' étapes</p></div></div>';
 
@@ -859,7 +859,7 @@ window.showGD=function(key){const g=GUIDE[key];if(!g)return;
 
   const _pgG=document.getElementById('p-guide-detail');
   _pgG.style.setProperty('--cat-c',g.c);_pgG.style.setProperty('--cat-bg',g.bg);
-  document.getElementById('gdh').style.background='radial-gradient(120% 80% at 100% 100%,rgba(255,255,255,.32) 0%,transparent 60%),linear-gradient(135deg,'+g.c+' 0%,'+g.bg+' 100%)';
+  document.getElementById('gdh').style.background='radial-gradient(110% 80% at 100% 0%,rgba(255,255,255,.55) 0%,rgba(255,255,255,.18) 32%,transparent 65%),linear-gradient(135deg,'+g.c+' 0%,'+g.bg+' 100%)';
   document.getElementById('gdh').style.color='#fff';
   document.getElementById('gdh').innerHTML='<button class="back" onclick="go(\'guide\')" style="color:#fff">'+ico('arrowL',14)+' Retour</button><div style="display:flex;align-items:center;gap:14px"><span style="width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.32);flex-shrink:0">'+ico(g.ico,26)+'</span><div><h2>'+g.t+'</h2><p class="ds">'+g.tips.length+' conseils</p></div></div>';
 
